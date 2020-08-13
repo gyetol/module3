@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,git,svn,eclipse,intellij,webstorm,windows,android,androidstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,git,svn,eclipse,intellij,webstorm,windows,android,androidstudio
 
+.MF
+.properties
 ### Android ###
 # Built application files
 *.apk
