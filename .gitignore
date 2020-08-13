@@ -4,6 +4,7 @@
 
 
 *.MF
+*.mf
 *.properties
 
 ### Android ###
