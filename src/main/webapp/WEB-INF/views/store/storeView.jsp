@@ -1,5 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="ko">
+
+<!DOCTYPE html>
+<%
+	String path = "../storeView/";
+%>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
