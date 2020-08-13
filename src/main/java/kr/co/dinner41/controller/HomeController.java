@@ -1,4 +1,4 @@
-package kr.co.dinner41.Controller;
+package kr.co.dinner41.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
