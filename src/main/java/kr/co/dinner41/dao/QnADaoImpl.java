@@ -40,9 +40,7 @@ public class QnADaoImpl implements QnADao {
         List<QnAVO> list;
         int startPoint = (page-1)*pageSize;
 
-        String sql = "SELECT * FROM qna_view AS q " +
-                "LEFT JOIN user_view u on q.user_id = u.user_id " +
-                "LEFT JOIN user_view m on q.manager_id = m.user_id " +
+        String sql = "SELECT * FROM qna_view " +
                 "ORDER BY qna_question_date DESC LIMIT ?, ?;";
         list = template.query(sql, new QnAMapper(), startPoint, pageSize);
         return list;
@@ -52,9 +50,7 @@ public class QnADaoImpl implements QnADao {
     public List<QnAVO> selectAll(int page, int pageSize, String qna_type) throws QnAException {
         List<QnAVO> list;
         int startPoint = (page-1)*pageSize;
-        String sql = "SELECT * FROM qna_view AS q " +
-                "LEFT JOIN user_view u on q.user_id = u.user_id " +
-                "LEFT JOIN user_view m on q.manager_id = m.user_id " +
+        String sql = "SELECT * FROM qna_view " +
                 "WHERE qna_type_id LIKE ? ORDER BY qna_question_date DESC LIMIT ?, ?;";
         list = template.query(sql, new QnAMapper(), qna_type, startPoint, pageSize);
         return list;
@@ -63,9 +59,7 @@ public class QnADaoImpl implements QnADao {
     @Override
     public QnAVO selectById(int qna_id) throws QnAException {
         List<QnAVO> list;
-        String sql = "SELECT * FROM qna_view AS q " +
-                "LEFT JOIN user_view u on q.user_id = u.user_id " +
-                "LEFT JOIN user_view m on q.manager_id = m.user_id " +
+        String sql = "SELECT * FROM qna_view " +
                 "WHERE qna_id = ?;";
         list = template.query(sql, new QnAMapper(), qna_id);
         return (list.size() == 0? null:list.get(0));
