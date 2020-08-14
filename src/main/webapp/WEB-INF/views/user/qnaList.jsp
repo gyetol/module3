@@ -1,16 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -22,7 +19,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Q&A</title>
 </head>
@@ -35,7 +32,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!--사용자 위치-->
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
@@ -48,10 +44,8 @@
         </div>
     </div>
 
-    <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
 
-    <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -76,15 +70,12 @@
     </div>
 </nav>
 
-<!--Content-->
 <div>
-    <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="../../images/1인의만찬.png" class="img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>문의 내역</h4>
     </div>
 
-    <!--포커스가 주어진 탭 링크에 active 클래스를 추가해주세요-->
     <ul class="nav nav-tabs">
         <li class="nav-item text-center nav_three">
             <a class="nav-link" href="#">ALL</a>
@@ -97,13 +88,11 @@
         </li>
     </ul>
 
-    <!--문의 목록-->
     <div>
         <ul class="list-group list-group-flush">
 
             <li class="list-group-item">
                 <h5><span>문의 제목을 적어주세요</span>&nbsp;&nbsp;
-                    <!--답변 완료인 경우 badge badge-primary 클래스 이렇게 두개를 사용-->
                     <span class="badge badge-primary">답변완료</span>
                 </h5>
                 문의 유형 : <span>신고</span>
@@ -114,7 +103,6 @@
 
             <li class="list-group-item">
                 <h5><span>문의 제목을 적어주세요</span>&nbsp;&nbsp;
-                    <!--답변 대기인 경우 badge badge-danger 클래스 이렇게 두개를 사용-->
                     <span class="badge badge-danger">답변완료</span>
                 </h5>
                 문의 유형 : <span>신고</span>
@@ -128,7 +116,6 @@
 
     <hr style="margin-top: 0"/>
 
-    <!--pagination-->
     <div style="text-align: center">
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-success"><<</button>

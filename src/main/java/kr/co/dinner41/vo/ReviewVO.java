@@ -7,17 +7,19 @@ public class ReviewVO {
     private int id;
     private StoreVO store;
     private UserVO user;
-    private double score;
+    private String content;
+    private int score;
     private Timestamp date;
 
     public ReviewVO() {
     }
 
-    public ReviewVO(int id, StoreVO store, UserVO user, double score, Timestamp date) {
+    public ReviewVO(int id, StoreVO store, UserVO user, int score, String content, Timestamp date) {
         this.id = id;
         this.store = store;
         this.user = user;
         this.score = score;
+        this.content = content;
         this.date = date;
     }
 
@@ -45,11 +47,11 @@ public class ReviewVO {
         this.user = user;
     }
 
-    public double getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(double score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -61,6 +63,14 @@ public class ReviewVO {
         this.date = date;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "ReviewVO{" +
@@ -68,6 +78,7 @@ public class ReviewVO {
                 ", store=" + store +
                 ", user=" + user +
                 ", score=" + score +
+                ", content='" + content + '\'' +
                 ", date=" + date +
                 '}';
     }
@@ -78,14 +89,15 @@ public class ReviewVO {
         if (o == null || getClass() != o.getClass()) return false;
         ReviewVO reviewVO = (ReviewVO) o;
         return id == reviewVO.id &&
-                Double.compare(reviewVO.score, score) == 0 &&
+                score == reviewVO.score &&
                 Objects.equals(store, reviewVO.store) &&
                 Objects.equals(user, reviewVO.user) &&
+                Objects.equals(content, reviewVO.content) &&
                 Objects.equals(date, reviewVO.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, store, user, score, date);
+        return Objects.hash(id, store, user, score, content, date);
     }
 }
