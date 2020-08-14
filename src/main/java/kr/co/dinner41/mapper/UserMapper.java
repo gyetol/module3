@@ -13,7 +13,8 @@ public class UserMapper implements RowMapper<UserVO>{
 	@Override
 	public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		int id=rs.getInt("user_id");
-		String type=rs.getString("user_type_id");
+		String typeId=rs.getString("user_type_id");
+		String typeName=rs.getString("user_type_name");
 		String email=rs.getString("user_email");
 		String password=rs.getString("user_password");
 		String name=rs.getString("user_name");
@@ -24,7 +25,8 @@ public class UserMapper implements RowMapper<UserVO>{
 		String phone=rs.getString("user_phone");
 		Timestamp registerDate=rs.getTimestamp("user_register_date");
 		Timestamp removeDate=rs.getTimestamp("user_remove_date");
-		UserVO user=new UserVO(id,new UserTypeVO(type,null),email,password,name,address,subAddresss,latitude,longitude,phone,registerDate,removeDate);
+		UserTypeVO userType=new UserTypeVO(typeId,typeName);
+		UserVO user=new UserVO(id,userType,email,password,name,address,subAddresss,latitude,longitude,phone,registerDate,removeDate);
 		return user;
 	}
 }

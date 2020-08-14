@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserVO selectByEmail(String email) throws UserException {
-		String sql="SELECT * FROM users WHERE user_email=?";
+		String sql="SELECT * FROM user_view WHERE user_email=?";
 		List<UserVO> users=null;
 		try {
 			users=jTemp.query(sql, new UserMapper(),email);
@@ -123,7 +123,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserVO selectByEmailAndPassword(String email, String password) throws UserException {
-		String sql="SELECT * FROM users WHERE user_email=? AND user_password=PASSWORD(?)";
+		String sql="SELECT * FROM user_view WHERE user_email=? AND user_password=PASSWORD(?);";
 		List<UserVO> users=null;
 		try {
 			users=jTemp.query(sql,new UserMapper(),email,password); 
@@ -137,7 +137,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<UserVO> selectAll() throws UserException {
-		String sql="SELECT * FROM users ";
+		String sql="SELECT * FROM user_view ";
 		List<UserVO> users=null;
 		try {
 			users=jTemp.query(sql, new UserMapper());
