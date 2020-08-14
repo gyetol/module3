@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("qnATypeDaoImpl")
+@Repository("qnATypeDao")
 public class QnATypeDaoImpl implements QnaTypeDao{
     @Autowired
     private JdbcTemplate template;
