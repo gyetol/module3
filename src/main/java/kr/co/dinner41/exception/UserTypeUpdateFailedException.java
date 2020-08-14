@@ -2,7 +2,7 @@ package kr.co.dinner41.exception;
 
 public class UserTypeUpdateFailedException extends UserTypeException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE="UserTypeDaoImplÀÇ update¸Ş¼­µå ¼öÇà Áß ¿À·ù ¹ß»ı";
+	private static final String MESSAGE="íšŒì›ìœ í˜•ì„ ìˆ˜ì •í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 	
 	public UserTypeUpdateFailedException() {
 		this(MESSAGE);

@@ -2,11 +2,14 @@ package kr.co.dinner41.exception;
 
 public class UserTypeDeleteFailedException extends UserTypeException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE="UserTypeDaoImplÀÇ delete¸Ş¼Òµå ¼öÇà Áß ¿À·ù ¹ß»ı";
+	private static final String MESSAGE="íšŒì› ìœ í˜•ì„ ì‚­ì œí•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 	public UserTypeDeleteFailedException() {
 		this(MESSAGE);
 	}
+ 
 	public UserTypeDeleteFailedException(String message) {
 		super(message);
 	}
+
+
 }
