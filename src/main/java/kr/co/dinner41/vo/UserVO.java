@@ -13,14 +13,14 @@ public class UserVO {
 	private double latitude;
 	private double longitude;
 	private String phone;
-	private Timestamp registeredAt;
-	private Timestamp removedAt;
+	private Timestamp registerDate;
+	private Timestamp removeDate;
 	
 	public UserVO() {}
 
 	public UserVO(int id, UserTypeVO type, String email, String password, String name, String addresss,
-			String subAddress, double latitude, double longitude, String phone, Timestamp registeredAt,
-			Timestamp removedAt) {
+			String subAddress, double latitude, double longitude, String phone, Timestamp registerDate,
+			Timestamp removeDate) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -32,8 +32,8 @@ public class UserVO {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.phone = phone;
-		this.registeredAt = registeredAt;
-		this.removedAt = removedAt;
+		this.registerDate = registerDate;
+		this.removeDate = removeDate;
 	}
 
 	public int getId() {
@@ -116,21 +116,20 @@ public class UserVO {
 		this.phone = phone;
 	}
 
-	public Timestamp getRegisteredAt() {
-		return registeredAt;
+	public Timestamp getRegisterDate() {
+		return registerDate;
 	}
 
-	public void setRegisteredAt(Timestamp registeredAt) {
-		this.registeredAt = registeredAt;
+	public void setRegisterDate(Timestamp registerDate) {
+		this.registerDate = registerDate;
 	}
 
-	public Timestamp getRemovedAt() {
-		return removedAt;
+	public Timestamp getRemoveDAte() {
+		return removeDate;
 	}
 
-	public void setRemovedAt(Timestamp removedAt) {
-		this.removedAt = removedAt;
+	public void setRemoveDAte(Timestamp removeDAte) {
+		this.removeDate = removeDAte;
 	}
-	
 
 }

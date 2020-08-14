@@ -26,10 +26,10 @@ public class UserTypeDaoTester {
 	@Test
 	public void testInsert() {
 		UserTypeDao dao=ctx.getBean("userTypeDao",UserTypeDao.class);
-		UserTypeVO userType=new UserTypeVO("","抛胶飘侩");
+		UserTypeVO userType=new UserTypeVO("TE","韰岇姢韸胳毄");
 		try {
 			dao.insert(userType);
-			System.out.println("usertype insert己傍");
+			System.out.println("usertype insert靹标车");
 		}
 		catch(UserTypeException e) {
 			System.out.println(e.getMessage());
@@ -41,8 +41,8 @@ public class UserTypeDaoTester {
 	public void testUpdate() {
 		UserTypeDao dao=ctx.getBean("userTypeDao",UserTypeDao.class);
 		try {
-			dao.update("TE","诀单捞飘 抛胶飘");
-			System.out.println("usertype update己傍");
+			dao.update("TE","鞐呺嵃鞚错姼韰岇姢韸胳毄");
+			System.out.println("usertype update靹标车");
 		}
 		catch(UserTypeException e) {
 			System.out.println(e.getMessage());
@@ -59,10 +59,10 @@ public class UserTypeDaoTester {
 			for(int i=0;i<userTypes.size();i++) {
 				System.out.println("user_type_id:"+userTypes.get(i).getId()+", user_type_name:"+userTypes.get(1).getName()+"\n");
 			}
-			System.out.println("usertype selectAll己傍");
+			System.out.println("usertype selectAll靹标车");
 		}
 		catch(NullPointerException e) {
-			System.out.println("usertype selectAll角菩");
+			System.out.println("usertype selectAll鞓る 氚滌儩");
 		}
 		catch(UserTypeException e) {
 			System.out.println(e.getMessage());
@@ -75,9 +75,8 @@ public class UserTypeDaoTester {
 		UserTypeDao dao=ctx.getBean("userTypeDao",UserTypeDao.class);
 		try {
 			dao.delete("TE");
-			System.out.println("usertype delete己傍");
-		}
-		catch(UserTypeException e) {
+			System.out.println("usertype delete靹标车");
+		} catch(UserTypeException e) {
 			System.out.println(e.getMessage());
 		}
 	}

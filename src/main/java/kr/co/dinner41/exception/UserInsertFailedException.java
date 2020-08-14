@@ -3,7 +3,7 @@ package kr.co.dinner41.exception;
 public class UserInsertFailedException extends UserException {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE="userDaoÀÇ insert¸Ş¼­µå ¼öÇà Áß ¿À·ù ¹ß»ı";
+	private static final String MESSAGE="íšŒì›ì„ ì¶”ê°€í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 	
 	public UserInsertFailedException() {
 		this(MESSAGE);
