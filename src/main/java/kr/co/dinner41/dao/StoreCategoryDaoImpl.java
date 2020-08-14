@@ -48,7 +48,7 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao {
 			throw new StoreCategoryDeleteFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreCategoryDeleteFailedException("매장 카테고리 삭제을 시도하였으나 영향받은 행이 없습니다.");
+			throw new StoreCategoryDeleteFailedException("매장 카테고리 삭제를 시도하였으나 영향받은 행이 없습니다.");
 		}
 	}
 	
