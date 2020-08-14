@@ -1,4 +1,5 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -23,6 +24,9 @@
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="../../css/dinner41.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="resources/js/menuView.js"></script>
 
     <title>Menu</title>
 </head>
@@ -49,7 +53,9 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <button id="cartButton">
+    <img src="${pageContext.request.contextPath}/resources/images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
+    </button>
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -76,7 +82,7 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" data-storeId="1" data-menuId="2">
     <div class="container-fluid">
         <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
             <img src="../../categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
@@ -85,14 +91,14 @@
         <div class="form-group">
             <label for="menuName">메뉴명</label>
             <div class="card card-body" id="menuName">
-                메뉴명을 여기에 입력하시오
+            	닭강정(대)
             </div>
         </div>
 
         <div class="form-group">
             <label for="menuAmount">최대 수량</label>
             <div class="card card-body" id="menuAmount">
-                수량을 여기에 입력하시오
+            	2
             </div>
         </div>
 
@@ -106,7 +112,7 @@
         <div class="form-group">
             <label for="menuMoney">메뉴 가격</label>
             <div class="card card-body" id="menuMoney">
-                가격을 여기에 입력하시오
+            5000
             </div>
         </div>
 
@@ -124,7 +130,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-success two_button">주문 하기</button>
+        <button type="button" class="btn btn-success two_button" id="insertCart">장바구니에 넣기</button>
         <button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
     </div>
 </div>
