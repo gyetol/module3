@@ -15,25 +15,21 @@ public class Log2ManagerDaoImpl implements Log2ManagerDao {
 
 	@Override
 	public void insert(Log2ManagerVO log2manager) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void delete(int logId) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void update(int logId, int managerId) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<Log2ManagerVO> selectAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
