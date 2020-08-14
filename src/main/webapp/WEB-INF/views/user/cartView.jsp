@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,7 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Cart</title>
 </head>
@@ -41,7 +42,7 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
+    <img src="${pageContext.request.contextPath}/resources/images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -72,7 +73,7 @@
 <div>
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="../../images/1인의만찬.png" class="img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>장바구니</h4>
     </div>
 
