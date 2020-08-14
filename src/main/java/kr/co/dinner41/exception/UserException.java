@@ -1,7 +1,6 @@
 package kr.co.dinner41.exception;
 
-
-public abstract class UserException extends Exception {
+public class UserException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public UserException(String message) {

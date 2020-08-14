@@ -10,4 +10,5 @@ public interface UserTypeDao {
 	void delete(String id)throws UserTypeException;
 	void update(String id,String newName)throws UserTypeException;
 	List<UserTypeVO> selectAll()throws UserTypeException;
+	UserTypeVO selectById(String id)throws UserTypeException;
 }

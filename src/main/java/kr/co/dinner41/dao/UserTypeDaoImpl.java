@@ -14,6 +14,7 @@ import kr.co.dinner41.exception.UserTypeDeleteFailedException;
 import kr.co.dinner41.exception.UserTypeException;
 import kr.co.dinner41.exception.UserTypeInsertFailedException;
 import kr.co.dinner41.exception.UserTypeUpdateFailedException;
+import kr.co.dinner41.mapper.UserTypeMapper;
 import kr.co.dinner41.vo.UserTypeVO;
 
 @Repository("userTypeDao")
@@ -71,16 +72,15 @@ public class UserTypeDaoImpl implements UserTypeDao {
 	@Override
 	public List<UserTypeVO> selectAll() throws UserTypeException{
 		String sql="SELECT * FROM user_types"; 
-		List<UserTypeVO> userTypes=jTemp.query(sql, new RowMapper<UserTypeVO>(){
-			@Override
-			public UserTypeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				String id=rs.getString("user_type_id");
-				String name=rs.getString("user_type_name");
-				UserTypeVO userType=new UserTypeVO(id,name);
-				return userType;
-			}
-		});
-		return (userTypes.size()>0?userTypes:null);
+		List<UserTypeVO> userTypes=jTemp.query(sql, new UserTypeMapper());
+		return (userTypes.size()==0?null:userTypes);
+	}
+
+	
+	public UserTypeVO selectById(String id)throws UserTypeException{
+		String sql="SELECT * FROM user_types WHERE user_type_id=?"; 
+		List<UserTypeVO> userTypes=jTemp.query(sql,new UserTypeMapper(),id);
+		return (userTypes.size()==0?null:userTypes.get(0));
 	}
 
 }
