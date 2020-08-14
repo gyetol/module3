@@ -1,5 +1,10 @@
-<!doctype html>
-<html lang="ko">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<%
+	String path = "../promotionuploads/";
+%>
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -44,22 +49,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="#">ë´ì ë³´ ë³´ê¸°</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문 내역</a>
+                <a class="nav-link" href="#">ì£¼ë¬¸ ë´ì­</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> </a>
+                <a class="nav-link" href="#">1:1 ë¬¸ì</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">ë¡ê·¸ìì</a>
             </li>
         </ul>
     </div>
@@ -67,8 +72,8 @@
 
 <div class="container-fluid" style="margin-top: 15pt">
     <div class="text-center">
-        <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-        <h2>메뉴 상세</h2>
+        <img src="../../images/1ì¸ìë§ì°¬.png" class="img-fluid img-title" alt="no title"/>
+        <h2>ë©ë´ ìì¸</h2>
     </div>
 </div>
 
@@ -82,59 +87,59 @@
         <br/>
 
         <div class="form-group">
-            <label for="menuName">메뉴명</label>
+            <label for="menuName">ë©ë´ëª</label>
             <div class="card card-body" id="menuName">
-                뼈해장국
+                ë¼í´ì¥êµ­
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuAmount">재고 수량</label>
+            <label for="menuAmount">ì¬ê³  ìë</label>
             <div class="card card-body" id="menuAmount">
-                12개
+                12ê°
             </div>
         </div>
 
         <div class="form-group">
-            <label for="inputKind">제공방식</label>
+            <label for="inputKind">ì ê³µë°©ì</label>
             <div class="card card-body" id="inputKind">
-                완전 조리식
+                ìì  ì¡°ë¦¬ì
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuMoney">메뉴 가격</label>
+            <label for="menuMoney">ë©ë´ ê°ê²©</label>
             <div class="card card-body" id="menuMoney">
-                4000원
+                4000ì
             </div>
         </div>
 
         <div class="form-group">
-            <label for="tag">메뉴 태그</label>
+            <label for="tag">ë©ë´ íê·¸</label>
             <div id="tag">
-                <span class="badge badge-primary">밥</span>
-                <span class="badge badge-primary">국수</span>
-                <span class="badge badge-primary">한식</span>
+                <span class="badge badge-primary">ë°¥</span>
+                <span class="badge badge-primary">êµ­ì</span>
+                <span class="badge badge-primary">íì</span>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuDes">메뉴 설명</label>
+            <label for="menuDes">ë©ë´ ì¤ëª</label>
             <div class="card card-body" id="menuDes">
-                뼈해장국 입니다.
+                ë¼í´ì¥êµ­ ìëë¤.
             </div>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
-            <label for="inputContent">메뉴 유의 사항</label>
+            <label for="inputContent">ë©ë´ ì ì ì¬í­</label>
             <div class="card card-body" id="inputContent">
-                집에 도착하자마자 상하지 않게 한번 끓여주세요
+                ì§ì ëì°©íìë§ì ìíì§ ìê² íë² ëì¬ì£¼ì¸ì
             </div>
         </div>
 
-        <button type="button" class="btn btn-success two_button">메뉴 수정 하기</button>
-        <button type="button" class="btn btn-success two_button float-right">메뉴 삭제 하기</button>
+        <button type="button" class="btn btn-success two_button">ë©ë´ ìì  íê¸°</button>
+        <button type="button" class="btn btn-success two_button float-right">ë©ë´ ì­ì  íê¸°</button>
     </div>
 </div>
 <hr/>
