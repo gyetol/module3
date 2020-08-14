@@ -33,7 +33,7 @@ public class StoreStateDaoImpl implements StoreStateDao {
 			throw new StoreStateInsertFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreStateInsertFailedException("¸ÅÀå »óÅÂ µî·ÏÀ» ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreStateInsertFailedException("ë§¤ì¥ ìƒíƒœ ë“±ë¡ì„ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 
@@ -48,7 +48,7 @@ public class StoreStateDaoImpl implements StoreStateDao {
 			throw new StoreStateDeleteFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreStateDeleteFailedException("¸ÅÀå »óÅÂ »èÁ¦¸¦ ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreStateDeleteFailedException("ë§¤ì¥ ìƒíƒœ ì‚­ì œë¥¼ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 	

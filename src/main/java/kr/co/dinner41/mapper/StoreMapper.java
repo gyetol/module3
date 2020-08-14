@@ -40,7 +40,7 @@ public class StoreMapper implements RowMapper<StoreVO> {
 		
 		String userEmail=rs.getString("user_email");
 		String userPassword=rs.getString("user_password");
-		String userName=rs.getString("use_name");
+		String userName=rs.getString("user_name");
 		String userAddress=rs.getString("user_address");
 		String userSubAddress=rs.getString("user_sub_address");
 		double userLatitude=rs.getDouble("user_latitude");

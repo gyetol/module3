@@ -33,7 +33,7 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao {
 			throw new StoreCategoryInsertFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreCategoryInsertFailedException("¸ÅÀå Ä«Å×°í¸® µî·ÏÀ» ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù");
+			throw new StoreCategoryInsertFailedException("ë§¤ì¥ ì¹´í…Œê³ ë¦¬ ë“±ë¡ì„ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 
@@ -48,7 +48,7 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao {
 			throw new StoreCategoryDeleteFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreCategoryDeleteFailedException("¸ÅÀå Ä«Å×°í¸® »èÁ¦¸¦ ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreCategoryDeleteFailedException("ë§¤ì¥ ì¹´í…Œê³ ë¦¬ ì‚­ì œì„ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 	

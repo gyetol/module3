@@ -2,7 +2,7 @@ package kr.co.dinner41.exception.store;
 
 public class StoreStateSelectFailedException extends StoreStateException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE="¸ÅÀå»óÅÂ Ã£±â¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù";
+	private static final String MESSAGE="ë§¤ì¥ìƒíƒœ ì°¾ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 	
 	public StoreStateSelectFailedException() {
 		this(MESSAGE);

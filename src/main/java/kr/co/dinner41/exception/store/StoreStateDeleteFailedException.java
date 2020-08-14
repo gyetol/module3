@@ -2,7 +2,7 @@ package kr.co.dinner41.exception.store;
 
 public class StoreStateDeleteFailedException extends StoreStateException {
 	private static final long serialVersionUID =1L;
-	public static final String MESSAGE = "¸ÅÀå »óÅÂ »èÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.";
+	public static final String MESSAGE = "ë§¤ì¥ìƒíƒœ ì‚­ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 	
 	public StoreStateDeleteFailedException() {
 		this(MESSAGE);

@@ -2,7 +2,7 @@ package kr.co.dinner41.exception.store;
 
 public class StoreUpdateFailedException extends StoreException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE = "¸ÅÀå¼öÁ¤¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.";
+	private static final String MESSAGE = "ë§¤ì¥ ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 	
 	public StoreUpdateFailedException() {
 		this(MESSAGE);

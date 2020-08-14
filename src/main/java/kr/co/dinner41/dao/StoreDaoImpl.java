@@ -48,7 +48,7 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreInsertFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreInsertFailedException("¸ÅÀå µî·ÏÀ» ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreInsertFailedException("ë§¤ì¥ ë“±ë¡ì„ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 	@Override
@@ -62,7 +62,7 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreDeleteFailedException(e.getMessage());
 		}
 		if(result==0){
-			throw new StoreDeleteFailedException("¸ÅÀå »èÁ¦¸¦ ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreDeleteFailedException("ë§¤ì¥ ì‚­ì œë¥¼ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreDeleteFailedException(e.getMessage());
 		}
 		if(result==0){
-			throw new StoreDeleteFailedException("¸ÅÀå »èÁ¦¸¦ ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreDeleteFailedException("ë§¤ì¥ ì‚­ì œë¥¼ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 
@@ -113,7 +113,7 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreUpdateFailedException(e.getMessage());
 		}
 		if(result==0) {
-			throw new StoreUpdateFailedException("¸ÅÀå ¼öÁ¤À» ½ÃµµÇÏ¿´À¸³ª ¿µÇâ¹ŞÀº ÇàÀÌ ¾ø½À´Ï´Ù.");
+			throw new StoreUpdateFailedException("ë§¤ì¥ ìˆ˜ì •ì„ ì‹œë„í•˜ì˜€ìœ¼ë‚˜ ì˜í–¥ë°›ì€ í–‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 	}
 
