@@ -10,50 +10,45 @@ import java.sql.Timestamp;
 public class ReviewMapper implements RowMapper<ReviewVO> {
     @Override
     public ReviewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-        int id = rs.getInt("review_id");
+        int review_id = rs.getInt("review_id");
 
-        int storeId= rs.getInt("store_id");
-        int userId=rs.getInt("user_id");
-        String storeCategoryId=rs.getString("store_category_id");
-        int storeStateId=rs.getInt("store_state_id");
-        String storeBusinessNumber=rs.getString("store_business_number");
-        String storeName=rs.getString("store_name");
-        String storeAddress=rs.getString("store_address");
-        String storeSubAddress=rs.getString("store_sub_address");
-        double storeLatitude=rs.getDouble("store_latitude");
-        double storeLongitude=rs.getDouble("store_longitude");
-        String storePhone=rs.getString("store_phone");
-        String storeOperateTime=rs.getString("store_operate_time");
-        String storePhoto=rs.getString("store_photo");
-        String storeIntroduction= rs.getString("store_introduction");
-        OpenState storeOpenState = OpenState.valueOf(rs.getString("store_open_state"));
-        String storePayNumber= rs.getString("store_paynumber");
+        int store_id= rs.getInt("store_id");
 
-        String userTypeId = rs.getString("user_type_id");
-        String userTypeName= rs.getString("user_type_name");
-        UserTypeVO userType = new UserTypeVO(userTypeId,userTypeName);
+        int store_user_id=rs.getInt("store_user_id");
+        String store_user_type_id = rs.getString("store_user_type_id");
+        String store_user_type_name = rs.getString("store_user_type_name");
+        UserTypeVO store_user_type = new UserTypeVO(store_user_type_id, store_user_type_name);
+        String store_user_email = rs.getString("store_user_email");
+        String store_user_password = rs.getString("store_user_password");
+        String store_user_name = rs.getString("store_user_name");
+        String store_user_address = rs.getString("store_user_address");
+        String store_user_sub_address = rs.getString("store_user_sub_address");
+        double store_user_latitude = rs.getDouble("store_user_latitude");
+        double store_user_longitude = rs.getDouble("store_user_longitude");
+        String store_user_phone = rs.getString("store_user_phone");
+        Timestamp store_user_register_date = rs.getTimestamp("store_user_register_date");
+        Timestamp store_user_remove_date = rs.getTimestamp("store_user_remove_date");
+        UserVO store_user = new UserVO(store_user_id, store_user_type, store_user_email, store_user_password, store_user_name, store_user_address, store_user_sub_address, store_user_latitude, store_user_longitude, store_user_phone, store_user_register_date, store_user_remove_date);
 
-        String userEmail=rs.getString("user_email");
-        String userPassword=rs.getString("user_password");
-        String userName=rs.getString("use_name");
-        String userAddress=rs.getString("user_address");
-        String userSubAddress=rs.getString("user_sub_address");
-        double userLatitude=rs.getDouble("user_latitude");
-        double userLongitude=rs.getDouble("user_longitude");
-        String userPhone=rs.getString("user_phone");
-        Timestamp userRegisterDate=rs.getTimestamp("user_register_date");
-        Timestamp userRemoveDate=rs.getTimestamp("user_remove_date");
-        UserVO user = new UserVO(userId,userType,userEmail,userPassword,userName,userAddress,userSubAddress,
-                userLatitude,userLongitude,userPhone,userRegisterDate,userRemoveDate);
-
-        String storeCategoryName = rs.getString("store_category_name");
-        StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
-
-        String storeStateName= rs.getString("store_state_name");
-        StoreStateVO storeState = new StoreStateVO(storeStateId,storeStateName);
-
-        StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
-                storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeOpenState,storePayNumber);
+        String store_category_id = rs.getString("store_category_id");
+        String store_category_name = rs.getString("store_category_name");
+        StoreCategoryVO store_category = new StoreCategoryVO(store_category_id, store_category_name);
+        int store_state_id = rs.getInt("store_state_id");
+        String store_state_name = rs.getString("store_state_name");
+        StoreStateVO store_state = new StoreStateVO(store_state_id, store_state_name);
+        String store_business_number = rs.getString("store_business_number");
+        String store_name = rs.getString("store_name");
+        String store_address = rs.getString("store_address");
+        String store_sub_address = rs.getString("store_sub_address");
+        double store_latitude = rs.getDouble("store_latitude");
+        double store_longitude = rs.getDouble("store_longitude");
+        String store_phone = rs.getString("store_phone");
+        String store_operate_time = rs.getString("store_operate_time");
+        String store_photo = rs.getString("store_photo");
+        String store_introduction = rs.getString("store_introduction");
+        OpenState store_open_state = OpenState.valueOf(rs.getString("store_open_state"));
+        String store_paynumber = rs.getString("store_paynumber");
+        StoreVO store = new StoreVO(store_id, store_user, store_category, store_state, store_business_number, store_name, store_address, store_sub_address, store_latitude, store_longitude, store_phone, store_operate_time, store_photo, store_introduction, store_open_state, store_paynumber);
 
         int user_id = rs.getInt("user_id");
         String user_type_id = rs.getString("user_type_id");
@@ -69,13 +64,12 @@ public class ReviewMapper implements RowMapper<ReviewVO> {
         String user_phone = rs.getString("user_phone");
         Timestamp user_registerDate = rs.getTimestamp("user_register_date");
         Timestamp user_removeDate = rs.getTimestamp("user_remove_date");
-        UserVO user_vo = new UserVO(user_id, user_type, user_email, user_password, user_name, user_address, user_subAddress, user_latitude, user_longitude, user_phone, user_registerDate, user_removeDate);
+        UserVO user = new UserVO(user_id, user_type, user_email, user_password, user_name, user_address, user_subAddress, user_latitude, user_longitude, user_phone, user_registerDate, user_removeDate);
 
+        String review_content = rs.getString("review_content");
+        int review_score = rs.getInt("review_score");
+        Timestamp review_date = rs.getTimestamp("review_date");
 
-        String content = rs.getString("review_content");
-        int score = rs.getInt("review_score");
-        Timestamp date = rs.getTimestamp("review_date");
-
-        return new ReviewVO(id, store, user_vo, score, content, date);
+        return new ReviewVO(review_id, store, user, review_score, review_content, review_date);
     }
 }

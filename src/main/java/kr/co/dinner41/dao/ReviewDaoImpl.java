@@ -56,7 +56,7 @@ public class ReviewDaoImpl implements ReviewDao{
 
     @Override
     public int getTotalRecordByStoreId(int storeId) throws ReviewException {
-        List<Integer> list = template.query("select count(*) as num from reviews WHERE review_store_id LIKE ?;", new RowMapper<Integer>() {
+        List<Integer> list = template.query("select count(*) as num from reviews WHERE store_id LIKE ?;", new RowMapper<Integer>() {
             @Override
             public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return rs.getInt("num");
