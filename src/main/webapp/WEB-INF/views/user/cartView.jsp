@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -14,9 +16,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+    
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+
+    <script src="resources/js/cartView.js"></script>
 
     <title>Cart</title>
 </head>
@@ -76,13 +80,18 @@
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>장바구니</h4>
     </div>
-
+    
     <hr />
+
+	<c:forEach items="${carts}" var="cart" varStatus="i">
+		<c:out value="${cart.storeId}"/>
+		<c:out value="${cart.menuId}"/>
+	</c:forEach>
 
     <!--전체 선택 체크박스-->
     <div class="custom-control custom-checkbox  " style="margin-left: 10pt">
         <input type="checkbox" class="custom-control-input" id="totalToggle">
-        <label class="custom-control-label" for="totalToggle">전제선택</label>
+        <label class="custom-control-label" for="totalToggle">전체선택</label>
     </div>
 
     <hr/>
