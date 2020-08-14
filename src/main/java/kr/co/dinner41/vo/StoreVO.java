@@ -9,7 +9,6 @@ public class StoreVO {
 	private String name;
 	private String address;
 	private String subAddress;
-	private String payNumber;
 	private double latitude;
 	private double longitude;
 	private String phone;
@@ -17,12 +16,14 @@ public class StoreVO {
 	private String photo;
 	private String introduction;
 	private OpenState openState;
+	private String payNumber;
 	
 	public StoreVO() {}
 
 	public StoreVO(int id, UserVO user, StoreCategoryVO category, StoreStateVO state, String businessNumber,
-			String name, String address, String subAddress, String payNumber, double latitude, double longitude,
-			String phone, String operateTime, String photo, String introduction, OpenState openState) {
+			String name, String address, String subAddress, double latitude, double longitude, String phone,
+			String operateTime, String photo, String introduction, OpenState openState, String payNumber) {
+		super();
 		this.id = id;
 		this.user = user;
 		this.category = category;
@@ -31,7 +32,6 @@ public class StoreVO {
 		this.name = name;
 		this.address = address;
 		this.subAddress = subAddress;
-		this.payNumber = payNumber;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.phone = phone;
@@ -39,6 +39,7 @@ public class StoreVO {
 		this.photo = photo;
 		this.introduction = introduction;
 		this.openState = openState;
+		this.payNumber = payNumber;
 	}
 
 	public int getId() {
@@ -105,14 +106,6 @@ public class StoreVO {
 		this.subAddress = subAddress;
 	}
 
-	public String getPayNumber() {
-		return payNumber;
-	}
-
-	public void setPayNumber(String payNumber) {
-		this.payNumber = payNumber;
-	}
-
 	public double getLatitude() {
 		return latitude;
 	}
@@ -168,6 +161,15 @@ public class StoreVO {
 	public void setOpenState(OpenState openState) {
 		this.openState = openState;
 	}
+
+	public String getPayNumber() {
+		return payNumber;
+	}
+
+	public void setPayNumber(String payNumber) {
+		this.payNumber = payNumber;
+	}
+
 	
 	
 }
