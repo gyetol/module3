@@ -8,7 +8,8 @@ import kr.co.dinner41.vo.StoreVO;
 
 public interface StoreDao {
 	void insert(StoreVO store) throws StoreException;
-	void delete(int id) throws StoreException;
+	void deleteByStore(int id) throws StoreException;
+	void deleteByManager(int id) throws StoreException;
 	void update(StoreVO store) throws StoreException;
 	StoreVO selectById(int id) throws StoreException;
 	List<StoreVO> selectByCategory(String category, int page, int pageSize) throws StoreException;
