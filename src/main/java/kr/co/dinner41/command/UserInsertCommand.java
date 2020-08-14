@@ -10,6 +10,23 @@ public class UserInsertCommand {
 	private String phone;
 	private String type;
 
+	public UserInsertCommand() {}
+	
+	
+	public UserInsertCommand(String eamil, String password, String passwordConfirm, String name, String address,
+			String subAddress, String phone, String type) {
+		super();
+		this.eamil = eamil;
+		this.password = password;
+		this.passwordConfirm = passwordConfirm;
+		this.name = name;
+		this.address = address;
+		this.subAddress = subAddress;
+		this.phone = phone;
+		this.type = type;
+	}
+
+
 	public String getEamil() {
 		return eamil;
 	}

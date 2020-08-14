@@ -2,22 +2,22 @@ package kr.co.dinner41.vo;
 
 public class OfferTypeVO {
 	
-	private int id;
+	private String id;
 	private String name;
 	
 	public OfferTypeVO() {}
 
-	public OfferTypeVO(int id, String name) {
+	public OfferTypeVO(String id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
