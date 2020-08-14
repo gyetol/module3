@@ -1,9 +1,11 @@
-package kr.co.dinner41.service;
+package kr.co.dinner41.service.review;
 
 import kr.co.dinner41.vo.ReviewVO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("reviewListService")
 public class ReviewListServiceImpl implements ReviewListService {
     public static final int PAGE_SIZE = 10;
     @Override
