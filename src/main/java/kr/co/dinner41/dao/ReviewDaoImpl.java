@@ -1,6 +1,8 @@
 package kr.co.dinner41.dao;
 
 import kr.co.dinner41.exception.ReviewException;
+import kr.co.dinner41.exception.ReviewInsertException;
+import kr.co.dinner41.exception.ReviewSelectException;
 import kr.co.dinner41.mapper.ReviewMapper;
 import kr.co.dinner41.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("reviewDaoImpl")
+@Repository("reviewDao")
 public class ReviewDaoImpl implements ReviewDao{
     @Autowired
     private JdbcTemplate template;
 
     @Override
-    public void insert(ReviewVO review) throws ReviewException {
+    public void insert(ReviewVO review) throws ReviewInsertException {
         String sql = "INSERT INTO reviews VALUES(DEFAULT, ?, ?, ?, ?, DEFAULT);";
         template.update(sql, review.getStore().getId(), review.getUser().getId(), review.getContent(), review.getScore());
     }
@@ -26,7 +28,7 @@ public class ReviewDaoImpl implements ReviewDao{
     }
 
     @Override
-    public ReviewVO selectedById(int id) throws ReviewException {
+    public ReviewVO selectedById(int id) throws ReviewSelectException {
         List<ReviewVO> list;
         String sql = "SELECT * FROM reviews WHERE review_id = ?;";
         list = template.query(sql, new ReviewMapper(), id);
@@ -34,7 +36,7 @@ public class ReviewDaoImpl implements ReviewDao{
     }
 
     @Override
-    public List<ReviewVO> selectedByStoreId(int storeId) throws ReviewException {
+    public List<ReviewVO> selectedByStoreId(int storeId) throws ReviewSelectException {
         List<ReviewVO> list;
         String sql = "SELECT * FROM reviews WHERE store_id = ?;";
         list = template.query(sql, new ReviewMapper(), storeId);
@@ -42,7 +44,7 @@ public class ReviewDaoImpl implements ReviewDao{
     }
 
     @Override
-    public List<ReviewVO> selectedAll() throws ReviewException {
+    public List<ReviewVO> selectedAll() throws ReviewSelectException {
         List<ReviewVO> list;
         String sql = "SELECT * FROM reviews;";
         list = template.query(sql, new ReviewMapper());
