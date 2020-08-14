@@ -9,6 +9,6 @@ public interface ReviewDao {
     void insert(ReviewVO review) throws ReviewException;
     void delete(int id) throws ReviewException;
     ReviewVO selectedById(int id) throws ReviewException;
-    ReviewVO selectedByStoreId(int storeId) throws ReviewException;
+    List<ReviewVO> selectedByStoreId(int storeId) throws ReviewException;
     List<ReviewVO> selectedAll() throws ReviewException;
 }

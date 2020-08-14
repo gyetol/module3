@@ -9,5 +9,6 @@ public interface QnaTypeDao {
     void insert(QnATypeVO qnAType) throws QnATypeException;
     void delete(String id) throws QnATypeException;
     void update(String id, String name) throws QnATypeException;
+    QnATypeVO selectById(String id) throws QnATypeException;
     List<QnATypeVO> selectAll() throws QnATypeException;
 }

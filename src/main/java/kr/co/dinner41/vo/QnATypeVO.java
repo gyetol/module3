@@ -3,22 +3,22 @@ package kr.co.dinner41.vo;
 import java.util.Objects;
 
 public class QnATypeVO {
-    private int id;
+    private String id;
     private String name;
 
     public QnATypeVO() {
     }
 
-    public QnATypeVO(int id, String name) {
+    public QnATypeVO(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class QnATypeVO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QnATypeVO qnATypeVO = (QnATypeVO) o;
-        return id == qnATypeVO.id &&
+        return Objects.equals(id, qnATypeVO.id) &&
                 Objects.equals(name, qnATypeVO.name);
     }
 
