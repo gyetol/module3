@@ -69,17 +69,21 @@ public class StoreController {
 		return "login";
 	}
 	
-	@RequestMapping(value="/ad/{store-name}/{page}/store",method=RequestMethod.GET)
-	public String listByManager(@PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
+	@RequestMapping(value="/ad/{store-state-name}/{store-name}/{page}/store",method=RequestMethod.GET)
+	public String listByManager(@PathVariable("store-state-name") String storeStateName, @PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
 		int intPage = Integer.parseInt(page);
 		List<StoreVO> stores;
 		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
+		model.addAttribute("storeStateName",storeStateName);
 		model.addAttribute("storeName",storeName);
 		model.addAttribute("page",page);
 		
-		stores = 
+		stores = storeListByManagerService.execute(storeStateName, storeName, intPage);
+		
+		model.addAttribute("stores",stores);
+		return "manage/storeList";
 	}
 	
 }
