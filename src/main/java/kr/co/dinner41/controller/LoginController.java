@@ -33,6 +33,7 @@ public class LoginController {
 		new LoginValidator().validate(command, errors);
 		if(errors.hasErrors()) {
 			mav.setViewName("common/login");
+			return mav;
 		}
 		
 		try {
@@ -43,14 +44,18 @@ public class LoginController {
 		}
 		UserVO user=(UserVO)session.getAttribute("loginUser");
 		String userType=user.getType().getId();
+		System.out.println(userType);
 		String viewName=null;
 		switch(userType) {
 		case "GM":
 			viewName="user/userHome";
+			break;
 		case "SM":
 			viewName="store/storeHome";
+			break;
 		case "AD":
 			viewName="manage/managerHome";
+			break;
 		}
 		System.out.println(viewName);
 		mav.setViewName(viewName);
