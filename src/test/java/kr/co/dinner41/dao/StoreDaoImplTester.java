@@ -26,6 +26,7 @@ public class StoreDaoImplTester {
 	@Autowired
 	private ApplicationContext ctx;
 	
+
 //	@Test
 //	public void insertTest() {
 //		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
@@ -54,6 +55,18 @@ public class StoreDaoImplTester {
 //		
 //		
 //	}
+
+	@Ignore
+	@Test
+	public void insertTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		UserDao userDao =ctx.getBean("userDao",UserDao.class);
+		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
+		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
+		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
+		
+	}
+
 	
 	
 

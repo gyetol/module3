@@ -7,7 +7,6 @@ import kr.co.dinner41.service.qna.QnAInsertService;
 import kr.co.dinner41.service.qna.QnAListService;
 import kr.co.dinner41.service.qna.QnAViewService;
 import kr.co.dinner41.vo.QnAVO;
-import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

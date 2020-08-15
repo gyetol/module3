@@ -31,8 +31,8 @@
 
     <title>Menu</title>
 </head>
-
 <body>
+
 <nav class="navbar navbar-light light_green" style="background-color: aquamarine">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -49,88 +49,87 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">ë´ì ë³´ ë³´ê¸°</a>
+                <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ì£¼ë¬¸ ë´ì­</a>
+                <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 ë¬¸ì</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> </a>
+                <a class="nav-link" href="#">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ë¡ê·¸ìì</a>
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">로그아웃</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container-fluid" style="margin-top: 15pt">
     <div class="text-center">
-        <img src="../../images/1ì¸ìë§ì°¬.png" class="img-fluid img-title" alt="no title"/>
-        <h2>ë©ë´ ì ë³´ ìì </h2>
+        <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
+        <h2>메뉴 등록</h2>
     </div>
 </div>
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left">
+    <form class="text-left container-fluid" method="put" aciton="menu">
 
         <div class="form-group">
-            <label for="menuName">ë©ë´ëª</label>
-            <input type="text" class="form-control" id="menuName"/>
+            <label for="name">메뉴명</label>
+            <input type="text" class="form-control" name="setName" id="menuName"/>
         </div>
 
         <div class="form-group">
-            <label for="menuAmount">ì¬ê³  ìë</label>
-            <input type="text" class="form-control" id="menuAmount">
+            <label for="amount">재고 수량</label>
+            <input type="text" class="form-control" name="setAmount" id="menuAmount">
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlInput1">ë©ë´ ì¬ì§ ì²¨ë¶</label>
-            <img src="../../images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
+            <label for="exampleFormControlInput1">메뉴 사진 첨부</label>
             <div id="emailCheckLabel">
-                <input type="file" id="exampleFormControlInput1">
+                <input type="file" id="menuPhoto" name="photo">
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="inputKind">ì ê³µë°©ì</label>
-            <select id="inputKind" class="form-control">
-                <option>ëìë½</option>
-                <option>ì¡°ë¦¬í¤í¸</option>
-                <option>ìì ì¡°ë¦¬ì</option>
+        <div class="form-group" style="margin-bottom: 20pt">
+            <label for="inputKind">제공방식</label>
+            <select name="type" id="offerType" class="form-control">
+                <option>도시락</option>
+                <option>조리키트</option>
+                <option>완전조리식</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="menuMoney">ë©ë´ ê°ê²©</label>
-            <input type="text" class="form-control margin_up" placeholder="ìì¸ì£¼ì" id="menuMoney"/>
+            <label for="menuMoney">메뉴 가격</label>
+            <input name ="price" type="text" class="form-control margin_up" placeholder="메뉴 가격" id="menuPrice"/>
         </div>
 
         <div class="form-group">
-            <label for="tag">ë©ë´ íê·¸</label>
-            <input type="tel" class="form-control" id="tag">
+            <label for="tag">메뉴 태그</label>
+            <input name="tag" type="tel" class="form-control" id="menuTag">
         </div>
 
         <div class="form-group">
-            <label for="menuDes">ë©ë´ ì¤ëª</label>
-            <textarea class="form-control" id="menuDes" placeholder="ë©ë´ì ëí´ì ì¤ëªí´ì£¼ì¸ì." rows="5"></textarea>
+            <label for="menuDes">메뉴 설명</label>
+            <textarea class="form-control" name="introduction" id="menuIntro" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
-            <label for="inputContent">ë©ë´ ì ì ì¬í­</label>
-            <textarea class="form-control" id="inputContent" placeholder="ì¬ë£, ì¬ë£ ìì°ì§ ìë ë¥´ê¸° ì ë°ìíì ëí´ ì ì´ì£¼ì¸ì."
+            <label for="inputContent">메뉴 유의 사항</label>
+            <textarea class="form-control" name="notice" id="menuNotice" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
                       rows="5"></textarea>
         </div>
 
-        <button type="button" class="btn btn-success two_button">ë©ë´ ìì  ìë£</button>
-        <button type="button" class="btn btn-success two_button float-right">ë©ë´ ìì  ì·¨ìíê¸°</button>
+        <button id ="menuUpdate" type="submit" class="btn btn-success two_button">메뉴 수정하기</button>
+        <button id = "menuUpdateCancel" type="button" class="btn btn-success two_button float-right">메뉴 수정 취소하기</button>
     </form>
 </div>
 <hr/>

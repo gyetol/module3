@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-<%
-	String path = "../promotionuploads/";
-%>
-<html>
+<html lang="ko">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -29,117 +25,114 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="../../css/dinner41.css">
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>
+
     <title>Menu</title>
 </head>
+
 <body>
 
 <nav class="navbar navbar-light light_green" style="background-color: aquamarine">
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div>
-        <h5 class="up_down_center">STORE MANAGE</h5>
+    <!--사용자 위치-->
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span>서울특별시 봉천동</span>
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">주소 변경하기</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">현재 위치 기준</a>
+        </div>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture">
+    <!--장바구니 아이콘-->
+    <button id="cartButton">
+    <img src="${pageContext.request.contextPath}/resources/images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
+    </button>
 
+    <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">ë´ì ë³´ ë³´ê¸°</a>
+                <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ì£¼ë¬¸ ë´ì­</a>
+                <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 ë¬¸ì</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> </a>
+                <a class="nav-link" href="#">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ë¡ê·¸ìì</a>
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">로그아웃</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<div class="container-fluid" style="margin-top: 15pt">
-    <div class="text-center">
-        <img src="../../images/1ì¸ìë§ì°¬.png" class="img-fluid img-title" alt="no title"/>
-        <h2>ë©ë´ ìì¸</h2>
-    </div>
-</div>
-
-<hr/>
-
-<div class="container-fluid">
-    <div class="container-fluid text-left">
-        <div class="card card-body">
-            <img src="../../images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
+<!-- storeId, menuId가 data로 세팅되어야함 -->
+<div class="container-fluid" data-storeId="38" data-menuId="55">
+    <div class="container-fluid">
+        <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
+            <img src="../../categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
         </div>
-        <br/>
 
         <div class="form-group">
-            <label for="menuName">ë©ë´ëª</label>
-            <div class="card card-body" id="menuName">
-                ë¼í´ì¥êµ­
+            <label for="menuName">메뉴명</label>
+            <div class="card card-body" id="menuName" name="name">
+            	닭강정(대)
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuAmount">ì¬ê³  ìë</label>
-            <div class="card card-body" id="menuAmount">
-                12ê°
+            <label for="menuAmount">최대 수량</label>
+            <div class="card card-body" id="menuAmount" name="amount">
+            	2
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20pt">
+            <label for="inputKind">제공방식</label>
+            <div class="card card-body" id="inputKind" name="type">
+                제공방식을 여기에 입력하시오
             </div>
         </div>
 
         <div class="form-group">
-            <label for="inputKind">ì ê³µë°©ì</label>
-            <div class="card card-body" id="inputKind">
-                ìì  ì¡°ë¦¬ì
+            <label for="menuMoney">메뉴 가격</label>
+            <div class="card card-body" id="menuMoney" name="price">
+            5000
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuMoney">ë©ë´ ê°ê²©</label>
-            <div class="card card-body" id="menuMoney">
-                4000ì
+            <label for="menuDes">메뉴 설명</label>
+            <div class="card card-body" id="menuDes" name="introduction">
+                여기에 메뉴설명을 입력하시오
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="tag">ë©ë´ íê·¸</label>
-            <div id="tag">
-                <span class="badge badge-primary">ë°¥</span>
-                <span class="badge badge-primary">êµ­ì</span>
-                <span class="badge badge-primary">íì</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="menuDes">ë©ë´ ì¤ëª</label>
-            <div class="card card-body" id="menuDes">
-                ë¼í´ì¥êµ­ ìëë¤.
-            </div>
-        </div>
-
 
         <div class="form-group" style="margin-bottom: 40pt">
-            <label for="inputContent">ë©ë´ ì ì ì¬í­</label>
-            <div class="card card-body" id="inputContent">
-                ì§ì ëì°©íìë§ì ìíì§ ìê² íë² ëì¬ì£¼ì¸ì
+            <label for="inputContent">메뉴 유의 사항</label>
+            <div class="card card-body" id="inputContent" name="notice">
+                여기에 메뉴설명을 입력하시오
             </div>
         </div>
 
-        <button type="button" class="btn btn-success two_button">ë©ë´ ìì  íê¸°</button>
-        <button type="button" class="btn btn-success two_button float-right">ë©ë´ ì­ì  íê¸°</button>
+        <button type="button" class="btn btn-success two_button" id="menuUpdate">수정하기</button>
+        <button type="button" class="btn btn-success two_button float-right" id="menuDelete">삭제하기</button>
     </div>
 </div>
 <hr/>
