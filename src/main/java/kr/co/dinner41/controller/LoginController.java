@@ -28,13 +28,15 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(LoginCommand command,Errors errors,HttpSession session) {
+	public ModelAndView login(LoginCommand command,Errors errors,HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
 		new LoginValidator().validate(command, errors);
 		if(errors.hasErrors()) {
 			mav.setViewName("common/login");
 			return mav;
 		}
+		
+		HttpSession session=request.getSession();
 		
 		try {
 			loginService.execute(command, session);
