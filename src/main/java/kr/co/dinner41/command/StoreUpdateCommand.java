@@ -1,6 +1,6 @@
 package kr.co.dinner41.command;
 
-public class StoreInsertCommand {
+public class StoreUpdateCommand {
 	private String businessNumber;
 	private String name;
 	private String photo;
@@ -13,9 +13,9 @@ public class StoreInsertCommand {
 	private String operateTime;
 	private String introduction;
 	
-	public StoreInsertCommand() {}
+	public StoreUpdateCommand() {}
 
-	public StoreInsertCommand(String businessNumber, String name, String photo, String category, String address,
+	public StoreUpdateCommand(String businessNumber, String name, String photo, String category, String address,
 			String subAddress, double latitude, double longitude, String phone, String operateTime,
 			String introduction) {
 		super();
@@ -119,7 +119,7 @@ public class StoreInsertCommand {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+	
+	
 
-	
-	
 }

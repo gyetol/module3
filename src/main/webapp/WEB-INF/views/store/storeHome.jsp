@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -123,12 +123,14 @@
 <div>
     <div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
         <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center trim">
-                    <img src="../../categoryImages/store.png" class="rounded category" alt="no picture" >
-                    <h5 class="card-title">매장관리</h5>
-                </div>
-            </div>
+            <a href="store">
+            	<div class="card h-100" id="storeManagement" name="storeManagement">
+                	<div class="card-body text-center trim">
+                    	<img src="../../categoryImages/store.png" class="rounded category" alt="no picture" >
+                    	<h5 class="card-title">매장관리</h5>
+                	</div>
+            	</div>
+            </a>
         </div>
         <div class="col mb-4">
         <a href = "menu">
