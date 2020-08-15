@@ -18,7 +18,7 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="../../css/dinner41.css">
     
-    <script src="resources/js/user/storeDetail_menu.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/user/storeDetail_menu.js"></script>
 
     <title>one2one</title>
 </head>

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.dinner41.service.cart.CartInsertService;
 import kr.co.dinner41.service.cart.CartListService;
 import kr.co.dinner41.vo.CartVO;
+import kr.co.dinner41.vo.UserTypeVO;
+import kr.co.dinner41.vo.UserVO;
 
 @Controller
 public class CartController {
@@ -78,19 +80,21 @@ public class CartController {
 		map.put("msg2", "장바구니 등록 완료!!");
 		return map;
 	}
+
 	
 	@RequestMapping(value = "/gm/cart", method = RequestMethod.DELETE)
 	public String delete(HttpSession sesson, CartVO cart) {
+
 		return "";
 	}
+
 	
 	@RequestMapping(value = "/gm/cart", method = RequestMethod.GET)
-	public String list(HttpSession session, Model model) {
+	public String list(HttpServletRequest request, HttpSession session, Model model) {
 
-		/*
 		// 사용자가 로그인하지 않고 URL을 통해 오는 경우
 		if (session == null) {
-			return "/sessionCheck";
+			// 인터셉터로 보내기
 		}
 	
 		// 로그인했지만 점주회원, 관리자가 해당 기능을 URL을 통해 사용하려고 하는 경우
@@ -99,7 +103,6 @@ public class CartController {
 		if (type.getName().equals("AD") || type.getName().equals("SM")) {
 			return "/sessionCheck";
 		}
-		*/
 		
 		@SuppressWarnings("unchecked")
 		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");

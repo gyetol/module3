@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="../../css/dinner41.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="resources/js/user/menuView.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>
 
     <title>Menu</title>
 </head>
