@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface QnAListService {
     List<QnAVO> execute(UserVO user, String qnaType, int page);
+    List<QnAVO> execute(String qnaType, int page);
 }

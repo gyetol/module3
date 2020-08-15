@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -25,8 +24,8 @@
 
     <title>Q&A</title>
 </head>
-
 <body>
+
 <nav class="navbar navbar-light light_green">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -34,19 +33,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <span>서울특별시 봉천동</span>
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">주소 변경하기</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">현재 위치 기준</a>
-        </div>
+    <div>
+        <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture"/>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -54,7 +45,7 @@
                 <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문 내역</a>
+                <a class="nav-link" href="#">주문내역</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">1:1 문의</a>
@@ -73,12 +64,12 @@
 </nav>
 
 <div>
-    <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
-        <h4>문의 내역</h4>
+    <div class="container-fluid">
+        <div class="text-center" style="margin-top: 15pt">
+            <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title" style="margin: auto;"/>
+            <h4>문의 내역</h4>
+        </div>
     </div>
-
-
     <c:if test="${type eq 'ALL'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
@@ -213,7 +204,6 @@
             <button type="button" class="btn btn-success">>></button>
         </div>
     </div>
-
     <div class="container-fluid margin_first">
         <button type="button" class="btn btn-outline-success two_button">문의작성</button>
         <button type="button" class="btn btn-outline-success float-right two_button">뒤로가기</button>

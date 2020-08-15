@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
@@ -34,27 +34,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <span>서울특별시 봉천동</span>
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">주소 변경하기</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">현재 위치 기준</a>
-        </div>
+    <div>
+        <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="#">내정보 보기</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">1:1 문의</a>
@@ -74,10 +63,9 @@
 
 <div>
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title" style="margin: auto;"/>
         <h4>문의 내역</h4>
     </div>
-
 
     <c:if test="${type eq 'ALL'}">
         <ul class="nav nav-tabs">
@@ -206,13 +194,14 @@
     <div style="text-align: center">
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-success"><<</button>
-            <button type="button" class="btn btn-success">1</button>
+            <button type="button" class="btn btn-success" disabled>1</button>
             <button type="button" class="btn btn-success">2</button>
             <button type="button" class="btn btn-success">3</button>
             <button type="button" class="btn btn-success">4</button>
             <button type="button" class="btn btn-success">>></button>
         </div>
     </div>
+
 
     <div class="container-fluid margin_first">
         <button type="button" class="btn btn-outline-success two_button">문의작성</button>

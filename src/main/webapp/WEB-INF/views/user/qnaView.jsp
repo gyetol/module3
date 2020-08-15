@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -23,10 +24,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!--사용자 위치-->
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>서울특별시 봉천동</span>
+            <span>${qna.user.addresss}</span>
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
@@ -73,31 +73,35 @@
         <div class="form-group row">
             <label for="kind" class="col-3 col-form-label">문의 유형</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="kind" readonly>
+                <input type="text" class="form-control" id="kind" readonly value="${qna.type.name}">
             </div>
         </div>
 
         <div class="form-group row">
             <label for="inputTitle" class="col-3 col-form-label">제목</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="inputTitle" readonly>
+                <input type="text" class="form-control" id="inputTitle" readonly value="${qna.title}">
             </div>
         </div>
 
         <div class="form-group row">
             <label for="qnaDate" class="col-3 col-form-label">문의 작성일자</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="qnaDate" readonly>
+                <input type="text" class="form-control" id="qnaDate" readonly value="${qna.questionDate}">
             </div>
         </div>
 
         <div class="card card-body" style="margin-bottom: 10pt;">
-            문의 내용을 입력해주세요
+            ${qna.content}
         </div>
 
         <div class="card card-body" style="margin-bottom: 10pt;">
-            답변이 작성되지 않은 경우 '답변 대기중입니다.'<br>
-            답변이 적힌 경우 그대로 답변을 출력해주세요.
+            <c:if test="${!empty qna.answerDate}">
+                ${qna.answerContent}
+            </c:if>
+            <c:if test="${empty qna.answerDate}">
+                답변 대기중입니다
+            </c:if>
         </div>
     </div>
 

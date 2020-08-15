@@ -11,9 +11,11 @@ public interface QnADao {
     void update(QnAVO qna) throws QnAException;
     void delete(String email) throws QnAException;
     List<QnAVO> selectAll(int page, int pageSize) throws QnAException;
+    List<QnAVO> selectAll(int page, int pageSize, UserVO user) throws QnAException;
     List<QnAVO> selectAll(int page, int pageSize, String qna_type) throws QnAException;
-    List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user) throws QnAException;
-    List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user, String qna_type) throws QnAException;
+    List<QnAVO> selectAll(int page, int pageSize, String qna_type, UserVO user) throws QnAException;
+    List<QnAVO> selectAllDone(int page, int pageSize) throws QnAException;
+    List<QnAVO> selectAllDone(int page, int pageSize, UserVO user) throws QnAException;
     QnAVO selectById(int qna_id) throws QnAException;
     int getTotalRecord() throws QnAException;
     int getTotalRecord(String qna_type) throws QnAException;
