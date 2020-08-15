@@ -1,16 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -22,7 +20,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Q&A</title>
 </head>
@@ -38,7 +36,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -49,7 +47,7 @@
                 <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -66,7 +64,7 @@
 
 <div>
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="../../images/1인의만찬.png" width="18%" class="img-fluid img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" width="18%" class="img-fluid img-title" alt="no title"/>
         <h4>문의 상세</h4>
     </div>
 
@@ -76,35 +74,42 @@
         <div class="form-group row">
             <label for="kind" class="col-3 col-form-label">문의 유형</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="kind" disabled>
+                <input type="text" class="form-control" id="kind" readonly value="${qna.type.name}">
             </div>
         </div>
 
         <div class="form-group row">
             <label for="inputTitle" class="col-3 col-form-label">제목</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="inputTitle" disabled>
+                <input type="text" class="form-control" id="inputTitle" readonly value="${qna.title}">
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="name" class="col-3 col-form-label">작성자</label>
+            <label for="qnaDate" class="col-3 col-form-label">문의 작성일자</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="name" disabled>
+                <input type="text" class="form-control" id="qnaDate" readonly value="${qna.questionDate}">
             </div>
         </div>
 
         <div class="card card-body" style="margin-bottom: 10pt;">
-            문의 내용을 입력해주세요
+            ${qna.content}
         </div>
 
         <div class="card card-body" style="margin-bottom: 10pt;">
-            답변 내용을 입력해주세요
+            <c:if test="${!empty qna.answerDate}">
+                ${qna.answerContent}
+            </c:if>
+            <c:if test="${empty qna.answerDate}">
+                답변 대기중입니다
+            </c:if>
         </div>
     </div>
 
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block">홈으로</button>
+        <a href="${pageContext.request.contextPath}/ALL/1/qna">
+            <button type="button" class="btn btn-outline-success btn-block">목록으로</button>
+        </a>
     </div>
 
 </div>
