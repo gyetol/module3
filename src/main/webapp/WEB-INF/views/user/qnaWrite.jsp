@@ -70,29 +70,30 @@
 
     <hr/>
 
-    <div class="container-fluid" >
+    <form class="container-fluid" method="post">
         <div class="form-group row">
             <label for="qna_type" class="col-3 col-form-label">문의 유형</label>
             <div class="col-9">
-                <select class="form-control" id="qna_type">
-                    <option>문의</option>
-                    <option>건의</option>
-                    <option>신고</option>
+                <select class="form-control" id="qna_type" name="type">
+                    <option value="QUE">문의</option>
+                    <option value="REQ">건의</option>
+                    <option value="REP">신고</option>
                 </select>
             </div>
         </div>
         <div class="form-group row">
             <label for="qna_title" class="col-3 col-form-label">제목</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="qna_title">
+                <input type="password" class="form-control" id="qna_title" name="title" value="">
             </div>
         </div>
-        <textarea class="form-control" placeholder="문의 내용을 입력해주세요" rows="10" id="qna_content"></textarea>
-    </div>
-    <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success two_button">문의등록</button>
-        <button type="button" class="btn btn-outline-success two_button float-right">등록취소</button>
-    </div>
+        <textarea class="form-control" placeholder="문의 내용을 입력해주세요" rows="10" id="qna_content" name="content"></textarea>
+        <div class="container-fluid margin_first">
+            <button type="submit" class="btn btn-outline-success two_button">문의등록</button>
+            <button type="button" class="btn btn-outline-success two_button float-right">등록취소</button>
+        </div>
+    </form>
+
 </div>
 
 <hr/>

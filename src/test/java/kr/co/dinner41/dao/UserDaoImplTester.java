@@ -1,7 +1,5 @@
 package kr.co.dinner41.dao;
 
-import java.util.List;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +43,7 @@ public class UserDaoImplTester {
 	}
 
 	@Test
+	@Ignore
 	public void deleteTest() {
 		UserDao dao=ctx.getBean("userDao",UserDao.class);
 		try {
@@ -73,18 +72,20 @@ public class UserDaoImplTester {
 	}
 
 	@Test
-	@Ignore
 	public void selectTest() {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
-		List<UserVO> users=null;
+		UserVO user=null;
 		try {
-			users=userDao.selectAll();
-			if(users==null) {
-				System.out.println("회원의 목록을 불러오지 못함");
+			user=userDao.selectByEmailAndPassword("testSm@naver.com", "1234");
+			if(user==null) {
+				System.out.println("회원을 불러오지 못함");
 			}
+			System.out.println(user.getEmail());
+			/*
 			for(UserVO user:users) {
 				System.out.println(user.getName());
 			}
+			*/
 		}
 		catch(Exception e) {
 			e.printStackTrace();

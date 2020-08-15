@@ -131,38 +131,120 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public List<StoreVO> selectByCategory(String category, int page, int pageSize) throws StoreException {
-		return null;
+	public List<StoreVO> selectByCategoryName(String categoryName, int page, int pageSize) throws StoreException {
+		int startPos = (page-1)*pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_category_name like '"+categoryName+"' ");
+		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
 	}
 
 	@Override
-	public List<StoreVO> selectByStateId(int stateId, int page, int pageSize) throws StoreException {
-		return null;
+	public List<StoreVO> selectByStateName(String stateName, int page, int pageSize) throws StoreException {
+		int startPos = (page-1)*pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_state_name='"+stateName+"' ");
+		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
 	}
 
 	@Override
 	public StoreVO selectByBusinessNumber(String businessNumber) throws StoreException {
-		return null;
+		String sql = "select * from store_view where store_business_number=?";
+		List<StoreVO> stores =null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper(),businessNumber);
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0?stores.get(0):null);
 	}
 
 	@Override
 	public List<StoreVO> selectByName(String name, int page, int pageSize) throws StoreException {
-		return null;
+		int startPos = (page-1)*pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_name like '%"+name+"%' ");
+		sb.append("order by store_name ASC limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
 	}
 
 	@Override
 	public List<StoreVO> selectByLocation(double latitude, double longitude) throws StoreException {
+		//String sql = "select * from store_view where "
 		return null;
 	}
 
 	@Override
 	public List<StoreVO> selectByOpenState(OpenState openState, int page, int pageSize) throws StoreException {
-		return null;
+		int startPos = (page-1)*pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_open_state='"+openState+"' ");
+		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
 	}
 
 	@Override
 	public List<StoreVO> selectAll(int page, int pageSize) throws StoreException {
-		return null;
+		int startPos = (page-1)*pageSize;
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("order by store_id desc limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores =null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores:null);
 	}
 
 }

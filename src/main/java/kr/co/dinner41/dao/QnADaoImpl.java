@@ -3,6 +3,7 @@ package kr.co.dinner41.dao;
 import kr.co.dinner41.exception.QnAException;
 import kr.co.dinner41.mapper.QnAMapper;
 import kr.co.dinner41.vo.QnAVO;
+import kr.co.dinner41.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Repository("qnADao")
 public class QnADaoImpl implements QnADao {
+
     @Autowired
     private JdbcTemplate template;
 
@@ -53,6 +55,29 @@ public class QnADaoImpl implements QnADao {
         String sql = "SELECT * FROM qna_view " +
                 "WHERE qna_type_id LIKE ? ORDER BY qna_question_date DESC LIMIT ?, ?;";
         list = template.query(sql, new QnAMapper(), qna_type, startPoint, pageSize);
+        return list;
+    }
+
+    @Override
+    public List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user) throws QnAException {
+        List<QnAVO> list;
+        int startPoint = (page-1)*pageSize;
+
+        String sql = "SELECT * FROM qna_view " +
+                "WHERE user_id LIKE ? " +
+                "ORDER BY qna_question_date DESC LIMIT ?, ?;";
+        list = template.query(sql, new QnAMapper(), user.getId(),startPoint, pageSize);
+        return list;
+    }
+
+    @Override
+    public List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user, String qna_type) throws QnAException {
+        List<QnAVO> list;
+        int startPoint = (page-1)*pageSize;
+        String sql = "SELECT * FROM qna_view " +
+                "WHERE qna_type_id LIKE ? AND user_id LIKE ? " +
+                "ORDER BY qna_question_date DESC LIMIT ?, ?;";
+        list = template.query(sql, new QnAMapper(), qna_type, user.getId(),startPoint, pageSize);
         return list;
     }
 
