@@ -4,9 +4,9 @@ public class MenuUpdateCommand {
 	
 	private String type;
 	private String name;
-	private String price;
+	private int price;
 	private String photo;
-	private String amount;
+	private int amount;
 	private String introduction;
 	private String notice;
 	public String getType() {
@@ -21,10 +21,10 @@ public class MenuUpdateCommand {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getPhoto() {
@@ -33,10 +33,10 @@ public class MenuUpdateCommand {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public String getIntroduction() {
@@ -51,6 +51,8 @@ public class MenuUpdateCommand {
 	public void setNotice(String notice) {
 		this.notice = notice;
 	}
+	
+	
 	
 
 }

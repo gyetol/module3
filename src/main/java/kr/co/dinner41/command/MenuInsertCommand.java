@@ -10,6 +10,7 @@ public class MenuInsertCommand {
 	private int amount;
 	private String introduction;
 	private String notice;
+	
 	public String getType() {
 		return type;
 	}
