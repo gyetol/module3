@@ -19,6 +19,8 @@ import kr.co.dinner41.vo.StoreVO;
 public class StoreDaoImpl implements StoreDao {
 	@Autowired
 	private JdbcTemplate jTemp;
+	
+	private int searchDistance=1; //1km검색
 
 	@Override
 	public void insert(StoreVO store) throws StoreException {
@@ -131,13 +133,33 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public List<StoreVO> selectByCategoryName(String categoryName, int page, int pageSize) throws StoreException {
+	public List<StoreVO> selectByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException {
 		int startPos = (page-1)*pageSize;
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from store_view ");
-		sb.append("where store_category_name like '"+categoryName+"' ");
-		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
+		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
+		sb.append(" AS distance from (select * from store_view where store_category_name like '"+categoryName+"') AS viewByCategory "); 
+		sb.append(" HAVING distance <=1 order by distance limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
+	}
+	
+	@Override
+	public List<StoreVO> selectByCategoryNameOnMap(String categoryName, double userLatitude, double userLongitude) throws StoreException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
+		sb.append(" AS distance from (select * from store_view where store_category_name like '"+categoryName+"') AS viewByCategory "); 
+		sb.append(" HAVING distance <=1 order by distance limit 0,300");
 		
 		String sql = sb.toString();
 		List<StoreVO> stores = null;
@@ -184,13 +206,14 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public List<StoreVO> selectByName(String name, int page, int pageSize) throws StoreException {
+	public List<StoreVO> selectByStoreName(String storeName,double userLatitude, double userLongitude, int page, int pageSize) throws StoreException {
 		int startPos = (page-1)*pageSize;
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from store_view ");
-		sb.append("where store_name like '%"+name+"%' ");
-		sb.append("order by store_name ASC limit "+startPos+","+pageSize);
+		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
+		sb.append(" AS distance from (select * from store_view where store_name like '%"+storeName+"%') AS viewByCategory "); 
+		sb.append(" HAVING distance <=1 order by distance limit "+startPos+","+pageSize);
 		
 		String sql = sb.toString();
 		List<StoreVO> stores = null;
@@ -204,9 +227,21 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public List<StoreVO> selectByLocation(double latitude, double longitude) throws StoreException {
-		//String sql = "select * from store_view where "
-		return null;
+	public List<StoreVO> selectByLocation(double userLatitude, double userLongitude) throws StoreException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
+		sb.append("AS distance from store_view HAVING distance <=1 order by distance limit 0,300");
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
 	}
 
 	@Override
