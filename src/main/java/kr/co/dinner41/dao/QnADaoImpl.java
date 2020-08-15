@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository("qnADao")
 public class QnADaoImpl implements QnADao {
+
     @Autowired
     private JdbcTemplate template;
 

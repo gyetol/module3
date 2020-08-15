@@ -20,7 +20,7 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
-    <script src="resources/js/cartView.js"></script>
+    <script src="resources/js/user/cartView.js"></script>
 
     <title>Cart</title>
 </head>

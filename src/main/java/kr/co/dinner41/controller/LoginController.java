@@ -1,6 +1,5 @@
 package kr.co.dinner41.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +55,4 @@ public class LoginController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-
 }
