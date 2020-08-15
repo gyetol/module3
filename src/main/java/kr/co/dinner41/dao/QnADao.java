@@ -18,5 +18,9 @@ public interface QnADao {
     List<QnAVO> selectAllDone(int page, int pageSize, UserVO user) throws QnAException;
     QnAVO selectById(int qna_id) throws QnAException;
     int getTotalRecord() throws QnAException;
+    int getTotalRecord(UserVO user) throws QnAException;
     int getTotalRecord(String qna_type) throws QnAException;
+    int getTotalRecord(String qna_type, UserVO user) throws QnAException;
+    int getTotalRecordDone() throws QnAException;
+    int getTotalRecordDone(UserVO user) throws QnAException;
 }
