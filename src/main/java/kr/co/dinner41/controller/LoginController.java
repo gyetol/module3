@@ -1,5 +1,6 @@
 package kr.co.dinner41.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class LoginController {
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String login() {
+		System.out.println("login컨트롤러 진입성공");
 		return "common/login";
-
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
@@ -59,5 +60,30 @@ public class LoginController {
 		System.out.println(viewName);
 		mav.setViewName(viewName);
 		return mav;
+	}
+	
+	@RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
+	public String sessionCheck(HttpServletRequest request) {
+		HttpSession session=request.getSession(false);
+		if(session==null) {
+			return "common/login";
+		}
+		UserVO loginUser=(UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "common/login";
+		}
+		String loginUserType=loginUser.getType().getId();
+		String jspName=null;
+		switch(loginUserType) {
+		case "GM":
+			jspName="user/userHome";
+			break;
+		case "SM":
+			jspName="store/storeHome";
+			break;
+		case "AD":
+			jspName="manage/managerHome";
+		}
+		return jspName;
 	}
 }
