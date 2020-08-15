@@ -16,12 +16,12 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 	@Qualifier("storeDao")
 	StoreDao storeDao;
 	
+	 public static final int PAGESIZE = 10;
+	
 
 	@Override
-	public List<StoreVO> execute(String storeStateName,String StoreName,int page,int pageSize) throws StoreException{
-		if(storeName==null) {
-			
-		}
+	public List<StoreVO> execute(String storeStateName,String StoreName,int page) throws StoreException{
+		return null;
 	}
 
 }
