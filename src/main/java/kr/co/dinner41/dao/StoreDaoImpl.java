@@ -24,7 +24,7 @@ public class StoreDaoImpl implements StoreDao {
 
 	@Override
 	public void insert(StoreVO store) throws StoreException {
-		String sql = "insert into stores values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into stores values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,default,?)";
 		int result=0;
 		try {
 			int userId= store.getUser().getId();//1
@@ -40,11 +40,11 @@ public class StoreDaoImpl implements StoreDao {
 			String storeOperateTime=store.getOperateTime();//11
 			String storePhoto=store.getPhoto();//12
 			String storeIntroduction=store.getIntroduction();//13
-			OpenState storeOpenState = store.getOpenState();//14
-			String storePayNumber= store.getPayNumber();//15
+			//OpenState storeOpenState = store.getOpenState();//
+			String storePayNumber= store.getPayNumber();//14
 			
 			result= jTemp.update(sql,userId,storeCategoryId,storeStateId,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
-								storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeOpenState,storePayNumber);
+								storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storePayNumber);
 		}
 		catch(Exception e) {
 			throw new StoreInsertFailedException(e.getMessage());

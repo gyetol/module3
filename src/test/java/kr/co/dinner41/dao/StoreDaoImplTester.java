@@ -1,6 +1,5 @@
 package kr.co.dinner41.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -12,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.dinner41.vo.OpenState;
+import kr.co.dinner41.vo.StoreCategoryVO;
+import kr.co.dinner41.vo.StoreStateVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
@@ -25,20 +26,34 @@ public class StoreDaoImplTester {
 	@Autowired
 	private ApplicationContext ctx;
 	
-	@Test
-	public void insertTest() {
-		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
-		UserDao userDao =ctx.getBean("userDao",UserDao.class);
-		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
-		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
-		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
-		
-		UserTypeVO userType = new UserTypeVO("SM","점주회원");
-		UserVO user =new UserVO(17,userType,"hong@naver.com",1234,"홍길동","서울시 관악구 행운5길 23-4","우진하우스 b01호",37.481978,126.958761,"010-4416-9941",
-						null,null);
-		
-		
-	}
+//	@Test
+//	public void insertTest() {
+//		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+//		UserDao userDao =ctx.getBean("userDao",UserDao.class);
+//		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
+//		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
+//		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
+//		
+//		UserTypeVO userType = new UserTypeVO("SM","점주회원");
+//		//UserVO user =new UserVO(0,userType,"hong3@naver.com","1234","홍길동","서울시 관악구 행운5길 23-4","우진하우스 b01호",37.481978,126.958761,"010-4416-9941",
+//		//				null,null);
+//		//userDao.insert(user);
+//		UserVO user = userDao.selectById(17);
+//		OpenState openState = OpenState.OPEN;
+//		StoreCategoryVO storeCategory = new StoreCategoryVO("KOR","한식");
+//		StoreStateVO storeState = new StoreStateVO(2,"승인");
+//		StoreVO store = new StoreVO(0,user,storeCategory,storeState,"1231231231","자연별곡","서울시 관악구 중앙동 관악로 195","6층 자연별곡",37.482417,126.953073,"010-2222-3333",
+//									"2시-22시","kor.jpg","자연별곡입니다",null,"12345644");
+//		try {
+//			storeDao.insert(store);
+//			System.out.println("매장등록성공");
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//	}
 	
 	
 
