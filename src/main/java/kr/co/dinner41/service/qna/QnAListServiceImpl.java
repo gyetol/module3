@@ -64,4 +64,17 @@ public class QnAListServiceImpl implements QnAListService{
         }
         return list;
     }
+
+    public int getTotalRecord(){
+        try {
+            return qnADao.getTotalRecord();
+        } catch (QnAException e) {
+            return 1;
+        }
+    }
+
+    public List<Integer> getPages(){
+        List<Integer> list = null;
+        return list;
+    }
 }

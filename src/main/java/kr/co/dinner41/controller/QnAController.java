@@ -1,5 +1,6 @@
 package kr.co.dinner41.controller;
 
+import kr.co.dinner41.command.QnAAnswerCommand;
 import kr.co.dinner41.command.QnAInsertCommand;
 import kr.co.dinner41.service.qna.QnAAnswerService;
 import kr.co.dinner41.service.qna.QnAInsertService;
@@ -36,13 +37,25 @@ public class QnAController {
     QnAAnswerService answerService;
 
     @RequestMapping(value = "/qna", method = RequestMethod.GET)
-    public String insert(){
-        return "user/qnaWrite";
+    public String insert(HttpSession session, Model model){
+        UserVO user = (UserVO) session.getAttribute("loginUser");
+
+        if (user.getType().getId().equals("AD")){
+            return "redirect:/ALL/1/qna";
+        } else if (user.getType().getId().equals("GM")){
+            return "user/qnaWrite";
+        } else if (user.getType().getId().equals("SM")){
+            return "store/qnaWrite";
+        } else {
+            return "redirect:/ALL/1/qna";
+        }
     }
 
     @RequestMapping(value = "/qna", method = RequestMethod.POST)
     public String insert(QnAInsertCommand command, HttpSession session){
-        return "user/qnaList";
+        UserVO user = (UserVO) session.getAttribute("loginUser");
+        insertService.execute(command, user);
+        return "redirect:/ALL/1/qna";
     }
 
     @RequestMapping(value = "/{type}/{page}/qna", method = RequestMethod.GET)
@@ -51,13 +64,8 @@ public class QnAController {
         int int_page = Integer.parseInt(page);
         List<QnAVO> list;
 
-        ///
-//        session.getAttribute("loginUser");
-        UserVO user = new UserVO();
-        user.setType(new UserTypeVO("AD", null));
-        user.setId(4);
-//        현재 세션에 있는 사용자 가지고 오기
-        ///
+        UserVO user = (UserVO) session.getAttribute("loginUser");
+        List<Integer> totalPage = listService.getPages();
 
         model.addAttribute("type", type);
         model.addAttribute("page", int_page);
@@ -80,20 +88,31 @@ public class QnAController {
     }
 
     @RequestMapping(value = "/{id}/qna", method = RequestMethod.GET)
-    public String view(@PathVariable("id") String qnaId, Model model){
+    public String view(@PathVariable("id") String qnaId, HttpSession session,Model model){
         int id = Integer.parseInt(qnaId);
+        UserVO user = (UserVO) session.getAttribute("loginUser");
+
         QnAVO qna = viewService.execute(id);
         model.addAttribute("qna", qna);
-        return "user/qnaView";
+        if (user.getType().getId().equals("AD")){
+            return "manage/qnaView";
+        } else if (user.getType().getId().equals("SM")){
+            return "store/qnaView";
+        } else if (user.getType().getId().equals("GM")){
+            return "user/qnaView";
+        } else {
+            return "redirect:/ALL/1/qna";
+        }
     }
 
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    public String answer(int qnaId, Model model){
-//        return "user/qnaView";
-//    }
+    @RequestMapping(value = "/{id}/qna", method = RequestMethod.POST)
+    public String view(@PathVariable("id") String qnaId, QnAAnswerCommand command){
+        int id = Integer.parseInt(qnaId);
 
-//    @RequestMapping(value = "", method = RequestMethod.POST)
-//    public String answer(int qnaId, HttpSession session, String content){
-//        return "user/qnaView";
-//    }
+        UserVO manager = new UserVO();
+        manager.setId(4);
+        answerService.execute(manager, id, command);
+
+        return "redirect:/" + qnaId + "/qna";
+    }
 }
