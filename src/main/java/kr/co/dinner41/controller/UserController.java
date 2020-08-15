@@ -1,5 +1,6 @@
 package kr.co.dinner41.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import kr.co.dinner41.service.user.UserDeleteService;
