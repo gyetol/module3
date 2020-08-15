@@ -12,7 +12,6 @@ public class UserInsertCommand {
 
 	public UserInsertCommand() {}
 	
-	
 	public UserInsertCommand(String eamil, String password, String passwordConfirm, String name, String address,
 			String subAddress, String phone, String type) {
 		super();
