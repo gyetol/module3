@@ -14,6 +14,7 @@ import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.exception.login.LoginException;
 import kr.co.dinner41.service.login.LoginService;
 import kr.co.dinner41.validator.LoginValidator;
+import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -48,6 +49,7 @@ public class LoginController {
 		String viewName=null;
 		switch(userType) {
 		case "GM":
+			session.setAttribute("carts", new ArrayList<CartVO>());
 			viewName="user/userHome";
 			break;
 		case "SM":

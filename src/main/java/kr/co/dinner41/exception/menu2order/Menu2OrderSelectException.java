@@ -2,7 +2,7 @@ package kr.co.dinner41.exception.menu2order;
 
 public class Menu2OrderSelectException extends Menu2OrderException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE = "ÁÖ¹®¸ñ·ÏÀ» °¡Á®¿À´Â µµÁß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.";
+	private static final String MESSAGE = "ì£¼ë¬¸ ëª©ë¡ ê°€ì ¸ì˜¤ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
     public Menu2OrderSelectException(){
         this(MESSAGE);
     }

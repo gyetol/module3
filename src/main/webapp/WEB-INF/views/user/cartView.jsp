@@ -73,6 +73,7 @@
     </div>
 </nav>
 
+
 <!--Content-->
 <div>
     <!--제목-->
@@ -80,13 +81,23 @@
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>장바구니</h4>
     </div>
-    
     <hr />
 
-	<c:forEach items="${carts}" var="cart" varStatus="i">
-		<c:out value="${cart.storeId}"/>
-		<c:out value="${cart.menuId}"/>
-	</c:forEach>
+<c:if test="${empty carts}">
+장바구니가 비어있습니다.
+</c:if>
+
+<c:if test="${not empty carts}">
+
+    <!--선택된 메뉴의 매장명-->
+    <div class="container-fluid">
+        <!--메뉴가 선택된 경우 매장이름을 출력하고 -->
+        <!--메뉴가 선택되지 않아 장바구니가 빈경우 매장이름 대신 빈 값을 넣거나 -->
+        <!--'장바구니가 비었습니다.'를 출력해주세요 -->
+        <h5>매장고유번호 : <span><c:out value="${carts[0].storeId}"/></span></h5>
+        <h5>매장명 : <span>뽀식이네 감자탕</span></h5>
+    </div>
+    <hr/>
 
     <!--전체 선택 체크박스-->
     <div class="custom-control custom-checkbox  " style="margin-left: 10pt">
@@ -94,22 +105,12 @@
         <label class="custom-control-label" for="totalToggle">전체선택</label>
     </div>
 
-    <hr/>
-
-    <!--선택된 메뉴의 매장명-->
-    <div class="container-fluid">
-        <!--메뉴가 선택된 경우 매장이름을 출력하고 -->
-        <!--메뉴가 선택되지 않아 장바구니가 빈경우 매장이름 대신 빈 값을 넣거나 -->
-        <!--'장바구니가 비었습니다.'를 출력해주세요 -->
-        <h5>식당이름 : <span>뽀식이네 감자탕</span></h5>
-    </div>
-
     <hr style="margin-bottom: 0"/>
 
+	<c:forEach items="${carts}" var="cart" varStatus="i">
     <div>
         <!--장바구니 목록-->
         <ul class="list-group list-group-flush">
-
             <li class="list-group-item">
                 <div class="row">
                     <div style="width: 7%" >
@@ -117,6 +118,7 @@
                     </div>
                     <div style="width: 90%; padding-top:3pt;">
                         <div>
+                        메뉴고유번호 : <span><c:out value="${cart.menuId}"/></span><br/>
                             주문메뉴 : <span>개구리 뒷다리</span>
                             <div style="margin-top: 5pt">
                                 수량 : <span>1</span> &nbsp;
@@ -129,40 +131,21 @@
                     </div>
                 </div>
             </li>
+            </ul>
+    </c:forEach>
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div style="width: 7%" >
-                        <input type="checkbox" class="form-control" style="width: 11pt; margin: auto">
-                    </div>
-                    <div style="width: 90%; padding-top:3pt;">
-                        <div>
-                            주문메뉴 : <span>스팸 구이</span>
-                            <div style="margin-top: 5pt">
-                                수량 : <span>1</span> &nbsp;
-                                <i class="fas fa-minus-square pos"></i>
-                                <i class="fas fa-plus-square pos"></i>
-                                <br/>
-                                금액 : <span>10000원</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="text-right" style="margin: 10pt">
-                    <h5>총 금액 : <span>20000원</span></h5>
-                </div>
-            </li>
-
-        </ul>
+    <div class="text-right" style="margin: 10pt">
+    	<h5>총 금액 : <span>20000원</span></h5>
     </div>
+    
     <div class="container-fluid margin_first">
         <button type="button" class="btn btn-success two_button" >선택 메뉴 삭제</button>
         <button type="button" class="btn btn-success two_button float-right" >선택 메뉴 주문</button>
     </div>
+    </c:if>
 </div>
+
+
 <hr/>
 <div class="last_block"></div>
 </body>

@@ -2,7 +2,7 @@ package kr.co.dinner41.exception.order;
 
 public class OrderInsertException extends OrderException {
 	private static final long serialVersionUID = 1L;
-	private static final String MESSAGE = "ÁÖ¹®À» µî·ÏÇÏ´Â Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.";
+	private static final String MESSAGE = "ì£¼ë¬¸ ë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
     public OrderInsertException(){
         this(MESSAGE);
     }
