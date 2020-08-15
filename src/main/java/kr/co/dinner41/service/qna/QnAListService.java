@@ -8,6 +8,6 @@ import java.util.List;
 public interface QnAListService {
     List<QnAVO> execute(UserVO user, String qnaType, int page);
     List<QnAVO> execute(String qnaType, int page);
-    int getTotalRecord();
-    List<Integer> getPages();
+    List<Integer> getPages(int nowPage, String qnaType);
+    List<Integer> getPages(int nowPage, String qnaType, UserVO user);
 }

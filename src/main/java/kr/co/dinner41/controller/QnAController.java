@@ -61,30 +61,35 @@ public class QnAController {
     @RequestMapping(value = "/{type}/{page}/qna", method = RequestMethod.GET)
     public String list(@PathVariable("type") String type, @PathVariable("page") String page
                                             ,HttpSession session, Model model){
+        String view_name = "common/login";
         int int_page = Integer.parseInt(page);
-        List<QnAVO> list;
+        List<QnAVO> list = null;
+        List<Integer> pageList = null;
 
         UserVO user = (UserVO) session.getAttribute("loginUser");
-        List<Integer> totalPage = listService.getPages();
 
-        model.addAttribute("type", type);
-        model.addAttribute("page", int_page);
         //사용자에 따른 execute 분기하기
         if (user.getType().getId().equals("AD")){
             list = listService.execute(type, int_page);
-            model.addAttribute("list", list);
-            return "manage/qnaList";
+            pageList = listService.getPages(int_page, type);
+            view_name = "manage/qnaList";
         }else if (user.getType().getId().equals("GM")){
             list = listService.execute(user, type, int_page);
-            model.addAttribute("list", list);
-            return "user/qnaList";
+            pageList = listService.getPages(int_page, type, user);
+            view_name = "user/qnaList";
         }else if (user.getType().getId().equals("SM")){
             list = listService.execute(user, type, int_page);
-            model.addAttribute("list", list);
-            return "store/qnaList";
-        } else {
-            return "common/login";
+            pageList = listService.getPages(int_page, type, user);
+            view_name = "store/qnaList";
         }
+
+        model.addAttribute("list", list);
+        model.addAttribute("first", list.get(0));
+        model.addAttribute("last", list.get(list.size()-1));
+        model.addAttribute("pages", pageList);
+        model.addAttribute("type", type);
+        model.addAttribute("page", int_page);
+        return view_name;
     }
 
     @RequestMapping(value = "/{id}/qna", method = RequestMethod.GET)
