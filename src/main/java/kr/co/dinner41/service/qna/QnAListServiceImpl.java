@@ -13,42 +13,55 @@ import java.util.List;
 public class QnAListServiceImpl implements QnAListService{
     @Autowired
     private QnADaoImpl qnADao;
-
     public static final int PAGE_SIZE = 10;
 
     @Override
     public List<QnAVO> execute(UserVO user, String qnaType, int page) {
         List<QnAVO> list = null;
-        if (user.getType().getId().equals("AD")){
-            if (qnaType == null){
-                try {
-                    list = qnADao.selectAll(page, PAGE_SIZE);
-                } catch (QnAException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    list = qnADao.selectAll(page, PAGE_SIZE, qnaType);
-                } catch (QnAException e) {
-                    e.printStackTrace();
-                }
+        if (qnaType.equals("ALL")){
+            try {
+                list = qnADao.selectAll(page, PAGE_SIZE, user);
+            } catch (QnAException e) {
+                e.printStackTrace();
             }
-        }else{
-            if (qnaType == null){
-                try {
-                    list = qnADao.selectAllForUser(page, PAGE_SIZE, user);
-                } catch (QnAException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    list = qnADao.selectAllForUser(page, PAGE_SIZE, user,qnaType);
-                } catch (QnAException e) {
-                    e.printStackTrace();
-                }
+        } else if (qnaType.equals("DON")){
+            try {
+                list = qnADao.selectAllDone(page, PAGE_SIZE, user);
+            } catch (QnAException e) {
+                e.printStackTrace();
+            }
+        } else{
+            try {
+                list = qnADao.selectAll(page, PAGE_SIZE,qnaType, user);
+            } catch (QnAException e) {
+                e.printStackTrace();
             }
         }
+        return list;
+    }
 
+    @Override
+    public List<QnAVO> execute(String qnaType, int page) {
+        List<QnAVO> list = null;
+        if (qnaType.equals("ALL")){
+            try {
+                list = qnADao.selectAll(page, PAGE_SIZE);
+            } catch (QnAException e) {
+                e.printStackTrace();
+            }
+        } else if (qnaType.equals("DON")){
+            try {
+                list = qnADao.selectAllDone(page, PAGE_SIZE);
+            } catch (QnAException e) {
+                e.printStackTrace();
+            }
+        } else{
+            try {
+                list = qnADao.selectAll(page, PAGE_SIZE, qnaType);
+            } catch (QnAException e) {
+                e.printStackTrace();
+            }
+        }
         return list;
     }
 }

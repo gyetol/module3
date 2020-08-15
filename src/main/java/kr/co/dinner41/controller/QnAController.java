@@ -5,6 +5,9 @@ import kr.co.dinner41.service.qna.QnAAnswerService;
 import kr.co.dinner41.service.qna.QnAInsertService;
 import kr.co.dinner41.service.qna.QnAListService;
 import kr.co.dinner41.service.qna.QnAViewService;
+import kr.co.dinner41.vo.QnAVO;
+import kr.co.dinner41.vo.UserTypeVO;
+import kr.co.dinner41.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class QnAController {
@@ -41,10 +45,45 @@ public class QnAController {
         return "user/qnaList";
     }
 
-    @RequestMapping(value = "/{id}/qna", method = RequestMethod.HEAD)
+    @RequestMapping(value = "/{type}/{page}/qna", method = RequestMethod.GET)
+    public String list(@PathVariable("type") String type, @PathVariable("page") String page
+                                            ,HttpSession session, Model model){
+        int int_page = Integer.parseInt(page);
+        List<QnAVO> list;
+
+        ///
+//        session.getAttribute("loginUser");
+        UserVO user = new UserVO();
+        user.setType(new UserTypeVO("AD", null));
+        user.setId(4);
+//        현재 세션에 있는 사용자 가지고 오기
+        ///
+
+        model.addAttribute("type", type);
+        model.addAttribute("page", int_page);
+        //사용자에 따른 execute 분기하기
+        if (user.getType().getId().equals("AD")){
+            list = listService.execute(type, int_page);
+            model.addAttribute("list", list);
+            return "manage/qnaList";
+        }else if (user.getType().getId().equals("GM")){
+            list = listService.execute(user, type, int_page);
+            model.addAttribute("list", list);
+            return "user/qnaList";
+        }else if (user.getType().getId().equals("SM")){
+            list = listService.execute(user, type, int_page);
+            model.addAttribute("list", list);
+            return "store/qnaList";
+        } else {
+            return "common/login";
+        }
+    }
+
+    @RequestMapping(value = "/{id}/qna", method = RequestMethod.GET)
     public String view(@PathVariable("id") String qnaId, Model model){
         int id = Integer.parseInt(qnaId);
-        viewService.execute(id);
+        QnAVO qna = viewService.execute(id);
+        model.addAttribute("qna", qna);
         return "user/qnaView";
     }
 
