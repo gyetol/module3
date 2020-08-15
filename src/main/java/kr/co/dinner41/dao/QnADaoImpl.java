@@ -53,13 +53,14 @@ public class QnADaoImpl implements QnADao {
         List<QnAVO> list;
         int startPoint = (page-1)*pageSize;
         String sql = "SELECT * FROM qna_view " +
-                "WHERE qna_type_id LIKE ? ORDER BY qna_question_date DESC LIMIT ?, ?;";
+                "WHERE qna_type_id LIKE ? AND manager_id IS NULL " +
+                "ORDER BY qna_question_date DESC LIMIT ?, ?;";
         list = template.query(sql, new QnAMapper(), qna_type, startPoint, pageSize);
         return list;
     }
 
     @Override
-    public List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user) throws QnAException {
+    public List<QnAVO> selectAll(int page, int pageSize, UserVO user) throws QnAException {
         List<QnAVO> list;
         int startPoint = (page-1)*pageSize;
 
@@ -71,13 +72,35 @@ public class QnADaoImpl implements QnADao {
     }
 
     @Override
-    public List<QnAVO> selectAllForUser(int page, int pageSize, UserVO user, String qna_type) throws QnAException {
+    public List<QnAVO> selectAll(int page, int pageSize, String qna_type, UserVO user) throws QnAException {
         List<QnAVO> list;
         int startPoint = (page-1)*pageSize;
         String sql = "SELECT * FROM qna_view " +
-                "WHERE qna_type_id LIKE ? AND user_id LIKE ? " +
+                "WHERE qna_type_id LIKE ? AND user_id LIKE ? AND manager_id IS NULL " +
                 "ORDER BY qna_question_date DESC LIMIT ?, ?;";
         list = template.query(sql, new QnAMapper(), qna_type, user.getId(),startPoint, pageSize);
+        return list;
+    }
+
+    @Override
+    public List<QnAVO> selectAllDone(int page, int pageSize) throws QnAException {
+        List<QnAVO> list;
+        int startPoint = (page-1)*pageSize;
+        String sql = "SELECT * FROM qna_view " +
+                "WHERE manager_id IS NOT NULL " +
+                "ORDER BY qna_question_date DESC LIMIT ?, ?;";
+        list = template.query(sql, new QnAMapper(), startPoint, pageSize);
+        return list;
+    }
+
+    @Override
+    public List<QnAVO> selectAllDone(int page, int pageSize, UserVO user) throws QnAException {
+        List<QnAVO> list;
+        int startPoint = (page-1)*pageSize;
+        String sql = "SELECT * FROM qna_view " +
+                "WHERE user_id LIKE ? AND manager_id IS NOT NULL " +
+                "ORDER BY qna_question_date DESC LIMIT ?, ?;";
+        list = template.query(sql, new QnAMapper(), user.getId(), startPoint, pageSize);
         return list;
     }
 
