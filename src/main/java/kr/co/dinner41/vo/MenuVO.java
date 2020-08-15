@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 public class MenuVO {
 	
-	private int id;
 	private StoreVO store;
+	private int id;
 	private OfferTypeVO offerType;
 	private String Tag;
 	private String name;
@@ -19,11 +19,11 @@ public class MenuVO {
 	public MenuVO() {}
 
 	
-	public MenuVO(int id, StoreVO store, OfferTypeVO offerType, String tag, String name, int price, int amount,
+	public MenuVO(StoreVO store, int id,OfferTypeVO offerType, String tag, String name, int price, int amount,
 			String description, String notice, String photo, Timestamp removeDate) {
 		super();
-		this.id = id;
 		this.store = store;
+		this.id = id;
 		this.offerType = offerType;
 		Tag = tag;
 		this.name = name;

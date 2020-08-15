@@ -7,9 +7,10 @@ import kr.co.dinner41.vo.OfferTypeVO;
 
 public interface OfferTypeDao {
 	
-	public void insert(OfferTypeVO offerType) throws OfferTypeException ;
-	public void delete(String id);
-	public void update(String id, String name);
-	public List<OfferTypeVO> selectAll() throws OfferTypeException;
+	  void insert(OfferTypeVO offerType) throws OfferTypeException;
+	    void delete(String id) throws OfferTypeException;
+	    void update(String id, String name) throws OfferTypeException;
+	    OfferTypeVO selectById(String id) throws OfferTypeException;
+	    List<OfferTypeVO> selectAll() throws OfferTypeException;
 
 }

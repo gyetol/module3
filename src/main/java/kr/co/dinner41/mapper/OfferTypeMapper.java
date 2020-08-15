@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class OfferTypeMapper implements RowMapper<OfferTypeVO> {
     @Override
     public OfferTypeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-        String id = rs.getString("menu_type_id");
-        String name = rs.getString("menu_type_name");
+        String id = rs.getString("offer_type_id");
+        String name = rs.getString("offer_type_name");
         return new OfferTypeVO(id, name);
     }
 }

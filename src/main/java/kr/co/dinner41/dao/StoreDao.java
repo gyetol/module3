@@ -12,11 +12,12 @@ public interface StoreDao {
 	void deleteByManager(int id) throws StoreException;
 	void update(StoreVO store) throws StoreException;
 	StoreVO selectById(int id) throws StoreException;
-	List<StoreVO> selectByCategoryName(String categoryName, int page, int pageSize) throws StoreException;
+	List<StoreVO> selectByCategoryName(String categoryName,double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
+	List<StoreVO> selectByCategoryNameOnMap(String categoryName,double userLatitude, double userLongitude) throws StoreException;
 	List<StoreVO> selectByStateName(String stateName, int page, int pageSize) throws StoreException;
 	StoreVO selectByBusinessNumber(String businessNumber) throws StoreException;
-	List<StoreVO> selectByName(String name, int page, int pageSize) throws StoreException;
-	List<StoreVO> selectByLocation(double latitude, double longitude) throws StoreException;
+	List<StoreVO> selectByStoreName(String storeName,double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
+	List<StoreVO> selectByLocation(double userLatitude, double userLongitude) throws StoreException;
 	List<StoreVO> selectByOpenState(OpenState openState, int page, int pageSize) throws StoreException;
 	List<StoreVO> selectAll(int page,int pageSize) throws StoreException;
 }

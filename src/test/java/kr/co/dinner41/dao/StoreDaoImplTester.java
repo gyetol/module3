@@ -1,5 +1,6 @@
 package kr.co.dinner41.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -24,16 +25,20 @@ public class StoreDaoImplTester {
 	@Autowired
 	private ApplicationContext ctx;
 	
-//	@Test
-//	public void insertTest() {
-//		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
-//		UserDao userDao =ctx.getBean("userDao",UserDao.class);
-//		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
-//		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
-//		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
-//		
-//		
-//	}
+	@Test
+	public void insertTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		UserDao userDao =ctx.getBean("userDao",UserDao.class);
+		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
+		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
+		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
+		
+		UserTypeVO userType = new UserTypeVO("SM","점주회원");
+		UserVO user =new UserVO(17,userType,"hong@naver.com",1234,"홍길동","서울시 관악구 행운5길 23-4","우진하우스 b01호",37.481978,126.958761,"010-4416-9941",
+						null,null);
+		
+		
+	}
 	
 	
 
@@ -62,7 +67,27 @@ public class StoreDaoImplTester {
 		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
 		List<StoreVO> stores = null;
 		try {
-			stores = storeDao.selectByCategoryName("밀키트",1, 2);
+			stores = storeDao.selectByCategoryName("밀키트",37.482566,126.953100,1, 2);
+			if(stores==null) {
+				System.out.println("매장들을 불러오지 못함");
+			}
+			for(StoreVO store:stores) {
+				System.out.println(store.getName());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Ignore
+	@Test
+	public void selectByCategoryOnMapTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		List<StoreVO> stores = null;
+		try {
+			stores = storeDao.selectByCategoryNameOnMap("밀키트",37.482566,126.953100);
 			if(stores==null) {
 				System.out.println("매장들을 불러오지 못함");
 			}
@@ -116,14 +141,33 @@ public class StoreDaoImplTester {
 	}
 	
 	
-	
 	@Ignore
 	@Test
-	public void selectByNameTest() {
+	public void selectByStoreNameTest() {
 		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
 		List<StoreVO> stores = null;
 		try {
-			stores = storeDao.selectByName("안녕베트남", 1, 1);
+			stores = storeDao.selectByStoreName("애슐리 퀸즈",37.482566,126.953100, 1, 2);
+			if(stores==null) {
+				System.out.println("매장들을 불러오지 못함");
+			}
+			for(StoreVO store:stores) {
+				System.out.println(store.getName());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Ignore
+	@Test
+	public void selectByLocationTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		List<StoreVO> stores = null;
+		try {
+			stores = storeDao.selectByLocation(37.482566,126.953100);
 			if(stores==null) {
 				System.out.println("매장들을 불러오지 못함");
 			}
