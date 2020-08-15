@@ -2,8 +2,11 @@ package kr.co.dinner41.service.menu;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import kr.co.dinner41.vo.MenuVO;
 
+@Service("menuListByUserService")
 public class MenuListByUserServiceImpl implements MenuListByUserService {
 	
 	public static final String CONDITION_TITLE = "menu_name";
