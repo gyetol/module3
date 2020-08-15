@@ -1,5 +1,7 @@
 package kr.co.dinner41.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.exception.login.LoginException;
 import kr.co.dinner41.service.login.LoginService;
 import kr.co.dinner41.validator.LoginValidator;
+import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -28,7 +31,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
+
 	public ModelAndView login(LoginCommand command,Errors errors,HttpServletRequest request) {
+
 		ModelAndView mav=new ModelAndView();
 		new LoginValidator().validate(command, errors);
 		if(errors.hasErrors()) {
@@ -44,12 +49,13 @@ public class LoginController {
 		}catch(LoginException e) {
 			mav.addObject("result","로그인 실패"+e.getMessage());
 		}
+
 		UserVO user=(UserVO)session.getAttribute("loginUser");
 		String userType=user.getType().getId();
-		System.out.println(userType);
 		String viewName=null;
 		switch(userType) {
 		case "GM":
+			session.setAttribute("carts", new ArrayList<CartVO>());
 			viewName="user/userHome";
 			break;
 		case "SM":
@@ -59,7 +65,6 @@ public class LoginController {
 			viewName="manage/managerHome";
 			break;
 		}
-		System.out.println(viewName);
 		mav.setViewName(viewName);
 		return mav;
 	}

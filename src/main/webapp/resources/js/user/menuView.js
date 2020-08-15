@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	insertCart();
+});
+
+function insertCart() {
 	var storeId = $(".container-fluid").data("storeid");
 	var menuId = $(".container-fluid").data("menuid");
 	
@@ -10,9 +14,19 @@ $(document).ready(function() {
 				"storeId" : storeId,
 				"menuId" : menuId
 			},
-			success : function() {
-				alert("장바구니에 등록되었습니다!");
-				window.location.href = "storeDetail_menu";
+			success : function(data) {
+				if (data.result) {
+					if (data.msg1 != undefined) {
+						alert(data.msg1);
+					}
+					alert(data.msg2);
+					window.location.href = "menuView";
+				}
+				else {
+					alert(data.msg);
+					// 로그인 화면으로 이동하는 URL
+					winow.location.href = "/dinner41";
+				}
 			}
 		});
 	});
@@ -20,4 +34,4 @@ $(document).ready(function() {
 	$("#cartButton").click(function() {
 		window.location.href = "gm/cart";
 	});
-});
+}

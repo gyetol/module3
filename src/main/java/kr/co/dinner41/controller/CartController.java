@@ -1,8 +1,11 @@
 package kr.co.dinner41.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dinner41.service.cart.CartInsertService;
 import kr.co.dinner41.service.cart.CartListService;
 import kr.co.dinner41.vo.CartVO;
+import kr.co.dinner41.vo.UserTypeVO;
+import kr.co.dinner41.vo.UserVO;
 
 @Controller
 public class CartController {
@@ -27,43 +33,85 @@ public class CartController {
 	@Qualifier("cartList")
 	CartListService listService;
 
-	// Àå¹Ù±¸´Ï¿¡ µî·Ï
-	@RequestMapping(value = "/gm/cart", method = RequestMethod.POST)
-	public String insert(HttpServletRequest request) {
-
-		// ¼öÁ¤ ÇÊ¿ä
-		// request.getSession(false)·Î ¹Ù²Ù¾î¾ßÇÔ
-		// ±×·¡¾ß ¼¼¼Ç °´Ã¼°¡ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì nullÀ» ¹İÈ¯
-		HttpSession session = request.getSession(true);
-		
-		int storeId = Integer.parseInt(request.getParameter("storeId"));
-		int menuId = Integer.parseInt(request.getParameter("menuId"));
-		insertService.execute(session, storeId, menuId);
-		
-		// ÀÌ ¸®ÅÏ°ªÀ¸·Î ÀÎÇØ ÇØ´ç ÆäÀÌÁö·Î ÀÌµ¿ÇÏ´Â °ÍÀº ¾Æ´Ô
-		// ±Ùµ¥ Á¦´ë·Î µÈ jspÆäÀÌÁö¸¦ ½áÁÖ¾î¾ß ¿À·ù°¡ ¾È³ª±äÇÔ
-		// Á» ´õ °øºÎ ÇÊ¿ä
-		return "user/storeDetail_menu";
-	}
-
-	@RequestMapping(value = "/gm/cart", method = RequestMethod.GET)
-	public String list(HttpSession session, Model model) {
-		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");
-		if (carts.isEmpty()) {
-			// Àå¹Ù±¸´Ï°¡ ºñ¾îÀÖ´Ù°í Ã³¸®
-		}
-		
-		// ÇöÀç ¸®½ºÆ®ÀÇ CartVO¿¡´Â storeId, menuId¸¸ ÀúÀåµÇ¾îÀÖ´Ù
-		// ÀÌ ¸®½ºÆ®ÀÇ CartVO¸¦ Ã¤¿ö¼­ ´Ù½Ã ¸®ÅÏÇÑ´Ù
-		carts = listService.execute(carts);
-		model.addAttribute("carts", carts);
-		return "user/cartView";
-	}
-
-	// ¼öÁ¤ ÇÊ¿ä
-	// ¿©±â ÀÖÀ¸¸é ¾ÈµÊ
+	// í–¥í›„ ì‚­ì œ
 	@RequestMapping(value = "/menuView", method = RequestMethod.GET)
 	public String menuView() {
 		return "user/menuView";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/gm/cart", method = RequestMethod.POST)
+	public HashMap<String, Object> insert(HttpServletRequest request, HttpServletResponse response) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			map.put("result", false);
+			map.put("msg", "ë¡œê·¸ì¸í•˜ì§€ ì•Šìœ¼ë©´ ì¥ë°”êµ¬ë‹ˆë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+			return map;
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");
+		int storeId = Integer.parseInt(request.getParameter("storeId"));
+		int menuId = Integer.parseInt(request.getParameter("menuId"));
+		
+		// ì¥ë°”êµ¬ë‹ˆê°€ ë¹„ì–´ìˆëŠ” ê²½ìš°
+		// ë©”ë‰´ë¥¼ ì¥ë°”êµ¬ë‹ˆì— ë°”ë¡œ ë‹´ìŒ
+		if (carts.isEmpty()) {
+			session.setAttribute("carts", new ArrayList<CartVO>());
+			insertService.execute(session, storeId, menuId);
+		}
+		// ì¥ë°”êµ¬ë‹ˆê°€ ë¹„ì–´ìˆì§€ ì•Šì€ ê²½ìš°
+		// ê°™ì€ ë§¤ì¥ì˜ ë©”ë‰´ë¥¼ ë„£ì„ ê²½ìš° ì¥ë°”êµ¬ë‹ˆì— ë©”ë‰´ ì¶”ê°€
+		// ë‹¤ë¥¸ ë§¤ì¥ì˜ ë©”ë‰´ë¥¼ ë„£ì„ ê²½ìš° ì¥ë°”êµ¬ë‹ˆë¥¼ ë¹„ìš°ê³  ìƒˆë¡œ ë©”ë‰´ ì¶”ê°€
+		else {
+			if (carts.get(0).getStoreId() == storeId) {
+				insertService.execute(session, storeId, menuId);
+			}
+			else {
+				session.removeAttribute("carts");
+				session.setAttribute("carts", new ArrayList<CartVO>());
+				insertService.execute(session, storeId, menuId);
+				map.put("msg1", "ì´ì „ ë§¤ì¥ì˜ ì¥ë°”êµ¬ë‹ˆ ê¸°ë¡ì€ ì‚¬ë¼ì§‘ë‹ˆë‹¤.");
+			}
+		}
+		map.put("result", true);
+		map.put("msg2", "ì¥ë°”êµ¬ë‹ˆ ë“±ë¡ ì™„ë£Œ!!");
+		return map;
+	}
+
+	
+	@RequestMapping(value = "/gm/cart", method = RequestMethod.DELETE)
+	public String delete(HttpSession sesson, CartVO cart) {
+
+		return "";
+	}
+
+	
+	@RequestMapping(value = "/gm/cart", method = RequestMethod.GET)
+	public String list(HttpServletRequest request, HttpSession session, Model model) {
+
+		// ì‚¬ìš©ìê°€ ë¡œê·¸ì¸í•˜ì§€ ì•Šê³  URLì„ í†µí•´ ì˜¤ëŠ” ê²½ìš°
+		if (session == null) {
+			// ì¸í„°ì…‰í„°ë¡œ ë³´ë‚´ê¸°
+		}
+	
+		// ë¡œê·¸ì¸í–ˆì§€ë§Œ ì ì£¼íšŒì›, ê´€ë¦¬ìê°€ í•´ë‹¹ ê¸°ëŠ¥ì„ URLì„ í†µí•´ ì‚¬ìš©í•˜ë ¤ê³  í•˜ëŠ” ê²½ìš°
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		UserTypeVO type = user.getType();
+		if (type.getName().equals("AD") || type.getName().equals("SM")) {
+			return "/sessionCheck";
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");
+		if (!carts.isEmpty()) {
+			// í˜„ì¬ ì¹´íŠ¸ì—ëŠ” storeId, menuIdë§Œ ìˆìœ¼ë¯€ë¡œ
+			// DBë¥¼ ê±°ì³ì„œ CartVOì˜ ë‚˜ë¨¸ì§€ ë¶€ë¶„ì„ ì±„ì›Œì„œ ë¦¬í„´
+			carts = listService.execute(carts);
+		}
+		model.addAttribute("carts", carts);
+		return "user/cartView";
 	}
 }

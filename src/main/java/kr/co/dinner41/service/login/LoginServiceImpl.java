@@ -17,6 +17,7 @@ public class LoginServiceImpl implements LoginService {
 	private UserDao userDao; 
 	@Override
 	public void execute(LoginCommand command, HttpSession session) throws LoginException {
+		
 		String email=command.getEmail();
 		String password=command.getPassword();
 		
