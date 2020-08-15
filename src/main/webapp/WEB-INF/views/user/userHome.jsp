@@ -1,4 +1,6 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -15,7 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Home</title>
 </head>
@@ -43,7 +45,7 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -94,13 +96,13 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../../images/cake.png" class="rounded d-block w-100" alt="...">
+            <img src="${pageContext.request.contextPath}/resources/images/cake.png" class="rounded d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="../../images/stake.png" class="rounded d-block w-100" alt="...">
+            <img src="${pageContext.request.contextPath}/resources/images/stake.png" class="rounded d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="../../images/chicken.png" class="rounded d-block w-100" alt="...">
+            <img src="${pageContext.request.contextPath}/resources/images/chicken.png" class="rounded d-block w-100" alt="...">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -119,7 +121,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/total.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/total.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">전체</h5>
                 </div>
             </div>
@@ -128,7 +130,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/box.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/box.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">도시락</h5>
                 </div>
             </div>
@@ -137,7 +139,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/mealKit.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/mealKit.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">밀키트</h5>
                 </div>
             </div>
@@ -146,7 +148,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/korean.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/korean.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">한식</h5>
                 </div>
             </div>
@@ -155,7 +157,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/japan.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/japan.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">일식</h5>
                 </div>
             </div>
@@ -164,7 +166,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/tpk.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/tpk.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">분식</h5>
                 </div>
             </div>
@@ -173,7 +175,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/bread.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/bread.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">제과</h5>
                 </div>
             </div>
@@ -182,7 +184,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/ttt.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/ttt.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">떡</h5>
                 </div>
             </div>
@@ -191,7 +193,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/chicken.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/chicken.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">치킨</h5>
                 </div>
             </div>
@@ -200,7 +202,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/pizza.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/pizza.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">피자</h5>
                 </div>
             </div>
@@ -209,7 +211,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/side.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/side.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">반찬</h5>
                 </div>
             </div>
@@ -218,7 +220,7 @@
         <div class="col mb-4">
             <div class="card h-100 category_label">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/etc.png" class="category rounded" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/categoryImages/etc.png" class="category rounded" alt="no picture">
                     <h5 class="card-title">기타</h5>
                 </div>
             </div>
