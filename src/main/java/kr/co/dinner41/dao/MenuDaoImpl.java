@@ -32,18 +32,18 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void delete(int menuId) throws MenuException {
+	public void delete(int menuId,int storeId) throws MenuException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
 		String now = sdf.format(calendar.getTime());
 
-		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = " + menuId;
+		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = '" + menuId +"'WHERE store_id ="+ storeId ;
 
 		int result = 0;
 
 		try {
-			result = jTemp.update(sql, menuId);
+			result = jTemp.update(sql, menuId,storeId);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			throw new MenuDeleteFailedException();
@@ -113,11 +113,11 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public MenuVO selectById(int menuId) throws MenuException {
+	public MenuVO selectById(int menuId, int storeId) throws MenuException {
 		List<MenuVO> list;
 		String sql = "SELECT * FROM menu_view " +
-		             "WHERE menu_id = ?";
-		list = jTemp.query(sql, new MenuMapper(),menuId);
+		             "WHERE menu_id = ? AND store_id =?";
+		list = jTemp.query(sql, new MenuMapper(),menuId,storeId);
 		return (list.size() == 0? null:list.get(0));
 	}
 

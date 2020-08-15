@@ -131,12 +131,14 @@
             </div>
         </div>
         <div class="col mb-4">
+        <a href = "menu">
             <div class="card h-100">
                 <div class="card-body text-center trim">
                     <img src="../../categoryImages/menu.png" class="rounded category" alt="no picture">
-                    <h5 class="card-title">메뉴관리</h5>
+                    <h5 id ="menuManage" class="card-title">메뉴관리</h5>
                 </div>
             </div>
+           </a>
         </div>
         <div class="col mb-4">
             <div class="card h-100">
