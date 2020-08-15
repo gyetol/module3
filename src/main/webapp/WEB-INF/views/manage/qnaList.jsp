@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -195,15 +196,40 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-success"><<</button>
-            <button type="button" class="btn btn-success" disabled>1</button>
-            <button type="button" class="btn btn-success">2</button>
-            <button type="button" class="btn btn-success">3</button>
-            <button type="button" class="btn btn-success">4</button>
-            <button type="button" class="btn btn-success">>></button>
+            <button type="button" class="btn btn-success" id="downButton"><<</button>
+            <input type="hidden" value="${first}" id="first">
+            <input type="hidden" value="${last}" id="last">
+            <c:forEach var="obj" items="${pages}">
+                <c:if test="${obj eq page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj}"></c:out></button>
+                    </a>
+                </c:if>
+                <c:if test="${obj ne page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
+                        <button type="button" class="btn btn-success"><c:out value="${obj}"></c:out></button>
+                    </a>
+                </c:if>
+            </c:forEach>
+            <button type="button" class="btn btn-success" id="upButton">>></button>
         </div>
     </div>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#downButton').click(function () {
+                var f = $('#first').val();
+                if (f<1){
+                    f = 1;
+                }else{
+                    f = f -1;
+                }
+            });
+            $('#upButton').click(function () {
+
+            });
+        });
+    </script>
 
     <div class="container-fluid margin_first">
         <a href="${pageContext.request.contextPath}/qna">

@@ -198,12 +198,24 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-success"><<</button>
-            <button type="button" class="btn btn-success">1</button>
-            <button type="button" class="btn btn-success">2</button>
-            <button type="button" class="btn btn-success">3</button>
-            <button type="button" class="btn btn-success">4</button>
-            <button type="button" class="btn btn-success">>></button>
+            <a href="${pageContext.request.contextPath}/${type}/${obj - 1}/qna">
+                <button type="button" class="btn btn-success"><<</button>
+            </a>
+            <c:forEach var="obj" items="${pages}">
+                <c:if test="${obj eq page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj}"></c:out></button>
+                    </a>
+                </c:if>
+                <c:if test="${obj ne page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
+                        <button type="button" class="btn btn-success"><c:out value="${obj}"></c:out></button>
+                    </a>
+                </c:if>
+            </c:forEach>
+            <a href="${pageContext.request.contextPath}/${type}/${obj + 1}/qna">
+                <button type="button" class="btn btn-success">>></button>
+            </a>
         </div>
     </div>
     <div class="container-fluid margin_first">
