@@ -21,6 +21,7 @@ public interface MenuDao {
 	MenuVO selectByMenuIdStoreId(int menuId, int storeId) throws MenuException;
 	int getTotalRecord() throws MenuException;
 	int getLastInsertId(int storeId) throws SQLException;
+	List<MenuVO> userSelectByStoreId(int storeId, int page, int pageSize) throws MenuException;
 	
 	
 }
