@@ -131,4 +131,21 @@ public class CartController {
 		model.addAttribute("carts", carts);
 		return "user/cartView";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/gm/cart/order", method = RequestMethod.POST)
+	public HashMap<String, Object> cartOrder(HttpServletRequest request) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		// 장바구니에서 넘어온 주문 정보들
+		String [] arrForOrder = request.getParameterValues("arr[]");
+		// 장바구니에서 넘어온 선택된 메뉴들의 수량들
+		String [] arrForOrder2 = request.getParameterValues("arr2[]");
+		
+		HttpSession session = request.getSession(false);
+		session.setAttribute("arrForOrder", arrForOrder);
+		session.setAttribute("arrForOrder2", arrForOrder2);
+		map.put("msg", "주문 화면으로 넘어갑니다.");
+		return map;
+	}
 }

@@ -79,7 +79,7 @@
 		<c:if test="${not empty carts}">
 
 			<!--선택된 메뉴의 매장명-->
-			<div class="container-fluid">
+			<div class="container-fluid" id="storeId" data-storeId=<c:out value="${carts[0].storeId}"/>>
 				<!--메뉴가 선택된 경우 매장이름을 출력하고 -->
 				<!--메뉴가 선택되지 않아 장바구니가 빈경우 매장이름 대신 빈 값을 넣거나 -->
 				<!--'장바구니가 비었습니다.'를 출력해주세요 -->

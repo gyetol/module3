@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dinner41.exception.order.OrderException;
@@ -19,13 +21,18 @@ public class OrderDaoImpl implements OrderDao {
 	
 	@Override
 	public void insert(OrderVO order) throws OrderException {
-		String sql = "INSERT INTO orders VALUES(DEFAULT, ?, DEFAULT, ?, NULL, DEFAULT)";
-		jTemp.update(sql, order.getUser().getId(), order.getReserveDate());
+		KeyHolder holder = new GeneratedKeyHolder();
+		String sql = "INSERT INTO orders VALUES(DEFAULT, ?, ?, ?, DEFAULT, ?)";
+		jTemp.update(sql, order.getUser().getId(), order.getOrderDate(), order.getReserveDate(), order.getPrice(), holder);
+		Number number = holder.getKey();
+		int value = number.intValue();
+		order.setId(value);
 	}
 
 	@Override
 	public void delete(int orderId) {
-		// ÇâÈÄ ±¸Çö
+		// í–¥í›„ êµ¬í˜„
+		
 	}
 
 	@Override
