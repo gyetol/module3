@@ -19,6 +19,7 @@ public class CartListServiceImpl implements CartListService {
 		
 		for (CartVO cart : carts) {
 			// MenuDao를 활용해서 cart안을 가득채우면 끝!!
+			cart.setPrice(5000);
 		}
 
 		return carts;

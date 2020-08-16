@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.dinner41.service.cart.CartDeleteService;
 import kr.co.dinner41.service.cart.CartInsertService;
 import kr.co.dinner41.service.cart.CartListService;
 import kr.co.dinner41.vo.CartVO;
@@ -28,6 +29,10 @@ public class CartController {
 	@Autowired
 	@Qualifier("cartInsert")
 	CartInsertService insertService;
+	
+	@Autowired
+	@Qualifier("cartDelete")
+	CartDeleteService deleteService;
 
 	@Autowired
 	@Qualifier("cartList")
@@ -77,15 +82,20 @@ public class CartController {
 			}
 		}
 		map.put("result", true);
-		map.put("msg2", "장바구니 등록 완료!!");
+		map.put("msg2", "장바구니에 등록되었습니다!!");
 		return map;
 	}
 
-	
-	@RequestMapping(value = "/gm/cart", method = RequestMethod.DELETE)
-	public String delete(HttpSession sesson, CartVO cart) {
 
-		return "";
+	@ResponseBody
+	@RequestMapping(value = "/gm/cart", method = RequestMethod.DELETE)
+	public HashMap<String, Object> delete(HttpSession session, HttpServletRequest request, CartVO cart) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		String [] menuIds = request.getParameterValues("arr[]");
+		deleteService.execute(session, menuIds);
+		map.put("msg", "장바구니에서 삭제 되었습니다!!");
+		return map;
 	}
 
 	
@@ -94,9 +104,16 @@ public class CartController {
 
 		// 사용자가 로그인하지 않고 URL을 통해 오는 경우
 		if (session == null) {
-			// 인터셉터로 보내기
+			System.out.println("CartController:list():현재 세션이 없습니다.");
+			// 인터셉터로 보내야함
 		}
-	
+		
+		if (session.getAttribute("loginUser") == null) {
+			System.out.println("CartController:list()"
+					+ ": 세션은 있지만 안에 로그인 정보가 삭제되어있습니다."
+					+ " 아마 서버를 재구동해서 세션은 남아있지만 세션안의 정보는 삭제된 상황일겁니다.");
+		}
+
 		// 로그인했지만 점주회원, 관리자가 해당 기능을 URL을 통해 사용하려고 하는 경우
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		UserTypeVO type = user.getType();
