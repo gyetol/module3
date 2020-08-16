@@ -1,4 +1,4 @@
-package kr.co.dinner41.exception;
+package kr.co.dinner41.exception.user;
 
 public class UserDeleteFailedException extends UserException {
 	private static final long serialVersionUID = 1L;
