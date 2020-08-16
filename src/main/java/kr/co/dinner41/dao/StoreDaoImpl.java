@@ -12,8 +12,11 @@ import kr.co.dinner41.exception.store.StoreInsertFailedException;
 import kr.co.dinner41.exception.store.StoreSelectFailedException;
 import kr.co.dinner41.exception.store.StoreUpdateFailedException;
 import kr.co.dinner41.mapper.StoreMapper;
+import kr.co.dinner41.mapper.StoreWithDistanceMapper;
 import kr.co.dinner41.vo.OpenState;
+import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.StoreWithDistanceVO;
 
 @Repository("storeDao")
 public class StoreDaoImpl implements StoreDao {
@@ -313,6 +316,19 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreSelectFailedException(e.getMessage());
 		}
 		return (stores.size()>0? stores:null);
+	}
+	
+	public List<StoreListByUserViewVO> selectViewByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException{
+		int startPos = (page-1)*pageSize;
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from ");
+		//to do
+		return null;
+	}
+	
+	public List<StoreListByUserViewVO> selectViewByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException{
+		//to do
+		return null;
 	}
 
 }

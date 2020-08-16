@@ -13,11 +13,11 @@ import kr.co.dinner41.vo.StoreVO;
 
 @Service("storeListByManagerService")
 public class StoreListByManagerServiceImpl implements StoreListByManagerService {
+	 public static final int PAGESIZE = 5;
+	
 	@Autowired
 	@Qualifier("storeDao")
 	StoreDao storeDao;
-	
-	 public static final int PAGESIZE = 10;
 	
 	@Override
 	public List<StoreVO> execute(String storeStateName,String storeName,int page) throws StoreException{
