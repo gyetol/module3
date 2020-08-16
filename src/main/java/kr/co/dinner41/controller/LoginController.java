@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import kr.co.dinner41.vo.UserVO;
 @Controller
 public class LoginController {
 	@Autowired
+	@Qualifier("loginService")
 	private LoginService loginService;
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
@@ -31,7 +33,6 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-
 	public ModelAndView login(LoginCommand command,Errors errors,HttpServletRequest request) {
 
 		ModelAndView mav=new ModelAndView();
