@@ -28,9 +28,11 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public void insert(MenuVO menu, StoreVO store) throws MenuException {
 		String sql = "INSERT INTO menus VALUES(?,?,?,?,?,?,?,?,?,?,default)";
+		
 		jTemp.update(sql, store.getId(), menu.getId(),menu.getOfferType().getId(), menu.getTag(), menu.getName(),
 				menu.getPrice(), menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto());
-
+ 
+	
 	}
 
 	@Override
