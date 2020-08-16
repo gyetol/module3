@@ -137,8 +137,37 @@ public class MenuDaoImpl implements MenuDao {
 		int startPoint = (page - 1) * pageSize;
 		
 		StringBuffer sb = new StringBuffer();
-		String sql = ("SELECT * FROM menu_view WHERE store_id ='"+ storeId +"' ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("AND menu_remove_date is null ");
+		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
 	
+		
+		String sql = sb.toString();
+		
+		List<MenuVO> menus = null;
+		
+		try {
+		    menus = jTemp.query(sql, new MenuMapper());
+		}
+		catch(Exception e) {
+			throw new MenuSelectFailedException(e.getMessage());
+		}
+		return (menus.size() > 0 ? menus:null);
+	}
+	
+	
+	@Override
+	public List<MenuVO> userSelectByStoreId(int storeId, int page, int pageSize) throws MenuException {
+		
+		int startPoint = (page - 1) * pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("AND menu_remove_date is null ");
+		sb.append("AND menu_amount > 0 ");
+		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
+	
+		String sql = sb.toString();
 		List<MenuVO> menus = null;
 		
 		try {

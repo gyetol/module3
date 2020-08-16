@@ -129,6 +129,8 @@
         </div>
 
         <button id ="menuWrite" type="submit" class="btn btn-success two_button">메뉴 등록하기</button>
+        
+       <a href = " /s">
         <button id = "menuWriteCancel" type="button" class="btn btn-success two_button float-right">메뉴 등록 취소하기</button>
     </form>
 </div>

@@ -97,9 +97,9 @@
         <div class="form-group">
             <label for="inputKind">제공방식</label>
             <select id="inputKind" class="form-control">
-                <option>도시락</option>
-                <option>조리키트</option>
-                <option>완전조리식</option>
+                <option value="PAC">도시락</option>
+                <option value="MEA">조리키트</option>
+                <option value="COO">완전조리식</option>
             </select>
         </div>
 

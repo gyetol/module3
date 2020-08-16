@@ -55,12 +55,28 @@ public class MenuDaoImplTester {
 System.out.println("메뉴 추가 성공");
 	}
 	
+
 	@Ignore
 	@Test
     public void testSelecByStoreId(){
         MenuDao dao = ctx.getBean("menuDao", MenuDaoImpl.class);
         try {
             List<MenuVO> list = dao.selectByStoreId(1,1,10);
+            System.out.println("Success");
+            for (MenuVO vo: list) {
+                System.out.println(vo);
+            }
+        } catch (MenuException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	
+	@Test
+    public void testUserSelecByStoreId(){
+        MenuDao dao = ctx.getBean("menuDao", MenuDaoImpl.class);
+        try {
+            List<MenuVO> list = dao.userSelectByStoreId(1,1,10);
             System.out.println("Success");
             for (MenuVO vo: list) {
                 System.out.println(vo);
@@ -90,6 +106,7 @@ System.out.println("메뉴 추가 성공");
     }
 
 
+	@Ignore
 	@Test
 	public void deleteTest() throws MenuException {
 		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);
