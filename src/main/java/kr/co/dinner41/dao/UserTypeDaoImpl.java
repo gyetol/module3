@@ -83,4 +83,11 @@ public class UserTypeDaoImpl implements UserTypeDao {
 		return (userTypes.size()==0?null:userTypes.get(0));
 	}
 
+	public UserTypeVO selectByName(String name)throws UserTypeException{
+		String sql="SELECT * FROM user_types WHERE user_type_name=?"; 
+		List<UserTypeVO> userTypes=jTemp.query(sql,new UserTypeMapper(),name);
+		return (userTypes.size()==0?null:userTypes.get(0));
+	}
+
+
 }

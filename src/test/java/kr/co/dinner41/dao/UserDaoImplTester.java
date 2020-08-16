@@ -28,13 +28,17 @@ public class UserDaoImplTester {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
 		UserTypeDao userTypeDao=ctx.getBean("userTypeDao",UserTypeDao.class);
 		UserTypeVO type=userTypeDao.selectById("GM");
+		UserVO insertedUser=null;
 		if(type==null) {
 			System.out.println("해당하는 회원유형을 불러올 수 없습니다.");
 			return;
 		}
 		UserVO user=new UserVO(0,type,"test@naver.com","test","테스트","testAddress1","testAddress2",35,127,"010-0000-0000",null,null);
 		try {
-			userDao.insert(user);
+			insertedUser=userDao.insert(user);
+			System.out.println("userId:"+insertedUser.getId());
+			System.out.println("userRegisterDate:"+insertedUser.getRegisterDate());
+			System.out.println("userRemoveDate:"+insertedUser.getRemoveDate());
 			System.out.println("회원 추가하기에 성공했습니다.");
 		}
 		catch(UserInsertFailedException e) {
@@ -43,7 +47,6 @@ public class UserDaoImplTester {
 	}
 
 	@Test
-	@Ignore
 	public void deleteTest() {
 		UserDao dao=ctx.getBean("userDao",UserDao.class);
 		try {
@@ -72,6 +75,7 @@ public class UserDaoImplTester {
 	}
 
 	@Test
+	@Ignore
 	public void selectTest() {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
 		UserVO user=null;

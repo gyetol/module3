@@ -124,12 +124,12 @@ public class UserVO {
 		this.registerDate = registerDate;
 	}
 
-	public Timestamp getRemoveDAte() {
+	public Timestamp getRemoveDate() {
 		return removeDate;
 	}
 
-	public void setRemoveDAte(Timestamp removeDAte) {
-		this.removeDate = removeDAte;
+	public void setRemoveDate(Timestamp removeDate) {
+		this.removeDate = removeDate;
 	}
 
 }
