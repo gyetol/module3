@@ -69,6 +69,7 @@ public class LoginController {
 		return mav;
 	}
 	
+	
 	@RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
 	public String sessionCheck(HttpServletRequest request) {
 		HttpSession session=request.getSession(false);
