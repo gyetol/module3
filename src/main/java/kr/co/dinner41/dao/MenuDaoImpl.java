@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
+import kr.co.dinner41.exception.menu.MenuSelectFailedException;
 import kr.co.dinner41.exception.menu.MenuUpdateFailedException;
 import kr.co.dinner41.mapper.MenuMapper;
 import kr.co.dinner41.service.menu.MenuListByUserServiceImpl;
@@ -82,6 +83,14 @@ public class MenuDaoImpl implements MenuDao {
 			throw new MenuUpdateFailedException();
 		}
 	}
+	
+	@Override
+	public MenuVO selectByMenuIdStoreId(int menuId, int storeId) throws MenuException {
+		List<MenuVO> list;
+		String sql = "SELECT * FROM menu_view " + "WHERE menu_id = ? AND store_id =?";
+		list = jTemp.query(sql, new MenuMapper(), menuId, storeId);
+		return (list.size() == 0 ? null : list.get(0));
+	}
 
 	@Override
 	public List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException {
@@ -120,13 +129,24 @@ public class MenuDaoImpl implements MenuDao {
 		return list;
 
 	}
-
+	
 	@Override
-	public MenuVO selectById(int menuId, int storeId) throws MenuException {
-		List<MenuVO> list;
-		String sql = "SELECT * FROM menu_view " + "WHERE menu_id = ? AND store_id =?";
-		list = jTemp.query(sql, new MenuMapper(), menuId, storeId);
-		return (list.size() == 0 ? null : list.get(0));
+	public List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException {
+		
+		int startPoint = (page - 1) * pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		String sql = ("SELECT * FROM menu_view WHERE store_id ='"+ storeId +"' ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
+	
+		List<MenuVO> menus = null;
+		
+		try {
+		    menus = jTemp.query(sql, new MenuMapper());
+		}
+		catch(Exception e) {
+			throw new MenuSelectFailedException(e.getMessage());
+		}
+		return (menus.size() > 0 ? menus:null);
 	}
 
 	@Override
