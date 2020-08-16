@@ -198,24 +198,18 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <a href="${pageContext.request.contextPath}/${type}/${obj - 1}/qna">
-                <button type="button" class="btn btn-success"><<</button>
-            </a>
             <c:forEach var="obj" items="${pages}">
-                <c:if test="${obj eq page}">
-                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
-                        <button type="button" class="btn btn-success" disabled><c:out value="${obj}"></c:out></button>
+                <c:if test="${obj.pageNumber eq page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj.showPageName}"></c:out></button>
                     </a>
                 </c:if>
-                <c:if test="${obj ne page}">
-                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
-                        <button type="button" class="btn btn-success"><c:out value="${obj}"></c:out></button>
+                <c:if test="${obj.pageNumber ne page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
                     </a>
                 </c:if>
             </c:forEach>
-            <a href="${pageContext.request.contextPath}/${type}/${obj + 1}/qna">
-                <button type="button" class="btn btn-success">>></button>
-            </a>
         </div>
     </div>
     <div class="container-fluid margin_first">
