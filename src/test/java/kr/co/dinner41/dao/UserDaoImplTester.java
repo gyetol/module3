@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.dinner41.exception.UserDeleteFailedException;
-import kr.co.dinner41.exception.UserInsertFailedException;
+import kr.co.dinner41.exception.user.UserDeleteFailedException;
+import kr.co.dinner41.exception.user.UserInsertFailedException;
 import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -47,6 +47,7 @@ public class UserDaoImplTester {
 	}
 
 	@Test
+	@Ignore
 	public void deleteTest() {
 		UserDao dao=ctx.getBean("userDao",UserDao.class);
 		try {
@@ -59,10 +60,9 @@ public class UserDaoImplTester {
 	}
 
 	@Test
-	@Ignore
 	public void updateNameTest() {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
-		UserVO user=new UserVO(12,null,null,null,"테스트 업데이트","testAddress1_2","testAddress2_2",40,150,"010-1111-1111",null,null);
+		UserVO user=new UserVO(29,null,null,null,"테스트 업데이트","testAddress1_2","testAddress2_2",40,150,"010-1111-1111",null,null);
 		try {
 			userDao.update(user);
 			System.out.println("회원 수정하기에 성공했습니다.");

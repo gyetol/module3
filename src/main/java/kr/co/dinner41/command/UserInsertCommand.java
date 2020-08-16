@@ -19,7 +19,6 @@ public class UserInsertCommand {
 	public UserInsertCommand(String eamil, String password, String passwordConfirm, String name, String address,
 			String subAddress, String latitude, String longitude, String phone1, String phone2, String phone3,
 			String type) {
-		super();
 		this.eamil = eamil;
 		this.password = password;
 		this.passwordConfirm = passwordConfirm;

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import kr.co.dinner41.command.UserInsertCommand;
 import kr.co.dinner41.dao.UserDao;
 import kr.co.dinner41.dao.UserTypeDao;
-import kr.co.dinner41.exception.UserException;
-import kr.co.dinner41.exception.UserTypeException;
+import kr.co.dinner41.exception.user.UserException;
+import kr.co.dinner41.exception.usertype.UserTypeException;
 import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
 

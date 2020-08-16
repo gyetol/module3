@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.dao.UserDao;
-import kr.co.dinner41.exception.UserSelectFailedException;
 import kr.co.dinner41.exception.login.LoginException;
+import kr.co.dinner41.exception.user.UserSelectFailedException;
 import kr.co.dinner41.vo.UserVO;
 
 @Service("loginService")

@@ -3,11 +3,9 @@ package kr.co.dinner41.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,11 +15,12 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import kr.co.dinner41.exception.UserDeleteFailedException;
-import kr.co.dinner41.exception.UserException;
-import kr.co.dinner41.exception.UserInsertFailedException;
-import kr.co.dinner41.exception.UserSelectFailedException;
-import kr.co.dinner41.exception.UserUpdateFailedException;
+import kr.co.dinner41.exception.user.NoSuchUserException;
+import kr.co.dinner41.exception.user.UserDeleteFailedException;
+import kr.co.dinner41.exception.user.UserException;
+import kr.co.dinner41.exception.user.UserInsertFailedException;
+import kr.co.dinner41.exception.user.UserSelectFailedException;
+import kr.co.dinner41.exception.user.UserUpdateFailedException;
 import kr.co.dinner41.mapper.UserMapper;
 import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
@@ -41,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 		String email=user.getEmail();
 		String password=user.getPassword();
 		String name=user.getName();
-		String address=user.getAddresss();
+		String address=user.getAddress();
 		String subAddress=user.getSubAddress();
 		double latitude=user.getLatitude();
 		double longitude=user.getLongitude();
@@ -85,14 +84,19 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void delete(String email, String password) throws UserException {
-		String sql="DELETE FROM users WHERE user_id=?";
+		String sql="UPDATE users SET user_remove_date=? WHERE user_id=?";
 		UserVO target=selectByEmailAndPassword(email, password);
 		int result=0;
 		if(target==null) {
 			throw new UserDeleteFailedException("비밀번호가 일치하지 않습니다.");
 		}
+
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    Calendar calendar = Calendar.getInstance();
+	    String now = sdf.format(calendar.getTime());
+
 		try {
-			result=jTemp.update(sql,target.getId());
+			result=jTemp.update(sql,now,target.getId());
 		}
 		catch(DataAccessException e) {
 			e.printStackTrace();
@@ -104,7 +108,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void update(UserVO user) throws UserException {
+	public UserVO update(UserVO user) throws UserException {
 		if(user==null) {
 			throw new UserUpdateFailedException("(UserDaoImpl)update:전달인자가 null이다");
 		}
@@ -113,7 +117,7 @@ public class UserDaoImpl implements UserDao {
 				+ "WHERE user_id=? ";
 		int userId=user.getId();
 		String userName=user.getName();
-		String userAddress=user.getAddresss();
+		String userAddress=user.getAddress();
 		String userSubAddress=user.getSubAddress();
 		double userLatitude=user.getLatitude();
 		double userLongitude=user.getLongitude();
@@ -122,14 +126,20 @@ public class UserDaoImpl implements UserDao {
 		try {
 			result=jTemp.update(sql,userName,userAddress,userSubAddress,userLatitude,userLongitude,userPhone,userId);
 		}catch(DataAccessException e) {
-			e.printStackTrace();
-			throw e;
-			//throw new UserUpdateFailedException();
+			throw new UserUpdateFailedException(e);
 		}
 		if(result==0) {
-			System.out.println("영향받은 행이 없습니다.");
-			//throw new UserUpdateFailedException();
+			throw new UserUpdateFailedException();
 		}
+		try {
+			UserVO updatedUser=selectById(userId);
+			if(updatedUser!=null) {
+				return updatedUser;
+			}
+		}catch(UserException e) {
+			throw new UserUpdateFailedException(e);
+		}
+		return null;
 	}
 	
 	@Override
@@ -140,7 +150,7 @@ public class UserDaoImpl implements UserDao {
 			users=jTemp.query(sql, new UserMapper(),id);
 		}catch(DataAccessException e) {
 			e.printStackTrace();
-			throw new UserSelectFailedException();
+			throw new NoSuchUserException();
 		}
 		return (users.size()==0?null:users.get(0));
 	}

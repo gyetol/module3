@@ -1,4 +1,6 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -14,8 +16,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+	<!-- DaumPostcode import -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<script src="${pageContext.request.contextPath }/resources/js/user/mypageInsert.js"></script>
+
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
 
     <title>My Page</title>
 </head>
@@ -29,8 +36,7 @@
 
     <!--사용자 위치-->
     <div class="btn-group">
-        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>서울특별시 봉천동</span>
         </button>
         <div class="dropdown-menu">
@@ -68,6 +74,7 @@
     </div>
 </nav>
 
+<!--Content-->
 <div>
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
@@ -77,44 +84,76 @@
 
     <hr/>
 
-    <!--내 정보 보기 폼-->
+    <!--내정보 수정 폼-->
+<form action="/mypage" method="POST">
     <div class="container-fluid">
 
         <div class="form-group">
             <label for="userName">이름</label>
-            <input type="text" class="form-control " id="userName" readonly>
+            <input type="text" name="name"class="form-control " id="userName" >
         </div>
 
         <div class="form-group">
-            <label for="exampleFormControlInput1">이메일</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" readonly>
+            <label for="userEmail">이메일</label>
+            <input type="email" name="email" class="form-control" id="userEmail" readonly>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" readonly/>
+                <input type="tel" name="phone1" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" >
                 <p style="width: 5% ;float: left;text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" readonly/>
+                <input type="tel" name="phone2" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" >
                 <p style="width: 5% ;float: left ; text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;" readonly/>
+                <input type="tel" name="phone3" class="form-control" id="phoneNumber3" style="width: 30% ;" >
             </div>
         </div>
 
         <div class="form-group">
             <label for="address">거주지</label>
             <div id="address">
-                <input type="text" class="form-control margin_up" id="user_address" readonly/>
-                <input type="text" class="form-control margin_up" id="user_sub_address" readonly/>
+                <button type="button" class="btn btn-success two_button" id="search_button">주소 찾기</button>
+                <input type="text" name="address" class="form-control margin_up" placeholder="주소" id="user_address"/>
+                <input type="text" name="subAddress" class="form-control margin_up" placeholder="상세주소" id="user_sub_address"/>
+				<div id="wrap" style="display:none;border:2px solid #CFE3A1;width:503px;height:300px;margin:5px 0;position:absolute; overflow:auto;"></div>
+				<input type="hidden" name="latitude" id="user_latitude" name="latitude" value=""/>
+				<input type="hidden" name="longitude" id="user_longitude" name="longitude" value=""/>
             </div>
         </div>
 
-        <div class="margin_first">
-            <button type="button" class="btn btn-success two_button">수정하기</button>
-            <button type="button" class="btn btn-success two_button float-right" >뒤로가기</button>
+		<!-- 비밀번호 수정버튼을 누르면 비밀번호 수정하는 걸로 바꿈  -->
+        <button type="button" id="update_password_button" class="btn btn-success two_button" style="margin-bottom: 20pt;">비밀번호 수정하기</button>
+
+<!--  
+        <div class="form-group">
+            <label for="exampleInputPassword1">비밀번호</label>
+            <input type="password" name="newPassword" class="form-control" id="exampleInputPassword1">
         </div>
 
+        <div class="form-group" style="margin-bottom: 20pt">
+            <label for="exampleInputPassword2">비밀번호 확인</label>
+            <input type="password" name="newPasswordConfirm" class="form-control" id="exampleInputPassword2">
+            <small id="passhelp" class="form-text text-muted">내정보 수정을 위해서는 비밀번호 입력이 필요합니다.</small>
+        </div>
+
+-->
+        <div id="InputNewPassword" class="form-group" style="display:none">
+            <label for="exampleInputPassword1">비밀번호</label>
+            <input type="password" name="newPassword" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <div id="InputNewPasswordConfirm" class="form-group" style="margin-bottom: 20pt; display:none">
+            <label for="exampleInputPassword2">비밀번호 확인</label>
+            <input type="password" name="newPasswordConfirm" class="form-control" id="exampleInputPassword2">
+            <small id="passhelp" class="form-text text-muted">내정보 수정을 위해서는 비밀번호 입력이 필요합니다.</small>
+        </div>
+
+        <div class="margin_first">
+            <button type="submit" class="btn btn-success two_button">수정완료</button>
+            <button type="button" id="goBackButton" class="btn btn-success two_button float-right">수정취소</button>
+        </div>
     </div>
+</form>
 </div>
 <hr/>
 <div class="last_block"></div>

@@ -20,9 +20,13 @@
     
     <!-- daum주소검색api사용 -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/user/register.js"></script>
+    
+    <!-- kakaoMap api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
 
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <script src="${pageContext.request.contextPath}/resources/js/common/register.js"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
 
     <title>register</title>
 
@@ -42,7 +46,7 @@
             <hr/>
 
             <div>
-                <form class="text-left" action="${pageContext.request.contextPath }/register" method="POST">
+                <form class="text-left" id="register_form" action="${pageContext.request.contextPath}/register" method="POST">
                     <div class="form-group">
                         <label for="emailLabel">이메일</label>
                         <div id="emailLabel">
@@ -60,7 +64,7 @@
                     <div class="form-group">
                         <label for="user_password_check">비밀번호 확인</label>
                         <input type="password" name="passwordConfirm" class="form-control" id="user_password_check">
-                        <!--                    라벨의 for와 이메일의 id가 일치해야함-->
+                        <!-- 라벨의 for와 이메일의 id가 일치해야함-->
                     </div>
 
                     <div class="form-group">
@@ -72,13 +76,11 @@
                         <label for="address">거주지</label>
                         <div id="address">
                             <button type="button" class="btn btn-outline-success right_input" id="searchButton" >주소검색</button>
-                            <!--  <input type="text" class="form-control margin_up" placeholder="주소" id="user_address"/>-->
                             <input type="text" name="address" class="form-control margin_up" placeholder="도로명주소" id="user_address"/>
-                            <!--<input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address"/>-->
                             <input type="text" name="subAddress" class="form-control margin_up" placeholder="상세주소" id="user_detailAddress"/>
-                            <div id="wrap" style="display:none;border:2px solid black;width:500px;height:300px;margin:5px 0;position:absolute"></div>
-                            <input type="hidden" name="latitude" id="user_latitude" name="latitude" value=""/>
-                            <input type="hidden" name="longitude" id="user_longitude" name="longitude" value=""/>
+                            <div id="wrap" style="display:none;border:2px solid #CFE3A1;width:503px;height:300px;margin:5px 0;position:absolute; overflow:auto"></div>
+                            <input type="hidden" name="latitude" id="user_latitude"/>
+                            <input type="hidden" name="longitude" id="user_longitude"/>
                         </div>
                     </div>
 
@@ -101,7 +103,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-block margin_first" id="register_apply_button">가입하기</button>
+                    <button type="button" class="btn btn-success btn-block margin_first" id="register_apply_button">가입하기</button>
                 </form>
             </div>
         </div>

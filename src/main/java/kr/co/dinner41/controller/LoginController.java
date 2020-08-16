@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.exception.login.LoginException;
+import kr.co.dinner41.exception.login.SearchPasswordException;
 import kr.co.dinner41.service.login.LoginService;
+import kr.co.dinner41.service.login.SearchPasswordService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.UserVO;
@@ -26,10 +28,39 @@ public class LoginController {
 	@Qualifier("loginService")
 	private LoginService loginService;
 
+	@Autowired
+	@Qualifier("searchPasswordService")
+	private SearchPasswordService searchPasswordService;
+	
+	private String getUserPage(UserVO loginUser) {
+		if(loginUser==null) {
+			return null;
+		}
+		String userType=loginUser.getType().getId();
+		switch(userType) {
+		case "GM":
+			return "user/userHome";
+		case "SM":
+			return "store/storeHome";
+		case "AD":
+			return "manage/managerHome";
+		default:
+			return null;
+		}
+	}
+
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String login() {
-		System.out.println("login컨트롤러 진입성공");
-		return "common/login";
+	public String login(HttpServletRequest request) {
+		HttpSession session=request.getSession(false);
+		if(session==null) {
+			return "common/login";
+		}
+		UserVO loginUser=(UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "common/login";
+		}
+		String result=getUserPage(loginUser);
+		return result;
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
@@ -54,21 +85,14 @@ public class LoginController {
 		UserVO user=(UserVO)session.getAttribute("loginUser");
 		String userType=user.getType().getId();
 		String viewName=null;
-		switch(userType) {
-		case "GM":
+		viewName=getUserPage(user);
+		if(viewName.equals("user/userHome")) {
 			session.setAttribute("carts", new ArrayList<CartVO>());
-			viewName="user/userHome";
-			break;
-		case "SM":
-			viewName="store/storeHome";
-			break;
-		case "AD":
-			viewName="manage/managerHome";
-			break;
 		}
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
 	
 	
 	@RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
@@ -94,5 +118,23 @@ public class LoginController {
 			jspName="manage/managerHome";
 		}
 		return jspName;
+	}
+	
+	@RequestMapping(value="/password",method=RequestMethod.GET)
+	public String searchPassword() {
+		return "common/searchPassword";
+	}
+	
+	@RequestMapping(value="/password",method=RequestMethod.POST)
+	public String searchPassword(HttpServletRequest request) {
+		System.out.println("searchPasswordController진입");
+		try {
+
+			searchPasswordService.exectue(request);
+		}catch(SearchPasswordException e) {
+			
+		}
+		return "common/login";
+		
 	}
 }
