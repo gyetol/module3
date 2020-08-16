@@ -10,17 +10,19 @@ public class ReviewVO {
     private String content;
     private int score;
     private Timestamp date;
+    private int order_id;
 
     public ReviewVO() {
     }
 
-    public ReviewVO(int id, StoreVO store, UserVO user, int score, String content, Timestamp date) {
+    public ReviewVO(int id, StoreVO store, UserVO user, String content, int score, Timestamp date, int order_id) {
         this.id = id;
         this.store = store;
         this.user = user;
-        this.score = score;
         this.content = content;
+        this.score = score;
         this.date = date;
+        this.order_id = order_id;
     }
 
     public int getId() {
@@ -47,6 +49,14 @@ public class ReviewVO {
         this.user = user;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getScore() {
         return score;
     }
@@ -63,24 +73,12 @@ public class ReviewVO {
         this.date = date;
     }
 
-    public String getContent() {
-        return content;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "ReviewVO{" +
-                "id=" + id +
-                ", store=" + store +
-                ", user=" + user +
-                ", score=" + score +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     @Override
@@ -90,6 +88,7 @@ public class ReviewVO {
         ReviewVO reviewVO = (ReviewVO) o;
         return id == reviewVO.id &&
                 score == reviewVO.score &&
+                order_id == reviewVO.order_id &&
                 Objects.equals(store, reviewVO.store) &&
                 Objects.equals(user, reviewVO.user) &&
                 Objects.equals(content, reviewVO.content) &&
@@ -98,6 +97,19 @@ public class ReviewVO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, store, user, score, content, date);
+        return Objects.hash(id, store, user, content, score, date, order_id);
+    }
+
+    @Override
+    public String toString() {
+        return "ReviewVO{" +
+                "id=" + id +
+                ", store=" + store +
+                ", user=" + user +
+                ", content='" + content + '\'' +
+                ", score=" + score +
+                ", date=" + date +
+                ", order_id=" + order_id +
+                '}';
     }
 }
