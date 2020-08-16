@@ -10,6 +10,7 @@ import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.exception.store.StoreException;
 import kr.co.dinner41.vo.StoreVO;
 
+
 @Service("storeListByManagerService")
 public class StoreListByManagerServiceImpl implements StoreListByManagerService {
 	@Autowired
@@ -25,3 +26,4 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 	}
 
 }
+

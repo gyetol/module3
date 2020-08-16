@@ -68,7 +68,7 @@ public class StoreController {
 		storeInsertService.execute(store);
 		return "login";
 	}
-	
+
 	@RequestMapping(value="/ad/{store-state-name}/{store-name}/{page}/store",method=RequestMethod.GET)
 	public String listByManager(@PathVariable("store-state-name") String storeStateName, @PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
 		int intPage = Integer.parseInt(page);
@@ -85,5 +85,6 @@ public class StoreController {
 		model.addAttribute("stores",stores);
 		return "manage/storeList";
 	}
+
 	
 }

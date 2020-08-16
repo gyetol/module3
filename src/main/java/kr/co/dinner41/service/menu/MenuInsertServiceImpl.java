@@ -37,8 +37,10 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		OfferTypeVO offerTypeVO = null;
 		StoreVO storeVO = null;
 		
+		
 		try {
 			offerTypeVO = offerTypeDao.selectById(command.getType());
+			storeVO = storeDao.selectByUserId(user.getId());
 			
 		}
 		catch (OfferTypeSelectException e) {
@@ -46,7 +48,7 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		}
 		
 		MenuVO menu = new MenuVO();
-		menu.setStore(store);
+		menu.setStore(storeVO);
 		menu.setOfferType(offerTypeVO);
 		menu.setTag(command.getTag());
 		menu.setPhoto(command.getPhoto());

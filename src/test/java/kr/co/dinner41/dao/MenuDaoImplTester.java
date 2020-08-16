@@ -40,7 +40,7 @@ public class MenuDaoImplTester {
 		StoreDaoImpl storeDao = ctx.getBean("storeDao",StoreDaoImpl.class);
 		StoreVO store = storeDao.selectById(1);
 		
-		MenuVO menu = new MenuVO(store,0,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
+		MenuVO menu = new MenuVO(store,2,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
 		
 	
 			try {
