@@ -8,5 +8,5 @@ import kr.co.dinner41.vo.UserVO;
 
 public interface MenuInsertService {
 
-	public void execute(MenuInsertCommand menu, StoreVO store, UserVO user);
+	public void execute(MenuInsertCommand menu, UserVO user);
 }

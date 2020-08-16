@@ -80,13 +80,14 @@ public class MenuController {
 	    }
 
 	    @RequestMapping(value = "/menu", method = RequestMethod.POST)
-	    public String insert(MenuInsertCommand menu, StoreVO store, Model model, HttpSession session){
-	   
-	    	
-			
+	    public String insert(MenuInsertCommand menu, Model model, HttpSession session){
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
+	    	System.out.println("Controller"+user.getName()+", id:"+user.getId());
+	    	System.out.println(menu.getName());
+	    	System.out.println(menu.getType());
 	    	//int userId=user.getId();
-	    	insertService.execute(menu,store,user);
+//			StoreVO store =
+	    	insertService.execute(menu,user);
 	    	
 	
 	  
