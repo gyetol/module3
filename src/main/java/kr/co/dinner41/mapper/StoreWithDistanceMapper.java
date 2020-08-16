@@ -1,7 +1,6 @@
 package kr.co.dinner41.mapper;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
@@ -10,14 +9,14 @@ import org.springframework.jdbc.core.RowMapper;
 import kr.co.dinner41.vo.OpenState;
 import kr.co.dinner41.vo.StoreCategoryVO;
 import kr.co.dinner41.vo.StoreStateVO;
-import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.StoreWithDistanceVO;
 import kr.co.dinner41.vo.UserTypeVO;
 import kr.co.dinner41.vo.UserVO;
 
-public class StoreMapper implements RowMapper<StoreVO> {
+public class StoreWithDistanceMapper implements RowMapper<StoreWithDistanceVO> {
 
 	@Override
-	public StoreVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public StoreWithDistanceVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		int storeId= rs.getInt("store_id");
 		int userId=rs.getInt("user_id");
 		String storeCategoryId=rs.getString("store_category_id");
@@ -34,6 +33,7 @@ public class StoreMapper implements RowMapper<StoreVO> {
 		String storeIntroduction= rs.getString("store_introduction");
 		OpenState storeOpenState = OpenState.valueOf(rs.getString("store_open_state"));
 		String storePayNumber= rs.getString("store_paynumber");
+		double distance = rs.getDouble("distance");
 		
 //		double distance = 0;
 //		ResultSetMetaData rsmd = rs.getMetaData();
@@ -69,10 +69,9 @@ public class StoreMapper implements RowMapper<StoreVO> {
 		String storeStateName= rs.getString("store_state_name");
 		StoreStateVO storeState = new StoreStateVO(storeStateId,storeStateName);
 		
-		StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
-					storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeOpenState,storePayNumber);
-		return store;
+		StoreWithDistanceVO storeWithDistance = new StoreWithDistanceVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
+					storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeOpenState,storePayNumber,distance);
+		return storeWithDistance;
 	}
-	
 }
 

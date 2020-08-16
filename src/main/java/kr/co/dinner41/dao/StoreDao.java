@@ -5,6 +5,8 @@ import java.util.List;
 import kr.co.dinner41.exception.store.StoreException;
 import kr.co.dinner41.vo.OpenState;
 import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.StoreListByUserViewVO;
+
 
 public interface StoreDao {
 	void insert(StoreVO store) throws StoreException;
@@ -22,4 +24,6 @@ public interface StoreDao {
 	List<StoreVO> selectByLocation(double userLatitude, double userLongitude) throws StoreException;
 	List<StoreVO> selectByOpenState(OpenState openState, int page, int pageSize) throws StoreException;
 	List<StoreVO> selectAll(int page,int pageSize) throws StoreException;
+	List<StoreListByUserViewVO> selectViewByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException;
+	List<StoreListByUserViewVO> selectViewByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException;
 }

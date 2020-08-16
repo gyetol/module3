@@ -76,7 +76,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left" method="post" action="store">
+    <form class="container-fluid text-left" method="post" action="sm/store">
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
             <div id="store">

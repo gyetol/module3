@@ -149,6 +149,7 @@ public class StoreDaoImplTester {
 		}
 	}
 	
+	@Ignore
 	@Test
 	public void selectByStateNameAndNameTest() {
 		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);

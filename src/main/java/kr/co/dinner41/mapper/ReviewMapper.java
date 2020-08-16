@@ -49,7 +49,7 @@ public class ReviewMapper implements RowMapper<ReviewVO> {
         OpenState store_open_state = OpenState.valueOf(rs.getString("store_open_state"));
         String store_paynumber = rs.getString("store_paynumber");
         StoreVO store = new StoreVO(store_id, store_user, store_category, store_state, store_business_number, store_name, store_address, store_sub_address, store_latitude, store_longitude, store_phone, store_operate_time, store_photo, store_introduction, store_open_state, store_paynumber);
-
+        
         int user_id = rs.getInt("user_id");
         String user_type_id = rs.getString("user_type_id");
         String user_type_name = rs.getString("user_type_name");
