@@ -78,12 +78,14 @@
 <div>
     <div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
         <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center trim">
-                    <img src="../../icons/cogs-solid.svg" class="" alt="..." width="70%" style="margin: 10%">
-                    <h5 class="card-title" style="margin-top: 10pt">매장관리</h5>
-                </div>
-            </div>
+            <a href="ad/all-/all-/1/store">
+            	<div class="card h-100">
+                	<div class="card-body text-center trim">
+                    	<img src="../../icons/cogs-solid.svg" class="" alt="..." width="70%" style="margin: 10%">
+                    	<h5 class="card-title" style="margin-top: 10pt">매장관리</h5>
+                	</div>
+            	</div>
+            </a>
         </div>
         <div class="col mb-4">
             <div class="card h-100">

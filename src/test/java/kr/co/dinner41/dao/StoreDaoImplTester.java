@@ -154,7 +154,7 @@ public class StoreDaoImplTester {
 		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
 		List<StoreVO> stores = null;
 		try {
-			stores = storeDao.selectByStateNameAndName("승인","안녕베트남",1, 10);
+			stores = storeDao.selectByStateNameAndName("%","%",1, 10);
 			if(stores==null) {
 				System.out.println("매장들을 불러오지 못함");
 			}
