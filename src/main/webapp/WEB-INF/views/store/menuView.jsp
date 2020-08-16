@@ -139,7 +139,9 @@
         
          <a href = "/dinner41/sm/menu">
         <button id="menuUpdate"  type="button" class="btn btn-success three_button" >수정하기</button>
-        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" >삭제하기</button>
+        
+        <a href = " /sm/menu">
+        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" >삭제하기</button>
     </div>
 </div>
 <hr/>
