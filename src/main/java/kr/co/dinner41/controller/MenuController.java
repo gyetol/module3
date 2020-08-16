@@ -1,5 +1,6 @@
 package kr.co.dinner41.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.command.MenuUpdateCommand;
-import kr.co.dinner41.command.QnAAnswerCommand;
 import kr.co.dinner41.service.menu.MenuDeleteService;
 import kr.co.dinner41.service.menu.MenuInsertService;
 import kr.co.dinner41.service.menu.MenuListByStoreService;
@@ -24,7 +23,6 @@ import kr.co.dinner41.service.menu.MenuUpdateAmountService;
 import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
 import kr.co.dinner41.vo.MenuVO;
-import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -61,7 +59,7 @@ public class MenuController {
 	    
 	    
 
-	    @RequestMapping(value = "/menu", method = RequestMethod.GET)
+	    @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
 	    public String insert(HttpSession session, Model model){
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
 	    	
@@ -79,19 +77,19 @@ public class MenuController {
 	    	}
 	    }
 
-	    @RequestMapping(value = "/menu", method = RequestMethod.POST)
-	    public String insert(MenuInsertCommand menu, Model model, HttpSession session){
+	    @RequestMapping(value = "/sm/menu", method = RequestMethod.POST)
+
+	    public String insert(MenuInsertCommand menu, Model model, HttpSession session) throws SQLException
+	    {
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
-	    	System.out.println("Controller"+user.getName()+", id:"+user.getId());
-	    	System.out.println(menu.getName());
-	    	System.out.println(menu.getType());
-	    	//int userId=user.getId();
-//			StoreVO store =
-	    	insertService.execute(menu,user);
-	    	
-	
+//	    	System.out.println("Controller"+user.getName()+", id:"+user.getId());
+//	    	System.out.println(menu.getName());
+//	    	System.out.println(menu.getType());
+
+	    	insertService.execute(menu, user);
+	    	return "store/menuList";
 	  
-//	    if (menu.getName().trim().contentEquals("")) {
+//	    if (menu.getName().trim().equals("")) {
 //	    	model.addAttribute("errMessage", "메뉴명이 입력되지 않았습니다.");
 //	    	return "store/menuRegister";
 //	    }
@@ -131,25 +129,24 @@ public class MenuController {
 //	    	return "store/menuRegister";
 //	    }
             
-    	return "redirect:/";
 	   }
 	    
 	  
 
 
-	    @RequestMapping(value = "/menu", method = RequestMethod.PUT)
+	    @RequestMapping(value = "/sm/menu", method = RequestMethod.PUT)
 	    public String update(MenuUpdateCommand menu, StoreVO store, HttpSession session){
 	    	
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
-	    	updateService.execute(menu,store,user);
-	        return "store/menuModify";
+	    	updateService.execute(menu,user);
+	        return "store/menuList";
 	    }
 	    
 	    @RequestMapping(value = "/{storeId}/{menuId}/menu", method = RequestMethod.GET)
 	    public String view(@PathVariable("storeId")String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model){
 	    	
-	    	 int store_id = Integer.parseInt(storeId);
-	    	 int menu_id = Integer.parseInt(menuId);
+	    	int store_id = Integer.parseInt(storeId);
+	    	int menu_id = Integer.parseInt(menuId);
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
 	    	
 	    	MenuVO menu = menuViewService.execute(store_id, menu_id);
@@ -167,7 +164,6 @@ public class MenuController {
 	    		return "redirect:/";
 	    	}
 	    }
-	   
 	    
 	}
 

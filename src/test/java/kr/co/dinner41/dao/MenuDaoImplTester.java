@@ -1,5 +1,6 @@
 package kr.co.dinner41.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -33,14 +34,15 @@ public class MenuDaoImplTester {
 	private ApplicationContext ctx;	
 	
 	@Test
-	public void insertTest() throws OfferTypeSelectException {
+	public void insertTest() throws OfferTypeSelectException, SQLException {
 		MenuDaoImpl menuDao=ctx.getBean("menuDao",MenuDaoImpl.class);
 		OfferTypeDaoImpl offerTypeDao=ctx.getBean("offerTypeDao",OfferTypeDaoImpl.class);
 		OfferTypeVO offerTypeVo=offerTypeDao.selectById("PAC");
 		StoreDaoImpl storeDao = ctx.getBean("storeDao",StoreDaoImpl.class);
-		StoreVO store = storeDao.selectById(1);
+		StoreVO store = storeDao.selectByUserId(4);
+		int menuId = menuDao.getLastInsertId(store.getId());
 		
-		MenuVO menu = new MenuVO(store,2,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
+		MenuVO menu = new MenuVO(store,menuId,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
 		
 	
 			try {

@@ -1,5 +1,9 @@
 package kr.co.dinner41.dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dinner41.command.MenuInsertCommand;
@@ -28,26 +33,26 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public void insert(MenuVO menu, StoreVO store) throws MenuException {
 		String sql = "INSERT INTO menus VALUES(?,?,?,?,?,?,?,?,?,?,default)";
-		
-		jTemp.update(sql, store.getId(), menu.getId(),menu.getOfferType().getId(), menu.getTag(), menu.getName(),
+
+		jTemp.update(sql, store.getId(), menu.getId(), menu.getOfferType().getId(), menu.getTag(), menu.getName(),
 				menu.getPrice(), menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto());
- 
-	
+
 	}
 
 	@Override
-	public void delete(int menuId,int storeId) throws MenuException {
+	public void delete(int menuId, int storeId) throws MenuException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
 		String now = sdf.format(calendar.getTime());
 
-		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = '" + menuId +"'WHERE store_id ="+ storeId ;
+		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = '" + menuId
+				+ "'WHERE store_id =" + storeId;
 
 		int result = 0;
 
 		try {
-			result = jTemp.update(sql, menuId,storeId);
+			result = jTemp.update(sql, menuId, storeId);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			throw new MenuDeleteFailedException();
@@ -67,7 +72,8 @@ public class MenuDaoImpl implements MenuDao {
 
 		try {
 			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getTag(), menu.getName(), menu.getPrice(),
-					menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto(),menu.getId(),store.getId());
+					menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto(), menu.getId(),
+					store.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MenuUpdateFailedException();
@@ -101,28 +107,26 @@ public class MenuDaoImpl implements MenuDao {
 			sb.append("AND menu_remove_date is null ");
 			break;
 		}
-		
-		List<MenuVO>list;
-		
+
+		List<MenuVO> list;
+
 		int startPoint = (page - 1) * pageSize;
 		sb.append("ORDER BY menu_id DESC ");
 		sb.append("LIMIT " + startPoint + "," + pageSize);
-		
+
 		String sql = sb.toString();
-		
-		
-		list = jTemp.query(sql, new MenuMapper(),startPoint,pageSize);
+
+		list = jTemp.query(sql, new MenuMapper(), startPoint, pageSize);
 		return list;
-		
+
 	}
 
 	@Override
 	public MenuVO selectById(int menuId, int storeId) throws MenuException {
 		List<MenuVO> list;
-		String sql = "SELECT * FROM menu_view " +
-		             "WHERE menu_id = ? AND store_id =?";
-		list = jTemp.query(sql, new MenuMapper(),menuId,storeId);
-		return (list.size() == 0? null:list.get(0));
+		String sql = "SELECT * FROM menu_view " + "WHERE menu_id = ? AND store_id =?";
+		list = jTemp.query(sql, new MenuMapper(), menuId, storeId);
+		return (list.size() == 0 ? null : list.get(0));
 	}
 
 	@Override
@@ -131,5 +135,24 @@ public class MenuDaoImpl implements MenuDao {
 		return 0;
 	}
 
+	@Override
+	public int getLastInsertId(int storeId) throws SQLException {
 
+		String sql = "SELECT COUNT(menu_id) AS count FROM menus WHERE store_id =?";
+
+		List<Integer> count = null;
+		try {
+			count = jTemp.query(sql, new RowMapper<Integer>() {
+
+				@Override
+				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return rs.getInt("count");
+				}
+			}, storeId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return (count.size() == 0 ? null : count.get(0));
+	}
 }
