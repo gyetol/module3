@@ -32,16 +32,16 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 	private StoreDaoImpl storeDao;
 
 	@Override
-	public void execute(MenuInsertCommand command, StoreVO store, UserVO user) {
+	public void execute(MenuInsertCommand command, UserVO user) {
 		
 		OfferTypeVO offerTypeVO = null;
 		StoreVO storeVO = null;
-		
-		
+
 		try {
 			offerTypeVO = offerTypeDao.selectById(command.getType());
 			storeVO = storeDao.selectByUserId(user.getId());
-			
+			System.out.println("offerType : "+offerTypeVO.getName());
+			System.out.println("store : "+storeVO.getName());
 		}
 		catch (OfferTypeSelectException e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		//System.out.println("check0");
 		
 		try {
-			menuDao.insert(menu, store);
+			menuDao.insert(menu, storeVO);
 		}
 		catch (MenuException e) {
 			e.printStackTrace();
@@ -69,9 +69,6 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		catch(NullPointerException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 
 }

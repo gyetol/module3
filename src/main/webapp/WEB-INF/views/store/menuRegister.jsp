@@ -82,12 +82,12 @@
 
         <div class="form-group">
             <label for="name">메뉴명</label>
-            <input type="text" class="form-control" name="setName" id="menuName"/>
+            <input type="text" class="form-control" name="name" id="menuName"/>
         </div>
 
         <div class="form-group">
             <label for="amount">재고 수량</label>
-            <input type="text" class="form-control" name="setAmount" id="menuAmount">
+            <input type="text" class="form-control" name="amount" id="menuAmount">
         </div>
 
         <div class="form-group">
@@ -100,9 +100,9 @@
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="inputKind">제공방식</label>
             <select name="type" id="offerType" class="form-control">
-                <option>도시락</option>
-                <option>조리키트</option>
-                <option>완전조리식</option>
+                <option value="PAC">도시락</option>
+                <option value="MEA">조리키트</option>
+                <option value="COO">완전조리식</option>
             </select>
         </div>
 
