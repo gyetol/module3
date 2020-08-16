@@ -1,6 +1,6 @@
 package kr.co.dinner41.service.menu;
 
-import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,16 +32,20 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 	private StoreDaoImpl storeDao;
 
 	@Override
-	public void execute(MenuInsertCommand command, UserVO user) {
+	public void execute(MenuInsertCommand command, UserVO user) throws SQLException {
 		
 		OfferTypeVO offerTypeVO = null;
 		StoreVO storeVO = null;
+		int menuId = 0;
 
 		try {
 			offerTypeVO = offerTypeDao.selectById(command.getType());
+
 			storeVO = storeDao.selectByUserId(user.getId());
-			System.out.println("offerType : "+offerTypeVO.getName());
-			System.out.println("store : "+storeVO.getName());
+			menuId = menuDao.getLastInsertId(storeVO.getId());
+//			System.out.println("offerType : "+offerTypeVO.getName());
+//			System.out.println("store : "+storeVO.getName());
+
 		}
 		catch (OfferTypeSelectException e) {
 			e.printStackTrace();
@@ -49,6 +53,7 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		
 		MenuVO menu = new MenuVO();
 		menu.setStore(storeVO);
+		menu.setId(menuId);
 		menu.setOfferType(offerTypeVO);
 		menu.setTag(command.getTag());
 		menu.setPhoto(command.getPhoto());

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="kr.co.dinner41.controller.MenuController" %>
+<%@ page import="kr.co.dinner41.dao.MenuDao" %>
+<%@ page import="kr.co.dinner41.vo.MenuVO" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,7 +29,8 @@
     <link rel="stylesheet" href="../../css/dinner41.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+    <!-- <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>  -->
 
     <title>Menu</title>
 </head>
@@ -130,9 +134,14 @@
                 여기에 메뉴설명을 입력하시오
             </div>
         </div>
-
-        <button type="button" class="btn btn-success two_button" id="menuUpdate">수정하기</button>
-        <button type="button" class="btn btn-success two_button float-right" id="menuDelete">삭제하기</button>
+        <a href="${pageContext.request.contextPath}/sm/1/menu">
+        <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
+        
+         <a href = "/dinner41/sm/menu">
+        <button id="menuUpdate"  type="button" class="btn btn-success three_button" >수정하기</button>
+        
+        <a href = " /sm/menu">
+        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" >삭제하기</button>
     </div>
 </div>
 <hr/>

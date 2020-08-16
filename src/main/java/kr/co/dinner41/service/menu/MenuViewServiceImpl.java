@@ -17,7 +17,7 @@ public class MenuViewServiceImpl implements MenuViewService {
 	public MenuVO execute(int storeId, int menuId) {
 		MenuVO menuVO = null;
 		try {
-			menuVO = menuDao.selectById(menuId, storeId);
+			menuVO = menuDao.selectByMenuIdStoreId(menuId, storeId);
 		}
 		catch(MenuException e) {
 			e.printStackTrace();

@@ -27,7 +27,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/dinner41.css">
 
     <title>Menu</title>
 </head>
@@ -44,7 +44,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="home">
+    <img src="${pageContext.request.contextPath}/resource/icons/home-solid.svg" class="home" alt="home">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -83,7 +83,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-3">
-                    <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
                 </div>
                 <div class="col-9" style="padding-left: 0">
                     <h5>주문메뉴 : <span>개구리 뒷다리</span></h5>
@@ -102,7 +102,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-3">
-                    <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
                 </div>
                 <div class="col-9" style="padding-left: 0">
                     <h5>주문메뉴 : <span>개구리 뒷다리</span></h5>
@@ -120,7 +120,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-3">
-                    <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
                 </div>
                 <div class="col-9" style="padding-left: 0">
                     <h5>주문메뉴 : <span>개구리 뒷다리</span></h5>
@@ -138,7 +138,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-3">
-                    <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
                 </div>
                 <div class="col-9" style="padding-left: 0">
                     <h5>주문메뉴 : <span>개구리 뒷다리</span></h5>
@@ -156,7 +156,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-3">
-                    <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
                 </div>
                 <div class="col-9" style="padding-left: 0">
                     <h5>주문메뉴 : <span>개구리 뒷다리</span></h5>
@@ -185,7 +185,8 @@
         </div>
     </div>
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block">메뉴 추가 하기</button>
+        <a href = "/dinner41/sm/menu">
+        <button type="button" class="btn btn-outline-success btn-block" method="post" aciton="menu">메뉴 추가 하기</button>
     </div>
 </div>
 <hr/>

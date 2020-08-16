@@ -26,7 +26,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/dinner41.css">
 
     <title>Store</title>
 </head>
@@ -43,7 +43,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resource/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -71,7 +71,7 @@
 
 
 <div class="container-fluid text-center" style="margin-top: 15pt">
-    <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
+    <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
     <h2>매장 상세</h2>
 </div>
 
@@ -80,7 +80,7 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
-        <img src="../../images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
+        <img src="${pageContext.request.contextPath}/resource/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
     </div>
 
     <div class="container-fluid text-left">
