@@ -78,57 +78,57 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="text-left container-fluid">
+    <form class="text-left container-fluid" method="post" aciton="menu">
 
         <div class="form-group">
-            <label for="menuName">메뉴명</label>
-            <input type="text" class="form-control" id="menuName"/>
+            <label for="name">메뉴명</label>
+            <input type="text" class="form-control" name="name" id="menuName"/>
         </div>
 
         <div class="form-group">
-            <label for="menuAmount">재고 수량</label>
-            <input type="text" class="form-control" id="menuAmount">
+            <label for="amount">재고 수량</label>
+            <input type="text" class="form-control" name="amount" id="menuAmount">
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">메뉴 사진 첨부</label>
             <div id="emailCheckLabel">
-                <input type="file" id="menuPhoto">
+                <input type="file" id="menuPhoto" name="photo">
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="inputKind">제공방식</label>
-            <select id="offerType" class="form-control">
-                <option>도시락</option>
-                <option>조리키트</option>
-                <option>완전조리식</option>
+            <select name="type" id="offerType" class="form-control">
+                <option value="PAC">도시락</option>
+                <option value="MEA">조리키트</option>
+                <option value="COO">완전조리식</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="menuMoney">메뉴 가격</label>
-            <input type="text" class="form-control margin_up" placeholder="상세주소" id="menuPrice"/>
+            <input name ="price" type="text" class="form-control margin_up" placeholder="메뉴 가격" id="menuPrice"/>
         </div>
 
         <div class="form-group">
             <label for="tag">메뉴 태그</label>
-            <input type="tel" class="form-control" id="menuTag">
+            <input name="tag" type="tel" class="form-control" id="menuTag">
         </div>
 
         <div class="form-group">
             <label for="menuDes">메뉴 설명</label>
-            <textarea class="form-control" id="menuIntro" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
+            <textarea class="form-control" name="introduction" id="menuIntro" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="inputContent">메뉴 유의 사항</label>
-            <textarea class="form-control" id="menuNotice" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
+            <textarea class="form-control" name="notice" id="menuNotice" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
                       rows="5"></textarea>
         </div>
 
-        <button id ="menuWrite" type="button" class="btn btn-success two_button">메뉴 등록하기</button>
+        <button id ="menuWrite" type="submit" class="btn btn-success two_button">메뉴 등록하기</button>
         <button id = "menuWriteCancel" type="button" class="btn btn-success two_button float-right">메뉴 등록 취소하기</button>
     </form>
 </div>

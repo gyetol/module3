@@ -115,7 +115,7 @@ public class QnADaoImpl implements QnADao {
 
     @Override
     public int getTotalRecord() throws QnAException {
-        String sql="select count(*) as num from qna_types;";
+        String sql="select count(*) as num from qnas;";
         List<Integer> list = template.query(sql, new RowMapper<Integer>() {
             @Override
             public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -127,13 +127,66 @@ public class QnADaoImpl implements QnADao {
     }
 
     @Override
+    public int getTotalRecord(UserVO user) throws QnAException {
+        String sql="select count(*) as num from qnas WHERE user_id = ?;";
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("num");
+            }
+        }, user.getId());
+
+        return (list.size() == 0? 0:list.get(0));
+    }
+
+    @Override
     public int getTotalRecord(String qna_type) throws QnAException {
-        List<Integer> list = template.query("select count(*) as num from qnas WHERE qna_type_id LIKE ?;", new RowMapper<Integer>() {
+        String sql = "select count(*) as num from qnas WHERE qna_type_id LIKE ? AND manager_id IS NULL;";
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
             @Override
             public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return rs.getInt("num");
             }
         }, qna_type);
+
+        return (list.size() == 0? 0:list.get(0));
+    }
+
+    @Override
+    public int getTotalRecord(String qna_type, UserVO user) throws QnAException {
+        String sql = "select count(*) as num from qnas WHERE qna_type_id LIKE ? AND user_id = ? AND manager_id IS NULL;";
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("num");
+            }
+        }, qna_type, user.getId());
+
+        return (list.size() == 0? 0:list.get(0));
+    }
+
+    @Override
+    public int getTotalRecordDone() throws QnAException {
+        String sql = "select count(*) as num from qnas WHERE manager_id IS NOT NULL;";
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("num");
+            }
+        });
+
+        return (list.size() == 0? 0:list.get(0));
+    }
+
+    @Override
+    public int getTotalRecordDone(UserVO user) throws QnAException {
+        String sql = "select count(*) as num from qnas WHERE user_id = ? AND manager_id IS NOT NULL;";
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("num");
+            }
+        }, user.getId());
 
         return (list.size() == 0? 0:list.get(0));
     }

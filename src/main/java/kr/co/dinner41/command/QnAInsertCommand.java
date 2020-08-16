@@ -36,4 +36,13 @@ public class QnAInsertCommand {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "QnAInsertCommand{" +
+                "type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

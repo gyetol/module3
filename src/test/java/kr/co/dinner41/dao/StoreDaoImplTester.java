@@ -26,6 +26,7 @@ public class StoreDaoImplTester {
 	@Autowired
 	private ApplicationContext ctx;
 	
+
 //	@Test
 //	public void insertTest() {
 //		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
@@ -54,6 +55,18 @@ public class StoreDaoImplTester {
 //		
 //		
 //	}
+
+	@Ignore
+	@Test
+	public void insertTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		UserDao userDao =ctx.getBean("userDao",UserDao.class);
+		UserTypeDao userTypeDao = ctx.getBean("userTypeDao",UserTypeDao.class);
+		StoreCategoryDao storeCategoryDao =ctx.getBean("storeCategoryDao",StoreCategoryDao.class);
+		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
+		
+	}
+
 	
 	
 
@@ -136,6 +149,25 @@ public class StoreDaoImplTester {
 		}
 	}
 	
+	@Test
+	public void selectByStateNameAndNameTest() {
+		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
+		List<StoreVO> stores = null;
+		try {
+			stores = storeDao.selectByStateNameAndName("%","%",1, 10);
+			if(stores==null) {
+				System.out.println("매장들을 불러오지 못함");
+			}
+			for(StoreVO store:stores) {
+				System.out.println(store.getName());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	@Ignore
 	@Test
 	public void selectByBusinessTest() {
@@ -162,7 +194,7 @@ public class StoreDaoImplTester {
 		StoreDao storeDao =ctx.getBean("storeDao",StoreDao.class);
 		List<StoreVO> stores = null;
 		try {
-			stores = storeDao.selectByStoreName("애슐리 퀸즈",37.482566,126.953100, 1, 2);
+			stores = storeDao.selectByName("애슐리 퀸즈",37.482566,126.953100, 1, 2);
 			if(stores==null) {
 				System.out.println("매장들을 불러오지 못함");
 			}

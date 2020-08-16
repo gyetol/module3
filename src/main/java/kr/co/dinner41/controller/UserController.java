@@ -36,6 +36,7 @@ public class UserController {
 
 	@Autowired
 	@Qualifier("userUpdateService")
+
 	private UserUpdateService updateService;
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)

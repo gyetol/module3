@@ -46,7 +46,7 @@
                 <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -106,7 +106,9 @@
     </div>
 
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block">홈으로</button>
+        <a href="${pageContext.request.contextPath}/ALL/1/qna">
+            <button type="button" class="btn btn-outline-success btn-block">목록으로</button>
+        </a>
     </div>
 
 </div>

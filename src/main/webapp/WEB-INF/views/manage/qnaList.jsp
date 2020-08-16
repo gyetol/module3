@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -46,7 +47,7 @@
                 <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -70,95 +71,95 @@
     <c:if test="${type eq 'ALL'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
-                <a class="nav-link active" href="#">ALL</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/ALL/1/qna">ALL</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/QUE/1/qna">문의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">건의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REQ/1/qna">건의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">신고</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REP/1/qna">신고</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">답변완료</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/DON/1/qna">답변완료</a>
             </li>
         </ul>
     </c:if>
     <c:if test="${type eq 'QUE'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">ALL</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">ALL</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link active" href="#">문의</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/QUE/1/qna">문의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">건의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REQ/1/qna">건의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">신고</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REP/1/qna">신고</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">답변완료</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/DON/1/qna">답변완료</a>
             </li>
         </ul>
     </c:if>
     <c:if test="${type eq 'REQ'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">ALL</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">ALL</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/QUE/1/qna">문의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link active" href="#">건의</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/REQ/1/qna">건의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">신고</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REP/1/qna">신고</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">답변완료</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/DON/1/qna">답변완료</a>
             </li>
         </ul>
     </c:if>
     <c:if test="${type eq 'REP'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">ALL</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">ALL</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/QUE/1/qna">문의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">건의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REQ/1/qna">건의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link active" href="#">신고</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/REP/1/qna">신고</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">답변완료</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/DON/1/qna">답변완료</a>
             </li>
         </ul>
     </c:if>
     <c:if test="${type eq 'DON'}">
         <ul class="nav nav-tabs">
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">ALL</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">ALL</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/QUE/1/qna">문의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">건의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REQ/1/qna">건의</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link" href="#">신고</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/REP/1/qna">신고</a>
             </li>
             <li class="nav-item text-center nav_five">
-                <a class="nav-link active" href="#">답변완료</a>
+                <a class="nav-link active" href="${pageContext.request.contextPath}/DON/1/qna">답변완료</a>
             </li>
         </ul>
     </c:if>
@@ -183,7 +184,9 @@
                     문의 유형 : <span><c:out value="${vo.type.name}"></c:out></span>
                     <br/>
                     문의 날짜 : <span><c:out value="${vo.questionDate}"></c:out></span>
-                    <button class="btn btn-outline-success btn-sm btn-block" style="margin-top: 5pt">문의 상세</button>
+                    <a href="${pageContext.request.contextPath}/${vo.id}/qna">
+                        <button class="btn btn-outline-success btn-sm btn-block" style="margin-top: 5pt" >문의 상세</button>
+                    </a>
                 </li>
             </c:forEach>
         </c:if>
@@ -193,19 +196,28 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-success"><<</button>
-            <button type="button" class="btn btn-success" disabled>1</button>
-            <button type="button" class="btn btn-success">2</button>
-            <button type="button" class="btn btn-success">3</button>
-            <button type="button" class="btn btn-success">4</button>
-            <button type="button" class="btn btn-success">>></button>
+            <c:forEach var="obj" items="${pages}">
+                <c:if test="${obj.pageNumber eq page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj.showPageName}"></c:out></button>
+                    </a>
+                </c:if>
+                <c:if test="${obj.pageNumber ne page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                    </a>
+                </c:if>
+            </c:forEach>
         </div>
     </div>
 
-
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success two_button">문의작성</button>
-        <button type="button" class="btn btn-outline-success float-right two_button">뒤로가기</button>
+        <a href="${pageContext.request.contextPath}/qna">
+            <button type="button" class="btn btn-outline-success two_button">문의작성</button>
+        </a>
+        <a href="${pageContext.request.contextPath}/">
+            <button type="button" class="btn btn-outline-success float-right two_button">뒤로가기</button>
+        </a>
     </div>
 </div>
 <hr/>

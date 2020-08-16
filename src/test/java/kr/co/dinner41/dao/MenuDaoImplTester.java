@@ -10,11 +10,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.dinner41.exception.QnAException;
+import kr.co.dinner41.exception.QnATypeSelectException;
 import kr.co.dinner41.exception.UserDeleteFailedException;
+import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.exception.menu.OfferTypeSelectException;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.OfferTypeVO;
+import kr.co.dinner41.vo.QnATypeVO;
+import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -25,7 +30,7 @@ import kr.co.dinner41.vo.UserVO;
 })
 public class MenuDaoImplTester {
 	@Autowired
-	private ApplicationContext ctx;
+	private ApplicationContext ctx;	
 	
 	@Test
 	public void insertTest() throws OfferTypeSelectException {
@@ -35,7 +40,7 @@ public class MenuDaoImplTester {
 		StoreDaoImpl storeDao = ctx.getBean("storeDao",StoreDaoImpl.class);
 		StoreVO store = storeDao.selectById(1);
 		
-		MenuVO menu = new MenuVO(store,0,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
+		MenuVO menu = new MenuVO(store,2,offerTypeVo,"도시락","불고기 도시락",4500,5,"불고기 도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
 		
 	
 			try {
@@ -46,38 +51,45 @@ public class MenuDaoImplTester {
 		
 System.out.println("메뉴 추가 성공");
 	}
-
+	
 	@Ignore
+    @Test
+    public void testUpdate() throws OfferTypeSelectException {
+        MenuDaoImpl dao = ctx.getBean("menuDao", MenuDaoImpl.class);
+        OfferTypeDaoImpl offerTypeDao = ctx.getBean("offerTypeDao", OfferTypeDaoImpl.class);
+        OfferTypeVO offerTypeVo = offerTypeDao.selectById("PAC");
+        
+        StoreDaoImpl storeDao = ctx.getBean("storeDao",StoreDaoImpl.class);
+		StoreVO store = storeDao.selectById(1);
+		MenuVO menu = new MenuVO(store,2,offerTypeVo,"도시락","제육 도시락",4500,5,"제육도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
+
+        try {
+            dao.update(menu,store);
+            System.out.println("Success");
+        } catch (MenuException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Ignore
 	@Test
-	public void deleteTest() {
-		UserDao dao=ctx.getBean("userDao",UserDao.class);
+	
+	public void deleteTest() throws MenuException {
+		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);
 		try {
-			dao.delete("test@naver.com","test");
-			System.out.println("회원 삭제하기에 성공했습니다.");
+			dao.delete(1,1);
+			System.out.println("메뉴 삭제하기에 성공했습니다.");
 		}
-		catch(UserDeleteFailedException e) {
+		catch(MenuDeleteFailedException e) {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
 
-	@Test
 	@Ignore
-	public void updateNameTest() {
-		UserDao userDao=ctx.getBean("userDao",UserDao.class);
-		UserVO user=new UserVO(12,null,null,null,"테스트 업데이트","testAddress1_2","testAddress2_2",40,150,"010-1111-1111",null,null);
-		try {
-			userDao.update(user);
-			System.out.println("회원 수정하기에 성공했습니다.");
-		}
-		catch(Exception e) {
-		//catch(UserUpdateFailedException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-	}
+	@Test
 
-	@Test
-	@Ignore
 	public void selectTest() {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
 		List<UserVO> users=null;

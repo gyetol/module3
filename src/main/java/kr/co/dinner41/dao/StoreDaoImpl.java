@@ -131,6 +131,19 @@ public class StoreDaoImpl implements StoreDao {
 		}
 		return (stores.size()>0?stores.get(0):null);
 	}
+	
+	@Override
+	public StoreVO selectByUserId(int userId) throws StoreException{
+		String sql = "select * from store_view where user_id=?";
+		List<StoreVO> stores =null;
+		try {
+			stores=jTemp.query(sql,new StoreMapper(),userId);
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0?stores.get(0):null);
+	}
 
 	@Override
 	public List<StoreVO> selectByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException {
@@ -178,7 +191,27 @@ public class StoreDaoImpl implements StoreDao {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("select * from store_view ");
-		sb.append("where store_state_name='"+stateName+"' ");
+		sb.append("where store_state_name like '"+stateName+"' ");
+		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (stores.size()>0? stores: null);
+	}
+	
+	@Override
+	public List<StoreVO> selectByStateNameAndName(String stateName,String name,int page,int pageSize) throws StoreException{
+		int startPos = (page-1)*pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_state_name like '"+stateName+"' and store_name like '%"+name+"%' ");
 		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
 		
 		String sql = sb.toString();
@@ -206,13 +239,13 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public List<StoreVO> selectByStoreName(String storeName,double userLatitude, double userLongitude, int page, int pageSize) throws StoreException {
+	public List<StoreVO> selectByName(String name,double userLatitude, double userLongitude, int page, int pageSize) throws StoreException {
 		int startPos = (page-1)*pageSize;
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
 		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
-		sb.append(" AS distance from (select * from store_view where store_name like '%"+storeName+"%') AS viewByCategory "); 
+		sb.append(" AS distance from (select * from store_view where store_name like '%"+name+"%') AS viewByCategory "); 
 		sb.append(" HAVING distance <=1 order by distance limit "+startPos+","+pageSize);
 		
 		String sql = sb.toString();

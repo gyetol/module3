@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.UserVO;
 
 public interface MenuDao {
 	
