@@ -33,6 +33,7 @@ public class MenuDaoImplTester {
 	@Autowired
 	private ApplicationContext ctx;	
 	
+	@Ignore
 	@Test
 	public void insertTest() throws OfferTypeSelectException, SQLException {
 		MenuDaoImpl menuDao=ctx.getBean("menuDao",MenuDaoImpl.class);
@@ -53,6 +54,20 @@ public class MenuDaoImplTester {
 		
 System.out.println("메뉴 추가 성공");
 	}
+	
+	@Test
+    public void testSelecByStoreId(){
+        MenuDao dao = ctx.getBean("menuDao", MenuDaoImpl.class);
+        try {
+            List<MenuVO> list = dao.selectByStoreId(1,1,10);
+            System.out.println("Success");
+            for (MenuVO vo: list) {
+                System.out.println(vo);
+            }
+        } catch (MenuException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	@Ignore
     @Test
@@ -75,7 +90,6 @@ System.out.println("메뉴 추가 성공");
 
     @Ignore
 	@Test
-	
 	public void deleteTest() throws MenuException {
 		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);
 		try {
@@ -91,7 +105,6 @@ System.out.println("메뉴 추가 성공");
 
 	@Ignore
 	@Test
-
 	public void selectTest() {
 		UserDao userDao=ctx.getBean("userDao",UserDao.class);
 		List<UserVO> users=null;

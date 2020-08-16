@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.command.MenuUpdateCommand;
+import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.service.menu.MenuDeleteService;
 import kr.co.dinner41.service.menu.MenuInsertService;
 import kr.co.dinner41.service.menu.MenuListByStoreService;
@@ -23,6 +24,8 @@ import kr.co.dinner41.service.menu.MenuUpdateAmountService;
 import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
 import kr.co.dinner41.vo.MenuVO;
+import kr.co.dinner41.vo.PageVO;
+import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -164,6 +167,27 @@ public class MenuController {
 	    		return "redirect:/";
 	    	}
 	    }
+	    
+		@RequestMapping(value="/sm/{store-name}/{page}/menu",method=RequestMethod.GET)
+
+		public String listByStore(@PathVariable("storeId") String storeId,@PathVariable("page") String page, HttpSession session, Model model) throws MenuException {
+			int intPage = Integer.parseInt(page);
+			int store_id = Integer.parseInt(storeId);
+			List<MenuVO> menus;
+			
+			
+			UserVO user = (UserVO)session.getAttribute("loginUser");
+			model.addAttribute("page",page);
+
+			menus = listByStoreService.execute(store_id, intPage);
+			
+			model.addAttribute("menus",menus);
+			
+			return "store/menuList";
+		}
+	    
+	    
+
 	    
 	}
 
