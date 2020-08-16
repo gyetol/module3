@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import kr.co.dinner41.command.MenuUpdateCommand;
 import kr.co.dinner41.dao.MenuDaoImpl;
 import kr.co.dinner41.dao.OfferTypeDaoImpl;
+import kr.co.dinner41.dao.StoreDaoImpl;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.exception.menu.OfferTypeSelectException;
 import kr.co.dinner41.vo.MenuVO;
@@ -22,19 +23,30 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 	@Autowired
 	private OfferTypeDaoImpl offerTypeDao;
 	
+	@Autowired
+	private StoreDaoImpl storeDao;
+	
 	@Override
-	public void execute(MenuUpdateCommand command, StoreVO store, UserVO user) {
+	public void execute(MenuUpdateCommand command, UserVO user) {
 		
 		OfferTypeVO offerTypeVO = null;
+		StoreVO storeVO = null;
 		
 		try {
 			offerTypeVO = offerTypeDao.selectById(command.getType());
+			
+			storeVO = storeDao.selectByUserId(user.getId());
+			System.out.println("offerType : "+offerTypeVO.getName());
+			System.out.println("store : "+storeVO.getName());
+
+			
 		}
 		catch (OfferTypeSelectException e) {
 			e.printStackTrace();
 		}
 		
 		MenuVO menu = new MenuVO();
+		menu.setStore(storeVO);
 		menu.setOfferType(offerTypeVO);
 		menu.setName(command.getName());
 		menu.setPrice(command.getPrice());
@@ -44,7 +56,7 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 		menu.setNotice(command.getNotice());
 		
 		try {
-			menuDao.update(menu, store);
+			menuDao.update(menu, storeVO);
 		}
 		catch(MenuException e)
 		{

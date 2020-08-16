@@ -1,5 +1,7 @@
 package kr.co.dinner41.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import kr.co.dinner41.exception.menu.MenuException;
@@ -15,5 +17,6 @@ public interface MenuDao {
 	List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException;
 	MenuVO selectById(int menuId, int storeId) throws MenuException;
 	int getTotalRecord() throws MenuException;
+	int getLastInsertId(int storeId) throws SQLException;
 }
 

@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<%
-	String path = "../menu/";
-%>
+<!doctype html>
 <html>
 <head>
     <!-- Required meta tags -->
@@ -27,12 +23,12 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/images/css/dinner41.css">
 
     <title>Menu</title>
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-light light_green" style="background-color: aquamarine">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -44,7 +40,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="home">
+    <img src="${pageContext.request.contextPath}/resources/images/icons/home-solid.svg" class="home" alt="home">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -71,35 +67,36 @@
 </nav>
 <div class="container-fluid" style="margin-top: 15pt">
     <div class="text-center">
-        <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-        <h2>메뉴 등록</h2>
+        <img src="${pageContext.request.contextPath}/resources/images/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
+        <h2>메뉴 정보 수정</h2>
     </div>
 </div>
 <hr/>
 
-<div class="container-fluid">
-    <form class="text-left container-fluid" method="put" aciton="menu">
+<div class="container-fluid" >
+    <form class="container-fluid text-left" method="put" aciton="menu">
 
         <div class="form-group">
-            <label for="name">메뉴명</label>
-            <input type="text" class="form-control" name="setName" id="menuName"/>
+            <label for="menuName">메뉴명</label>
+            <input type="text" class="form-control" id="menuName"/>
         </div>
 
         <div class="form-group">
-            <label for="amount">재고 수량</label>
-            <input type="text" class="form-control" name="setAmount" id="menuAmount">
+            <label for="menuAmount">재고 수량</label>
+            <input type="text" class="form-control" id="menuAmount">
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">메뉴 사진 첨부</label>
+            <img src="../../images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
             <div id="emailCheckLabel">
-                <input type="file" id="menuPhoto" name="photo">
+                <input type="file" id="exampleFormControlInput1">
             </div>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20pt">
+        <div class="form-group">
             <label for="inputKind">제공방식</label>
-            <select name="type" id="offerType" class="form-control">
+            <select id="inputKind" class="form-control">
                 <option>도시락</option>
                 <option>조리키트</option>
                 <option>완전조리식</option>
@@ -108,28 +105,30 @@
 
         <div class="form-group">
             <label for="menuMoney">메뉴 가격</label>
-            <input name ="price" type="text" class="form-control margin_up" placeholder="메뉴 가격" id="menuPrice"/>
+            <input type="text" class="form-control margin_up" placeholder="상세주소" id="menuMoney"/>
         </div>
 
         <div class="form-group">
             <label for="tag">메뉴 태그</label>
-            <input name="tag" type="tel" class="form-control" id="menuTag">
+            <input type="tel" class="form-control" id="tag">
         </div>
 
         <div class="form-group">
             <label for="menuDes">메뉴 설명</label>
-            <textarea class="form-control" name="introduction" id="menuIntro" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
+            <textarea class="form-control" id="menuDes" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="inputContent">메뉴 유의 사항</label>
-            <textarea class="form-control" name="notice" id="menuNotice" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
+            <textarea class="form-control" id="inputContent" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
                       rows="5"></textarea>
         </div>
-
-        <button id ="menuUpdate" type="submit" class="btn btn-success two_button">메뉴 수정하기</button>
-        <button id = "menuUpdateCancel" type="button" class="btn btn-success two_button float-right">메뉴 수정 취소하기</button>
+ 
+        <button id="menuUpdate" type="submit" class="btn btn-success two_button">메뉴 수정 완료</button>
+        
+        <a href="${pageContext.request.contextPath}/sm/1/menu">
+        <button id="menuUpdateCancel" type="button" class="btn btn-success two_button float-right">메뉴 수정 취소하기</button>
     </form>
 </div>
 <hr/>

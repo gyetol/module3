@@ -17,7 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Home</title>
 
@@ -126,17 +126,17 @@
             <a href="sm/store">
             	<div class="card h-100" id="storeManagement" name="storeManagement">
                 	<div class="card-body text-center trim">
-                    	<img src="../../categoryImages/store.png" class="rounded category" alt="no picture" >
+                    	<img src="${pageContext.request.contextPath}/resources/images/categoryImages/store.png" class="rounded category" alt="no picture" >
                     	<h5 class="card-title">매장관리</h5>
                 	</div>
             	</div>
             </a>
         </div>
         <div class="col mb-4">
-        <a href = "menu">
+        <a href = "sm/menu">
             <div class="card h-100">
                 <div class="card-body text-center trim">
-                    <img src="../../categoryImages/menu.png" class="rounded category" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/images/categoryImages/menu.png" class="rounded category" alt="no picture">
                     <h5 id ="menuManage" class="card-title">메뉴관리</h5>
                 </div>
             </div>
@@ -145,7 +145,7 @@
         <div class="col mb-4">
             <div class="card h-100">
                 <div class="card-body text-center trim" >
-                    <img src="../../categoryImages/list.png" class="rounded category" alt="no picture">
+                    <img src="${pageContext.request.contextPath}/resources/images/categoryImages/list.png" class="rounded category" alt="no picture">
                     <h5 class="card-title">거래내역</h5>
                 </div>
             </div>
