@@ -55,6 +55,7 @@ public class MenuDaoImplTester {
 System.out.println("메뉴 추가 성공");
 	}
 	
+	@Ignore
 	@Test
     public void testSelecByStoreId(){
         MenuDao dao = ctx.getBean("menuDao", MenuDaoImpl.class);
@@ -88,12 +89,12 @@ System.out.println("메뉴 추가 성공");
         }
     }
 
-    @Ignore
+
 	@Test
 	public void deleteTest() throws MenuException {
 		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);
 		try {
-			dao.delete(1,1);
+			dao.delete(2,1);
 			System.out.println("메뉴 삭제하기에 성공했습니다.");
 		}
 		catch(MenuDeleteFailedException e) {

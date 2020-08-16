@@ -1,8 +1,11 @@
 package kr.co.dinner41.controller;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.command.MenuUpdateCommand;
@@ -23,6 +27,7 @@ import kr.co.dinner41.service.menu.MenuListByUserService;
 import kr.co.dinner41.service.menu.MenuUpdateAmountService;
 import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
+import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.PageVO;
 import kr.co.dinner41.vo.QnAVO;
@@ -89,8 +94,6 @@ public class MenuController {
 //	    	System.out.println(menu.getName());
 //	    	System.out.println(menu.getType());
 
-	    	insertService.execute(menu, user);
-	    	return "store/menuList";
 	  
 //	    if (menu.getName().trim().equals("")) {
 //	    	model.addAttribute("errMessage", "메뉴명이 입력되지 않았습니다.");
@@ -131,11 +134,12 @@ public class MenuController {
 //	    	model.addAttribute("errMessage", "메뉴 유의사항은 필수 입력사항입니다.");
 //	    	return "store/menuRegister";
 //	    }
+	    
+
+    	insertService.execute(menu, user);
+    	return "store/menuList";
             
 	   }
-	    
-	  
-
 
 	    @RequestMapping(value = "/sm/menu", method = RequestMethod.PUT)
 	    public String update(MenuUpdateCommand menu, StoreVO store, HttpSession session){
@@ -167,6 +171,19 @@ public class MenuController {
 	    		return "redirect:/";
 	    	}
 	    }
+	    
+	    @ResponseBody
+		@RequestMapping(value = "/sm/menu", method = RequestMethod.DELETE)
+	    public String delete(@PathVariable("storeId") String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model) throws MenuException {
+	    	 
+	    	    int store_id = Integer.parseInt(storeId);
+	    	    int menu_id = Integer.parseInt(menuId);
+	    	    UserVO user = (UserVO)session.getAttribute("loginUser");
+	    		deleteService.execute(store_id, menu_id);
+	    		
+	    		return "store/menuList";
+	    		
+	     }
 	    
 		@RequestMapping(value="/sm/{store-name}/{page}/menu",method=RequestMethod.GET)
 
