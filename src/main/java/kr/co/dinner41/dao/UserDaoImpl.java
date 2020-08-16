@@ -1,10 +1,20 @@
 package kr.co.dinner41.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dinner41.exception.UserDeleteFailedException;
@@ -22,28 +32,55 @@ public class UserDaoImpl implements UserDao {
 	private JdbcTemplate jTemp;
 
 	@Override
-	public void insert(UserVO user) throws UserException{
-		String sql="INSERT INTO users VALUES(default,?,?,PASSWORD(?),?,?,?,?,?,?,default,default)";
+	public UserVO insert(UserVO user) throws UserException{
+		final String sql="INSERT INTO users VALUES(default,?,?,PASSWORD(?),?,?,?,?,?,?,default,default)";
+		final String[] columnNames= {"user_id"};
 		int result=0;
+
 		UserTypeVO type=user.getType();
 		String email=user.getEmail();
 		String password=user.getPassword();
 		String name=user.getName();
 		String address=user.getAddresss();
-		String subAddresss=user.getSubAddress();
+		String subAddress=user.getSubAddress();
 		double latitude=user.getLatitude();
 		double longitude=user.getLongitude();
 		String phone=user.getPhone();
+		
+		KeyHolder holder=new GeneratedKeyHolder();
+		
 		try {
-			result=jTemp.update(sql,type.getId(),email,password,name,address,subAddresss,latitude,longitude,phone);
+			result=jTemp.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement pstmt=con.prepareStatement(sql, columnNames);
+					pstmt.setString(1, type.getId());
+					pstmt.setString(2, email);
+					pstmt.setString(3, password);
+					pstmt.setString(4, name);
+					pstmt.setString(5, address);
+					pstmt.setString(6,subAddress);
+					pstmt.setDouble(7, latitude);
+					pstmt.setDouble(8, longitude);
+					pstmt.setString(9, phone);
+					return pstmt;
+				}
+			},holder);
 		}
 		catch(DataAccessException e) {
-			e.printStackTrace();
-			throw new UserInsertFailedException();
+			throw new UserInsertFailedException(e.getMessage());
 		}
-		if(result==0) {
-			throw new UserInsertFailedException();
+		if(result<=0) {
+			throw new UserInsertFailedException("DB문제로 인해 회원 등록을 할 수 없습니다.");
 		}
+		
+		Number key=holder.getKey();
+		int insertedId=key.intValue();
+		
+		user.setId(insertedId);
+		UserVO insertedUser=selectById(insertedId);
+		
+		return insertedUser;
 	}
 
 	@Override
@@ -97,7 +134,7 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public UserVO selectById(int id) throws UserException {
-		String sql="SELECT * FROM users WHERE user_id=?";
+		String sql="SELECT * FROM user_view WHERE user_id=?";
 		List<UserVO> users=null;
 		try {
 			users=jTemp.query(sql, new UserMapper(),id);

@@ -7,13 +7,18 @@ public class UserInsertCommand {
 	private String name;
 	private String address;
 	private String subAddress;
-	private String phone;
+	private String latitude;
+	private String longitude;
+	private String phone1;
+	private String phone2;
+	private String phone3;
 	private String type;
 
 	public UserInsertCommand() {}
-	
+
 	public UserInsertCommand(String eamil, String password, String passwordConfirm, String name, String address,
-			String subAddress, String phone, String type) {
+			String subAddress, String latitude, String longitude, String phone1, String phone2, String phone3,
+			String type) {
 		super();
 		this.eamil = eamil;
 		this.password = password;
@@ -21,14 +26,18 @@ public class UserInsertCommand {
 		this.name = name;
 		this.address = address;
 		this.subAddress = subAddress;
-		this.phone = phone;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.phone3 = phone3;
 		this.type = type;
 	}
-
 
 	public String getEamil() {
 		return eamil;
 	}
+
 	public void setEamil(String eamil) {
 		this.eamil = eamil;
 	}
@@ -73,12 +82,44 @@ public class UserInsertCommand {
 		this.subAddress = subAddress;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getPhone1() {
+		return phone1;
+	}
+
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+
+	public String getPhone2() {
+		return phone2;
+	}
+
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+
+	public String getPhone3() {
+		return phone3;
+	}
+
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
 	}
 
 	public String getType() {
@@ -88,5 +129,7 @@ public class UserInsertCommand {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	
 
 }
