@@ -1,6 +1,5 @@
 package kr.co.dinner41.service.cart;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
