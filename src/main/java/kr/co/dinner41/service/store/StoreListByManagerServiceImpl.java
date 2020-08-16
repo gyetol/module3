@@ -19,11 +19,20 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 	
 	 public static final int PAGESIZE = 10;
 	
-
 	@Override
-	public List<StoreVO> execute(String storeStateName,String StoreName,int page) throws StoreException{
-		return null;
+	public List<StoreVO> execute(String storeStateName,String storeName,int page) throws StoreException{
+		List<StoreVO> stores= null;
+		System.out.println("s1: " + storeStateName);
+		System.out.println("s2: " + storeName);
+		if(storeStateName.equals("all-") && storeName.equals("all-")) {
+			stores = storeDao.selectByStateNameAndName("%", "%", page, PAGESIZE);
+		}
+		else {
+			stores = storeDao.selectByStateNameAndName(storeStateName, storeName, page, PAGESIZE);
+		}
+		return stores;
 	}
+	
 
 }
 

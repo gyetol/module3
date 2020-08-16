@@ -191,7 +191,7 @@ public class StoreDaoImpl implements StoreDao {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("select * from store_view ");
-		sb.append("where store_state_name='"+stateName+"' ");
+		sb.append("where store_state_name like '"+stateName+"' ");
 		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
 		
 		String sql = sb.toString();
@@ -211,7 +211,7 @@ public class StoreDaoImpl implements StoreDao {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("select * from store_view ");
-		sb.append("where store_state_name='"+stateName+"' and store_name like '%"+name+"%' ");
+		sb.append("where store_state_name like '"+stateName+"' and store_name like '%"+name+"%' ");
 		sb.append("order by store_id ASC limit "+startPos+","+pageSize);
 		
 		String sql = sb.toString();
