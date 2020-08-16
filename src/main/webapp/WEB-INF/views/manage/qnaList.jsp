@@ -196,40 +196,20 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-success" id="downButton"><<</button>
-            <input type="hidden" value="${first}" id="first">
-            <input type="hidden" value="${last}" id="last">
             <c:forEach var="obj" items="${pages}">
-                <c:if test="${obj eq page}">
-                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
-                        <button type="button" class="btn btn-success" disabled><c:out value="${obj}"></c:out></button>
+                <c:if test="${obj.pageNumber eq page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj.showPageName}"></c:out></button>
                     </a>
                 </c:if>
-                <c:if test="${obj ne page}">
-                    <a href="${pageContext.request.contextPath}/${type}/${obj}/qna">
-                        <button type="button" class="btn btn-success"><c:out value="${obj}"></c:out></button>
+                <c:if test="${obj.pageNumber ne page}">
+                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                        <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
                     </a>
                 </c:if>
             </c:forEach>
-            <button type="button" class="btn btn-success" id="upButton">>></button>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#downButton').click(function () {
-                var f = $('#first').val();
-                if (f<1){
-                    f = 1;
-                }else{
-                    f = f -1;
-                }
-            });
-            $('#upButton').click(function () {
-
-            });
-        });
-    </script>
 
     <div class="container-fluid margin_first">
         <a href="${pageContext.request.contextPath}/qna">

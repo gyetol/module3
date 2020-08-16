@@ -6,6 +6,7 @@ import kr.co.dinner41.service.qna.QnAAnswerService;
 import kr.co.dinner41.service.qna.QnAInsertService;
 import kr.co.dinner41.service.qna.QnAListService;
 import kr.co.dinner41.service.qna.QnAViewService;
+import kr.co.dinner41.vo.PageVO;
 import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,8 @@ public class QnAController {
         String view_name = "common/login";
         int int_page = Integer.parseInt(page);
         List<QnAVO> list = null;
-        List<Integer> pageList = null;
+//        List<Integer> pageList = null;
+        List<PageVO> pageList = null;
 
         UserVO user = (UserVO) session.getAttribute("loginUser");
 
@@ -83,8 +85,6 @@ public class QnAController {
         }
 
         model.addAttribute("list", list);
-        model.addAttribute("first", list.get(0));
-        model.addAttribute("last", list.get(list.size()-1));
         model.addAttribute("pages", pageList);
         model.addAttribute("type", type);
         model.addAttribute("page", int_page);
