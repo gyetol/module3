@@ -25,6 +25,12 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 		if(storeStateName.equals("all-") && storeName.equals("all-")) {
 			stores = storeDao.selectByStateNameAndName("%", "%", page, PAGESIZE);
 		}
+		else if(storeStateName.equals("all-") && !storeName.equals("all-")) {
+			stores=storeDao.selectByStateNameAndName("%", storeName, page, PAGESIZE);
+		}
+		else if(!storeStateName.equals("all-") && storeName.equals("all-")) {
+			stores=storeDao.selectByStateNameAndName(storeStateName, "%", page, PAGESIZE);
+		}
 		else {
 			stores = storeDao.selectByStateNameAndName(storeStateName, storeName, page, PAGESIZE);
 		}

@@ -75,6 +75,8 @@ public class StoreController {
 		int intPage = Integer.parseInt(page);
 		List<StoreVO> stores;
 		
+		System.out.println(storeStateName);
+		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
 		model.addAttribute("storeStateName",storeStateName);
