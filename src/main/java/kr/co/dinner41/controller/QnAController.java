@@ -37,8 +37,12 @@ public class QnAController {
     QnAAnswerService answerService;
 
     @RequestMapping(value = "/qna", method = RequestMethod.GET)
-    public String insert(HttpSession session, Model model){
+    public String insert(HttpSession session){
         UserVO user = (UserVO) session.getAttribute("loginUser");
+        System.out.println(user);
+        if (user == null){
+            return "redirect:/";
+        }
 
         if (user.getType().getId().equals("AD")){
             return "redirect:/ALL/1/qna";
@@ -47,7 +51,7 @@ public class QnAController {
         } else if (user.getType().getId().equals("SM")){
             return "store/qnaWrite";
         } else {
-            return "redirect:/ALL/1/qna";
+            return "redirect:/";
         }
     }
 
@@ -61,15 +65,16 @@ public class QnAController {
     @RequestMapping(value = "/{type}/{page}/qna", method = RequestMethod.GET)
     public String list(@PathVariable("type") String type, @PathVariable("page") String page
                                             ,HttpSession session, Model model){
-        String view_name = "common/login";
+        String view_name = "redirect:/";
         int int_page = Integer.parseInt(page);
         List<QnAVO> list = null;
-//        List<Integer> pageList = null;
         List<PageVO> pageList = null;
 
         UserVO user = (UserVO) session.getAttribute("loginUser");
+        if (user == null){
+            return view_name;
+        }
 
-        //사용자에 따른 execute 분기하기
         if (user.getType().getId().equals("AD")){
             list = listService.execute(type, int_page);
             pageList = listService.getPages(int_page, type);
@@ -95,6 +100,9 @@ public class QnAController {
     public String view(@PathVariable("id") String qnaId, HttpSession session,Model model){
         int id = Integer.parseInt(qnaId);
         UserVO user = (UserVO) session.getAttribute("loginUser");
+        if (user == null){
+            return "redirect:/";
+        }
 
         QnAVO qna = viewService.execute(id);
         model.addAttribute("qna", qna);
@@ -110,11 +118,10 @@ public class QnAController {
     }
 
     @RequestMapping(value = "/{id}/qna", method = RequestMethod.POST)
-    public String view(@PathVariable("id") String qnaId, QnAAnswerCommand command){
+    public String view(@PathVariable("id") String qnaId, QnAAnswerCommand command, HttpSession session){
         int id = Integer.parseInt(qnaId);
 
-        UserVO manager = new UserVO();
-        manager.setId(4);
+        UserVO manager = (UserVO) session.getAttribute("loginUser");
         answerService.execute(manager, id, command);
 
         return "redirect:/" + qnaId + "/qna";

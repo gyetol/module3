@@ -21,8 +21,8 @@ public class ReviewDaoImpl implements ReviewDao{
 
     @Override
     public void insert(ReviewVO review) throws ReviewInsertException {
-        String sql = "INSERT INTO reviews VALUES(DEFAULT, ?, ?, ?, ?, DEFAULT);";
-        template.update(sql, review.getStore().getId(), review.getUser().getId(), review.getContent(), review.getScore());
+        String sql = "INSERT INTO reviews VALUES(DEFAULT, ?, ?, ?, ?, DEFAULT, ?);";
+        template.update(sql, review.getStore().getId(), review.getUser().getId(), review.getContent(), review.getScore(), review.getOrder_id());
     }
 
     @Override
@@ -63,6 +63,17 @@ public class ReviewDaoImpl implements ReviewDao{
             }
         }, storeId);
 
+        return (list.size() == 0? 0:list.get(0));
+    }
+
+    @Override
+    public double getAverageScore(int storeId) throws ReviewException {
+        List<Double> list = template.query("select AVG(review_score) as num from reviews WHERE store_id = ?;", new RowMapper<Double>() {
+            @Override
+            public Double mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getDouble("num");
+            }
+        }, storeId);
         return (list.size() == 0? 0:list.get(0));
     }
 

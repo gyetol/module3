@@ -16,7 +16,7 @@ public class QnAListServiceImpl implements QnAListService{
     @Autowired
     private QnADaoImpl qnADao;
     public static final int PAGE_SIZE = 10;
-    public static final int NUMBER_OF_PAGE_IN_ON_PAGE = 4;
+    public static final int NUMBER_OF_PAGE_IN_ONE_PAGE = 4;
 
     @Override
     public List<QnAVO> execute(UserVO user, String qnaType, int page) {
@@ -155,7 +155,10 @@ public class QnAListServiceImpl implements QnAListService{
             }
         }
 
-        int totalPage = totalRecord/PAGE_SIZE +1;
+        int totalPage = totalRecord/PAGE_SIZE;
+        if ((totalRecord%PAGE_SIZE) != 0){
+            totalPage = totalPage+1;
+        }
 
         if (nowPage > totalPage){
             nowPage = totalPage;
@@ -164,10 +167,10 @@ public class QnAListServiceImpl implements QnAListService{
             nowPage = 1;
         }
 
-        int startPoint = nowPage/NUMBER_OF_PAGE_IN_ON_PAGE;
-        int startPage = startPoint*NUMBER_OF_PAGE_IN_ON_PAGE + 1;
+        int startPoint = nowPage/ NUMBER_OF_PAGE_IN_ONE_PAGE;
+        int startPage = startPoint* NUMBER_OF_PAGE_IN_ONE_PAGE + 1;
 
-        int endPage = startPage + NUMBER_OF_PAGE_IN_ON_PAGE - 1;
+        int endPage = startPage + NUMBER_OF_PAGE_IN_ONE_PAGE - 1;
         if (endPage > totalPage){
             endPage = totalPage;
         }
@@ -225,7 +228,10 @@ public class QnAListServiceImpl implements QnAListService{
             }
         }
 
-        int totalPage = totalRecord/PAGE_SIZE +1;
+        int totalPage = totalRecord/PAGE_SIZE;
+        if ((totalRecord%PAGE_SIZE) != 0){
+            totalPage = totalPage+1;
+        }
 
         if (nowPage > totalPage){
             nowPage = totalPage;
@@ -233,10 +239,10 @@ public class QnAListServiceImpl implements QnAListService{
         if (nowPage<1){
             nowPage = 1;
         }
-        int startPoint = nowPage/NUMBER_OF_PAGE_IN_ON_PAGE;
-        int startPage = startPoint*NUMBER_OF_PAGE_IN_ON_PAGE + 1;
+        int startPoint = nowPage/ NUMBER_OF_PAGE_IN_ONE_PAGE;
+        int startPage = startPoint* NUMBER_OF_PAGE_IN_ONE_PAGE + 1;
 
-        int endPage = startPage + NUMBER_OF_PAGE_IN_ON_PAGE - 1;
+        int endPage = startPage + NUMBER_OF_PAGE_IN_ONE_PAGE - 1;
         if (endPage > totalPage){
             endPage = totalPage;
         }

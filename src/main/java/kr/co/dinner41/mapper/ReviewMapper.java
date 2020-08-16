@@ -69,7 +69,8 @@ public class ReviewMapper implements RowMapper<ReviewVO> {
         String review_content = rs.getString("review_content");
         int review_score = rs.getInt("review_score");
         Timestamp review_date = rs.getTimestamp("review_date");
+        int order_id = rs.getInt("review_order_id");
 
-        return new ReviewVO(review_id, store, user, review_score, review_content, review_date);
+        return new ReviewVO(review_id, store, user, review_content, review_score, review_date, order_id);
     }
 }

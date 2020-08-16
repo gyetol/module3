@@ -1,21 +1,25 @@
 package kr.co.dinner41.command;
 
 public class ReviewInsertCommand {
-    private int score;
+    private String score;
     private String content;
+    private String storeId;
+    private String orderId;
 
     public ReviewInsertCommand(){}
 
-    public ReviewInsertCommand(int score, String content) {
+    public ReviewInsertCommand(String score, String content, String storeId, String orderId) {
         this.score = score;
         this.content = content;
+        this.storeId = storeId;
+        this.orderId = orderId;
     }
 
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
@@ -25,5 +29,21 @@ public class ReviewInsertCommand {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

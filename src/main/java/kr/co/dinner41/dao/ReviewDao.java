@@ -13,4 +13,5 @@ public interface ReviewDao {
     List<ReviewVO> selectedByStoreId(int page, int pageSize, int storeId) throws ReviewException;
     List<ReviewVO> selectedAll() throws ReviewException;
     int getTotalRecordByStoreId(int storeId) throws ReviewException;
+    double getAverageScore(int storeId) throws ReviewException;
 }

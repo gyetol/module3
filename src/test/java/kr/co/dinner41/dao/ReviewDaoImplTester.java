@@ -32,7 +32,7 @@ public class ReviewDaoImplTester {
         StoreDaoImpl storeDao = ctx.getBean("storeDao", StoreDaoImpl.class);
         StoreVO store = storeDao.selectById(1);
 
-        ReviewVO reviewVO = new ReviewVO(0, store, user, 4, "taste Good", null);
+        ReviewVO reviewVO = new ReviewVO(0, store, user, "taste Good", 4,null,0);
 
         try {
             dao.insert(reviewVO);
