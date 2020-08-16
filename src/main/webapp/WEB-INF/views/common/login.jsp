@@ -19,8 +19,13 @@
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="/resources/css/dinner41.css">
+    
+    <script src="${pageContext.request.contextPath}/resources/js/common/login.js"></script>
 
     <title>login</title>
+    <script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+    </script>
 </head>
 <body>
 <!--전체-->

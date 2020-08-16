@@ -19,6 +19,7 @@ import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.exception.menu.MenuSelectFailedException;
 import kr.co.dinner41.exception.menu.MenuUpdateFailedException;
+import kr.co.dinner41.exception.store.StoreDeleteFailedException;
 import kr.co.dinner41.mapper.MenuMapper;
 import kr.co.dinner41.service.menu.MenuListByUserServiceImpl;
 import kr.co.dinner41.vo.MenuVO;
@@ -47,20 +48,20 @@ public class MenuDaoImpl implements MenuDao {
 		Calendar calendar = Calendar.getInstance();
 		String now = sdf.format(calendar.getTime());
 
-		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = '" + menuId
-				+ "'WHERE store_id =" + storeId;
+		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = " + menuId
+				+ " AND store_id =" + storeId;
 
 		int result = 0;
 
 		try {
-			result = jTemp.update(sql, menuId, storeId);
+			result = jTemp.update(sql);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			throw new MenuDeleteFailedException();
 		}
 
 		if (result == 0) {
-			throw new MenuDeleteFailedException();
+			throw new MenuDeleteFailedException("매장 삭제실패 ");
 		}
 
 	}
@@ -136,8 +137,13 @@ public class MenuDaoImpl implements MenuDao {
 		int startPoint = (page - 1) * pageSize;
 		
 		StringBuffer sb = new StringBuffer();
-		String sql = ("SELECT * FROM menu_view WHERE store_id ='"+ storeId +"' ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("AND menu_remove_date is null ");
+		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
 	
+		
+		String sql = sb.toString();
+		
 		List<MenuVO> menus = null;
 		
 		try {
@@ -148,6 +154,32 @@ public class MenuDaoImpl implements MenuDao {
 		}
 		return (menus.size() > 0 ? menus:null);
 	}
+	
+	
+	@Override
+	public List<MenuVO> userSelectByStoreId(int storeId, int page, int pageSize) throws MenuException {
+		
+		int startPoint = (page - 1) * pageSize;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("AND menu_remove_date is null ");
+		sb.append("AND menu_amount > 0 ");
+		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
+	
+		String sql = sb.toString();
+		List<MenuVO> menus = null;
+		
+		try {
+		    menus = jTemp.query(sql, new MenuMapper());
+		}
+		catch(Exception e) {
+			throw new MenuSelectFailedException(e.getMessage());
+		}
+		return (menus.size() > 0 ? menus:null);
+	}
+	
+
 
 	@Override
 	public int getTotalRecord() throws MenuException {

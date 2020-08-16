@@ -191,7 +191,6 @@ function clickOrderMenus() {
 			alert("주문할 메뉴를 선택해주세요.");
 			return;
 		}
-	
 
 		$.ajax({
 			type : "POST",

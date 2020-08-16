@@ -1,4 +1,4 @@
-package kr.co.dinner41.exception;
+package kr.co.dinner41.exception.usertype;
 
 public class UserTypeSelectFailedException extends UserTypeException {
 	private static final long serialVersionUID = 1L;

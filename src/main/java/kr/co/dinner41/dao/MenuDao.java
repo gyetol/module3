@@ -17,10 +17,12 @@ public interface MenuDao {
 	void delete(int menuId, int storeId) throws MenuException;
 	void update(MenuVO menu, StoreVO store) throws MenuException;
 	List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException;
+	List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException;
 	MenuVO selectByMenuIdStoreId(int menuId, int storeId) throws MenuException;
 	int getTotalRecord() throws MenuException;
 	int getLastInsertId(int storeId) throws SQLException;
-	List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException;
+	List<MenuVO> userSelectByStoreId(int storeId, int page, int pageSize) throws MenuException;
+	
 	
 }
 

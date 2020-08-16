@@ -6,17 +6,19 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.UserInsertCommand;
-import kr.co.dinner41.exception.UserException;
+import kr.co.dinner41.command.UserUpdateCommand;
+import kr.co.dinner41.exception.user.UserException;
 import kr.co.dinner41.service.user.UserDeleteService;
 import kr.co.dinner41.service.user.UserInsertService;
 import kr.co.dinner41.service.user.UserUpdateService;
 import kr.co.dinner41.service.user.UserViewService;
-import kr.co.dinner41.validator.UserInsertValidator;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -36,8 +38,8 @@ public class UserController {
 
 	@Autowired
 	@Qualifier("userUpdateService")
-
 	private UserUpdateService updateService;
+	
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public String insert() {
@@ -53,6 +55,9 @@ public class UserController {
 		}
 		*/
 		System.out.println("insertController진입");
+		System.out.println(command.getName());
+		System.out.println(command.getLatitude());
+		System.out.println(command.getLongitude());
 		
 		try {
 			UserVO user=insertService.execute(command);
@@ -71,6 +76,29 @@ public class UserController {
 			
 		}
 		return "common/register";
+	}
+	
+	@RequestMapping(value="/mypage",method=RequestMethod.PATCH)
+	public ModelAndView update(String password) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("passwordForUpdate", password);
+		mav.setViewName("user/myPageInsert");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage",method=RequestMethod.POST)
+	public String update(UserUpdateCommand command,Model model,HttpSession session) {
+		String password=(String)model.getAttribute("passwordForUpdate");
+		try {
+			UserVO updatedUser=updateService.execute(password,command, session);
+			session.removeAttribute("loginUser");
+			session.setAttribute("loginUser", updatedUser);
+			return "redirect:/mypage";
+		}
+		catch(UserException e) {
+			return "user/myPageInsert";
+			
+		}
 	}
 
 }

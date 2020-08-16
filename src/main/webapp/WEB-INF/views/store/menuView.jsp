@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="kr.co.dinner41.controller.MenuController" %>
-<%@ page import="kr.co.dinner41.dao.MenuDao" %>
-<%@ page import="kr.co.dinner41.vo.MenuVO" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -47,7 +45,7 @@
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-            <span>서울특별시 봉천동</span>
+            <span>서울시 봉천동</span>
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
@@ -95,51 +93,54 @@
 
         <div class="form-group">
             <label for="menuName">메뉴명</label>
-            <div class="card card-body" id="menuName" name="name">
-            	닭강정(대)
+            <div class="card card-body" name="name">
+            	<input type="text" class="form-control" id="menName" readonly value="${menu.name}">
             </div>
         </div>
 
         <div class="form-group">
             <label for="menuAmount">최대 수량</label>
-            <div class="card card-body" id="menuAmount" name="amount">
-            	2
+            <div class="card card-body"  name="amount">
+            	<input type="text" class="form-control" id="menuAmount" readonly value="${menu.amount}">
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 20pt">
-            <label for="inputKind">제공방식</label>
-            <div class="card card-body" id="inputKind" name="type">
-                제공방식을 여기에 입력하시오
+            <label for="offerType">제공방식</label>
+            <div class="card card-body"  name="type">
+                <input type="text" class="form-control" id="offerType" readonly value="${menu.type}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuMoney">메뉴 가격</label>
-            <div class="card card-body" id="menuMoney" name="price">
-            5000
+            <label for="menuPrice">메뉴 가격</label>
+            <div class="card card-body" name="price">
+            <input type="text" class="form-control" id="menuPrice" readonly value="${menu.price}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuDes">메뉴 설명</label>
-            <div class="card card-body" id="menuDes" name="introduction">
-                여기에 메뉴설명을 입력하시오
+            <label for="menuIntro">메뉴 설명</label>
+            <div class="card card-body" id="menuIntro" name="introduction">
+             <input type="text" class="form-control" id="menuIntro" readonly value="${menu.introduction}">
+
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 40pt">
-            <label for="inputContent">메뉴 유의 사항</label>
-            <div class="card card-body" id="inputContent" name="notice">
-                여기에 메뉴설명을 입력하시오
+            <label for="menuNotice">메뉴 유의 사항</label>
+            <div class="card card-body" id="menuNotice" name="notice">
+             <input type="text" class="form-control" id="menuNotice" readonly value="${menu.notice}">
             </div>
         </div>
-        <a href="${pageContext.request.contextPath}/sm/1/menu">
+        <a href="/sm//1/menu">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         
          <a href = "/dinner41/sm/menu">
-        <button id="menuUpdate"  type="button" class="btn btn-success three_button" >수정하기</button>
-        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" >삭제하기</button>
+        <button id="menuUpdate"  type="button" class="btn btn-success three_button"  method="put" aciton="menu" >수정하기</button>
+        
+        <a href = " /sm/menu">
+        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" action="menu">삭제하기</button>
     </div>
 </div>
 <hr/>

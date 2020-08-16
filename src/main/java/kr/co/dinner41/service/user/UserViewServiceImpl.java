@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.dinner41.exception.UserException;
+import kr.co.dinner41.exception.user.UserException;
 import kr.co.dinner41.vo.UserVO;
 
 @Service("userViewService")

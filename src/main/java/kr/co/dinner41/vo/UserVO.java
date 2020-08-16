@@ -8,7 +8,7 @@ public class UserVO {
 	private String email;
 	private String password;
 	private String name;
-	private String addresss;
+	private String address;
 	private String subAddress;
 	private double latitude;
 	private double longitude;
@@ -18,7 +18,7 @@ public class UserVO {
 	
 	public UserVO() {}
 
-	public UserVO(int id, UserTypeVO type, String email, String password, String name, String addresss,
+	public UserVO(int id, UserTypeVO type, String email, String password, String name, String address,
 			String subAddress, double latitude, double longitude, String phone, Timestamp registerDate,
 			Timestamp removeDate) {
 		super();
@@ -27,7 +27,7 @@ public class UserVO {
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.addresss = addresss;
+		this.address = address;
 		this.subAddress = subAddress;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -76,12 +76,12 @@ public class UserVO {
 		this.name = name;
 	}
 
-	public String getAddresss() {
-		return addresss;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddresss(String addresss) {
-		this.addresss = addresss;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getSubAddress() {
