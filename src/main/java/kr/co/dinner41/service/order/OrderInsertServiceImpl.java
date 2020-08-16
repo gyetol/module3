@@ -49,10 +49,24 @@ public class OrderInsertServiceImpl implements OrderInsertService {
 		// 주문 내역을 데이터베이스에 저장
 		oDao.insert(order);
 
-		System.out.println("id : " + order.getId());
-		
+
 		Menu2OrderVO menu2order = new Menu2OrderVO();
-		// 주문 목록 내역을 데이터베이스에 저장
-		m2oDao.insert(menu2order);
+		StoreVO store = new StoreVO();
+		int storeId = Integer.parseInt(arrForOrder[0]);
+		store.setId(storeId);
+		menu2order.setOrder(order);
+		menu2order.setStore(store);
+
+		int menuCount = Integer.parseInt(arrForOrder[1]);
+		for (int i = 0; i < menuCount; i++) {
+			MenuVO menu = new MenuVO();
+			int menuId = Integer.parseInt(arrForOrder[i+2]);
+			menu.setId(menuId);
+			menu2order.setMenu(menu);
+			menu2order.setAmount(Integer.parseInt(arrForOrder2[i]));
+
+			// 주문 목록 내역을 데이터베이스에 저장
+			m2oDao.insert(menu2order);
+		}
 	}
 }

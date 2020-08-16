@@ -61,10 +61,9 @@ function clickCountButton() {
 		var jMenus = $(menus[i]);
 		var minusButton = jMenus.find("#minusButton");
 		var plusButton = jMenus.find("#plusButton");
-		var numTag = jMenus.find("#num");
-		var num = Number($(numTag).text());
 
 		minusButton.click(function() {
+			var num = Number(($(this).siblings('#num')).text());
 			--num;
 			if (num <= 0) {
 				num = 1;
@@ -79,6 +78,7 @@ function clickCountButton() {
 			calcAllPrice();
 		});
 		plusButton.click(function() {
+			var num = Number(($(this).siblings('#num')).text());
 			++num;
 			if (num > 5) {
 				num = 5;

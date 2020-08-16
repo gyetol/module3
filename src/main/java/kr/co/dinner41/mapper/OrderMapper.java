@@ -23,5 +23,4 @@ public class OrderMapper implements RowMapper<OrderVO> {
 		order.setPrice(rs.getInt("price"));
 		return order;
 	}
-
 }

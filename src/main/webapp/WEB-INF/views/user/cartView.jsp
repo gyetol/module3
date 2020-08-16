@@ -124,7 +124,7 @@
 
 			<div class="text-right" style="margin: 10pt">
 				<h5>
-					총 금액 : <span id="totalPrice">0원</span>
+					총 금액  :  <span id="totalPrice">0원</span>
 				</h5>
 			</div>
 

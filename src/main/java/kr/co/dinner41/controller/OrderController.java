@@ -62,6 +62,8 @@ public class OrderController {
 		payTotal = payTotal.replaceAll("[^0-9]", "");
 		
 		insertService.execute(arrForOrder, arrForOrder2, userId, Integer.parseInt(getTime), Integer.parseInt(payTotal));
+		
+		JSONArray jArray = new JSONArray();
 		map.put("msg", "결제가 완료되었습니다.");
 		return map;
 	}
