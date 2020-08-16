@@ -22,8 +22,6 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 	@Override
 	public List<StoreVO> execute(String storeStateName,String storeName,int page) throws StoreException{
 		List<StoreVO> stores= null;
-		System.out.println("s1: " + storeStateName);
-		System.out.println("s2: " + storeName);
 		if(storeStateName.equals("all-") && storeName.equals("all-")) {
 			stores = storeDao.selectByStateNameAndName("%", "%", page, PAGESIZE);
 		}
@@ -32,7 +30,5 @@ public class StoreListByManagerServiceImpl implements StoreListByManagerService 
 		}
 		return stores;
 	}
-	
-
 }
 
