@@ -1,9 +1,23 @@
 $(document).ready(function() {
-	deleteMenus();
+	releaseCheck();
+	clickDeleteMenus();
+	clickOrderMenus();
 	allCheck();
 	clickCountButton();
 	checkForCalc();
 });
+
+// 화면이 업데이트 될 때마다 체크된 것들이 해제됨
+function releaseCheck() {
+	var menus = $(".menuClass").get();
+	for (let i = 0; i < menus.length; i++) {
+		var jMenus = $(menus[i]);
+		var checkBox = jMenus.find(".form-control");
+		if (checkBox.is(":checked")) {
+			checkBox.prop("checked", false);
+		}
+	}
+}
 
 // 체크박스가 체크될 때마다 총금액이 변하도록 하는 함수
 function checkForCalc() {
@@ -11,7 +25,6 @@ function checkForCalc() {
 	for (let i = 0; i < menus.length; i++) {
 		var jMenus = $(menus[i]);
 		var checkBox = jMenus.find(".form-control");
-
 		checkBox.change(function() {
 			calcAllPrice();
 		});
@@ -25,12 +38,12 @@ function calcAllPrice() {
 	for (let i = 0; i < menus.length; i++) {
 		var jMenus = $(menus[i]);
 		var checkBox = jMenus.find(".form-control");
-		
+
 		// 하나의 메뉴의 총 가격
 		// "5000원"이렇게 넘어옴
 		var amount = jMenus.find("#amount").text();
 		amount = Number(amount.replace(/[^0-9]/g, ""));
-		
+
 		if (checkBox.is(":checked")) {
 			allPrice += amount;
 		}
@@ -101,8 +114,9 @@ function allCheck() {
 }
 
 // 선택메뉴삭제버튼을 클릭할 때를 처리하는 함수
-function deleteMenus() {
+function clickDeleteMenus() {
 	$("#delete").click(function() {
+		// 삭제할 메뉴아이디가 담길 배열
 		var arr = [];
 		var menus = $(".menuClass").get();
 		for (let i = 0; i < menus.length; i++) {
@@ -128,6 +142,60 @@ function deleteMenus() {
 			success : function(data) {
 				alert(data.msg);
 				window.location.href = "cart";
+			}
+		});
+	});
+}
+
+function clickOrderMenus() {
+	$("#order").click(function() {
+		// 주문할 하나의 매장아이디 + 메뉴개수 + 여러 메뉴아이디 + 총 가격을 저장할 배열
+		var arr = [];
+		var checkedMenus = 0;
+		var storeId = $("#storeId").data("storeid");
+		var totalPrice = $("#totalPrice").text();
+
+		// 배열의 맨 앞에는 매장아이디를 넣음
+		arr.push(storeId);
+
+		var menus = $(".menuClass").get();
+		for (let i = 0; i < menus.length; i++) {
+			var jMenus = $(menus[i]);
+			var checkBox = jMenus.find(".form-control");
+			if (checkBox.is(":checked")) {
+				++checkedMenus;
+			}
+		}
+
+		// 체크되어있는 메뉴의 개수를 넣음
+		arr.push(checkedMenus);
+
+		// 그 다음에는 체크되어있는 메뉴아이디를 순서대로 넣음
+		for (let i = 0; i < menus.length; i++) {
+			var jMenus = $(menus[i]);
+			var checkBox = jMenus.find(".form-control");
+			if (checkBox.is(":checked")) {
+				arr.push(jMenus.data("menuid"));
+			}
+		}
+
+		// 그리고 마지막에는 총 가격을 넣음
+		arr.push(totalPrice);
+
+		if (arr.length == 3) {
+			alert("주문할 메뉴를 선택해주세요.");
+			return;
+		}
+
+		$.ajax({
+			type : "POST",
+			url : "cart/order",
+			data : {
+				"arr" : arr
+			},
+			success : function(data) {
+				alert(data.msg);
+				window.location.href = "order";
 			}
 		});
 	});
