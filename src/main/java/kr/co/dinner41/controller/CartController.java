@@ -97,6 +97,7 @@ public class CartController {
 				map.put("msg1", "이전 매장의 장바구니 기록은 사라집니다.");
 			}
 		}
+		
 		map.put("result", true);
 		return map;
 	}
@@ -108,6 +109,10 @@ public class CartController {
 
 		HashMap<String, Object> map = new HashMap<>();
 		String [] menuIds = request.getParameterValues("arr[]");
+
+		System.out.println("menuIds : " + menuIds);
+		System.out.println("menuIds.length : " + menuIds.length);
+
 		deleteService.execute(session, menuIds);
 		map.put("msg", "장바구니에서 삭제 되었습니다!!");
 		return map;
