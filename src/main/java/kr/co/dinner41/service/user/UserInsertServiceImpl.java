@@ -28,7 +28,7 @@ public class UserInsertServiceImpl implements UserInsertService {
 	@Override
 	public UserVO execute(UserInsertCommand command) throws UserException {
 		String type=command.getType();
-		String email=command.getEamil();
+		String email=command.getEmail();
 		String password=command.getPassword();
 		String name=command.getName();
 		String address=command.getAddress();

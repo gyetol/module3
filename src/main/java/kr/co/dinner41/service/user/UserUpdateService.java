@@ -7,5 +7,5 @@ import kr.co.dinner41.exception.user.UserException;
 import kr.co.dinner41.vo.UserVO;
 
 public interface UserUpdateService {
-	UserVO execute(String password,UserUpdateCommand command,HttpSession session)throws UserException,NumberFormatException;
+	UserVO execute(UserUpdateCommand command,HttpSession session)throws UserException,NumberFormatException;
 }
