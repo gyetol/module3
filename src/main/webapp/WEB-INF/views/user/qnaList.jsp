@@ -37,7 +37,7 @@
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-            <span>서울특별시 봉천동</span>
+            <span>${address}</span>
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
@@ -77,7 +77,6 @@
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>문의 내역</h4>
     </div>
-
 
     <c:if test="${type eq 'ALL'}">
         <ul class="nav nav-tabs">
@@ -195,7 +194,9 @@
                     문의 유형 : <span><c:out value="${vo.type.name}"></c:out></span>
                     <br/>
                     문의 날짜 : <span><c:out value="${vo.questionDate}"></c:out></span>
-                    <button class="btn btn-outline-success btn-sm btn-block" style="margin-top: 5pt">문의 상세</button>
+                    <a href="${pageContext.request.contextPath}/${vo.id}/qna">
+                        <button class="btn btn-outline-success btn-sm btn-block" style="margin-top: 5pt" >문의 상세</button>
+                    </a>
                 </li>
             </c:forEach>
         </c:if>

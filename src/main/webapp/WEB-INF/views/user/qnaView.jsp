@@ -26,7 +26,7 @@
 
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>${qna.user.addresss}</span>
+            <span>${address}</span>
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>

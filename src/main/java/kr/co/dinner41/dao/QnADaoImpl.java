@@ -6,9 +6,14 @@ import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,10 +25,28 @@ public class QnADaoImpl implements QnADao {
     private JdbcTemplate template;
 
     @Override
-    public void insert(QnAVO qna) throws QnAException {
-        String sql = "INSERT INTO qnas VALUES(DEFAULT, ?, ?, DEFAULT, ?, ?, CURRENT_TIMESTAMP, NULL, NULL);";
-        template.update(sql, qna.getType().getId(), qna.getUser().getId(),
-                qna.getTitle(), qna.getContent());
+    public int insert(QnAVO qna) throws QnAException {
+        final String sql = "INSERT INTO qnas VALUES(DEFAULT, ?, ?, DEFAULT, ?, ?, CURRENT_TIMESTAMP, NULL, NULL);";
+        KeyHolder holder= new GeneratedKeyHolder();
+        final String[] str = {"qna_id"};
+        //template.update(sql, qna.getType().getId(), qna.getUser().getId(),
+                //qna.getTitle(), qna.getContent(), );
+        template.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement pstmt=con.prepareStatement(sql, str);
+                pstmt.setString(1, qna.getType().getId());
+                pstmt.setInt(2, qna.getUser().getId());
+                pstmt.setString(3, qna.getTitle());
+                pstmt.setString(4, qna.getContent());
+                return pstmt;
+            }
+        }, holder);
+
+        Number key= holder.getKey();
+        int qnaId=key.intValue();
+
+        return qnaId;
     }
 
     @Override

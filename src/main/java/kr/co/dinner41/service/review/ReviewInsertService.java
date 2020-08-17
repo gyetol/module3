@@ -12,4 +12,5 @@ public interface ReviewInsertService {
     void execute(ReviewInsertCommand command, UserVO user, int orderId);
     StoreVO getStore(int orderId);
     List<ReveiwMenuVO> getMenus(int orderId);
+    boolean isHaveReview(int orderId);
 }
