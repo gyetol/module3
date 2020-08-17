@@ -80,7 +80,9 @@
 
     <hr/>
         <h4 class="text-center">
-            이 매장의 총 평점은 <span style="color: red">${avg}</span>점 입니다!!
+            <span>${store.name}</span>의
+            <br/>
+            총 평점은 <span style="color: red">${avg}</span>점 입니다!!
         </h4>
     <hr style="margin-bottom: 0"/>
 
@@ -99,7 +101,6 @@
                         <span><c:out value="${vo.score}"></c:out>점이에요!</span>
                     </h5>
                     <div class="card card-body">
-                        주문 번호 : <c:out value="${vo.id}"></c:out>&nbsp;&nbsp;&nbsp;&nbsp;
                         주문 일자 : <c:out value="${vo.date}"></c:out>
                         <br/>
                         <span style="font-weight: bold"><c:out value="${vo.content}"></c:out></span>
