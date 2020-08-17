@@ -81,6 +81,7 @@ public class CartController {
 				map.put("msg1", "이전 매장의 장바구니 기록은 사라집니다.");
 			}
 		}
+		
 		map.put("result", true);
 		map.put("msg2", "장바구니에 등록되었습니다!!");
 		return map;
@@ -136,21 +137,15 @@ public class CartController {
 	@RequestMapping(value = "/gm/cart/order", method = RequestMethod.POST)
 	public HashMap<String, Object> cartOrder(HttpServletRequest request) {
 		HashMap<String, Object> map = new HashMap<>();
+		
 		// 장바구니에서 넘어온 주문 정보들
 		String [] arrForOrder = request.getParameterValues("arr[]");
-		
-		for (String s : arrForOrder) {
-			System.out.println(s);
-		}
+		// 장바구니에서 넘어온 선택된 메뉴들의 수량들
+		String [] arrForOrder2 = request.getParameterValues("arr2[]");
 		
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("arrForOrder") == null) {
-			session.setAttribute("arrForOrder", arrForOrder);
-		}
-		else {
-			session.removeAttribute("arrForOrder");
-			session.setAttribute("arrForOrder", arrForOrder);
-		}
+		session.setAttribute("arrForOrder", arrForOrder);
+		session.setAttribute("arrForOrder2", arrForOrder2);
 		map.put("msg", "주문 화면으로 넘어갑니다.");
 		return map;
 	}

@@ -9,6 +9,9 @@ $(document).ready(function() {
 
 // 화면이 업데이트 될 때마다 체크된 것들이 해제됨
 function releaseCheck() {
+	if ($("#totalToggle").is(":checked")) {
+		$("#totalToggle").prop("checked", false);
+	}
 	var menus = $(".menuClass").get();
 	for (let i = 0; i < menus.length; i++) {
 		var jMenus = $(menus[i]);
@@ -58,10 +61,9 @@ function clickCountButton() {
 		var jMenus = $(menus[i]);
 		var minusButton = jMenus.find("#minusButton");
 		var plusButton = jMenus.find("#plusButton");
-		var numTag = jMenus.find("#num");
-		var num = Number($(numTag).text());
 
 		minusButton.click(function() {
+			var num = Number(($(this).siblings('#num')).text());
 			--num;
 			if (num <= 0) {
 				num = 1;
@@ -76,6 +78,7 @@ function clickCountButton() {
 			calcAllPrice();
 		});
 		plusButton.click(function() {
+			var num = Number(($(this).siblings('#num')).text());
 			++num;
 			if (num > 5) {
 				num = 5;
@@ -151,6 +154,7 @@ function clickOrderMenus() {
 	$("#order").click(function() {
 		// 주문할 하나의 매장아이디 + 메뉴개수 + 여러 메뉴아이디 + 총 가격을 저장할 배열
 		var arr = [];
+		var arr2 = [];
 		var checkedMenus = 0;
 		var storeId = $("#storeId").data("storeid");
 		var totalPrice = $("#totalPrice").text();
@@ -176,6 +180,7 @@ function clickOrderMenus() {
 			var checkBox = jMenus.find(".form-control");
 			if (checkBox.is(":checked")) {
 				arr.push(jMenus.data("menuid"));
+				arr2.push(jMenus.find("#num").text());
 			}
 		}
 
@@ -191,7 +196,8 @@ function clickOrderMenus() {
 			type : "POST",
 			url : "cart/order",
 			data : {
-				"arr" : arr
+				"arr" : arr,
+				"arr2" : arr2
 			},
 			success : function(data) {
 				alert(data.msg);
