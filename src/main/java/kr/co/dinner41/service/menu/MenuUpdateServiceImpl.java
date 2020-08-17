@@ -27,17 +27,20 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 	private StoreDaoImpl storeDao;
 	
 	@Override
-	public void execute(MenuUpdateCommand command, UserVO user) {
+	public void execute(MenuUpdateCommand command, int menuId, int storeId, UserVO user) throws MenuException {
 		
 		OfferTypeVO offerTypeVO = null;
 		StoreVO storeVO = null;
+		MenuVO menuVO = null;
 		
 		try {
 			offerTypeVO = offerTypeDao.selectById(command.getType());
 			System.out.println(command.getType());
 			storeVO = storeDao.selectByUserId(user.getId());
+			menuVO = menuDao.selectByMenuIdStoreId(menuId, storeId);
 			System.out.println("offerTypeVO : " + offerTypeVO);
 			System.out.println("storeVO : " + storeVO);
+			
 		}
 		catch (OfferTypeSelectException e) {
 			e.printStackTrace();
@@ -50,9 +53,9 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 		menu.setPrice(command.getPrice());
 		menu.setPhoto(command.getPhoto());
 		menu.setAmount(command.getAmount());
-		menu.setDescription(command.getIntroduction());
+		menu.setDescription(command.getDescription());
 		menu.setNotice(command.getNotice());
-		
+		System.out.println(menu);
 		try {
 			menuDao.update(menu, storeVO);
 		}

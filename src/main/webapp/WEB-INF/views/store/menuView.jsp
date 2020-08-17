@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -29,6 +30,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+    <script src="${pageContext.request.contextPath}/resources/js/store/menuView.js"></script>
     <!-- <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>  -->
 
     <title>Menu</title>
@@ -89,71 +91,63 @@
 <div class="container-fluid" data-storeId="38" data-menuId="55">
 
     <div class="container-fluid">
-    <form:form action="${pageContext.request.contextPath}/sm/menu" method="post">
+    <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/menu" method="post">
         <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
             <img src="${pageContext.request.contextPath}/resources/images/categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
         </div>
 
         <div class="form-group">
-            <label for="menuName">메뉴명</label>
-            <div class="card card-body" name="name">
-            	<input type="hidden" name="_method" value="put"/>
-            	<input type="text" class="form-control" id="menName" readonly value="${menu.name}">
+            <label for="menName">메뉴명</label>
+            <div class="card card-body">
+            	<input type="text" class="form-control" name="name" id="menName" readonly value="${menu.name}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuAmount">최대 수량</label>
-            <div class="card card-body"  name="amount">
-            	<input type="hidden" name="_method" value="put"/>
-            	<input type="text" class="form-control" id="menuAmount"  readonly value="${menu.amount}">
+            <label for="menuAmount">재고 수량</label>
+            <div class="card card-body">
+            	<input type="text" class="form-control" name="amount" id="menuAmount"  readonly value="${menu.amount}">
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="offerType">제공방식</label>
-            <div class="card card-body"  name="type">
-            	<input type="hidden" name="_method" value="put"/>
-                <input type="text" class="form-control" id="offerType" readonly value="${menu.offerType.name}">
+            <div class="card card-body">
+                <input type="text" class="form-control" name="offerType.name" id="offerType" readonly value="${menu.offerType.name}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuPrice">메뉴 가격</label>
-            <div class="card card-body" name="price">
-            <input type="hidden" name="_method" value="put"/>
-            <input type="text" class="form-control" id="menuPrice" readonly value="${menu.price}">
+            <label for="price">메뉴 가격</label>
+            <div class="card card-body">
+            <input type="text" class="form-control" name="price" id="menuPrice" readonly value="${menu.price}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menuIntro">메뉴 설명</label>
-            <div class="card card-body" id="menuIntro" name="introduction">
-            <input type="hidden" name="_method" value="put"/>
-             <input type="text" class="form-control" id="menuIntro"  readonly value="${menu.description}">
+            <label for="menuDescription">메뉴 설명</label>
+            <div class="card card-body">
+             <input type="text" class="form-control" id="menuDescription" name="description" readonly value="${menu.description}">
 
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 40pt">
-            <label for="menuNotice">메뉴 유의 사항</label>
-            <div class="card card-body" id="menuNotice" name="notice">
-            <input type="hidden" name="_method" value="put"/>
+            <label for="notice">메뉴 유의 사항</label>
+            <div class="card card-body" id="notice" name="notice">
              <input type="text" class="form-control" id="menuNotice" readonly value="${menu.notice}">
             </div>
         </div>
         
-          <a href="${pageContext.request.contextPath}/sm/menu" method="post">
+          <a href="${pageContext.request.contextPath}/sm/menu">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>
           
-          
         <button id="menuUpdate"  type="submit" class="btn btn-success three_button">수정하기</button>
          
+        <button id="menuDelete" type="button" class="btn btn-success three_button" >삭제하기</button>
         
-        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" action="menu">삭제하기</button>
-        </a>
-      </form:form>
+      </form>
 
     </div>
     

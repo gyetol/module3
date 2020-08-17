@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.command.MenuUpdateCommand;
+import kr.co.dinner41.dao.MenuDao;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.service.menu.MenuDeleteService;
 import kr.co.dinner41.service.menu.MenuInsertService;
@@ -24,6 +26,7 @@ import kr.co.dinner41.service.menu.MenuListByUserService;
 import kr.co.dinner41.service.menu.MenuUpdateAmountService;
 import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
+import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
@@ -59,12 +62,20 @@ public class MenuController {
 	    @Qualifier("menuViewService")
 	    MenuViewService menuViewService;
 	    
+	    @Autowired
+	    @Qualifier("storeViewByStoreService")
+	    StoreViewByStoreService storeViewByStoreService;
+	    
+	    @Autowired
+	    @Qualifier("menuDao")
+	    MenuDao menuDao;
+	    
 	    
 
 	    @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
 	    public String insert(HttpSession session, Model model){
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
-	    	System.out.println("GET");
+	    	
 	    	if (user.getType().getId().equals("AD")) {
 	    		return "redirect:/";
 	    	}
@@ -84,6 +95,10 @@ public class MenuController {
 	    public String insert(MenuInsertCommand menu, Model model, HttpSession session) throws SQLException
 	    {
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
+	    	
+	    	insertService.execute(menu, user);
+	    	return "store/menuList";
+	    }
 //	    	System.out.println("Controller"+user.getName()+", id:"+user.getId());
 //	    	System.out.println(menu.getName());
 //	    	System.out.println(menu.getType());
@@ -129,18 +144,35 @@ public class MenuController {
 //	    	return "store/menuRegister";
 //	    }
 	    
-
-    	insertService.execute(menu, user);
-    	return "store/menuList";
-            
-	   }
-
 	
-	    @RequestMapping(value = "/sm/menu", method = RequestMethod.PUT)
-	    public String update(MenuUpdateCommand menu, StoreVO store, HttpSession session){
-	    	System.out.println("MenuUpdateCommand: " + menu);
+	    @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.PUT)
+	    public String update(MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session) throws MenuException {
+	    	UserVO user = (UserVO) session.getAttribute("loginUser");
+	    
+	    	if (user.getType().getId().equals("AD")) {
+	    		return "redirect:/";
+	    	}
+	    	else if(user.getType().getId().equals("GM")) {
+	    		return "redirect:/";
+	    	}
+	    	else if(user.getType().getId().equals("SM")) {
+	    		return "store/menuModify";
+	    	}
+	    	else {
+	    		return "redirect:/";
+	    	}
+	    }
+	    
+	    
+	    
+	    
+	    @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.POST)
+	    public String update(@ModelAttribute("menu") MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session,Model model) throws MenuException {
+	    	int store_id = Integer.parseInt(storeId);
+	    	int menu_id = Integer.parseInt(menuId);
+	    	
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
-	    	updateService.execute(menu, user);
+	    	updateService.execute(menu, store_id, menu_id, user);
 	        return "store/menuModify";
 	    }
 	    
@@ -150,6 +182,7 @@ public class MenuController {
 	    	
 	    	int store_id = Integer.parseInt(storeId);
 	    	int menu_id = Integer.parseInt(menuId);
+	    	
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
 	    	
 	    	MenuVO menu = menuViewService.execute(store_id, menu_id);
