@@ -68,12 +68,12 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public void update(MenuVO menu, StoreVO store) throws MenuException {
-		String sql = "UPDATE menus SET offer_type_id = ?, menu_tag = ?, menu_name = ?, menu_price = ?, menu_amount = ?, menu_description = ?, menu_notice = ?,menu_photo = ? WHERE menu_id = ? AND store_id=? ";
+		String sql = "UPDATE menu_view SET offer_type_id = ?, menu_name = ?, menu_price = ?, menu_amount = ?, menu_description = ?, menu_notice = ?,menu_photo = ? WHERE menu_id = ? AND store_id=? ";
 
 		int result = 0;
 
 		try {
-			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getTag(), menu.getName(), menu.getPrice(),
+			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getName(), menu.getPrice(),
 					menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto(), menu.getId(),
 					store.getId());
 		} catch (Exception e) {
@@ -92,6 +92,15 @@ public class MenuDaoImpl implements MenuDao {
 		list = jTemp.query(sql, new MenuMapper(), menuId, storeId);
 		return (list.size() == 0 ? null : list.get(0));
 	}
+	
+	@Override
+	public MenuVO selectByMenuId(int menuId) throws MenuException {
+		List<MenuVO> list;
+		String sql = "SELECT * FROM menu_view " + "WHERE menu_id = ? ";
+		list = jTemp.query(sql, new MenuMapper(), menuId);
+		return (list.size() == 0 ? null : list.get(0));
+	}
+
 
 	@Override
 	public List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException {

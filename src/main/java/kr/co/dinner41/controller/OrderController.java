@@ -79,6 +79,9 @@ public class OrderController {
 	
 		// 결제가 완료되면 완료된 메뉴들을 장바구니에서 제거
 		int clearMenuCount = Integer.parseInt(arrForOrder[1]);
+		
+		System.out.println("결제가 완료된 메뉴의 개수 : " + clearMenuCount);
+		
 		String [] clearMenuIds = new String[clearMenuCount]; 
 		for (int i = 0; i < clearMenuCount; i++) {
 			clearMenuIds[i] = arrForOrder[i+2];
@@ -104,5 +107,11 @@ public class OrderController {
 		OrderVO order = viewService.execute(orderId);
 		model.addAttribute("order", order);
 		return "user/orderView";
+	}
+	
+	
+	@RequestMapping(value = "/gm/pay", method = RequestMethod.GET)
+	public String pay() {
+		return "user/pay";
 	}
 }

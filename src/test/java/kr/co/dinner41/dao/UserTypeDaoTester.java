@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.dinner41.exception.UserTypeException;
+import kr.co.dinner41.exception.usertype.UserTypeException;
 import kr.co.dinner41.vo.UserTypeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
