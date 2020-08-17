@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.LoginCommand;
@@ -18,7 +19,7 @@ import kr.co.dinner41.exception.login.LoginException;
 import kr.co.dinner41.exception.login.SearchPasswordException;
 import kr.co.dinner41.exception.user.UserException;
 import kr.co.dinner41.service.login.LoginService;
-import kr.co.dinner41.service.login.SearchPasswordService;
+import kr.co.dinner41.service.login.SearchUserByEmailService;
 import kr.co.dinner41.service.user.LogoutService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
@@ -31,8 +32,12 @@ public class LoginController {
 	private LoginService loginService;
 
 	@Autowired
-	@Qualifier("searchPasswordService")
-	private SearchPasswordService searchPasswordService;
+	@Qualifier("searchUserByEmailService")
+	private SearchUserByEmailService searchUserByEmailService;
+	
+	@Autowired
+	@Qualifier("sendTempPasswordService")
+	private SendTempPasswordService sendTempPasswordService;
 	
 	@Autowired
 	@Qualifier("logoutService")
@@ -144,15 +149,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/password",method=RequestMethod.POST)
-	public String searchPassword(HttpServletRequest request) {
-		System.out.println("searchPasswordController진입");
+	public String searchPassword(@RequestParam("email") String email) {
+		System.out.println("(searchPassword event handler) email: "+email);
+		ModelAndView mav=new ModelAndView();
 		try {
-
-			searchPasswordService.exectue(request);
+			UserVO user=searchUserByEmailService.exectue(email);
+			mav.setViewName(viewName);
 		}catch(SearchPasswordException e) {
+
 			
 		}
 		return "common/login";
 		
 	}
+	
 }
