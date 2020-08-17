@@ -18,6 +18,7 @@ import kr.co.dinner41.exception.login.LoginException;
 import kr.co.dinner41.exception.login.SearchPasswordException;
 import kr.co.dinner41.service.login.LoginService;
 import kr.co.dinner41.service.login.SearchPasswordService;
+import kr.co.dinner41.service.user.LogoutService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.UserVO;
@@ -31,6 +32,17 @@ public class LoginController {
 	@Autowired
 	@Qualifier("searchPasswordService")
 	private SearchPasswordService searchPasswordService;
+	
+	@Autowired
+	@Qualifier("logoutService")
+	private LogoutService logoutService;
+	
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		logoutService.execute(session);
+		return "common/login";
+	}
+	
 	
 	private String getUserPage(UserVO loginUser) {
 		if(loginUser==null) {
@@ -79,7 +91,9 @@ public class LoginController {
 			loginService.execute(command, session);
 			mav.addObject("result", "로그인 성공!");
 		}catch(LoginException e) {
-			mav.addObject("result","로그인 실패"+e.getMessage());
+			mav.addObject("errorMessage",e.getMessage());
+			mav.setViewName("common/login");
+			return mav;
 		}
 
 		UserVO user=(UserVO)session.getAttribute("loginUser");
