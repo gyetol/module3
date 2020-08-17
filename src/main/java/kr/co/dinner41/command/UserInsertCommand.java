@@ -1,7 +1,7 @@
 package kr.co.dinner41.command;
 
 public class UserInsertCommand {
-	private String eamil;
+	private String email;
 	private String password;
 	private String passwordConfirm;
 	private String name;
@@ -16,10 +16,20 @@ public class UserInsertCommand {
 
 	public UserInsertCommand() {}
 
-	public UserInsertCommand(String eamil, String password, String passwordConfirm, String name, String address,
+	@Override
+	public String toString() {
+		return "UserInsertCommand [email=" + email + ", password=" + password + ", passwordConfirm=" + passwordConfirm
+				+ ", name=" + name + ", address=" + address + ", subAddress=" + subAddress + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
+				+ ", type=" + type + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+
+	public UserInsertCommand(String email, String password, String passwordConfirm, String name, String address,
 			String subAddress, String latitude, String longitude, String phone1, String phone2, String phone3,
 			String type) {
-		this.eamil = eamil;
+		super();
+		this.email = email;
 		this.password = password;
 		this.passwordConfirm = passwordConfirm;
 		this.name = name;
@@ -33,12 +43,12 @@ public class UserInsertCommand {
 		this.type = type;
 	}
 
-	public String getEamil() {
-		return eamil;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -128,7 +138,6 @@ public class UserInsertCommand {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+
 
 }

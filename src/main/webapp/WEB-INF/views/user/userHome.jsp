@@ -52,22 +52,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">결제내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/gm/1/order">결제내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -85,7 +85,7 @@
     <!--  </form>--> 
         <div class="col-3" style="padding: 3pt 3pt 3pt 0;">
            <a href="${pageContext.request.contextPath}/gm/map">
-           	 <button class="btn btn-outline-success btn-block" type="button" id="map_button">지도로 검색</button>
+               <button class="btn btn-outline-success btn-block" type="button" id="map_button">지도로 검색</button>
            </a>
         </div>
     
@@ -124,23 +124,23 @@
     <div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
         <div class="col mb-4">
             <a href="${pageContext.request.contextPath}/gm/전체/all-/1/store">
-            	<div class="card h-100 category_label">
-               	 	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/total.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">전체</h5>
-                	</div>
-            	</div>
+               <div class="card h-100 category_label">
+                      <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/total.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">전체</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
             <a href="${pageContext.request.contextPath}/gm/도시락/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/box.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">도시락</h5>
-                	</div>
-            	</div>
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/box.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">도시락</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
@@ -167,90 +167,90 @@
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/일식/all-/1/store">
-            	<div class="card h-100 category_label">
-              	  <div class="card-body text-center trim">
-                	    <img src="${pageContext.request.contextPath}/resources/categoryImages/japan.png" class="category rounded" alt="no picture">
-                	    <h5 class="card-title">일식</h5>
-              	  </div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/일식/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/japan.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">일식</h5>
+                   </div>
+               </div>
            </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/분식/all-/1/store">
-        	    <div class="card h-100 category_label">
-            	    <div class="card-body text-center trim">
-                	    <img src="${pageContext.request.contextPath}/resources/categoryImages/tpk.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">분식</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/분식/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/tpk.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">분식</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/제과/all-/1/store">
-            	<div class="card h-100 category_label">
-              	  <div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/bread.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">제과</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/제과/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/bread.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">제과</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/떡/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/ttt.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">떡</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/떡/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/ttt.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">떡</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/치킨/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/chicken.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">치킨</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/치킨/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/chicken.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">치킨</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/피자/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/pizza.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">피자</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/피자/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/pizza.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">피자</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/반찬/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/side.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">반찬</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/반찬/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/side.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">반찬</h5>
+                   </div>
+               </div>
             </a>
         </div>
 
         <div class="col mb-4">
-        	<a href="${pageContext.request.contextPath}/gm/기타/all-/1/store">
-            	<div class="card h-100 category_label">
-                	<div class="card-body text-center trim">
-                    	<img src="${pageContext.request.contextPath}/resources/categoryImages/etc.png" class="category rounded" alt="no picture">
-                    	<h5 class="card-title">기타</h5>
-                	</div>
-            	</div>
+           <a href="${pageContext.request.contextPath}/gm/기타/all-/1/store">
+               <div class="card h-100 category_label">
+                   <div class="card-body text-center trim">
+                       <img src="${pageContext.request.contextPath}/resources/categoryImages/etc.png" class="category rounded" alt="no picture">
+                       <h5 class="card-title">기타</h5>
+                   </div>
+               </div>
             </a>
         </div>
     </div>
