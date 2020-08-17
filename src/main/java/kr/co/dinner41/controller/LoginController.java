@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.exception.login.LoginException;
 import kr.co.dinner41.exception.login.SearchPasswordException;
+import kr.co.dinner41.exception.user.UserException;
 import kr.co.dinner41.service.login.LoginService;
 import kr.co.dinner41.service.login.SearchPasswordService;
 import kr.co.dinner41.service.user.LogoutService;
@@ -94,6 +95,9 @@ public class LoginController {
 			mav.addObject("errorMessage",e.getMessage());
 			mav.setViewName("common/login");
 			return mav;
+		}
+		catch(UserException e) {
+			
 		}
 
 		UserVO user=(UserVO)session.getAttribute("loginUser");
