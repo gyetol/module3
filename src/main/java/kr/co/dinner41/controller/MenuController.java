@@ -30,7 +30,6 @@ import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.vo.MenuVO;
-import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -71,7 +70,6 @@ public class MenuController {
 	    @Autowired
 	    @Qualifier("menuDao")
 	    MenuDao menuDao;
-	    
 	    
 
 	    @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
@@ -232,12 +230,8 @@ public class MenuController {
 			model.addAttribute("menus",menus);
 			
 			return "store/menuList";
-		}
-	    
-	    
-
-	    
 	}
-
+	    
+}
 
 
