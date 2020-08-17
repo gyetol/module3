@@ -92,4 +92,10 @@ public class OrderController {
 		model.addAttribute("orderViews", list);
 		return "user/orderList";
 	}
+	
+	@RequestMapping(value = "/gm/{id}/order", method = RequestMethod.HEAD)
+	public String view(@PathVariable("id") int orderId) {
+		System.out.println("orderId: " + orderId);
+		return "user/orderView";
+	}
 }

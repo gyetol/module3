@@ -1,4 +1,5 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -110,13 +111,6 @@
         </div>
 
         <div class="form-group row">
-            <label for="pay_type" class="col-3 col-form-label">결제 수단</label>
-            <div class="col-9">
-                <input type="password" class="form-control" id="pay_type" readonly>
-            </div>
-        </div>
-
-        <div class="form-group row">
             <label for="pay_total" class="col-3 col-form-label">결제금액</label>
             <div class="col-9">
                 <input type="password" class="form-control" id="pay_total" readonly>
@@ -126,6 +120,7 @@
 
     <hr style="margin: 0"/>
 
+	<!-- 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="container-fluid">
@@ -149,6 +144,7 @@
             </div>
         </li>
     </ul>
+    -->
 
     <hr style="margin: 0"/>
 

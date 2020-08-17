@@ -1,6 +1,10 @@
 package kr.co.dinner41.vo;
 
-public class Menu2OrderVO {
+import java.io.Serializable;
+
+public class Menu2OrderVO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private OrderVO order;
 	private StoreVO store;

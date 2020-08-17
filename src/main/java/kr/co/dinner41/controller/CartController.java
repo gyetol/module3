@@ -66,13 +66,29 @@ public class CartController {
 		if (carts.isEmpty()) {
 			session.setAttribute("carts", new ArrayList<CartVO>());
 			insertService.execute(session, storeId, menuId);
+			map.put("msg2", "장바구니에 등록되었습니다!!");
 		}
 		// 장바구니가 비어있지 않은 경우
 		// 같은 매장의 메뉴를 넣을 경우 장바구니에 메뉴 추가
 		// 다른 매장의 메뉴를 넣을 경우 장바구니를 비우고 새로 메뉴 추가
 		else {
 			if (carts.get(0).getStoreId() == storeId) {
-				insertService.execute(session, storeId, menuId);
+				boolean flag = false;
+				for (int i = 0; i < carts.size(); i++) {
+					// 장바구니에 이미 들어있는 메뉴를 다시 넣는 경우
+					// 해당 메뉴는 담지 못하도록 막음
+					if (carts.get(i).getMenuId() == menuId) {
+						flag = true;
+					}
+				}
+
+				if (flag == false) {
+					insertService.execute(session, storeId, menuId);
+					map.put("msg2", "장바구니에 등록되었습니다!!");
+				}
+				else {
+					map.put("msg2", "이미 장바구니에 등록되어있는 메뉴입니다.");
+				}
 			}
 			else {
 				session.removeAttribute("carts");
@@ -81,9 +97,7 @@ public class CartController {
 				map.put("msg1", "이전 매장의 장바구니 기록은 사라집니다.");
 			}
 		}
-		
 		map.put("result", true);
-		map.put("msg2", "장바구니에 등록되었습니다!!");
 		return map;
 	}
 

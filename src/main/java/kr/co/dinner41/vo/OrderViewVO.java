@@ -1,8 +1,12 @@
 package kr.co.dinner41.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class OrderViewVO {
+public class OrderViewVO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private int order_id;
 	private Timestamp order_reserve_date;
 	private int price;
