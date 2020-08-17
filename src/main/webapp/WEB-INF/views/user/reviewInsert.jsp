@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -28,6 +30,9 @@
         }
         #star_grade a.on{
             color: red;
+        }
+        #star_grade a:hover{
+            cursor: pointer;
         }
     </style>
 
@@ -65,7 +70,7 @@
                 <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -89,46 +94,59 @@
     <hr/>
 
     <div class="container-fluid">
-        <h5>식당이름 : <span>뽀식이네 감자탕</span></h5>
+        <h5>식당이름 : <span><c:out value="${store.name}"></c:out></span></h5>
         <div>
-            <div class="row">
-                <div class="col-3">주문 메뉴 :</div>
-                <div class="col-3">뼈해장국</div>
-                <div class="col-2">3개</div>
-                <div class="col-4">100000000원</div>
-            </div>
-            <div class="row">
-                <div class="col-3">주문 메뉴 :</div>
-                <div class="col-3">뼈해장국</div>
-                <div class="col-2">3개</div>
-                <div class="col-4">100000000원</div>
-            </div>
+            <c:forEach var="vo" items="${menus}">
+                <div class="row">
+                    <div class="col-3">주문 메뉴 :</div>
+                    <div class="col-3">${vo.menuName}</div>
+                    <div class="col-2">${vo.menuAmount}개</div>
+                    <div class="col-4">${vo.menuTotalPrice}원</div>
+                </div>
+            </c:forEach>
         </div>
     </div>
+
     <hr/>
 
-    <div class="container-fluid">
-        <p>식사는 어떠셨나요? 별점으로 만족도를 알려주세요</p>
+    <form class="container-fluid" method="post">
+        <span>식사는 어떠셨나요? 별점으로 만족도를 알려주세요</span>
         <p id="star_grade">
-            <a href="#">★</a>
-            <a href="#">★</a>
-            <a href="#">★</a>
-            <a href="#">★</a>
-            <a href="#">★</a>
+            <a id="1">★</a>
+            <a id="2">★</a>
+            <a id="3">★</a>
+            <a id="4">★</a>
+            <a id="5">★</a>
         </p>
+        <input type="hidden" name="score" value="0" id="score">
         <script>
             $('#star_grade a').click(function(){
                 $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */
                 $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
                 return false;
             });
+            $('#1').click(function (){
+               $('#score').val(1);
+            });
+            $('#2').click(function (){
+                $('#score').val(2);
+            });
+            $('#3').click(function (){
+                $('#score').val(3);
+            });
+            $('#4').click(function (){
+                $('#score').val(4);
+            });
+            $('#5').click(function (){
+                $('#score').val(5);
+            });
         </script>
-        <textarea class="form-control" rows="7" id="review_content"></textarea>
-    </div>
-    <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success two_button" id="review_button">리뷰등록</button>
-        <button type="button" class="btn btn-outline-success two_button float-right" id="cancel_button">등록취소</button>
-    </div>
+        <textarea class="form-control" rows="7" id="review_content" name="content"></textarea>
+        <div class="margin_first">
+            <button type="submit" class="btn btn-outline-success two_button" id="review_button">리뷰등록</button>
+            <button type="button" class="btn btn-outline-success two_button float-right" id="cancel_button">등록취소</button>
+        </div>
+    </form>
 </div>
 <hr/>
 <div class="last_block"></div>

@@ -3,16 +3,12 @@ package kr.co.dinner41.command;
 public class ReviewInsertCommand {
     private String score;
     private String content;
-    private String storeId;
-    private String orderId;
 
     public ReviewInsertCommand(){}
 
-    public ReviewInsertCommand(String score, String content, String storeId, String orderId) {
+    public ReviewInsertCommand(String score, String content) {
         this.score = score;
         this.content = content;
-        this.storeId = storeId;
-        this.orderId = orderId;
     }
 
     public String getScore() {
@@ -31,19 +27,11 @@ public class ReviewInsertCommand {
         this.content = content;
     }
 
-    public String getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    @Override
+    public String toString() {
+        return "ReviewInsertCommand{" +
+                "score='" + score + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

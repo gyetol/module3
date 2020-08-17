@@ -4,6 +4,7 @@ import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.ReviewInsertException;
 import kr.co.dinner41.exception.ReviewSelectException;
 import kr.co.dinner41.mapper.ReviewMapper;
+import kr.co.dinner41.vo.ReveiwMenuVO;
 import kr.co.dinner41.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,7 +42,7 @@ public class ReviewDaoImpl implements ReviewDao{
     @Override
     public List<ReviewVO> selectedByStoreId(int page, int pageSize, int storeId) throws ReviewSelectException {
         List<ReviewVO> list;
-        String sql = "SELECT * FROM review_view WHERE store_id = ?;";
+        String sql = "SELECT * FROM review_view WHERE store_id = ? ORDER BY review_date DESC;";
         list = template.query(sql, new ReviewMapper(), storeId);
         return list;
     }
@@ -77,5 +78,29 @@ public class ReviewDaoImpl implements ReviewDao{
         return (list.size() == 0? 0:list.get(0));
     }
 
+    @Override
+    public int getStoreIdForReview(int orederId) throws ReviewException {
+        List<Integer> list = template.query("select distinct store_id from menu_to_orders WHERE order_id = ?;", new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("store_id");
+            }
+        }, orederId);
+        return (list.size() == 0? 0:list.get(0));
+    }
 
+    @Override
+    public List<ReveiwMenuVO> getMenus(int orderId) throws ReviewException {
+        String sql = "select menu_name, menu_to_order_amount, menu_price from menu_to_orders, menus WHERE order_id = ? AND menus.menu_id=menu_to_orders.menu_id;";
+        List<ReveiwMenuVO> list = template.query(sql, new RowMapper<ReveiwMenuVO>() {
+            @Override
+            public ReveiwMenuVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+                String menuName = rs.getString("menu_name");
+                int menuAmount = rs.getInt("menu_to_order_amount");
+                int menuPrice = rs.getInt("menu_price");
+                return new ReveiwMenuVO(menuName, menuAmount, menuPrice,menuPrice*menuAmount);
+            }
+        }, orderId);
+        return list;
+    }
 }

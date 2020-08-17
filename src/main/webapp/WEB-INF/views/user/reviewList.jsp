@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
@@ -96,9 +96,10 @@
             <c:forEach var="vo" items="${list}">
                 <li class="list-group-item">
                     <h5 class="text-center">
-                        <span><c:out value="${vo.score}"></c:out>점이에요!</span>&nbsp;&nbsp;
+                        <span><c:out value="${vo.score}"></c:out>점이에요!</span>
                     </h5>
                     <div class="card card-body">
+                        주문 번호 : <c:out value="${vo.id}"></c:out>&nbsp;&nbsp;&nbsp;&nbsp;
                         주문 일자 : <c:out value="${vo.date}"></c:out>
                         <br/>
                         <span style="font-weight: bold"><c:out value="${vo.content}"></c:out></span>

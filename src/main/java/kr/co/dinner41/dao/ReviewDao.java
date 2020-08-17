@@ -2,6 +2,7 @@ package kr.co.dinner41.dao;
 
 import kr.co.dinner41.exception.QnAException;
 import kr.co.dinner41.exception.ReviewException;
+import kr.co.dinner41.vo.ReveiwMenuVO;
 import kr.co.dinner41.vo.ReviewVO;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface ReviewDao {
     List<ReviewVO> selectedAll() throws ReviewException;
     int getTotalRecordByStoreId(int storeId) throws ReviewException;
     double getAverageScore(int storeId) throws ReviewException;
+    int getStoreIdForReview(int orederId) throws ReviewException;
+    List<ReveiwMenuVO> getMenus(int orderId) throws ReviewException;
 }
