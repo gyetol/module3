@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import kr.co.dinner41.service.review.ReviewListService;
+import kr.co.dinner41.service.store.*;
+import kr.co.dinner41.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,15 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreException;
-import kr.co.dinner41.service.store.StoreInsertService;
-import kr.co.dinner41.service.store.StoreListByManagerService;
-import kr.co.dinner41.service.store.StoreListByUserService;
-import kr.co.dinner41.service.store.StoreViewByStoreService;
-import kr.co.dinner41.vo.StoreCategoryVO;
-import kr.co.dinner41.vo.StoreStateVO;
-import kr.co.dinner41.vo.StoreVO;
-import kr.co.dinner41.vo.StoreListByUserViewVO;
-import kr.co.dinner41.vo.UserVO;
 
 @Controller
 @RequestMapping()
@@ -44,6 +38,14 @@ public class StoreController {
 	@Autowired
 	@Qualifier("storeListByManagerService")
 	StoreListByManagerService storeListByManagerService;
+
+	@Autowired
+	@Qualifier("storeViewByUserService")
+	StoreViewByUserService storeViewByUserService;
+
+	@Autowired
+	@Qualifier("reviewListService")
+	ReviewListService reviewListService;
 	
 	@RequestMapping(value="/sm/store",method=RequestMethod.GET)
 	public String insert(HttpSession session,Model model) {
@@ -133,5 +135,26 @@ public class StoreController {
 		return "manage/storeList";
 	}
 
-	
+	@RequestMapping(value = "/gm/{id}/{type}/store", method = RequestMethod.GET)
+	public String ViewByUser(@PathVariable("id") String id, HttpSession session, Model model, @PathVariable("type") String type){
+		int storeId = Integer.parseInt(id);
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		model.addAttribute("address", user.getAddress());
+
+		StoreVO store = storeViewByUserService.execute(storeId);
+		model.addAttribute("store", store);
+
+		double total_score = reviewListService.getTotalScore(storeId);
+		model.addAttribute("score", total_score);
+
+		model.addAttribute("type", type);
+
+		List<MenuVO> list = storeViewByUserService.getMenus(storeId);
+		model.addAttribute("list", list);
+
+		List<ReviewVO> reviews = reviewListService.execute(storeId, 1);
+		model.addAttribute("reviews", reviews);
+
+		return "user/storeView";
+	}
 }

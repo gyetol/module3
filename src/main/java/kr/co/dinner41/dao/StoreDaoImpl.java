@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import kr.co.dinner41.mapper.MenuMapper;
+import kr.co.dinner41.vo.MenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -407,6 +409,14 @@ public class StoreDaoImpl implements StoreDao {
 			throw new StoreSelectFailedException(e.getMessage());
 		}
 		return (storeListByUsers.size()>0? storeListByUsers:null);
+	}
+
+	@Override
+	public List<MenuVO> getMenus(int storeId) throws StoreException {
+		List<MenuVO> list = null;
+		String sql = "select * from menu_view WHERE store_id = ?";
+		list = jTemp.query(sql, new MenuMapper(), storeId);
+		return list;
 	}
 
 }
