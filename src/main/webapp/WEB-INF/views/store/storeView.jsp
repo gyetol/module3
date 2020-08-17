@@ -87,49 +87,49 @@
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
             <div id="storeNumber" class="card card-body">
-                2013061307
+                ${store.businessNumber}
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeName">매장명</label>
             <div id="storeName" class="card card-body">
-                뽀식이네 감자탕
+                ${store.name}
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeCategory">매장 대표 카테고리</label>
             <div id="storeCategory" class="card card-body">
-                한식
+                ${store.category.name}
             </div>
         </div>
 
         <div class="form-group">
             <label for="address">매장주소</label>
             <div id="address" class="card card-body">
-                서울특별시 관악구 봉천동...
+                ${store.address} ${store.subAddress}
             </div>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
             <div id="phoneNumber" class="card card-body">
-                02-123-4567
+                ${store.phone}
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeTime">매장 운영 시간</label>
             <div id="storeTime" class="card card-body">
-                오후 9시붜터 12시까지
+                ${store.operateTime}
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputContent">매장 설명</label>
             <div id="inputContent" class="card card-body">
-                매우 맛있는 해장국을 판답니다.
+                ${store.introduction}
             </div>
         </div>
 

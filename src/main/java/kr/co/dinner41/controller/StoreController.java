@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
+import kr.co.dinner41.service.store.StoreListByUserService;
+import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.vo.StoreCategoryVO;
 import kr.co.dinner41.vo.StoreStateVO;
 import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -28,14 +31,31 @@ public class StoreController {
 	StoreInsertService storeInsertService;
 	
 	
+	@Autowired
+	@Qualifier("storeViewByStoreService")
+	StoreViewByStoreService storeViewByStoreService;
+	
+	@Autowired
+	@Qualifier("storeListByUserService")
+	StoreListByUserService storeListByUserService;
 	
 	@Autowired
 	@Qualifier("storeListByManagerService")
 	StoreListByManagerService storeListByManagerService;
 	
 	@RequestMapping(value="/sm/store",method=RequestMethod.GET)
-	public String insert(HttpSession session) {
-		return "store/storeRegister";
+	public String insert(HttpSession session,Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int userId = user.getId();
+		StoreVO store = null;
+		store = storeViewByStoreService.execute(userId);
+		
+		if(store==null) {
+			return "store/storeRegister";
+		}
+		
+		model.addAttribute("store",store);
+		return "store/storeView";
 	}
 	@RequestMapping(value="/sm/store",method=RequestMethod.POST)
 	public String insert(StoreInsertCommand command,Model model,HttpSession session) {
@@ -66,16 +86,31 @@ public class StoreController {
 		store.setIntroduction(command.getIntroduction());
 	
 		storeInsertService.execute(store);
-		return "login";
+		return "store/storeHome";
+	}
+	
+	@RequestMapping(value="/gm/{category}/{keyword}/{page}/store",method=RequestMethod.GET)
+	public String listByUser(@PathVariable("category") String category, @PathVariable("keyword") String keyword,
+							@PathVariable("page") String page, Model model, HttpSession session) {
+		int intPage = Integer.parseInt(page);
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		double userLatitude = user.getLatitude();
+		double userLongitude = user.getLongitude();
+		
+		List<StoreListByUserViewVO> storeListByUserViews =null;
+		storeListByUserViews = storeListByUserService.execute(category,keyword,userLatitude,userLongitude,intPage);
+		
+		model.addAttribute("category",category);
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("storeListByUserViews",storeListByUserViews);
+		
+		return "user/storeList";
 	}
 
 	@RequestMapping(value="/ad/{store-state-name}/{store-name}/{page}/store",method=RequestMethod.GET)
-
 	public String listByManager(@PathVariable("store-state-name") String storeStateName, @PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
 		int intPage = Integer.parseInt(page);
 		List<StoreVO> stores;
-		
-		System.out.println(storeStateName);
 		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
