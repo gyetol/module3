@@ -85,19 +85,20 @@
 
         <div class="form-group">
             <label for="menuAmount">재고 수량</label>
-            <input type="text" class="form-control" id="menuAmount" value="${menu.amount}">
+            <input type="text" class="form-control" id="menuAmount" value="${menu.amount}"/>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">메뉴 사진 첨부</label>
             <img src="${pageContext.request.contextPath}/resources/images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
             <div id="emailCheckLabel">
-                <input type="file" id="exampleFormControlInput1" value="${menu.photo}">
+                <input type="file" id="exampleFormControlInput1" value="${menu.photo}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputKind">제공방식</label>
+            <input type="text" class="form-control" name="type" id="type" value="${menu.type}">
             <select id="inputKind" class="form-control">
                 <option value="PAC">도시락</option>
                 <option value="MEA">조리키트</option>
@@ -112,7 +113,7 @@
 
         <div class="form-group">
             <label for="tag">메뉴 태그</label>
-            <input type="tel" class="form-control" id="tag"  readonly value="${menu.tag}">
+            <input type="tel" class="form-control" id="tag"  readonly value="${menu.tag}"/>
         </div>
 
         <div class="form-group">
