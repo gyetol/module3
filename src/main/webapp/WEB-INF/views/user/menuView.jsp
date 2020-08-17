@@ -55,7 +55,7 @@
 				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>

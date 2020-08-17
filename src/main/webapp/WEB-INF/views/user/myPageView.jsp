@@ -49,7 +49,7 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">현재 위치 기준</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">현재 위치 기준</a>
         </div>
     </div>
 
