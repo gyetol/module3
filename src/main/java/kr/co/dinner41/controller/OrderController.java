@@ -20,6 +20,7 @@ import kr.co.dinner41.service.order.OrderInsertService;
 import kr.co.dinner41.service.order.OrderListService;
 import kr.co.dinner41.service.order.OrderUpdateService;
 import kr.co.dinner41.service.order.OrderViewService;
+import kr.co.dinner41.vo.OrderVO;
 import kr.co.dinner41.vo.OrderViewVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -75,6 +76,14 @@ public class OrderController {
 		map.put("orderId", orderId);
 		map.put("price", price);
 		map.put("user", user);
+	
+		// 결제가 완료되면 완료된 메뉴들을 장바구니에서 제거
+		int clearMenuCount = Integer.parseInt(arrForOrder[1]);
+		String [] clearMenuIds = new String[clearMenuCount]; 
+		for (int i = 0; i < clearMenuCount; i++) {
+			clearMenuIds[i] = arrForOrder[i+2];
+		}
+		map.put("menuIds", clearMenuIds);
 		return map;
 	}
 	
@@ -83,19 +92,17 @@ public class OrderController {
 
 		// 세션의 사용자 정보를 통해서
 		// 주문번호, 주문시간, 매장명, 금액을 리스트로 출력
-		// List<OrderViewVO>를 request에 집어넣으면됌
+		// List<OrderViewVO>를 model에 집어넣으면됌
 		UserVO user = (UserVO)(session.getAttribute("loginUser"));
 		List<OrderViewVO> list = listService.execute(user.getId());
-		for (OrderViewVO vo : list) {
-			System.out.println(vo);
-		}
 		model.addAttribute("orderViews", list);
 		return "user/orderList";
 	}
 	
-	@RequestMapping(value = "/gm/{id}/order", method = RequestMethod.HEAD)
-	public String view(@PathVariable("id") int orderId) {
-		System.out.println("orderId: " + orderId);
+	@RequestMapping(value = "/gm/{id}/order/detail", method = RequestMethod.GET)
+	public String view(@PathVariable("id") int orderId, Model model) {
+		OrderVO order = viewService.execute(orderId);
+		model.addAttribute("order", order);
 		return "user/orderView";
 	}
 }

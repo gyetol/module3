@@ -35,7 +35,7 @@
         <!--첫번째 블록-->
         <div style="width: 80%; margin: 20pt auto auto;">
             <!--로고 이미지-->
-            <img src="/resourses/images/1인의만찬.png" width="70%" class="img-fluid" alt="no title"/>
+            <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" width="70%" class="img-fluid" alt="no title"/>
             <!--로그인 입력 폼-->
             <form style="text-align: left; margin-bottom: 15pt" method="post" action="login">
                 <!--이메일 입력란-->

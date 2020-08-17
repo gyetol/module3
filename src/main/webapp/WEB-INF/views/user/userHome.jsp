@@ -45,7 +45,9 @@
     </div>
 
     <!--장바구니 아이콘-->
+    <a href="${pageContext.request.contextPath}/gm/cart">
     <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    </a>
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -54,7 +56,7 @@
                 <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">결제내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/gm/1/order">결제내역</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">1:1 문의</a>

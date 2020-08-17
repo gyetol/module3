@@ -25,27 +25,40 @@ function clickOrder() {
 				var storePayNumber = data.storePayNumber;
 				var orderId = data.orderId;
 				var price = data.price;
-				
+				var menuIds = data.menuIds;
+
 				// 결제 api 함수 실행
 				alert("결제가 완료되었습니다!!");
-				window.location.href = "1/order";
+
+				// 결제가 완료된 메뉴들을 장바구니에서 삭제
+				$.ajax({
+					type : "DELETE",
+					url : "cart",
+					data : {
+						"arr" : menuIds
+					},
+					success : function(data) {
+						alert("결제가 완료된 메뉴들은 장바구니에서 삭제됩니다.");
+						window.location.href = "1/order";
+					}
+				});
 			}
 		});
 	});
 }
 
 function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr) {
-	IMP.init(storePayNumber);   // 매장식별번호
+	IMP.init(storePayNumber); // 매장식별번호
 	IMP.request_pay({
 		pg : 'inicis',
 		pay_method : 'card',
 		merchant_uid : 'merchant_' + new Date().getTime(),
-		name : orderId, 		// 주문번호
-		amount : price, 		// 결제 금액
-		buyer_email : email,    // 주문자 이메일
-		buyer_name : name, 		// 주문자 명
-		buyer_tel : phone, 		// 주문자 번호
-		buyer_addr : addr, 		// 주문자 주소
+		name : orderId, // 주문번호
+		amount : price, // 결제 금액
+		buyer_email : email, // 주문자 이메일
+		buyer_name : name, // 주문자 명
+		buyer_tel : phone, // 주문자 번호
+		buyer_addr : addr, // 주문자 주소
 		buyer_postcode : subAddr
 	}, function(rsp) {
 		if (rsp.success) {

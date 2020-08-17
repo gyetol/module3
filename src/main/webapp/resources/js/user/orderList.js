@@ -22,14 +22,12 @@ function clickOrderDetailView() {
 		var order = $(orders[i]);
 		order.find("#orderDetailView").click(function() {
 			var orderId = $(this).parents(".orderClass").data("orderid");
-			var http = new XMLHttpRequest();
-			http.open("HEAD", getContextPath() + "/gm/" + orderId + "/order");
-			http.send();
+			window.location = getContextPath() + "/gm/" + orderId + "/order/detail"
 		});
 	}
 }
 
 function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf("/", hostIndex + 1));
-};
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+}
