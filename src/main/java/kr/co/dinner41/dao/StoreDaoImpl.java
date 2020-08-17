@@ -1,27 +1,34 @@
 package kr.co.dinner41.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreDeleteFailedException;
 import kr.co.dinner41.exception.store.StoreException;
 import kr.co.dinner41.exception.store.StoreInsertFailedException;
 import kr.co.dinner41.exception.store.StoreSelectFailedException;
 import kr.co.dinner41.exception.store.StoreUpdateFailedException;
 import kr.co.dinner41.mapper.StoreMapper;
-import kr.co.dinner41.mapper.StoreWithDistanceMapper;
 import kr.co.dinner41.vo.OpenState;
 import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.StoreVO;
-import kr.co.dinner41.vo.StoreWithDistanceVO;
 
 @Repository("storeDao")
 public class StoreDaoImpl implements StoreDao {
 	@Autowired
 	private JdbcTemplate jTemp;
+	
+	@Autowired
+	@Qualifier("reviewDao")
+	ReviewDao reviewDao;
 	
 	private int searchDistance=1; //1km검색
 
@@ -321,14 +328,85 @@ public class StoreDaoImpl implements StoreDao {
 	public List<StoreListByUserViewVO> selectViewByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException{
 		int startPos = (page-1)*pageSize;
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from ");
-		//to do
-		return null;
+		sb.append("select distinct store_id,store_name,store_photo,");
+		sb.append("(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude) - ");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude)))) AS distance ");
+		sb.append("from store_view where store_category_name like '%"+categoryName+"%' ");
+		sb.append(" HAVING distance <=1 order by distance limit "+startPos+","+pageSize);
+		
+		String sql = sb.toString();
+		List<StoreListByUserViewVO> storeListByUsers =null;
+		try {
+			storeListByUsers=jTemp.query(sql, new RowMapper<StoreListByUserViewVO>() {
+
+				@Override
+				public StoreListByUserViewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					int storeId = rs.getInt("store_id");
+					String storeName = rs.getString("store_name");
+					String storePhoto= rs.getString("store_photo");
+					double distance = rs.getDouble("distance");
+					distance = distance*1000;
+					int intDistance = (int)distance;
+					double reviewScoreAvg=0.0;
+					try {
+						reviewScoreAvg = reviewDao.getAverageScore(storeId);
+						reviewScoreAvg = Double.parseDouble(String.format("%.2f",reviewScoreAvg));
+					} catch (ReviewException e) {
+						e.printStackTrace();
+					}
+					StoreListByUserViewVO storeListByUsers = new StoreListByUserViewVO(storeId,storeName,storePhoto,intDistance,reviewScoreAvg);
+					return storeListByUsers;
+				}
+				
+			});
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (storeListByUsers.size()>0? storeListByUsers:null);
 	}
+
 	
 	public List<StoreListByUserViewVO> selectViewByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException{
-		//to do
-		return null;
+		int startPos = (page-1)*pageSize;
+		StringBuffer sb = new StringBuffer();
+		sb.append("select distinct store_id,store_name,store_photo,");
+		sb.append("(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude) - ");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude)))) AS distance ");
+		sb.append("from (select * from stores inner join menus using(store_id) ");
+		sb.append("where store_name like '%"+keyword+"%' or menu_tag like '%"+keyword+"%') AS View_1 ");
+		sb.append("having distance <= 1 order by distance limit "+startPos+","+pageSize);
+
+		String sql = sb.toString();
+		List<StoreListByUserViewVO> storeListByUsers =null;
+		try {
+			storeListByUsers=jTemp.query(sql, new RowMapper<StoreListByUserViewVO>() {
+
+				@Override
+				public StoreListByUserViewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					int storeId = rs.getInt("store_id");
+					String storeName = rs.getString("store_name");
+					String storePhoto= rs.getString("store_photo");
+					double distance = rs.getDouble("distance");
+					distance = distance*1000;
+					int intDistance = (int)distance;
+					double reviewScoreAvg=0.0;
+					try {
+						reviewScoreAvg = reviewDao.getAverageScore(storeId);
+						reviewScoreAvg = Double.parseDouble(String.format("%.2f",reviewScoreAvg));
+					} catch (ReviewException e) {
+						e.printStackTrace();
+					}
+					StoreListByUserViewVO storeListByUsers = new StoreListByUserViewVO(storeId,storeName,storePhoto,intDistance,reviewScoreAvg);
+					return storeListByUsers;
+				}
+				
+			});
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (storeListByUsers.size()>0? storeListByUsers:null);
 	}
 
 }

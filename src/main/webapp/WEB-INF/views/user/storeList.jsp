@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -86,94 +87,33 @@
 <hr style="margin: 0"/>
 
 <div>
-    <div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-                    </div>
-                    <div class="col-9" style="padding-left: 0">
-                        <h5>식당이름&nbsp;&nbsp;<span class="badge badge-primary">300m</span></h5>
-                        <div>
-                            평점 : <span>★★★★★</span>
-                            <br/>
-                            대표메뉴 : <span>까르보나라 스파게티</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-                    </div>
-                    <div class="col-9" style="padding-left: 0">
-                        <h5>식당이름&nbsp;&nbsp;<span class="badge badge-primary">300m</span></h5>
-                        <div>
-                            평점 : <span>★★★★★</span>
-                            <br/>
-                            대표메뉴 : <span>까르보나라 스파게티</span>
-
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-                    </div>
-                    <div class="col-9" style="padding-left: 0">
-                        <h5>식당이름&nbsp;&nbsp;<span class="badge badge-primary">300m</span></h5>
-                        <div>
-                            평점 : <span>★★★★★</span>
-                            <br/>
-                            대표메뉴 : <span>까르보나라 스파게티</span>
-
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-                    </div>
-                    <div class="col-9" style="padding-left: 0">
-                        <h5>식당이름&nbsp;&nbsp;<span class="badge badge-primary">300m</span></h5>
-                        <div>
-                            평점 : <span>★★★★★</span>
-                            <br/>
-                            대표메뉴 : <span>까르보나라 스파게티</span>
-
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="../../images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-                    </div>
-                    <div class="col-9" style="padding-left: 0">
-                        <h5>식당이름&nbsp;&nbsp;<span class="badge badge-primary">300m</span></h5>
-                        <div>
-                            평점 : <span>★★★★★</span>
-                            <br/>
-                            대표메뉴 : <span>까르보나라 스파게티</span>
-
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-    </div>
+	<c:if test="${empty stores}">
+		등록된 매장이 없습니다.
+	</c:if>
+	
+	<c:if test="${not empty stores}">
+		<c:forEach items="${stores}" var="store" varStatus="i">
+	    	<div>
+		        <ul class="list-group list-group-flush">
+		            <li class="list-group-item">
+		                <div class="row">
+		                    <div class="col-3">
+		                        <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
+		                    </div>
+		                    <div class="col-9" style="padding-left: 0">
+		                        <h5><c:out value="${store.storeName}"/>&nbsp;&nbsp;<span class="badge badge-primary"><c:out value="${store.distance}m"/></span></h5>
+		                        <div>
+		                            평점 : <span><c:out value="${store.reviewScore}"/></span>
+		                            <br/>
+		                            검색어 : <span>${keyword}</span>
+		                        </div>
+		                    </div>
+		                </div>
+		            </li>
+		        </ul>
+	   		 </div>
+	   	</c:forEach>
+	</c:if>
     <hr style="margin-top: 0"/>
     <div style="text-align: center">
         <div class="btn-group" role="group">
