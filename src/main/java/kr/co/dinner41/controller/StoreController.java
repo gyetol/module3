@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.dinner41.command.StoreInsertCommand;
+import kr.co.dinner41.exception.ReviewException;
+import kr.co.dinner41.exception.store.StoreException;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
@@ -98,11 +100,17 @@ public class StoreController {
 		double userLongitude = user.getLongitude();
 		
 		List<StoreListByUserViewVO> storeListByUserViews =null;
-		storeListByUserViews = storeListByUserService.execute(category,keyword,userLatitude,userLongitude,intPage);
+		try {
+			storeListByUserViews = storeListByUserService.execute(category,keyword,userLatitude,userLongitude,intPage);
+		} catch (StoreException | ReviewException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		System.out.println(storeListByUserViews);
 		model.addAttribute("category",category);
 		model.addAttribute("keyword",keyword);
-		model.addAttribute("storeListByUserViews",storeListByUserViews);
+		model.addAttribute("stores",storeListByUserViews); //이름주의! stores로 담아놓음
 		
 		return "user/storeList";
 	}
