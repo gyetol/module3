@@ -5,7 +5,8 @@ $(document).ready(function() {
 function insertCart() {
 	var storeId = $(".container-fluid").data("storeid");
 	var menuId = $(".container-fluid").data("menuid");
-	
+
+	// 장바구니에 메뉴 등록
 	$("#insertCart").click(function() {
 		$.ajax({
 			type : "POST",

@@ -81,6 +81,7 @@ public class CartController {
 				map.put("msg1", "이전 매장의 장바구니 기록은 사라집니다.");
 			}
 		}
+		
 		map.put("result", true);
 		map.put("msg2", "장바구니에 등록되었습니다!!");
 		return map;

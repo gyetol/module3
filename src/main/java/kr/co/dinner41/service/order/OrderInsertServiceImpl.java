@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.dinner41.dao.Menu2OrderDao;
 import kr.co.dinner41.dao.OrderDao;
+import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.vo.Menu2OrderVO;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.OrderVO;
@@ -28,8 +29,12 @@ public class OrderInsertServiceImpl implements OrderInsertService {
 	@Qualifier("menu2orderDao")
 	private Menu2OrderDao m2oDao;
 
+	@Autowired
+	@Qualifier("storeDao")
+	private StoreDao sDao;
+
 	@Override
-	public void execute(String[] arrForOrder, String[] arrForOrder2, int userId, int getTime, int payTotal) {
+	public String[] execute(String[] arrForOrder, String[] arrForOrder2, int userId, int getTime, int payTotal) {
 		OrderVO order = new OrderVO();
 		UserVO user = new UserVO();
 		user.setId(userId);
@@ -49,7 +54,6 @@ public class OrderInsertServiceImpl implements OrderInsertService {
 		// 주문 내역을 데이터베이스에 저장
 		oDao.insert(order);
 
-
 		Menu2OrderVO menu2order = new Menu2OrderVO();
 		StoreVO store = new StoreVO();
 		int storeId = Integer.parseInt(arrForOrder[0]);
@@ -68,5 +72,11 @@ public class OrderInsertServiceImpl implements OrderInsertService {
 			// 주문 목록 내역을 데이터베이스에 저장
 			m2oDao.insert(menu2order);
 		}
+
+		// 매장의  결제식별번호를 리턴함
+		String [] payNumberAndOrderId = new String[2];
+		payNumberAndOrderId[0] = sDao.selectById(storeId).getPayNumber();
+		payNumberAndOrderId[1] = order.getId() + "";
+		return payNumberAndOrderId;
 	}
 }
