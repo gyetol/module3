@@ -15,6 +15,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -28,6 +29,9 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
+<script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <script src="${pageContext.request.contextPath}/resources/js/store/menuView.js"></script>
@@ -113,7 +117,7 @@
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="offerType">제공방식</label>
             <div class="card card-body">
-                <input type="text" class="form-control" name="offerType.name" id="offerType" readonly value="${menu.offerType.name}">
+                <input type="text" class="form-control" name="offerType.name" id="menuOfferType"  readonly value="${menu.offerType.name}">
             </div>
         </div>
 
@@ -139,14 +143,15 @@
             </div>
         </div>
         
-          <a href="${pageContext.request.contextPath}/sm/menu">
+         <a href="javascript:history.back()">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>
           
         <button id="menuUpdate"  type="submit" class="btn btn-success three_button">수정하기</button>
          
-        <button id="menuDelete" type="button" class="btn btn-success three_button" >삭제하기</button>
-        
+        <button id="menuDelete" type="button" class="btn btn-success three_button" method="delete" action="menu" >삭제하기</button>
+        <input type="hidden" id="storeId" name="storedId" value="${storeId}">
+        <input type="hidden" id="menuId" name="menuId" value="${menuId}">
       </form>
 
     </div>

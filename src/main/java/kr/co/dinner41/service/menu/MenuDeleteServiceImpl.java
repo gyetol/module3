@@ -17,8 +17,7 @@ public class MenuDeleteServiceImpl implements MenuDeleteService {
 	
 	@Override
 	public void execute(int storeId, int menuId) throws MenuException {
-		
-		
+		menuDao.delete(menuId, storeId);
 	}
 
 }
