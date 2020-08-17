@@ -1,10 +1,8 @@
 package kr.co.dinner41.service.review;
 
 import kr.co.dinner41.command.ReviewInsertCommand;
-import kr.co.dinner41.dao.OrderDaoImpl;
 import kr.co.dinner41.dao.ReviewDaoImpl;
 import kr.co.dinner41.dao.StoreDaoImpl;
-import kr.co.dinner41.dao.UserDaoImpl;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.ReviewInsertException;
 import kr.co.dinner41.vo.*;
@@ -20,9 +18,6 @@ public class ReviewInsertServiceImpl implements ReviewInsertService {
 
     @Autowired
     private StoreDaoImpl storeDao;
-
-    @Autowired
-    private OrderDaoImpl orderDao;
 
     @Override
     public void execute(ReviewInsertCommand command, UserVO user, int orderId) {
@@ -70,5 +65,15 @@ public class ReviewInsertServiceImpl implements ReviewInsertService {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public boolean isHaveReview(int orderId) {
+        try {
+            return reviewDao.isHaveReview(orderId);
+        } catch (ReviewException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

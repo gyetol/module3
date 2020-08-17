@@ -3,6 +3,7 @@ package kr.co.dinner41.dao;
 import java.util.List;
 
 import kr.co.dinner41.exception.store.StoreException;
+import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.OpenState;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.StoreListByUserViewVO;
@@ -26,4 +27,5 @@ public interface StoreDao {
 	List<StoreVO> selectAll(int page,int pageSize) throws StoreException;
 	List<StoreListByUserViewVO> selectViewByCategoryName(String categoryName, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException;
 	List<StoreListByUserViewVO> selectViewByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude,int page, int pageSize) throws StoreException;
+	List<MenuVO> getMenus(int storeId) throws StoreException;
 }

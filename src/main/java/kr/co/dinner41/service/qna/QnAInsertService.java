@@ -4,5 +4,5 @@ import kr.co.dinner41.command.QnAInsertCommand;
 import kr.co.dinner41.vo.UserVO;
 
 public interface QnAInsertService {
-    void execute(QnAInsertCommand command, UserVO user);
+    int execute(QnAInsertCommand command, UserVO user);
 }

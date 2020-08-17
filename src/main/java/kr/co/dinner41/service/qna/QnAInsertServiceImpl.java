@@ -20,7 +20,7 @@ public class QnAInsertServiceImpl implements QnAInsertService{
     private QnATypeDaoImpl qnATypeDao;
 
     @Override
-    public void execute(QnAInsertCommand command, UserVO user) {
+    public int execute(QnAInsertCommand command, UserVO user) {
         QnATypeVO qnATypeVO = null;
         try {
             qnATypeVO = qnATypeDao.selectById(command.getType());
@@ -35,10 +35,10 @@ public class QnAInsertServiceImpl implements QnAInsertService{
         qna.setContent(command.getContent());
 
         try {
-            qnADao.insert(qna);
+            return qnADao.insert(qna);
         } catch (QnAException e) {
             e.printStackTrace();
         }
+        return 0;
     }
-
 }

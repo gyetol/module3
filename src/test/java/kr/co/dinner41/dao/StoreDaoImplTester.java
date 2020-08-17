@@ -10,8 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.dinner41.exception.store.StoreException;
 import kr.co.dinner41.vo.OpenState;
 import kr.co.dinner41.vo.StoreCategoryVO;
+import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.StoreStateVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserTypeVO;
@@ -264,6 +266,47 @@ public class StoreDaoImplTester {
 			}
 			for(StoreVO store:stores) {
 				System.out.println(store.getName());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void  selectViewByCategoryNameTest() {
+		StoreDao storeDao = ctx.getBean("storeDao",StoreDao.class);
+		List<StoreListByUserViewVO> stores =null;
+		try {
+			stores = storeDao.selectViewByCategoryName("%", 37.481978,126.958761,1,10);
+			if(stores==null) {
+				System.out.println("매장들을 불러오지 못함");
+			}
+			for(StoreListByUserViewVO store:stores) {
+				System.out.println(store.getStoreName());
+				System.out.println(store.getReviewScore());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Ignore
+	@Test
+	public void  selectViewByStoreNameOrMenuNameTest() {
+		StoreDao storeDao = ctx.getBean("storeDao",StoreDao.class);
+		List<StoreListByUserViewVO> stores =null;
+		try {
+			stores = storeDao.selectViewByStoreNameOrMenuName("%", 37.481978,126.958761,1,5);
+			if(stores==null) {
+				System.out.println("매장들을 불러오지 못함");
+			}
+			for(StoreListByUserViewVO store:stores) {
+				System.out.println(store.getStoreName());
+				System.out.println(store.getReviewScore());
 			}
 		}
 		catch(Exception e) {

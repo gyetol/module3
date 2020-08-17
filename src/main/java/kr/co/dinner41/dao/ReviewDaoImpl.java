@@ -103,4 +103,17 @@ public class ReviewDaoImpl implements ReviewDao{
         }, orderId);
         return list;
     }
+
+    @Override
+    public boolean isHaveReview(int orderId) throws ReviewException {
+        String sql ="select review_id from reviews WHERE order_id_temp = ?;";
+
+        List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("review_id");
+            }
+        }, orderId);
+        return (list.size() == 0? false:true);
+    }
 }

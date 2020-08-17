@@ -25,16 +25,27 @@ $(document).ready(function(){
 		     if (status === kakao.maps.services.Status.OK) { //정상 검색
 
 		    	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    	 var latitude=coords.getLat();
-		    	 var longitude=coords.getLng();
-		    	 alert("latitude:"+latitude+",longitude:"+longitude);
+		    	 var lat=coords.getLat();
+		    	 var lng=coords.getLng();
+		    	 alert(lat);
+		    	 alert(lng);
+		    	 //alert("latitude:"+lat+",longitude:"+lng);
+		    	 var latitude=document.getElementById('user_latitude');
+		    	 latitude.value=lat;
+		    	 var longitude=document.getElementById('user_longitude');
+		    	 longitude.value=lng;
+		    	 //alert(latitude.value);
+		    	 //alert(longitude.value);
+		    	 $('#register_form').submit();
+		    	 /*
 		    	 $('#user_latitude').val(""+latitude);
 		    	 const la=$('#user_latitude');
 		    	 alert(""+la);
 		    	 $('#user_longitude').val(""+longitude);
+		    	 */
 		    } 
 		});    
 		
-		$('#register_form').submit();
+		
 	})
 });

@@ -21,7 +21,7 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 	private UserDao userDao;
 
 	@Override
-	public UserVO execute(String password,UserUpdateCommand command, HttpSession session) throws UserException,NumberFormatException {
+	public UserVO execute(UserUpdateCommand command, HttpSession session) throws UserException,NumberFormatException {
 		String name=command.getName();
 		String phone=command.getPhone1()+command.getPhone2()+command.getPhone3();
 		String address=command.getAddress();
@@ -37,9 +37,6 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 		UserVO targetUser=userDao.selectById(loginUserId); //NoSuchUserException
 		if(targetUser==null) {
 			throw new NoSuchUserException();
-		}
-		if(!targetUser.getPassword().equals(password)) {
-			throw new WrongPasswordException();
 		}
 		
 		targetUser.setName(name);

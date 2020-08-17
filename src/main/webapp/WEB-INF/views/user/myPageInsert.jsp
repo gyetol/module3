@@ -19,9 +19,13 @@
 	<!-- DaumPostcode import -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-	<script src="${pageContext.request.contextPath }/resources/js/user/mypageInsert.js"></script>
+	<!-- kakaoMap Api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+	<script src="${pageContext.request.contextPath }/resources/js/user/mypageInsert.js"></script>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
 
     <title>My Page</title>
@@ -47,7 +51,7 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath }/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -85,27 +89,35 @@
     <hr/>
 
     <!--내정보 수정 폼-->
-<form action="/mypage" method="POST">
+<form action="${pageContext.request.contextPath }/mypage" id="update_form" method="post">
     <div class="container-fluid">
 
         <div class="form-group">
             <label for="userName">이름</label>
-            <input type="text" name="name"class="form-control " id="userName" >
+            <input type="text" name="name" class="form-control " id="userName" value="${loginUser.name }">
         </div>
 
         <div class="form-group">
             <label for="userEmail">이메일</label>
-            <input type="email" name="email" class="form-control" id="userEmail" readonly>
+            <input type="email" name="email" class="form-control" id="userEmail" value="${loginUser.email }" readonly>
         </div>
+<%
+	kr.co.dinner41.vo.UserVO user=(kr.co.dinner41.vo.UserVO)session.getAttribute("loginUser");
+	String phone=user.getPhone();
+	int phoneLength=phone.length();
+	String phone1=phone.substring(0, 3);
+	String phone2=phone.substring(3, phoneLength-4);
+	String phone3=phone.substring(phoneLength-4,phoneLength);
+%>
 
         <div class="form-group">
             <label for="phoneNumber">전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" name="phone1" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" >
+                <input type="tel" value="<%=phone1 %>" name="phone1" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" >
                 <p style="width: 5% ;float: left;text-align: center">-</p>
-                <input type="tel" name="phone2" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" >
+                <input type="tel" value="<%=phone2 %>" name="phone2" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" >
                 <p style="width: 5% ;float: left ; text-align: center">-</p>
-                <input type="tel" name="phone3" class="form-control" id="phoneNumber3" style="width: 30% ;" >
+                <input type="tel" value="<%=phone3 %>" name="phone3" class="form-control" id="phoneNumber3" style="width: 30% ;" >
             </div>
         </div>
 
@@ -113,8 +125,8 @@
             <label for="address">거주지</label>
             <div id="address">
                 <button type="button" class="btn btn-success two_button" id="search_button">주소 찾기</button>
-                <input type="text" name="address" class="form-control margin_up" placeholder="주소" id="user_address"/>
-                <input type="text" name="subAddress" class="form-control margin_up" placeholder="상세주소" id="user_sub_address"/>
+                <input type="text" name="address" value="${loginUser.address }" class="form-control margin_up" placeholder="주소" id="user_address"/>
+                <input type="text" name="subAddress" value="${loginUser.subAddress }" class="form-control margin_up" placeholder="상세주소" id="user_sub_address"/>
 				<div id="wrap" style="display:none;border:2px solid #CFE3A1;width:503px;height:300px;margin:5px 0;position:absolute; overflow:auto;"></div>
 				<input type="hidden" name="latitude" id="user_latitude" name="latitude" value=""/>
 				<input type="hidden" name="longitude" id="user_longitude" name="longitude" value=""/>
@@ -149,7 +161,7 @@
         </div>
 
         <div class="margin_first">
-            <button type="submit" class="btn btn-success two_button">수정완료</button>
+            <button type="button" id="complete_update_button" class="btn btn-success two_button">수정완료</button>
             <button type="button" id="goBackButton" class="btn btn-success two_button float-right">수정취소</button>
         </div>
     </div>

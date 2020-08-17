@@ -17,4 +17,5 @@ public interface ReviewDao {
     double getAverageScore(int storeId) throws ReviewException;
     int getStoreIdForReview(int orederId) throws ReviewException;
     List<ReveiwMenuVO> getMenus(int orderId) throws ReviewException;
+    boolean isHaveReview(int orderId) throws  ReviewException;
 }
