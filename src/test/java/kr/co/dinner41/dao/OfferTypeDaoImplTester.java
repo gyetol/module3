@@ -43,7 +43,7 @@ public class OfferTypeDaoImplTester {
     }
 
  
-@Ignore
+
     @Test
     public void testSelectById() {
         String id = "PAC";

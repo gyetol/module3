@@ -64,7 +64,7 @@ public class MenuController {
 	    @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
 	    public String insert(HttpSession session, Model model){
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
-	    	
+	    	System.out.println("GET");
 	    	if (user.getType().getId().equals("AD")) {
 	    		return "redirect:/";
 	    	}
@@ -135,14 +135,16 @@ public class MenuController {
             
 	   }
 
+	
 	    @RequestMapping(value = "/sm/menu", method = RequestMethod.PUT)
 	    public String update(MenuUpdateCommand menu, StoreVO store, HttpSession session){
-	    	
+	    	System.out.println("MenuUpdateCommand: " + menu);
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
-	    	updateService.execute(menu,user);
-	        return "store/menuList";
+	    	updateService.execute(menu, user);
+	        return "store/menuModify";
 	    }
 	    
+	 
 	    @RequestMapping(value = "/{storeId}/{menuId}/menu", method = RequestMethod.GET)
 	    public String view(@PathVariable("storeId")String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model){
 	    	
