@@ -25,8 +25,8 @@ public class ReviewController {
     @Qualifier("reviewListService")
     ReviewListService listService;
 
-    @RequestMapping(value = "/gm/review", method = RequestMethod.GET)
-    public String insert(HttpSession session){
+    @RequestMapping(value = "gm/{orderId}/review", method = RequestMethod.GET)
+    public String insert(HttpSession session, @PathVariable("orderId") String orderId, Model model){
         UserVO user = (UserVO) session.getAttribute("loginUser");
         if (user == null){
             return "redirect:/";
@@ -36,17 +36,26 @@ public class ReviewController {
         if (!userType.equals("GM")){
             return "redirect:/";
         }
+
+        int order_id = Integer.parseInt(orderId);
+        StoreVO store = insertService.getStore(order_id);
+
+        List<ReveiwMenuVO> menus = insertService.getMenus(order_id);
+
+        model.addAttribute("store", store);
+        model.addAttribute("menus", menus);
         return "user/reviewInsert";
     }
 
-    @RequestMapping(value = "/gm/review", method = RequestMethod.POST)
-    public String insert(ReviewInsertCommand command, HttpSession session){
+    @RequestMapping(value = "gm/{orderId}/review", method = RequestMethod.POST)
+    public String insert(ReviewInsertCommand command, HttpSession session, @PathVariable("orderId") String orderId){
         UserVO user = (UserVO) session.getAttribute("loginUser");
-        insertService.execute(command, user);
-        return "user/reviewInsert";
+        int int_order_id = Integer.parseInt(orderId);
+        insertService.execute(command, user, int_order_id);
+        return "redirect:/";
     }
 
-    @RequestMapping(value = "/gm/{storeId}/{page}/review", method = RequestMethod.GET)
+    @RequestMapping(value = "gm/{storeId}/{page}/review", method = RequestMethod.GET)
     public String list(@PathVariable("page") String page, Model model,
                        HttpSession session, @PathVariable("storeId") String storeId){
         String view_name = "redirect:/";
