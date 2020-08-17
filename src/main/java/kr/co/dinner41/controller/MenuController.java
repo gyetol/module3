@@ -3,6 +3,7 @@ package kr.co.dinner41.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dinner41.command.MenuInsertCommand;
@@ -202,12 +204,12 @@ public class MenuController {
 	    }
 	    
 	    @ResponseBody
-		@RequestMapping(value = "/sm/menu", method = RequestMethod.DELETE)
-	    public String delete(@PathVariable("storeId") String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model) throws MenuException {
+		@RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
+	    public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request) throws MenuException {
 	    	 
 	    	    int store_id = Integer.parseInt(storeId);
 	    	    int menu_id = Integer.parseInt(menuId);
-	    	    UserVO user = (UserVO)session.getAttribute("loginUser");
+	    	
 	    		deleteService.execute(store_id, menu_id);
 	    		
 	    		return "store/menuList";

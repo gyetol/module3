@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,46 +17,42 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <script src="${pageContext.request.contextPath }/resources/js/common/searchPassword.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
-    <title>login</title>
+    <title>searchPassword</title>
 </head>
 <body>
+
 <!--전체-->
 <div class="container-fluid">
+
     <!--한행-->
     <div class="row" style="text-align: center;">
+
         <!--첫번째 블록-->
         <div style="width: 80%; margin: 20pt auto auto;">
+
             <!--로고 이미지-->
-            <img src="/resourses/images/1인의만찬.png" width="70%" class="img-fluid" alt="no title"/>
+            <img src="${pageContext.request.contextPath }/resources/images/1인의만찬.png" width="70%" class="img-fluid" alt="no title"/>
+
             <!--로그인 입력 폼-->
-            <form:form commandName="command" cssStype="text-align:left;margin-bottom:15pt" method="post" action="login">
+            <form style="text-align: left; margin-bottom: 15pt" action="/password" method="post" id="search_password_form">
                 <!--이메일 입력란-->
                 <div class="form-group">
                     <!--라벨의 for와 이메일의 id가 일치해야함-->
                     <label for="user_email">이메일</label>
-                    <form:input path="email" name="email" cssClass="form-control" id="user_email"/>
+                    <input type="email" name="email" class="form-control" placeholder="name@example.com" id="user_email">
                 </div>
-                <!-- error message 출력 -->
-                <form:errors path="email" cssStyle=""/><br/>
-                <!--비밀번호 입력란-->
-                <div class="form-group">
-                    <!--라벨의 for와 이메일의 id가 일치해야함-->
-                    <label for="user_password">비밀번호</label>
-                    <form:input type="password" path="password" name="password" class="form-control" id="user_password"/>
-                </div>
-                <!-- error message출력 -->
-                <form:errors path="password"/><br/>
                 <!--전송 버튼-->
-                <button type="submit" class="btn btn-success btn-block" id="login_button">로그인</button>
-			</form:form>
-            <button type="button" class="btn btn-outline-success btn-block" id="password_button">비밀번호 찾기</button>
-            <button type="button" class="btn btn-outline-success btn-block" id="register_button">회원가입하기</button>
+                <button type="button" class="btn btn-success btn-block" id="password_button">임시 비밀번호 받기</button>
+            </form>
+
+            <button type="button" class="btn btn-outline-success btn-block margin_first" onclick="location.href='${pageContext.request.contextPath}'" id="login_page_button">로그인 페이지로 돌아가기</button>
+            <button type="button" class="btn btn-outline-success btn-block" onclick="location.href='${pageContext.request.contextPath}/register'" id="register_button">회원가입하기</button>
         </div>
     </div>
 </div>
 <div class="last_block"></div>
 </body>
-
 </html>
