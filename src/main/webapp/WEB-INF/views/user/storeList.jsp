@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>store</title>
 </head>
@@ -44,7 +44,7 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -95,21 +95,23 @@
 		<c:forEach items="${stores}" var="store" varStatus="i">
 	    	<div>
 		        <ul class="list-group list-group-flush">
-		            <li class="list-group-item">
-		                <div class="row">
-		                    <div class="col-3">
-		                        <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
-		                    </div>
-		                    <div class="col-9" style="padding-left: 0">
-		                        <h5><c:out value="${store.storeName}"/>&nbsp;&nbsp;<span class="badge badge-primary"><c:out value="${store.distance}m"/></span></h5>
-		                        <div>
-		                            평점 : <span><c:out value="${store.reviewScore}"/></span>
-		                            <br/>
-		                            검색어 : <span>${keyword}</span>
-		                        </div>
-		                    </div>
-		                </div>
+		        <a href ="${pageContext.request.contextPath}/gm/${store.storeId}/menu/store">
+		            <li class="list-group-item" >
+			                <div class="row">
+			                    <div class="col-3">
+			                        <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="no picture">
+			                    </div>
+			                    <div class="col-9" style="padding-left: 0">
+			                        <h5><c:out value="${store.storeName}"/>&nbsp;&nbsp;<span class="badge badge-primary"><c:out value="${store.distance}m"/></span></h5>
+			                        <div>
+			                            평점 : <span><c:out value="${store.reviewScore}"/></span>
+			                            <br/>
+			                            검색어 : <span>${keyword}</span>
+			                        </div>
+			                    </div>
+			                </div>
 		            </li>
+		            </a>
 		        </ul>
 	   		 </div>
 	   	</c:forEach>

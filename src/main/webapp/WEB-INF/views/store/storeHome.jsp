@@ -34,7 +34,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture"/>
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture"/>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
