@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +25,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
@@ -86,14 +87,17 @@
 
 <!-- storeId, menuId가 data로 세팅되어야함 -->
 <div class="container-fluid" data-storeId="38" data-menuId="55">
+
     <div class="container-fluid">
+    <form:form action="${pageContext.request.contextPath}/sm/menu" method="post">
         <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
-            <img src="../../categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
+            <img src="${pageContext.request.contextPath}/resources/images/categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
         </div>
 
         <div class="form-group">
             <label for="menuName">메뉴명</label>
             <div class="card card-body" name="name">
+            	<input type="hidden" name="_method" value="put"/>
             	<input type="text" class="form-control" id="menName" readonly value="${menu.name}">
             </div>
         </div>
@@ -101,20 +105,23 @@
         <div class="form-group">
             <label for="menuAmount">최대 수량</label>
             <div class="card card-body"  name="amount">
-            	<input type="text" class="form-control" id="menuAmount" readonly value="${menu.amount}">
+            	<input type="hidden" name="_method" value="put"/>
+            	<input type="text" class="form-control" id="menuAmount"  readonly value="${menu.amount}">
             </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="offerType">제공방식</label>
             <div class="card card-body"  name="type">
-                <input type="text" class="form-control" id="offerType" readonly value="${menu.type}">
+            	<input type="hidden" name="_method" value="put"/>
+                <input type="text" class="form-control" id="offerType" readonly value="${menu.offerType.name}">
             </div>
         </div>
 
         <div class="form-group">
             <label for="menuPrice">메뉴 가격</label>
             <div class="card card-body" name="price">
+            <input type="hidden" name="_method" value="put"/>
             <input type="text" class="form-control" id="menuPrice" readonly value="${menu.price}">
             </div>
         </div>
@@ -122,7 +129,8 @@
         <div class="form-group">
             <label for="menuIntro">메뉴 설명</label>
             <div class="card card-body" id="menuIntro" name="introduction">
-             <input type="text" class="form-control" id="menuIntro" readonly value="${menu.introduction}">
+            <input type="hidden" name="_method" value="put"/>
+             <input type="text" class="form-control" id="menuIntro"  readonly value="${menu.description}">
 
             </div>
         </div>
@@ -130,18 +138,25 @@
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="menuNotice">메뉴 유의 사항</label>
             <div class="card card-body" id="menuNotice" name="notice">
+            <input type="hidden" name="_method" value="put"/>
              <input type="text" class="form-control" id="menuNotice" readonly value="${menu.notice}">
             </div>
         </div>
-        <a href="/sm//1/menu">
+        
+          <a href="${pageContext.request.contextPath}/sm/menu" method="post">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
+        </a>
+          
+          
+        <button id="menuUpdate"  type="submit" class="btn btn-success three_button">수정하기</button>
+         
         
-         <a href = "/dinner41/sm/menu">
-        <button id="menuUpdate"  type="button" class="btn btn-success three_button"  method="put" aciton="menu" >수정하기</button>
-        
-        <a href = " /sm/menu">
         <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" action="menu">삭제하기</button>
+        </a>
+      </form:form>
+
     </div>
+    
 </div>
 <hr/>
 <div class="last_block"></div>

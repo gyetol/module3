@@ -78,7 +78,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="text-left container-fluid" method="post" aciton="menu">
+    <form class="text-left container-fluid" method="post" aciton="/sm/menu">
 
         <div class="form-group">
             <label for="name">메뉴명</label>
@@ -130,8 +130,9 @@
 
         <button id ="menuWrite" type="submit" class="btn btn-success two_button">메뉴 등록하기</button>
         
-       <a href = " /s">
+       <a href = "/sm/{menu.store.name}/1/menu">
         <button id = "menuWriteCancel" type="button" class="btn btn-success two_button float-right">메뉴 등록 취소하기</button>
+    </a>
     </form>
 </div>
 <hr/>

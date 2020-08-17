@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>
 <!doctype html>
 <html>
 <head>
@@ -74,16 +75,16 @@
 <hr/>
 
 <div class="container-fluid" >
-    <form class="container-fluid text-left" method="put" aciton="menu">
+      <form class="text-left container-fluid" method="put" aciton="/sm/menu">
 
         <div class="form-group">
             <label for="menuName">메뉴명</label>
-            <input type="text" class="form-control" id="menuName"/>
+            <input type="text" class="form-control" id="menuName" value="${menu.name}"/>
         </div>
 
         <div class="form-group">
             <label for="menuAmount">재고 수량</label>
-            <input type="text" class="form-control" id="menuAmount">
+            <input type="text" class="form-control" id="menuAmount" value="${menu.amount}">
         </div>
 
         <div class="form-group">
@@ -129,6 +130,7 @@
         
         <a href="${pageContext.request.contextPath}/sm/1/menu">
         <button id="menuUpdateCancel" type="button" class="btn btn-success two_button float-right">메뉴 수정 취소하기</button>
+        </a>
     </form>
 </div>
 <hr/>
