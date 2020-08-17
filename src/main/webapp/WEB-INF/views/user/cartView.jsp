@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,7 +28,6 @@
 <body>
 
 	<nav class="navbar navbar-light light_green">
-
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -47,7 +45,8 @@
 		</div>
 
 		<!--장바구니 아이콘-->
-		<img src="${pageContext.request.contextPath}/resources/images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
+		<a href="${pageContext.request.contextPath}/gm/cart"><img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		</a>
 
 		<!--메뉴-->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -110,9 +109,9 @@
 								</div>
 								<div style="width: 90%; padding-top: 3pt;">
 									<div>
-										메뉴고유번호 : <span><c:out value="${cart.menuId}"/></span><br /> 주문메뉴 : <span>개구리 뒷다리</span>
+										메뉴고유번호 : <span><c:out value="${cart.menuId}" /></span><br /> 주문메뉴 : <span>개구리 뒷다리</span>
 										<div style="margin-top: 5pt">
-											수량 : <span id="num">1</span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i> <br /> 금액 : <span id="amount" data-amount=<c:out value="${cart.price}"/>><c:out value="${cart.price}"/>원</span>
+											수량 : <span id="num">1</span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i> <br /> 금액 : <span id="amount" data-amount=<c:out value="${cart.price}"/>><c:out value="${cart.price}" />원</span>
 										</div>
 									</div>
 								</div>
@@ -124,7 +123,7 @@
 
 			<div class="text-right" style="margin: 10pt">
 				<h5>
-					총 금액  :  <span id="totalPrice">0원</span>
+					총 금액 : <span id="totalPrice">0원</span>
 				</h5>
 			</div>
 

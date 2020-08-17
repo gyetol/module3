@@ -16,8 +16,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link rel="stylesheet" href="../../css/dinner41.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>
 
@@ -44,9 +44,8 @@
 		</div>
 
 		<!--장바구니 아이콘-->
-		<button id="cartButton">
-			<img src="${pageContext.request.contextPath}/resources/images/shopping-bag-solid.svg" width="20pt" style="" alt="no pic">
-		</button>
+		<a href="${pageContext.request.contextPath}/gm/cart"><img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		</a>
 
 		<!--메뉴-->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,7 +61,7 @@
 	</nav>
 
 	<!-- storeId, menuId가 data로 세팅되어야함 -->
-	<div class="container-fluid" data-storeId="1" data-menuId="0">
+	<div class="container-fluid" data-storeId="1" data-menuId="4">
 		<div class="container-fluid">
 			<div class="card card-body" style="margin-top: 15pt; margin-bottom: 15pt;">
 				<img src="../../categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">

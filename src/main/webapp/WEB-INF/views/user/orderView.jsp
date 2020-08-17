@@ -1,4 +1,5 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -22,7 +23,8 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Order History</title>
 </head>
@@ -49,7 +51,9 @@
     </div>
 
     <!--장바구니 아이콘-->
-    <img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <a href="${pageContext.request.contextPath}/gm/cart">
+    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    </a>
 
     <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -80,7 +84,7 @@
 <div>
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="../../images/1인의만찬.png" class="img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4>주문 상세</h4>
     </div>
 
@@ -91,41 +95,35 @@
         <div class="form-group row">
             <label for="pay_id" class="col-3 col-form-label">주문번호</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="pay_id" readonly>
+                <input type="text" class="form-control" id="pay_id" value="${order.id}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="order_date" class="col-3 col-form-label">주문 일시</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="order_date" readonly>
+                <input type="text" class="form-control" id="order_date" value="${order.orderDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="get_time" class="col-3 col-form-label">수령 일시</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="get_time" readonly>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="pay_type" class="col-3 col-form-label">결제 수단</label>
-            <div class="col-9">
-                <input type="password" class="form-control" id="pay_type" readonly>
+                <input type="text" class="form-control" id="get_time" value="${order.reserveDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="pay_total" class="col-3 col-form-label">결제금액</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="pay_total" readonly>
+                <input type="text" class="form-control" id="pay_total" value="${order.price}" readonly>
             </div>
         </div>
     </div>
 
     <hr style="margin: 0"/>
 
+	<!-- 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div class="container-fluid">
@@ -149,11 +147,12 @@
             </div>
         </li>
     </ul>
+    -->
 
     <hr style="margin: 0"/>
 
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block">뒤로가기</button>
+        <button type="button" class="btn btn-outline-success btn-block" onclick="history.back(-1)">뒤로가기</button>
     </div>
 </div>
 <hr/>

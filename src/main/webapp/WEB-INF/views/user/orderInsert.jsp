@@ -16,9 +16,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/user/orderInsert.js"></script>
 
@@ -51,7 +50,8 @@
 		</div>
 
 		<!--장바구니 아이콘-->
-		<img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		<a href="${pageContext.request.contextPath}/gm/cart"> <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		</a>
 
 		<!--메뉴-->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -70,7 +70,7 @@
 	<div>
 		<!--제목-->
 		<div class="container-fluid text-center" style="margin-top: 15pt">
-			<img src="../../images/1인의만찬.png" class="img-title" alt="no title" />
+			<img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title" />
 			<h4>주문하기</h4>
 		</div>
 
@@ -92,7 +92,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="get_time" class="col-3 col-form-label">수령 소요 시간 (분)</label>
+				<label for="get_time" class="col-3 col-form-label">수령소요시간 (분)</label>
 				<div class="col-9">
 					<input type="text" class="form-control" id="get_time" placeholder="분 단위로 입력해주세요">
 				</div>

@@ -45,7 +45,8 @@
 		</div>
 
 		<!--장바구니 아이콘-->
-		<img src="../../icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		<a href="${pageContext.request.contextPath}/gm/cart"> <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+		</a>
 
 		<!--메뉴-->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -64,7 +65,7 @@
 	<div>
 		<!--제목-->
 		<div class="container-fluid text-center" style="margin-top: 15pt">
-			<img src="../../images/1인의만찬.png" class="img-title" alt="no title" />
+			<img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title" />
 			<h4>주문 내역</h4>
 		</div>
 
@@ -90,7 +91,7 @@
 								<div style="margin-top: 5pt">
 									<button id="reviewClick" class="btn btn-outline-success btn_disabled btn-sm" style="width: 32%">리뷰쓰기</button>
 									<button class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
-									<button class="btn btn-outline-success btn-sm" style="width: 32%">주문상세</button>
+									<button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%">주문상세</button>
 								</div>
 							</div>
 						</li>

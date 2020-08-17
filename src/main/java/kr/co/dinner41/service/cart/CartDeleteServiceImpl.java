@@ -17,9 +17,6 @@ public class CartDeleteServiceImpl implements CartDeleteService {
 		@SuppressWarnings("unchecked")
 		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");
 
-		System.out.println(menuIds.length);
-		System.out.println(carts.size());
-
 		for (int i = 0; i < menuIds.length; i++) {
 			int menuId = Integer.parseInt(menuIds[i]);
 			for (int j = 0; j < carts.size(); j++) {
