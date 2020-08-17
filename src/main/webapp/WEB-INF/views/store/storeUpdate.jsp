@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
-
-<%
-	String path = "../storeView/";
-%>
+<html lang="ko">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -69,81 +67,86 @@
     </div>
 </nav>
 
-
-<div class="container-fluid text-center" style="margin-top: 15pt">
+<div class="text-center container-fluid" style="margin-top: 15pt">
     <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-    <h2>매장 상세</h2>
+    <h2>매장 수정</h2>
 </div>
 
-<hr style="margin-top: 0"/>
+<hr/>
 
 <div class="container-fluid">
+    <form class="container-fluid text-left">
 
-    <div class="text-center" style="margin-bottom: 20pt">
-        <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
-    </div>
-
-    <div class="container-fluid text-left">
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
-            <div id="storeNumber" class="card card-body">
-                ${store.businessNumber}
-            </div>
+            <input type="text" class="form-control" id="storeNumber" value="${store.businessNumber}" readonly/>
         </div>
 
         <div class="form-group">
             <label for="storeName">매장명</label>
-            <div id="storeName" class="card card-body">
-                ${store.name}
+            <input type="text" class="form-control" id="storeName" value="${store.name}">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">매장 대표사진 첨부</label>
+            <div id="emailCheckLabel">
+                <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" alt="no pic" class="rounded" style="width: 100%"/>
+                <input type="file" id="exampleFormControlInput1">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="storeCategory">매장 대표 카테고리</label>
-            <div id="storeCategory" class="card card-body">
-                ${store.category.name}
-            </div>
+            <label for="inputKind">매장 대표 카테고리</label>
+            <select id="inputKind" class="form-control" value= "${store.category.name}" >
+                <option>도시락</option>
+                <option>조리키트</option>
+                <option>떡/제과</option>
+                <option>한식</option>
+                <option>분식</option>
+                <option>일식</option>
+                <option>반찬</option>
+                <option>치킨/피자</option>
+                <option>기타</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="address">매장주소</label>
-            <div id="address" class="card card-body">
-                ${store.address} ${store.subAddress}
+            <label for="address">거주지</label>
+            <div id="address">
+                <input type="text" class="form-control left_input" id="search_address"/>
+                <button type="button" class="btn btn-outline-success right_input" id="search_button" >주소 찾기</button>
+                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" value= "${store.address}"/>
+                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" value= "${store.subAddress}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
-            <div id="phoneNumber" class="card card-body">
-                ${store.phone}
+            <div id="phoneNumber">
+                <input type="tel" class="form-control" id="phoneNumber1" value= "${store.phone}" style="width: 100% ;float: left">
+                
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeTime">매장 운영 시간</label>
-            <div id="storeTime" class="card card-body">
-                ${store.operateTime}
-            </div>
+            <input type="text" class="form-control" id="storeTime" value= "${store.operateTime}">
         </div>
+
 
         <div class="form-group">
             <label for="inputContent">매장 설명</label>
-            <div id="inputContent" class="card card-body">
-                ${store.introduction}
-            </div>
+            <textarea class="form-control" id="inputContent" placeholder="매장 운영시간과 정책에 대해서 설명해주세요."
+               value= "${store.introduction}"       rows="5"></textarea>
         </div>
 
         <div class="margin_first">
-           <a href="${pageContext.request.contextPath}/sm/update/store">
-            <button type="button" class="btn btn-success two_button">매장 수정 하기</button>
-           </a>
-            <button type="button" class="btn btn-success two_button float-right">매장 페점 하기</button>
+            <button type="button" class="btn btn-success two_button">매장 수정 완료</button>
+            <button type="button" class="btn btn-success two_button float-right">매장 수정 취소</button>
         </div>
-    </div>
+    </form>
 </div>
-
 <hr/>
-
 <div class="last_block"></div>
 </body>
 </html>

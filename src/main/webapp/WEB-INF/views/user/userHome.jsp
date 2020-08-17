@@ -125,7 +125,7 @@
 <div>
     <div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
         <div class="col mb-4">
-            <a href="${pageContext.request.contextPath}/gm/전체/all-/1/store">
+            <a href="${pageContext.request.contextPath}/gm/all-/all-/1/store">
             	<div class="card h-100 category_label">
                	 	<div class="card-body text-center trim">
                     	<img src="${pageContext.request.contextPath}/resources/categoryImages/total.png" class="category rounded" alt="no picture">
