@@ -7,7 +7,7 @@ import kr.co.dinner41.vo.UserVO;
 import java.util.List;
 
 public interface QnADao {
-    void insert(QnAVO qna) throws QnAException;
+    int insert(QnAVO qna) throws QnAException;
     void update(QnAVO qna) throws QnAException;
     void delete(String email) throws QnAException;
     List<QnAVO> selectAll(int page, int pageSize) throws QnAException;
