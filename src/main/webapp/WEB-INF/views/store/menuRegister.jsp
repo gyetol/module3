@@ -64,7 +64,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -130,7 +130,7 @@
 
         <button id ="menuWrite" type="submit" class="btn btn-success two_button">메뉴 등록하기</button>
         
-       <a href = "/sm/{menu.store.name}/1/menu">
+       <a href = ""${pageContext.request.contextPath}/sm/1/menu">
         <button id = "menuWriteCancel" type="button" class="btn btn-success two_button float-right">메뉴 등록 취소하기</button>
     </a>
     </form>

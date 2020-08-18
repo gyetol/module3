@@ -18,6 +18,7 @@ public interface MenuDao {
 	void update(MenuVO menu, StoreVO store) throws MenuException;
 	List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException;
 	List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException;
+	MenuVO selectByMenuId(int menuId) throws MenuException;
 	MenuVO selectByMenuIdStoreId(int menuId, int storeId) throws MenuException;
 	int getTotalRecord() throws MenuException;
 	int getLastInsertId(int storeId) throws SQLException;

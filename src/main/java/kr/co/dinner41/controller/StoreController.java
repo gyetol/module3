@@ -93,6 +93,19 @@ public class StoreController {
 		return "store/storeHome";
 	}
 	
+	@RequestMapping(value="/sm/update/store",method=RequestMethod.GET)
+	public String update(HttpSession session,Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int userId = user.getId();
+		StoreVO store = null;
+		store = storeViewByStoreService.execute(userId);
+		model.addAttribute("store",store);
+		
+		return "store/storeUpdate";
+	}
+	
+	
+	
 	@RequestMapping(value="/gm/{category}/{keyword}/{page}/store",method=RequestMethod.GET)
 	public String listByUser(@PathVariable("category") String category, @PathVariable("keyword") String keyword,
 							@PathVariable("page") String page, Model model, HttpSession session) {

@@ -34,7 +34,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture"/>
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture"/>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -54,7 +54,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>

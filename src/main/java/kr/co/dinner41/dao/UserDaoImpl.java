@@ -83,20 +83,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void delete(String email, String password) throws UserException {
+	public void delete(int userId) throws UserException {
 		String sql="UPDATE users SET user_remove_date=? WHERE user_id=?";
-		UserVO target=selectByEmailAndPassword(email, password);
 		int result=0;
-		if(target==null) {
-			throw new UserDeleteFailedException("비밀번호가 일치하지 않습니다.");
-		}
 
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    Calendar calendar = Calendar.getInstance();
 	    String now = sdf.format(calendar.getTime());
 
 		try {
-			result=jTemp.update(sql,now,target.getId());
+			result=jTemp.update(sql,now,userId);
 		}
 		catch(DataAccessException e) {
 			e.printStackTrace();

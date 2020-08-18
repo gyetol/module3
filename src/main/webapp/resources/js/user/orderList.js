@@ -22,6 +22,7 @@ function clickOrderDetailView() {
 		var order = $(orders[i]);
 		order.find("#orderDetailView").click(function() {
 			var orderId = $(this).parents(".orderClass").data("orderid");
+			alert(getContextPath);
 			window.location = getContextPath() + "/gm/" + orderId + "/order/detail"
 		});
 	}

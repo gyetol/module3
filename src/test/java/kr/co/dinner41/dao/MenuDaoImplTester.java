@@ -72,6 +72,7 @@ System.out.println("메뉴 추가 성공");
     }
 	
 	
+	@Ignore
 	@Test
     public void testUserSelecByStoreId(){
         MenuDao dao = ctx.getBean("menuDao", MenuDaoImpl.class);
@@ -86,20 +87,19 @@ System.out.println("메뉴 추가 성공");
         }
     }
 	
-	@Ignore
     @Test
-    public void testUpdate() throws OfferTypeSelectException {
-        MenuDaoImpl dao = ctx.getBean("menuDao", MenuDaoImpl.class);
+    public void testUpdate() throws OfferTypeSelectException, SQLException {
+    	MenuDaoImpl menuDao=ctx.getBean("menuDao",MenuDaoImpl.class);
         OfferTypeDaoImpl offerTypeDao = ctx.getBean("offerTypeDao", OfferTypeDaoImpl.class);
         OfferTypeVO offerTypeVo = offerTypeDao.selectById("PAC");
         
         StoreDaoImpl storeDao = ctx.getBean("storeDao",StoreDaoImpl.class);
 		StoreVO store = storeDao.selectById(1);
-		MenuVO menu = new MenuVO(store,2,offerTypeVo,"도시락","제육 도시락",4500,5,"제육도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
+		MenuVO menu = new MenuVO(store,4,offerTypeVo,null,"제육 도시락",500,5,"제육도시락입니다.","당일 섭취가 원칙입니다.","photo.jpg",null);
 
         try {
-            dao.update(menu,store);
-            System.out.println("Success");
+            menuDao.update(menu,store);
+        
         } catch (MenuException e) {
             e.printStackTrace();
         }

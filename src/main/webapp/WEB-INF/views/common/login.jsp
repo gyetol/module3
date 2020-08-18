@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="/resources/css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
     
     <script src="${pageContext.request.contextPath}/resources/js/common/login.js"></script>
 
@@ -59,6 +59,7 @@
             </form>
             <button type="button" class="btn btn-outline-success btn-block" id="password_button">비밀번호 찾기</button>
             <button type="button" class="btn btn-outline-success btn-block" id="register_button">회원가입하기</button>
+            <input type="hidden" id="errorMessage" value="${errorMessage }">
         </div>
     </div>
 </div>

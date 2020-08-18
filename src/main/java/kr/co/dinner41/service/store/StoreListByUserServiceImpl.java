@@ -34,7 +34,8 @@ public class StoreListByUserServiceImpl implements StoreListByUserService {
 		
 			if(category.equals("all-")) {
 				if(keyword.equals("all-")) {
-					storeListByUserViews = storeDao.selectViewByStoreNameOrMenuName("%", userLatitude, userLongitude, page, PAGESIZE);
+					//storeListByUserViews = storeDao.selectViewByStoreNameOrMenuName("%", userLatitude, userLongitude, page, PAGESIZE);
+					storeListByUserViews = storeDao.selectViewByCategoryName("%",userLatitude,userLongitude,page,PAGESIZE);
 				}
 				else {
 					storeListByUserViews = storeDao.selectViewByStoreNameOrMenuName(keyword, userLatitude, userLongitude, page, PAGESIZE);

@@ -26,7 +26,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Store</title>
 </head>
@@ -43,7 +43,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resource/icons/home-solid.svg" class="home" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -63,7 +63,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -80,7 +80,7 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
-        <img src="${pageContext.request.contextPath}/resource/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
+        <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
     </div>
 
     <div class="container-fluid text-left">
@@ -134,7 +134,9 @@
         </div>
 
         <div class="margin_first">
+           <a href="${pageContext.request.contextPath}/sm/update/store">
             <button type="button" class="btn btn-success two_button">매장 수정 하기</button>
+           </a>
             <button type="button" class="btn btn-success two_button float-right">매장 페점 하기</button>
         </div>
     </div>

@@ -55,13 +55,13 @@
 				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<!-- storeId, menuId가 data로 세팅되어야함 -->
-	<div class="container-fluid" data-storeId="1" data-menuId="4">
+	<div class="container-fluid" data-storeId="1" data-menuId="0">
 		<div class="container-fluid">
 			<div class="card card-body" style="margin-top: 15pt; margin-bottom: 15pt;">
 				<img src="../../categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">

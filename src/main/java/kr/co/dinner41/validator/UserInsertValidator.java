@@ -15,7 +15,7 @@ public class UserInsertValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		UserInsertCommand user=(UserInsertCommand)target;
-		String email=user.getEamil();
+		String email=user.getEmail();
 		String password=user.getPassword();
 		String passwordConfirm=user.getPasswordConfirm();
 		String name=user.getName();

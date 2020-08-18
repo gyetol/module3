@@ -17,6 +17,8 @@
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/user/orderInsert.js"></script>
@@ -61,7 +63,7 @@
 				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,7 +20,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+    </script>
+    
+    <script src="${pageContext.request.contextPath }/resources/js/user/myPageView.js"></script>
 
     <title>My Page</title>
 </head>
@@ -38,7 +49,7 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">현재 위치 기준</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">현재 위치 기준</a>
         </div>
     </div>
 
@@ -81,41 +92,49 @@
 
     <!--내 정보 보기 폼-->
     <div class="container-fluid">
+    	<form:form id="update_form" action="${pageContext.request.contextPath }/mypage">
 
         <div class="form-group">
             <label for="userName">이름</label>
-            <input type="text" class="form-control " id="userName" readonly>
+            <input type="text" class="form-control " id="userName" value="${viewTargetUser.name }" readonly>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">이메일</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" readonly>
+            <input type="email" class="form-control" id="exampleFormControlInput1" value="${viewTargetUser.email }"readonly>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">전화번호</label>
             <div id="phoneNumber">
+                <input type="tel" class="form-control" id="userPhone" style="width: 30% ;float: left" value="${viewTargetUser.phone }" readonly/>
+                <!--  
                 <input type="tel" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" readonly/>
                 <p style="width: 5% ;float: left;text-align: center">-</p>
                 <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" readonly/>
                 <p style="width: 5% ;float: left ; text-align: center">-</p>
                 <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;" readonly/>
+-->
             </div>
         </div>
 
         <div class="form-group">
             <label for="address">거주지</label>
             <div id="address">
-                <input type="text" class="form-control margin_up" id="user_address" readonly/>
-                <input type="text" class="form-control margin_up" id="user_sub_address" readonly/>
+                <input type="text" class="form-control margin_up" id="user_address" value="${viewTargetUser.address }" readonly/>
+                <input type="text" class="form-control margin_up" id="user_sub_address" value="${viewTargetUser.subAddress }" readonly/>
             </div>
         </div>
 
         <div class="margin_first">
-            <button type="button" class="btn btn-success two_button">수정하기</button>
-            <button type="button" class="btn btn-success two_button float-right" >뒤로가기</button>
+            <button type="button" id="update_button" class="btn btn-success three_button">수정하기</button>
+            <a href="javascript:history.back()">
+				<button type="button" id="go_back_button" class="btn btn-success three_button" >뒤로가기</button>
+			</a>
+            <button type="button" id="delete_button" class="btn btn-success three_button" method="delete" action="mypage">탈퇴하기</button>
+            <input type="hidden" id="password" name="password">
         </div>
-
+		</form:form>
     </div>
 </div>
 <hr/>

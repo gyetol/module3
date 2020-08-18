@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isErrorPage="true" %>
 <!doctype html>
 <html>
@@ -61,7 +62,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -75,7 +76,7 @@
 <hr/>
 
 <div class="container-fluid" >
-      <form class="text-left container-fluid" method="put" aciton="/sm/menu">
+      <form class="text-left container-fluid" method="post" action="/sm/${storeId}/${menuId}/menu">
 
         <div class="form-group">
             <label for="menuName">메뉴명</label>
@@ -84,19 +85,20 @@
 
         <div class="form-group">
             <label for="menuAmount">재고 수량</label>
-            <input type="text" class="form-control" id="menuAmount" value="${menu.amount}">
+            <input type="text" class="form-control" id="menuAmount" value="${menu.amount}"/>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">메뉴 사진 첨부</label>
-            <img src="../../images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
+            <img src="${pageContext.request.contextPath}/resources/images/table-cafe.jpg" width="100%" class="rounded" alt="no picture">
             <div id="emailCheckLabel">
-                <input type="file" id="exampleFormControlInput1">
+                <input type="file" id="exampleFormControlInput1" value="${menu.photo}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputKind">제공방식</label>
+            <input type="text" class="form-control" name="type" id="type" value="${menu.type}">
             <select id="inputKind" class="form-control">
                 <option value="PAC">도시락</option>
                 <option value="MEA">조리키트</option>
@@ -106,23 +108,23 @@
 
         <div class="form-group">
             <label for="menuMoney">메뉴 가격</label>
-            <input type="text" class="form-control margin_up" placeholder="상세주소" id="menuMoney"/>
+            <input type="text" class="form-control margin_up" placeholder="상세주소" id="menuMoney" value="${menu.price}"/>
         </div>
 
         <div class="form-group">
             <label for="tag">메뉴 태그</label>
-            <input type="tel" class="form-control" id="tag">
+            <input type="tel" class="form-control" id="tag"  readonly value="${menu.tag}"/>
         </div>
 
         <div class="form-group">
             <label for="menuDes">메뉴 설명</label>
-            <textarea class="form-control" id="menuDes" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
+            <textarea class="form-control" id="menuDes" value="${menu.description}" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="inputContent">메뉴 유의 사항</label>
-            <textarea class="form-control" id="inputContent" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
+            <textarea class="form-control" id="inputContent" value="${menu.notice}"  placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
                       rows="5"></textarea>
         </div>
  

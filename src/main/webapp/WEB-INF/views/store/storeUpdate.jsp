@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -25,12 +24,12 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
-    <title>Home</title>
+    <title>Store</title>
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-light light_green" style="background-color: aquamarine">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -42,7 +41,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="home">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -62,45 +61,43 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+                <a class="nav-link" href="#">로그아웃</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<div class="container-fluid text-center" style="margin-top: 15pt">
-    <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-    <h2>매장 등록</h2>
+<div class="text-center container-fluid" style="margin-top: 15pt">
+    <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
+    <h2>매장 수정</h2>
 </div>
 
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left" method="post" action="sm/store">
+    <form class="container-fluid text-left">
+
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
-            <div id="store">
-                <input type="text" class="form-control left_input" id="storeNumber" name="businessNumber"/>
-                <button type="button" class="btn btn-outline-success right_input" id="storeNumber_button">번호 찾기
-                </button>
-            </div>
+            <input type="text" class="form-control" id="storeNumber" value="${store.businessNumber}" readonly/>
         </div>
 
         <div class="form-group">
             <label for="storeName">매장명</label>
-            <input type="text" class="form-control" id="storeName" name="name"/>
+            <input type="text" class="form-control" id="storeName" value="${store.name}">
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">매장 대표사진 첨부</label>
             <div id="emailCheckLabel">
-                <input type="file" id="exampleFormControlInput1" name="photo"/>
+                <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" alt="no pic" class="rounded" style="width: 100%"/>
+                <input type="file" id="exampleFormControlInput1">
             </div>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20pt">
+        <div class="form-group">
             <label for="inputKind">매장 대표 카테고리</label>
-            <select id="inputKind" class="form-control" name="category">
+            <select id="inputKind" class="form-control" value= "${store.category.name}" >
                 <option>도시락</option>
                 <option>조리키트</option>
                 <option>떡/제과</option>
@@ -117,43 +114,39 @@
             <label for="address">거주지</label>
             <div id="address">
                 <input type="text" class="form-control left_input" id="search_address"/>
-                <button type="button" class="btn btn-outline-success right_input" id="search_button">주소 찾기</button>
-                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" name="address"/>
-                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" name="subAddress"/>
+                <button type="button" class="btn btn-outline-success right_input" id="search_button" >주소 찾기</button>
+                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" value= "${store.address}"/>
+                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" value= "${store.subAddress}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" class="form-control" id="phoneNumber1" name="phone" style="width: 100% ;float: left"/>
-               <!--  <p style="width: 5% ;float: left;text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left"/>
-                <p style="width: 5% ;float: left ; text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;"/>  -->
+                <input type="tel" class="form-control" id="phoneNumber1" value= "${store.phone}" style="width: 100% ;float: left">
+                
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeTime">매장 운영 시간</label>
-            <input type="text" class="form-control" id="storeTime" name="operateTime"/>
+            <input type="text" class="form-control" id="storeTime" value= "${store.operateTime}">
         </div>
+
 
         <div class="form-group">
             <label for="inputContent">매장 설명</label>
-            <textarea class="form-control" id="inputContent" name="introduction" placeholder="매장 운영시간과 정책에 대해서 설명해주세요."
-                      rows="5"></textarea>
+            <textarea class="form-control" id="inputContent" placeholder="매장 운영시간과 정책에 대해서 설명해주세요."
+               value= "${store.introduction}"       rows="5"></textarea>
         </div>
 
         <div class="margin_first">
-            <button type="submit" class="btn btn-success two_button">등록 신청서 제출</button>
-            <button type="submit" class="btn btn-success two_button float-right">등록 신청 취소</button>
+            <button type="button" class="btn btn-success two_button">매장 수정 완료</button>
+            <button type="button" class="btn btn-success two_button float-right">매장 수정 취소</button>
         </div>
     </form>
 </div>
-
 <hr/>
-
 <div class="last_block"></div>
 </body>
 </html>

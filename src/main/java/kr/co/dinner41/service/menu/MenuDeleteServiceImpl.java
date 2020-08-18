@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import kr.co.dinner41.dao.MenuDaoImpl;
+import kr.co.dinner41.exception.menu.MenuException;
 
 @Service("menuDeleteService")
 public class MenuDeleteServiceImpl implements MenuDeleteService {
@@ -15,9 +16,8 @@ public class MenuDeleteServiceImpl implements MenuDeleteService {
 	
 	
 	@Override
-	public void execute(int storeId, int menuId) {
-		// TODO Auto-generated method stub
-		
+	public void execute(int storeId, int menuId) throws MenuException {
+		menuDao.delete(menuId, storeId);
 	}
 
 }
