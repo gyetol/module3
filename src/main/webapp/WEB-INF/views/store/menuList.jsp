@@ -5,6 +5,7 @@
 <%
 	String path = "../menu/";
 %>
+
 <html>
 <head>
 <!-- Required meta tags -->
@@ -22,6 +23,8 @@
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/store/menuList.js"></script>
 
 <title>Menu</title>
 </head>
@@ -43,7 +46,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">주문내역</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -68,14 +71,17 @@
 					<li class="list-group-item">
 						<div class="row">
 							<div class="col-3">
-								<img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" width="100%" class="rounded" alt="menu">
+								<img src="${pageContext.request.contextPath}/resources/images/${menu.photo}" width="100%" class="rounded" alt="menu">
 							</div>
+							<a href="${pageContext.request.contextPath}/${menu.store.id}/${menu.id}/menu/view">
 							<div class="col-9" style="padding-left: 0">
 								<h5>
 									메뉴명 : <span><c:out value="${menu.name}"/></span>
+									</a>
 								</h5>
 								<div style="margin-top: 5pt">
-									금액 : <span><c:out value="${menu.price}"/></span><br /> 수량 : <span><c:out value="${menu.amount}"/></span> &nbsp; <i class="fas fa-minus-square pos"></i> <i class="fas fa-plus-square pos"></i>&nbsp;&nbsp;
+									금액 : <span><c:out value="${menu.price}"/></span><br />	
+								         수량 : <span><c:out value="${menu.amount}"/></span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i>&nbsp;&nbsp;
 									<button class="btn btn-outline-success btn-sm trim">등록</button>
 								</div>
 							</div>
@@ -89,7 +95,7 @@
 
 		<div style="text-align: center">
 			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-success"><<</button>
+				<button type="button" class="btn btn-success"></button>
 				<button type="button" class="btn btn-success" disabled>1</button>
 				<button type="button" class="btn btn-success">2</button>
 				<button type="button" class="btn btn-success">3</button>
@@ -98,8 +104,8 @@
 			</div>
 		</div>
 		<div class="container-fluid margin_first">
-			<a href="/dinner41/sm/menu">
-				<button type="button" class="btn btn-outline-success btn-block" method="post" aciton="menu">메뉴 추가 하기</button>
+			<a href="${pageContext.request.contextPath}/sm/menu">
+				<button type="button" class="btn btn-outline-success btn-block">메뉴 추가 하기</button>
 			</a>
 		</div>
 	</div>

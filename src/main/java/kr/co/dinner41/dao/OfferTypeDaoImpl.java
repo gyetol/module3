@@ -33,7 +33,7 @@ public class OfferTypeDaoImpl implements OfferTypeDao{
     @Override
     public OfferTypeVO selectById(String id) throws OfferTypeSelectException {
         List<OfferTypeVO> list = null;
-        String sql = "SELECT * FROM offer_types WHERE offer_type_id = ?;";
+        String sql = "SELECT * FROM offer_types WHERE offer_type_id = ?";
         list = jTemp.query(sql, new OfferTypeMapper(), id);
         return (list.size() == 0? null:list.get(0));
     }
@@ -45,4 +45,11 @@ public class OfferTypeDaoImpl implements OfferTypeDao{
         list = jTemp.query(sql, new OfferTypeMapper());
         return list;
     }
+
+	public OfferTypeVO selectByName(String name) throws OfferTypeSelectException  {
+		List<OfferTypeVO> list = null;
+        String sql = "SELECT * FROM offer_types WHERE offer_type_name = ?";
+        list = jTemp.query(sql, new OfferTypeMapper(), name);
+        return (list.size() == 0? null:list.get(0));
+	}
 }

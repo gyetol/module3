@@ -71,6 +71,18 @@ public class MenuDaoImpl implements MenuDao {
 		String sql = "UPDATE menu_view SET offer_type_id = ?, menu_name = ?, menu_price = ?, menu_amount = ?, menu_description = ?, menu_notice = ?,menu_photo = ? WHERE menu_id = ? AND store_id=? ";
 
 		int result = 0;
+		System.out.println("----------------------updat DaoImpl");
+		System.out.println("a : " + menu.getOfferType());
+		System.out.println("OfferType : "+menu.getOfferType().getId());
+		System.out.println("getName : "+menu.getName());
+		System.out.println("getPrice :"+menu.getPrice());
+		System.out.println("getAmount :"+menu.getAmount());
+		System.out.println("getDescription :"+menu.getDescription());
+		System.out.println("getNotice: "+menu.getNotice());
+		System.out.println("getPhoto :"+menu.getPhoto());
+		System.out.println("getId : "+menu.getId());
+		System.out.println("getStoreId : "+store.getId());
+		System.out.println("-----------------------------------------------------------------");
 
 		try {
 			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getName(), menu.getPrice(),
