@@ -74,13 +74,11 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left" method="post" action="sm/store">
+    <form class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/store">
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
             <div id="store">
-                <input type="text" class="form-control left_input" id="storeNumber" name="businessNumber"/>
-                <button type="button" class="btn btn-outline-success right_input" id="storeNumber_button">번호 찾기
-                </button>
+                <input type="text" class="form-control left_input" id="storeNumber" name="businessNumber" style="width: 100%"/>
             </div>
         </div>
 
