@@ -55,7 +55,10 @@ public class MenuDaoImplTester {
 System.out.println("메뉴 추가 성공");
 	}
 	
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	@Ignore
 	@Test
     public void testSelecByStoreId(){
@@ -106,7 +109,10 @@ System.out.println("메뉴 추가 성공");
     }
 
 
+<<<<<<< Updated upstream
 	@Ignore
+=======
+>>>>>>> Stashed changes
 	@Test
 	public void deleteTest() throws MenuException {
 		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);

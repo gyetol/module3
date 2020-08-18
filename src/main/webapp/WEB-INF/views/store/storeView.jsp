@@ -26,7 +26,11 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+=======
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/dinner41.css">
+>>>>>>> Stashed changes
 
     <title>Store</title>
 </head>
@@ -43,7 +47,11 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
+<<<<<<< Updated upstream
     <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+=======
+    <img src="${pageContext.request.contextPath}/resource/icons/home-solid.svg" class="home" alt="no picture">
+>>>>>>> Stashed changes
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -80,7 +88,11 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
+<<<<<<< Updated upstream
         <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
+=======
+        <img src="${pageContext.request.contextPath}/resource/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
+>>>>>>> Stashed changes
     </div>
 
     <div class="container-fluid text-left">
