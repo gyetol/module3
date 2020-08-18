@@ -143,6 +143,7 @@
             </div>
         </div>
         
+
          <a href="javascript:history.back()">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>

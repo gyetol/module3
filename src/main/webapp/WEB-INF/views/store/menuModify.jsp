@@ -118,14 +118,15 @@
 
         <div class="form-group">
             <label for="menuDes">메뉴 설명</label>
-            <textarea class="form-control" id="menuDes" value="${menu.description}" placeholder="메뉴에 대해서 설명해주세요." rows="5"></textarea>
+            <textarea class="form-control" id="menuDes" placeholder="메뉴에 대해서 설명해주세요.."
+               value= "${menu.description}" rows="5">${store.description}</textarea>
         </div>
 
 
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="inputContent">메뉴 유의 사항</label>
-            <textarea class="form-control" id="inputContent" value="${menu.notice}"  placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
-                      rows="5"></textarea>
+                <textarea class="form-control" id="menunNotice" placeholder="재료, 재료 원산지 알레르기 유발식품에 대해 적어주세요."
+               value= "${menu.notice}" rows="5">${store.notice}</textarea>
         </div>
  
         <button id="menuUpdate" type="submit" class="btn btn-success two_button">메뉴 수정 완료</button>

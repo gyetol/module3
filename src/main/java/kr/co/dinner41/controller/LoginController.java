@@ -33,13 +33,13 @@ public class LoginController {
 	@Qualifier("loginService")
 	private LoginService loginService;
 
-	@Autowired
-	@Qualifier("searchUserByEmailService")
-	private SearchUserByEmailService searchUserByEmailService;
+	// @Autowired
+	// @Qualifier("searchUserByEmailService")
+	// private SearchUserByEmailService searchUserByEmailService;
 	
-	@Autowired
-	@Qualifier("sendTempPasswordService")
-	private SendTempPasswordService sendTempPasswordService;
+	// @Autowired
+	// @Qualifier("sendTempPasswordService")
+	// private SendTempPasswordService sendTempPasswordService;
 	
 	@Autowired
 	@Qualifier("logoutService")
@@ -151,6 +151,7 @@ public class LoginController {
 		System.out.println("(searchPassword event handler) email: "+email);
 		ModelAndView mav=new ModelAndView();
 		try {
+
 			UserVO user=searchUserByEmailService.exectue(email);
 			if(user==null) {
 				mav.addObject("userSearchResult", "해당 하는 이메일을 가지는 회원이 존재하지 않습니다.이메일을 확인해주세요");
@@ -165,6 +166,7 @@ public class LoginController {
 			mav.setViewName("common/searchPassword");
 			mav.addObject("errorCode", "1");
 			mav.addObject("errorMessage", "해당 하는 이메일을 가지는 회원이 존재하지 않습니다.이메일을 확인해주세요");
+
 		}
 		catch(UserUpdateFailedException e) {
 			mav.setViewName("common/searchPassword");

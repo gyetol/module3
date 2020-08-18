@@ -150,7 +150,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/gm/{id}/{type}/store", method = RequestMethod.GET)
-	public String ViewByUser(@PathVariable("id") String id, HttpSession session, Model model, @PathVariable("type") String type){
+	public String viewByUser(@PathVariable("id") String id, HttpSession session, Model model, @PathVariable("type") String type){
 		int storeId = Integer.parseInt(id);
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		model.addAttribute("address", user.getAddress());
@@ -170,5 +170,15 @@ public class StoreController {
 		model.addAttribute("reviews", reviews);
 
 		return "user/storeView";
+	}
+
+	@RequestMapping(value = "/ad/{id}/store", method = RequestMethod.GET)
+	public String viewByManager(@PathVariable("id") String id, Model model){
+		int storeId = Integer.parseInt(id);
+
+		StoreVO store = storeViewByUserService.execute(storeId);
+		model.addAttribute("store", store);
+
+		return "manage/storeView";
 	}
 }
