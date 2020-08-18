@@ -16,8 +16,8 @@ public class StoreDeleteServiceImpl implements StoreDeleteService {
 	StoreDao storeDao;
 	
 	@Override
-	public void execute(HttpSession session) throws StoreException {
-
+	public void execute(int storeId) throws StoreException {
+		storeDao.deleteByStore(storeId);
 	}
 
 }

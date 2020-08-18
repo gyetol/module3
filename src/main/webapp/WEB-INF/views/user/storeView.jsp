@@ -23,9 +23,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Store</title>
-    
+
     <style>
-        .menu:hover{
+        .menu:hover {
             background-color: aliceblue;
             cursor: pointer;
         }
@@ -52,7 +52,9 @@
         </div>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <a href="${pageContext.request.contextPath}/gm/cart">
+        <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -131,8 +133,8 @@
     <ul class="list-group list-group-flush">
         <c:if test="${type eq 'menu'}">
             <c:forEach var="vo" items="${list}">
-                <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu" class="menu">
-                    <li class="list-group-item">
+                <li class="list-group-item">
+                    <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu" class="menu">
                         <div class="row">
                             <div class="col-3">
                                 <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg"
@@ -149,8 +151,8 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </a>
+                    </a>
+                </li>
             </c:forEach>
         </c:if>
         <c:if test="${type eq 'review'}">

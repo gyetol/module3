@@ -46,7 +46,9 @@
         </div>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <a href="${pageContext.request.contextPath}/gm/cart">
+        <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -134,7 +136,7 @@
     </div>
 
     <div class="container-fluid margin_first">
-        <a href="${pageContext.request.contextPath}/gm/${storeId}/store">
+        <a href="${pageContext.request.contextPath}/gm/${storeId}/menu/store">
             <button type="button" class="btn btn-outline-success btn-block">뒤로가기</button>
         </a>
     </div>

@@ -36,125 +36,125 @@ import kr.co.dinner41.vo.UserVO;
 
 @Controller
 public class MenuController {
-	
-	    @Autowired
-	    @Qualifier("menuInsertService")
-	    MenuInsertService insertService;
-	    
-	    @Autowired
-	    @Qualifier("menuDeleteService")
-	    MenuDeleteService deleteService;
+   
+       @Autowired
+       @Qualifier("menuInsertService")
+       MenuInsertService insertService;
+       
+       @Autowired
+       @Qualifier("menuDeleteService")
+       MenuDeleteService deleteService;
 
-	    @Autowired
-	    @Qualifier("menuListByUserService")
-	    MenuListByUserService listByUserService;
+       @Autowired
+       @Qualifier("menuListByUserService")
+       MenuListByUserService listByUserService;
 
-	    @Autowired
-	    @Qualifier("menuListByStoreService")
-	    MenuListByStoreService listByStoreService;
-	    
-	    @Autowired
-	    @Qualifier("menuUpdateService")
-	    MenuUpdateService updateService;
-	    
-	    @Autowired
-	    @Qualifier("menuUpdateAmountService")
-	    MenuUpdateAmountService updateAmountService;
-	    
-	    @Autowired
-	    @Qualifier("menuViewService")
-	    MenuViewService menuViewService;
-	    
-	    @Autowired
-	    @Qualifier("storeViewByStoreService")
-	    StoreViewByStoreService storeViewByStoreService;
-	    
-	    @Autowired
-	    @Qualifier("menuDao")
-	    MenuDao menuDao;
-	    
-	    @Autowired
-	    @Qualifier("storeDao")
-	    StoreDao storeDao;
-	    
+       @Autowired
+       @Qualifier("menuListByStoreService")
+       MenuListByStoreService listByStoreService;
+       
+       @Autowired
+       @Qualifier("menuUpdateService")
+       MenuUpdateService updateService;
+       
+       @Autowired
+       @Qualifier("menuUpdateAmountService")
+       MenuUpdateAmountService updateAmountService;
+       
+       @Autowired
+       @Qualifier("menuViewService")
+       MenuViewService menuViewService;
+       
+       @Autowired
+       @Qualifier("storeViewByStoreService")
+       StoreViewByStoreService storeViewByStoreService;
+       
+       @Autowired
+       @Qualifier("menuDao")
+       MenuDao menuDao;
+       
+       @Autowired
+       @Qualifier("storeDao")
+       StoreDao storeDao;
+       
 
-	    @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
-	    public String insert(@PathVariable("page") int page, HttpSession session, Model model) throws MenuException {
-	    	UserVO user = (UserVO) session.getAttribute("loginUser");
-	    	
-	    	if (user.getType().getId().equals("AD")) {
-	    		return "redirect:/";
-	    	}
-	    	else if(user.getType().getId().equals("GM")) {
-	    		return "redirect:/";
-	    	}
-	    	else if(user.getType().getId().equals("SM")) {
-	    		return "store/menuRegister";
-	    	}
-	    	else {
-	    		return "redirect:/";
-	    	}
-	    }
+       @RequestMapping(value = "/sm/menu", method = RequestMethod.GET)
+       public String insert(@PathVariable("page") int page, HttpSession session, Model model) throws MenuException {
+          UserVO user = (UserVO) session.getAttribute("loginUser");
+          
+          if (user.getType().getId().equals("AD")) {
+             return "redirect:/";
+          }
+          else if(user.getType().getId().equals("GM")) {
+             return "redirect:/";
+          }
+          else if(user.getType().getId().equals("SM")) {
+             return "store/menuRegister";
+          }
+          else {
+             return "redirect:/";
+          }
+       }
 
-	    @RequestMapping(value = "/sm/menu", method = RequestMethod.POST)
-	    public String insert(MenuInsertCommand menu, Model model, HttpSession session) throws SQLException
-	    {
-	    	UserVO user = (UserVO)session.getAttribute("loginUser");
-	    	
-	    	insertService.execute(menu, user);
-	    	return "store/menuList";
-	    }
-//	    	System.out.println("Controller"+user.getName()+", id:"+user.getId());
-//	    	System.out.println(menu.getName());
-//	    	System.out.println(menu.getType());
+       @RequestMapping(value = "/sm/menu", method = RequestMethod.POST)
+       public String insert(MenuInsertCommand menu, Model model, HttpSession session) throws SQLException
+       {
+          UserVO user = (UserVO)session.getAttribute("loginUser");
+          
+          insertService.execute(menu, user);
+          return "store/menuList";
+       }
+//          System.out.println("Controller"+user.getName()+", id:"+user.getId());
+//          System.out.println(menu.getName());
+//          System.out.println(menu.getType());
 
-	  
-//	    if (menu.getName().trim().equals("")) {
-//	    	model.addAttribute("errMessage", "메뉴명이 입력되지 않았습니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getAmount() < 0 || menu.getAmount() == 0) {
-//	    	model.addAttribute("errMessage", "재고 수량은 최소 1개 이상이어야 합니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getPhoto().trim().contentEquals("")) {
-//	    	model.addAttribute("errMessage", "사진은 필수 입력사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getType().trim().contentEquals("")) {
-//	    	model.addAttribute("errMessage", "제공방식은 필수 선택사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getPrice() < 0 || menu.getPrice() == 0) {
-//	    	model.addAttribute("errMessage", "메뉴 가격은 필수 입력사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getTag().trim().contentEquals("")) {
-//	    	model.addAttribute("errMessage", "메뉴 태그는 필수 입력사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getIntroduction().trim().contentEquals("")) {
-//	    	model.addAttribute("errMessage", "메뉴 설명은 필수 입력사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-//	    
-//	    if (menu.getNotice().trim().contentEquals("")) {
-//	    	model.addAttribute("errMessage", "메뉴 유의사항은 필수 입력사항입니다.");
-//	    	return "store/menuRegister";
-//	    }
-	   
-	    
-	    @RequestMapping(value = "/sm/{page}/menu/list", method = RequestMethod.GET)
-	    public String list(@PathVariable("page") int page, Model model, HttpSession session) throws MenuException {
-	    	UserVO user = (UserVO) session.getAttribute("loginUser");
-	    	StoreVO store = storeDao.selectByUserId(user.getId());
-	    	List<MenuVO> list = menuDao.selectByStoreId(store.getId(), page, 10);
+     
+//       if (menu.getName().trim().equals("")) {
+//          model.addAttribute("errMessage", "메뉴명이 입력되지 않았습니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getAmount() < 0 || menu.getAmount() == 0) {
+//          model.addAttribute("errMessage", "재고 수량은 최소 1개 이상이어야 합니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getPhoto().trim().contentEquals("")) {
+//          model.addAttribute("errMessage", "사진은 필수 입력사항입니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getType().trim().contentEquals("")) {
+//          model.addAttribute("errMessage", "제공방식은 필수 선택사항입니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getPrice() < 0 || menu.getPrice() == 0) {
+//          model.addAttribute("errMessage", "메뉴 가격은 필수 입력사항입니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getTag().trim().contentEquals("")) {
+//          model.addAttribute("errMessage", "메뉴 태그는 필수 입력사항입니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getIntroduction().trim().contentEquals("")) {
+//          model.addAttribute("errMessage", "메뉴 설명은 필수 입력사항입니다.");
+//          return "store/menuRegister";
+//       }
+//       
+//       if (menu.getNotice().trim().contentEquals("")) {
+//          model.addAttribute("errMessage", "메뉴 유의사항은 필수 입력사항입니다.");
+//          return "store/menuRegister";
+//       }
+      
+       
+       @RequestMapping(value = "/sm/{page}/menu/list", method = RequestMethod.GET)
+       public String list(@PathVariable("page") int page, Model model, HttpSession session) throws MenuException {
+          UserVO user = (UserVO) session.getAttribute("loginUser");
+          StoreVO store = storeDao.selectByUserId(user.getId());
+          List<MenuVO> list = menuDao.selectByStoreId(store.getId(), page, 10);
 
 	    	System.out.println("메뉴리스트 : " + list);
 	    	model.addAttribute("menus", list);
@@ -239,13 +239,12 @@ public class MenuController {
 			UserVO user = (UserVO)session.getAttribute("loginUser");
 			model.addAttribute("page",page);
 
-			menus = listByStoreService.execute(store_id, intPage);
-			
-			model.addAttribute("menus",menus);
-			
-			return "store/menuList";
-	}
-	    
+         menus = listByStoreService.execute(store_id, intPage);
+         
+         model.addAttribute("menus",menus);
+         
+         return "store/menuList";
+   }
+       
 }
-
 

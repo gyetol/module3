@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import kr.co.dinner41.command.LoginCommand;
 import kr.co.dinner41.dao.UserDao;
 import kr.co.dinner41.exception.login.LoginException;
+import kr.co.dinner41.exception.login.QuitUserException;
+import kr.co.dinner41.exception.login.UserNotFoundException;
 import kr.co.dinner41.exception.user.UserSelectFailedException;
 import kr.co.dinner41.vo.UserVO;
 
@@ -23,7 +25,10 @@ public class LoginServiceImpl implements LoginService {
 		
 		UserVO user=userDao.selectByEmailAndPassword(email, password);
 		if(user==null) {
-			throw new UserSelectFailedException("해당 이메일과 비밀번호를 가지는 회원이 존재하지 않습니다.");
+			throw new UserNotFoundException("해당 이메일과 비밀번호를 가지는 회원이 존재하지 않습니다");
+		}
+		if(user.getRemoveDate()!=null) {
+			throw new QuitUserException();
 		}
 		session.setAttribute("loginUser",user);
 	}

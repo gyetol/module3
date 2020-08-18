@@ -5,5 +5,5 @@ import javax.servlet.http.HttpSession;
 import kr.co.dinner41.exception.store.StoreException;
 
 public interface StoreDeleteService {
-	void execute(HttpSession session) throws StoreException;
+	void execute(int storeId) throws StoreException;
 }

@@ -54,7 +54,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
 				<li class="nav-item active"><a class="nav-link" href="#">결제내역</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
