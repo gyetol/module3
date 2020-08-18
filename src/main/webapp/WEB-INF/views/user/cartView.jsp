@@ -53,7 +53,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">주문 내역</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -128,8 +128,8 @@
 			</div>
 
 			<div class="container-fluid margin_first">
-				<button type="button" id="delete" class="btn btn-success two_button">선택 메뉴 삭제</button>
-				<button type="button" id="order" class="btn btn-success two_button float-right">선택 메뉴 주문</button>
+				<button type="button" id="delete" class="btn btn-success two_button float-right">선택 메뉴 삭제</button>
+				<button type="button" id="order" class="btn btn-success two_button">선택 메뉴 주문</button>
 			</div>
 		</c:if>
 	</div>

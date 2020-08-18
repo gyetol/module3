@@ -38,6 +38,7 @@
 </head>
 
 <body>
+
 	<nav class="navbar navbar-light light_green"
 		style="background-color: aquamarine">
 
@@ -152,5 +153,6 @@
 	</div>
 	<hr />
 	<div class="last_block"></div>
+
 </body>
 </html>

@@ -30,13 +30,14 @@
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
-            <a class="dropdown-item" href="#">주소 목록</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">현재 위치 기준</a>
         </div>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    <a href="${pageContext.request.contextPath}/gm/cart">
+        <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">

@@ -60,7 +60,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">주문 내역</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -94,7 +94,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="get_time" class="col-3 col-form-label">수령소요시간 (분)</label>
+				<label for="get_time" class="col-3 col-form-label">수령소요<br/>시간 (분)</label>
 				<div class="col-9">
 					<input type="text" class="form-control" id="get_time" placeholder="분 단위로 입력해주세요">
 				</div>

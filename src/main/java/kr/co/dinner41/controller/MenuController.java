@@ -157,6 +157,7 @@ public class MenuController {
        public String list(@PathVariable("page") int page, Model model, HttpSession session) throws MenuException {
           UserVO user = (UserVO) session.getAttribute("loginUser");
           StoreVO store = storeDao.selectByUserId(user.getId());
+
           
           List<MenuVO> list = menuDao.selectByStoreId(store.getId(), page, 5);
          

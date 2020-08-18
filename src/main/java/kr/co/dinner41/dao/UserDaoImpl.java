@@ -108,9 +108,10 @@ public class UserDaoImpl implements UserDao {
 		if(user==null) {
 			throw new UserUpdateFailedException("(UserDaoImpl)update:전달인자가 null이다");
 		}
-		String sql="UPDATE users SET user_name=? , user_address=? ,"
+		String sql="UPDATE users SET user_password=PASSWORD(?), user_name=? , user_address=? ,"
 				+ " user_sub_address=? , user_latitude=? , user_longitude=? , user_phone=? "
 				+ "WHERE user_id=? ";
+		String userPassword=user.getPassword();
 		int userId=user.getId();
 		String userName=user.getName();
 		String userAddress=user.getAddress();
@@ -120,7 +121,7 @@ public class UserDaoImpl implements UserDao {
 		String userPhone=user.getPhone();
 		int result=0;
 		try {
-			result=jTemp.update(sql,userName,userAddress,userSubAddress,userLatitude,userLongitude,userPhone,userId);
+			result=jTemp.update(sql,userPassword,userName,userAddress,userSubAddress,userLatitude,userLongitude,userPhone,userId);
 		}catch(DataAccessException e) {
 			throw new UserUpdateFailedException(e);
 		}

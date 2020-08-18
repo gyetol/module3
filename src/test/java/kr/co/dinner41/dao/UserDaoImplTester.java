@@ -51,9 +51,10 @@ public class UserDaoImplTester {
 	public void deleteTest() {
 		UserDao dao=ctx.getBean("userDao",UserDao.class);
 		try {
-			dao.delete("test@naver.com","test");
+//			dao.delete("test@naver.com","test");
 			System.out.println("회원 삭제하기에 성공했습니다.");
 		}
+
 		catch(UserDeleteFailedException e) {
 			System.out.println(e.getMessage());
 		}

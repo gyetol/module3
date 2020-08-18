@@ -37,7 +37,7 @@
             <img src="${pageContext.request.contextPath }/resources/images/1인의만찬.png" width="70%" class="img-fluid" alt="no title"/>
 
             <!--로그인 입력 폼-->
-            <form style="text-align: left; margin-bottom: 15pt" action="/password" method="post" id="search_password_form">
+            <form style="text-align: left; margin-bottom: 15pt" action="${pageContext.request.contextPath }/password" method="post" id="search_password_form">
                 <!--이메일 입력란-->
                 <div class="form-group">
                     <!--라벨의 for와 이메일의 id가 일치해야함-->
@@ -50,6 +50,8 @@
 
             <button type="button" class="btn btn-outline-success btn-block margin_first" onclick="location.href='${pageContext.request.contextPath}'" id="login_page_button">로그인 페이지로 돌아가기</button>
             <button type="button" class="btn btn-outline-success btn-block" onclick="location.href='${pageContext.request.contextPath}/register'" id="register_button">회원가입하기</button>
+
+			<div id="modelData" data-errorcode="${errorCode }" data-errorMessage="${errorMessage }" data-defaultemail="${defaultEmail }"></div>
         </div>
     </div>
 </div>

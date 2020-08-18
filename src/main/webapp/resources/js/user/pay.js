@@ -16,6 +16,8 @@ $(document).ready(
 function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 		menuIds) {
 
+	sessionStorage.setItem("payCompleteCheck", false);
+
 	IMP.init(storePayNumber);
 	IMP.request_pay({
 		pg : 'inicis',
@@ -27,7 +29,8 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 		buyer_name : name,
 		buyer_tel : phone,
 		buyer_addr : addr,
-		buyer_postcode : subAddr
+		buyer_postcode : subAddr /*,
+		m_redirect_url : "http://192.168.30.29:8080/dinner41/gm/pay/result" */
 	}, function(rsp) {
 		if (rsp.success) {
 			var flag = true;
@@ -41,7 +44,9 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 			var msg = '결제에 실패하였습니다.' + '\n';
 			msg += '에러내용 : ' + rsp.error_msg + "\n";
 		}
-
+	
+		alert(msg);
+		
 		if (flag) {
 			var arr = [];
 			for (let i = 0; i < menuIds.length; i++) {
@@ -63,6 +68,9 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 					window.location.href = "1/order";
 				}
 			});
+		} else {
+			alert("결제를 실패했으므로 장바구니 화면으로 돌아갑니다.");
+			window.location.href = "cart";
 		}
 	});
 }

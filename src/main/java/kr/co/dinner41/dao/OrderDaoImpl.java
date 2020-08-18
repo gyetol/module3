@@ -76,14 +76,42 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<OrderViewVO> selectAllOrderView(int userId) throws OrderException {
+	public List<OrderViewVO> selectAllOrderByUser(int userId) throws OrderException {
 		List<OrderViewVO> list = null;
-		String sql = "SELECT DISTINCT "
-				+ "A. order_id, A.order_reserve_date order_reserve_date, A.price price, C.store_name store_name "
-				+ "FROM orders AS A, menu_to_orders AS B, stores AS C "
-				+ "WHERE A.user_id = ? AND A.order_id = B.order_id AND B.store_id = C.store_id"; 
+		String sql = "SELECT DISTINCT\r\n" + 
+				"	A.order_id order_id, \r\n" + 
+				"	C.store_id store_id,\r\n" + 
+				"	A.user_id user_id,\r\n" + 
+				"	A.order_order_date order_order_date,\r\n" + 
+				"	A.order_reserve_date order_reserve_date, \r\n" + 
+				"	A.price price, \r\n" + 
+				"	C.store_name store_name,\r\n" + 
+				"	D.user_name user_name\r\n" + 
+				"FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n" + 
+				"WHERE A.user_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n" + 
+				"AND A.user_id=D.user_id;"; 
 		
 		list = jTemp.query(sql, new OrderViewMapper(), userId);
+		return list;
+	}
+
+	@Override
+	public List<OrderViewVO> selectAllOrderByStore(int storeId) throws OrderException {
+		List<OrderViewVO> list = null;
+		String sql = "SELECT DISTINCT\r\n" + 
+				"	A.order_id order_id, \r\n" + 
+				"	C.store_id store_id,\r\n" + 
+				"	A.user_id user_id,\r\n" + 
+				"	A.order_order_date order_order_date,\r\n" + 
+				"	A.order_reserve_date order_reserve_date, \r\n" + 
+				"	A.price price, \r\n" + 
+				"	C.store_name store_name,\r\n" + 
+				"	D.user_name user_name\r\n" + 
+				"FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n" + 
+				"WHERE C.store_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n" + 
+				"AND A.user_id=D.user_id;"; 
+		
+		list = jTemp.query(sql, new OrderViewMapper(), storeId);
 		return list;
 	}
 }

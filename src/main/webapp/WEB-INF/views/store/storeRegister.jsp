@@ -4,16 +4,12 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -25,7 +21,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Home</title>
 </head>
@@ -42,7 +38,9 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="home">
+    <a href="${pageContext.request.contextPath}/">
+        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -53,7 +51,7 @@
                 <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -69,7 +67,7 @@
 </nav>
 
 <div class="container-fluid text-center" style="margin-top: 15pt">
-    <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
+    <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
     <h2>매장 등록</h2>
 </div>
 
@@ -102,13 +100,15 @@
             <label for="inputKind">매장 대표 카테고리</label>
             <select id="inputKind" class="form-control" name="category">
                 <option>도시락</option>
-                <option>조리키트</option>
-                <option>떡/제과</option>
+                <option>밀키트</option>
+                <option>떡</option>
+                <option>제과</option>
                 <option>한식</option>
                 <option>분식</option>
                 <option>일식</option>
                 <option>반찬</option>
-                <option>치킨/피자</option>
+                <option>치킨</option>
+                <option>피자</option>
                 <option>기타</option>
             </select>
         </div>
@@ -147,7 +147,9 @@
 
         <div class="margin_first">
             <button type="submit" class="btn btn-success two_button">등록 신청서 제출</button>
-            <button type="submit" class="btn btn-success two_button float-right">등록 신청 취소</button>
+             <a href="{pageContext.request.contextPath}">
+            <button type="button" class="btn btn-success two_button float-right">등록 신청 취소</button>
+            </a>
         </div>
     </form>
 </div>

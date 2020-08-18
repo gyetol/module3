@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -50,6 +49,27 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao {
 		if(result==0) {
 			throw new StoreCategoryDeleteFailedException("매장 카테고리 삭제를 시도하였으나 영향받은 행이 없습니다.");
 		}
+	}
+	
+	@Override
+	public String selectIdByName(String name) throws StoreCategoryException {
+		String sql= "select store_category_id from store_categories where store_category_name=?";
+		List<String> storeCategoryId = null;
+		try {
+			storeCategoryId= jTemp.query(sql,new RowMapper<String>() {
+
+				@Override
+				public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+					String id = rs.getString("store_category_id");
+					return id;
+				}
+				
+			},name);
+		}
+		catch(Exception e) {
+			throw new StoreCategorySelectFailedException(e.getMessage());
+		}
+		return (storeCategoryId.size()>0 ? storeCategoryId.get(0): null);
 	}
 	
 	@Override
