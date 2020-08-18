@@ -33,13 +33,13 @@ public class LoginController {
 	@Qualifier("loginService")
 	private LoginService loginService;
 
-	// @Autowired
-	// @Qualifier("searchUserByEmailService")
-	// private SearchUserByEmailService searchUserByEmailService;
+	@Autowired
+	@Qualifier("searchUserByEmailService")
+	private SearchUserByEmailService searchUserByEmailService;
 	
-	// @Autowired
-	// @Qualifier("sendTempPasswordService")
-	// private SendTempPasswordService sendTempPasswordService;
+	@Autowired
+	@Qualifier("sendTempPasswordService")
+	private SendTempPasswordService sendTempPasswordService;
 	
 	@Autowired
 	@Qualifier("logoutService")
