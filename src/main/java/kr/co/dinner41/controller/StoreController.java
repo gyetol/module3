@@ -144,6 +144,7 @@ public class StoreController {
 		stores = storeListByManagerService.execute(storeStateName, storeName, intPage);
 		
 		model.addAttribute("stores",stores);
+		model.addAttribute("type", storeStateName);
 		
 		return "manage/storeList";
 	}
