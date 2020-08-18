@@ -1,6 +1,8 @@
 package kr.co.dinner41.controller;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.co.dinner41.command.MenuInsertCommand;
 import kr.co.dinner41.command.MenuUpdateCommand;
@@ -30,6 +32,7 @@ import kr.co.dinner41.service.menu.MenuUpdateAmountService;
 import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
+import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
@@ -148,8 +151,7 @@ public class MenuController {
 //	    	model.addAttribute("errMessage", "메뉴 유의사항은 필수 입력사항입니다.");
 //	    	return "store/menuRegister";
 //	    }
-	   
-	    
+
 	    @RequestMapping(value = "/sm/{page}/menu/list", method = RequestMethod.GET)
 	    public String list(@PathVariable("page") int page, Model model, HttpSession session) throws MenuException {
 	    	UserVO user = (UserVO) session.getAttribute("loginUser");
@@ -160,6 +162,7 @@ public class MenuController {
 	    	model.addAttribute("menus", list);
 	    	return "store/menuList";
 	    }
+
 	
 	    @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.PUT)
 	    public String update(MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session) throws MenuException {
@@ -184,7 +187,15 @@ public class MenuController {
 	    public String update(@ModelAttribute("menu") MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session,Model model) throws MenuException {
 	    	int store_id = Integer.parseInt(storeId);
 	    	int menu_id = Integer.parseInt(menuId);
-	    	
+
+    	insertService.execute(menu, user);
+    	return "store/menuList";
+            
+	   }
+
+	    @RequestMapping(value = "/sm/menu", method = RequestMethod.PUT)
+	    public String update(MenuUpdateCommand menu, StoreVO store, HttpSession session){
+
 	    	UserVO user = (UserVO)session.getAttribute("loginUser");
 	    	updateService.execute(menu, store_id, menu_id, user);
 	        return "store/menuModify";
@@ -219,12 +230,12 @@ public class MenuController {
 	    }
 	    
 	    @ResponseBody
+
 		@RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
 	    public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request) throws MenuException {
 	    	 
 	    	    int store_id = Integer.parseInt(storeId);
 	    	    int menu_id = Integer.parseInt(menuId);
-	    	
 	    		deleteService.execute(store_id, menu_id);
 	    		return "store/menuList";
 	    		
