@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 
 <%
@@ -9,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+<script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -19,7 +22,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/store/storeView.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <title>Store</title>
@@ -76,11 +79,7 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
-<<<<<<< Updated upstream
-        <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
-=======
-        <img src="${pageContext.request.contextPath}/resource/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
->>>>>>> Stashed changes
+        <img src="${pageContext.request.contextPath}/resources/images/${store.photo}" width="90%" class="rounded" alt="no picture">
     </div>
 
     <div class="container-fluid text-left">
@@ -134,10 +133,17 @@
         </div>
 
         <div class="margin_first">
-           <a href="${pageContext.request.contextPath}/sm/update/store">
-            <button type="button" class="btn btn-success two_button">매장 수정 하기</button>
-           </a>
-            <button id="deleteStoreBtn"type="button" class="btn btn-success two_button float-right">매장 폐점 하기</button>
+        <c:choose>
+        	<c:when test="${store.state.name eq '승인' || store.state.name eq '거부'}">
+	           <a href="${pageContext.request.contextPath}/sm/update/store">
+	            <button type="button" class="btn btn-success two_button">매장 수정 하기</button>
+	           </a>
+           </c:when>
+           <c:otherwise>
+           	 <button type="button" id="updateBtn" class="btn btn-success two_button">매장 수정 하기</button>
+           </c:otherwise>
+        </c:choose>
+            <button id="deleteStoreBtn" type="button" class="btn btn-success two_button float-right">매장 폐점 하기</button>
         </div>
     </div>
 </div>

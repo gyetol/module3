@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.LoginCommand;
+import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.exception.login.QuitUserException;
 import kr.co.dinner41.exception.login.SendEmailFailedException;
 import kr.co.dinner41.exception.login.UserNotFoundException;
@@ -25,6 +27,7 @@ import kr.co.dinner41.service.login.SendTempPasswordService;
 import kr.co.dinner41.service.user.LogoutService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
+import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -45,6 +48,10 @@ public class LoginController {
 	@Qualifier("logoutService")
 	private LogoutService logoutService;
 	
+	@Autowired
+	@Qualifier("storeDao")
+	StoreDao storeDao;
+	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		logoutService.execute(session);
@@ -52,7 +59,7 @@ public class LoginController {
 	}
 	
 	
-	private String getUserPage(UserVO loginUser) {
+	private String getUserPage(UserVO loginUser,Model model) {
 		if(loginUser==null) {
 			return null;
 		}
@@ -61,6 +68,9 @@ public class LoginController {
 		case "GM":
 			return "user/userHome";
 		case "SM":
+			int userId = loginUser.getId();
+			StoreVO store = storeDao.selectByUserId(userId);
+			model.addAttribute("store",store);
 			return "store/storeHome";
 		case "AD":
 			return "manage/managerHome";
@@ -70,7 +80,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request,Model model) {
 		
 		HttpSession session=request.getSession(false);
 		if(session==null) {
@@ -80,14 +90,14 @@ public class LoginController {
 		if(loginUser==null) {
 			return "common/login";
 		}
-		String result=getUserPage(loginUser);
+		String result=getUserPage(loginUser,model);
 		return result;
 		
 		//return "user/userMap";
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ModelAndView login(LoginCommand command,Errors errors,HttpServletRequest request) {
+	public ModelAndView login(LoginCommand command,Errors errors,HttpServletRequest request,Model model) {
 
 		ModelAndView mav=new ModelAndView();
 		new LoginValidator().validate(command, errors);
@@ -109,7 +119,7 @@ public class LoginController {
 
 		UserVO user=(UserVO)session.getAttribute("loginUser");
 		String viewName=null;
-		viewName=getUserPage(user);
+		viewName=getUserPage(user,model);
 		if(viewName.equals("user/userHome")) {
 			session.setAttribute("carts", new ArrayList<CartVO>());
 		}

@@ -57,7 +57,7 @@
 
 	<div class="container-fluid">
 		<div class="alert alert-primary text-center">
-			<h3>OPEN</h3>
+			<h3>${store.openState}</h3>
 		</div>
 	</div>
 
@@ -69,8 +69,8 @@
 	<!--</div>-->
 
 	<div class="container-fluid">
-		<button class="btn btn-primary two_button">오픈</button>
-		<button class="btn btn-danger two_button float-right">마감</button>
+		<button id="openBtn" name="${store.openState}" class="btn btn-primary two_button">오픈</button>
+		<button id="closeBtn" name="${store.openState}" class="btn btn-danger two_button float-right">마감</button>
 	</div>
 
 	<div class="container-fluid" style="margin-top: 10pt">
@@ -129,7 +129,7 @@
 				<a href="sm/1/menu/list">
 					<div class="card h-100">
 						<div class="card-body text-center trim">
-							<img src="${pageContext.request.contextPath}/resources/categoryImages/menu.png" class="rounded category" alt="no picture">
+							<img src="${pageContext.request.contextPath}/resources/categoryImages/korean.png" class="rounded category" alt="no picture">
 							<h5 id="menuManage" class="card-title">메뉴관리</h5>
 						</div>
 					</div>
