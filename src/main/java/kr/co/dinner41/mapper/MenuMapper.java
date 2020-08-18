@@ -63,7 +63,7 @@ public class MenuMapper implements RowMapper<MenuVO>{
 		String storeStateName= rs.getString("store_state_name");
 		StoreStateVO storeState = new StoreStateVO(storeStateId,storeStateName);
 		
-		StoreVO store = new StoreVO();
+		
 		int storeId= rs.getInt("store_id");
 		int menuId = rs.getInt("menu_id");
 		String menuTag = rs.getString("menu_tag");
@@ -74,6 +74,9 @@ public class MenuMapper implements RowMapper<MenuVO>{
 		String menuNotice = rs.getString("menu_notice");
 		String menuPhoto = rs.getString("menu_photo");
 		Timestamp menuRemoveDate = rs.getTimestamp("menu_remove_date");
+		StoreVO store = new StoreVO(storeId,user,storeCategory, storeState, storeBusinessNumber, storeName, storeAddress, storeSubAddress,
+				storeLatitude, storeLongitude, storePhone, storeOperateTime, storePhoto, storeIntroduction, storeOpenState,storePayNumber);
+		
 		//MenuVO menu = new MenuVO(storeId, menuId,offerTypeId, menuTag, menuName, menuPrice, menuAmount, menuDescription, menuNotice, menuPhoto,menuRemoveDate);
 		
 		 return new MenuVO(store, menuId, type, menuTag, menuName,menuPrice, menuAmount, menuDescription, menuNotice, menuPhoto, menuRemoveDate);

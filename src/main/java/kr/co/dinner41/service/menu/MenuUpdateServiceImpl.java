@@ -27,19 +27,18 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 	private StoreDaoImpl storeDao;
 	
 	@Override
-	public void execute(MenuUpdateCommand command, int menuId, int storeId, UserVO user) throws MenuException {
+	public void execute(MenuUpdateCommand command, int storeId, int menuId, UserVO user) throws MenuException {
 		
 		OfferTypeVO offerTypeVO = null;
 		StoreVO storeVO = null;
 		MenuVO menuVO = null;
 		
 		try {
+	
+			System.out.println("aaaaa :" + command.getType());
 			offerTypeVO = offerTypeDao.selectById(command.getType());
-			System.out.println(command.getType());
 			storeVO = storeDao.selectByUserId(user.getId());
-			menuVO = menuDao.selectByMenuIdStoreId(menuId, storeId);
-			System.out.println("offerTypeVO : " + offerTypeVO);
-			System.out.println("storeVO : " + storeVO);
+			//menuVO = menuDao.selectByMenuIdStoreId(menuId, storeId);
 			
 		}
 		catch (OfferTypeSelectException e) {
@@ -47,15 +46,27 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 		}
 		
 		MenuVO menu = new MenuVO();
+		
+		
 		menu.setStore(storeVO);
+		menu.setId(menuId);
 		menu.setOfferType(offerTypeVO);
 		menu.setName(command.getName());
 		menu.setPrice(command.getPrice());
 		menu.setPhoto(command.getPhoto());
 		menu.setAmount(command.getAmount());
+		menu.setTag(command.getTag());
 		menu.setDescription(command.getDescription());
 		menu.setNotice(command.getNotice());
-		System.out.println(menu);
+		
+		
+		System.out.println("menuUpdateServiceImpl의 menu 출력 :"+menu);
+		System.out.println("storeVO :" + storeVO);
+		System.out.println("menuId : " + menuId);
+		System.out.println("offerType VO : " + offerTypeVO);
+		System.out.println("getName :" + command.getName());
+		System.out.println("--------------------------------");
+		
 		try {
 			menuDao.update(menu, storeVO);
 		}

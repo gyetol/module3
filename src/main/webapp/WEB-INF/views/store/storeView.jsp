@@ -76,11 +76,8 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
-<<<<<<< Updated upstream
         <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
-=======
-        <img src="${pageContext.request.contextPath}/resource/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
->>>>>>> Stashed changes
+
     </div>
 
     <div class="container-fluid text-left">
