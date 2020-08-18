@@ -26,7 +26,6 @@ public class StoreController {
 	@Qualifier("storeInsertService")
 	StoreInsertService storeInsertService;
 	
-	
 	@Autowired
 	@Qualifier("storeViewByStoreService")
 	StoreViewByStoreService storeViewByStoreService;

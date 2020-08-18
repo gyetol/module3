@@ -94,7 +94,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="get_time" class="col-3 col-form-label">수령소요시간 (분)</label>
+				<label for="get_time" class="col-3 col-form-label">수령소요<br/>시간 (분)</label>
 				<div class="col-9">
 					<input type="text" class="form-control" id="get_time" placeholder="분 단위로 입력해주세요">
 				</div>

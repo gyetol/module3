@@ -13,5 +13,6 @@ public interface OrderDao {
 	void update(int orderId, Timestamp pickupDate) throws OrderException;;
 	OrderVO selectById(int orderId) throws OrderException;;
 	List<OrderVO> selectAll() throws OrderException;;
-	List<OrderViewVO> selectAllOrderView(int userId) throws OrderException;
+	List<OrderViewVO> selectAllOrderByUser(int userId) throws OrderException;
+	List<OrderViewVO> selectAllOrderByStore(int storeId) throws OrderException;
 }

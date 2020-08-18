@@ -191,7 +191,7 @@ public class MenuController {
 	    }
 	    
 	 
-	    @RequestMapping(value = "/{storeId}/{menuId}/menu", method = RequestMethod.GET)
+	    @RequestMapping(value = "/{storeId}/{menuId}/menu/view", method = RequestMethod.GET)
 	    public String view(@PathVariable("storeId")String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model){
 	    
 	    	System.out.println(storeId);
@@ -235,7 +235,6 @@ public class MenuController {
 			int intPage = Integer.parseInt(page);
 			int store_id = Integer.parseInt(storeId);
 			List<MenuVO> menus;
-			
 			
 			UserVO user = (UserVO)session.getAttribute("loginUser");
 			model.addAttribute("page",page);

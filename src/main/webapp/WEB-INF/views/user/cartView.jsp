@@ -128,8 +128,8 @@
 			</div>
 
 			<div class="container-fluid margin_first">
-				<button type="button" id="delete" class="btn btn-success two_button">선택 메뉴 삭제</button>
-				<button type="button" id="order" class="btn btn-success two_button float-right">선택 메뉴 주문</button>
+				<button type="button" id="delete" class="btn btn-success two_button float-right">선택 메뉴 삭제</button>
+				<button type="button" id="order" class="btn btn-success two_button">선택 메뉴 주문</button>
 			</div>
 		</c:if>
 	</div>
