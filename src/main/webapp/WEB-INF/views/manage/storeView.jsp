@@ -47,7 +47,7 @@
                 <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -191,10 +191,15 @@
         </form>
 
     </c:if>
-    <c:if test="${store.state.id eq 3 || store.state.id eq 4 || store.state.id eq 5 || store.state.id eq 6}">
+    <c:if test="${store.state.id eq 3 || store.state.id eq 5 || store.state.id eq 6}">
         <div class="container-fluid text-center">
             ${store.state.name} 처리된 매장입니다.
         </div>
+    </c:if>
+    <c:if test="${store.state.id eq 4}">
+        <a href="${pageContext.request.contextPath}/ad/approve/${store.id}/store">
+            <button type="button" class="btn btn-outline-success btn-block">매장 재승인 하기</button>
+        </a>
     </c:if>
     <div class="margin_first">
         <a href="${pageContext.request.contextPath}/ad/all-/all-/1/store">

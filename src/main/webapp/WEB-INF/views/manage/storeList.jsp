@@ -47,48 +47,56 @@
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
-            <li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
         </ul>
     </div>
 </nav>
 
 <div>
-    <form class="form-inline">
-        <div class="col-3" style="padding: 3pt;">
-            <select class="form-control" style="width: 100%">
-                <option>매장명</option>
-            </select>
-        </div>
+    <div class="form-inline">
         <div class="col-9" style="padding: 3pt 3pt 3pt 0;">
-            <input class="form-control" type="search" placeholder="검색어를 입력해주세요" style="width: inherit"
-                   id="search_input"/>
+            <input class="form-control" type="search" placeholder="매장이름을 입력해주세요" style="width: inherit" name="content"
+                   id="search_store_name"/>
         </div>
-    </form>
+        <div class="col-3" style="padding: 3pt;">
+            <button type="button" class="btn btn-outline-success" style="width: 100%" id="button">검색</button>
+        </div>
+        <script>
+            $('#button').click(function (){
+                if ($('#search_store_name').val()){
+                    location.href = '${pageContext.request.contextPath}/ad/${storeStateName}/'+($('#search_store_name').val())+'/1/store';
+                }
+                else{
+                    location.href = '${pageContext.request.contextPath}/ad/${storeStateName}/all-/1/store';
+                }
+            });
+        </script>
+    </div>
 </div>
 
 <ul class="nav nav-tabs">
     <c:if test="${type eq 'all-'}">
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/${storeName}/1/store"
                                                       class="nav-link active">ALL</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/${storeName}/1/store"
                                                       class="nav-link">승인 대기</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/${storeName}/1/store"
                                                       class="nav-link">승인 완료</a></li>
     </c:if>
     <c:if test="${type eq '신청'}">
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/${storeName}/1/store"
                                                       class="nav-link">ALL</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/${storeName}/1/store"
                                                       class="nav-link active">승인 대기</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/${storeName}/1/store"
                                                       class="nav-link">승인 완료</a></li>
     </c:if>
     <c:if test="${type eq '승인'}">
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/all-/${storeName}/1/store"
                                                       class="nav-link">ALL</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/신청/${storeName}/1/store"
                                                       class="nav-link">승인 대기</a></li>
-        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/all-/1/store"
+        <li class="nav-item text-center nav_three"><a href="${pageContext.request.contextPath}/ad/승인/${storeName}/1/store"
                                                       class="nav-link active">승인 완료</a></li>
     </c:if>
 </ul>
