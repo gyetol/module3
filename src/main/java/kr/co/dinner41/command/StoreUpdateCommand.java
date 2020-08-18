@@ -7,8 +7,8 @@ public class StoreUpdateCommand {
 	private String category;
 	private String address;
 	private String subAddress;
-	private double latitude;
-	private double longitude;
+	private String latitude;
+	private String longitude;
 	private String phone;
 	private String operateTime;
 	private String introduction;
@@ -16,7 +16,7 @@ public class StoreUpdateCommand {
 	public StoreUpdateCommand() {}
 
 	public StoreUpdateCommand(String businessNumber, String name, String photo, String category, String address,
-			String subAddress, double latitude, double longitude, String phone, String operateTime,
+			String subAddress, String latitude, String longitude, String phone, String operateTime,
 			String introduction) {
 		super();
 		this.businessNumber = businessNumber;
@@ -80,19 +80,19 @@ public class StoreUpdateCommand {
 		this.subAddress = subAddress;
 	}
 
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
@@ -119,6 +119,7 @@ public class StoreUpdateCommand {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+
 	
 	
 
