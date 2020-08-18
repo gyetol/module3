@@ -2,6 +2,7 @@ package kr.co.dinner41.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import kr.co.dinner41.service.order.OrderInsertService;
 import kr.co.dinner41.service.order.OrderListService;
 import kr.co.dinner41.service.order.OrderUpdateService;
 import kr.co.dinner41.service.order.OrderViewService;
+import kr.co.dinner41.vo.Menu2OrderViewVO;
 import kr.co.dinner41.vo.OrderVO;
 import kr.co.dinner41.vo.OrderViewVO;
 import kr.co.dinner41.vo.UserVO;
@@ -79,9 +81,6 @@ public class OrderController {
 	
 		// 결제가 완료되면 완료된 메뉴들을 장바구니에서 제거
 		int clearMenuCount = Integer.parseInt(arrForOrder[1]);
-		
-		System.out.println("결제가 완료된 메뉴의 개수 : " + clearMenuCount);
-		
 		String [] clearMenuIds = new String[clearMenuCount]; 
 		for (int i = 0; i < clearMenuCount; i++) {
 			clearMenuIds[i] = arrForOrder[i+2];
@@ -89,18 +88,42 @@ public class OrderController {
 		map.put("menuIds", clearMenuIds);
 		return map;
 	}
+
 	
 	@RequestMapping(value = "/gm/{page}/order", method = RequestMethod.GET)
-	public String list(@PathVariable("page") int page, HttpSession session, Model model) {
+	public String listByUser(@PathVariable("page") int page, HttpSession session, Model model) {
 
-		// 세션의 사용자 정보를 통해서
-		// 주문번호, 주문시간, 매장명, 금액을 리스트로 출력
-		// List<OrderViewVO>를 model에 집어넣으면됌
-		UserVO user = (UserVO)(session.getAttribute("loginUser"));
-		List<OrderViewVO> list = listService.execute(user.getId());
-		model.addAttribute("orderViews", list);
+		// service내에서 user의 타입을 체크해서 사용자일 경우 다른 쿼리문을 실행하도록 해야함
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
+		map = listService.execute(user);
+		
+		for (Map.Entry<OrderViewVO, List<Menu2OrderViewVO>> entry : map.entrySet()) {
+			OrderViewVO key = entry.getKey();
+			List<Menu2OrderViewVO> value = entry.getValue();
+			for (Menu2OrderViewVO m2o : value) {
+				System.out.printf("%s / ",  m2o.getMenuName());
+			}
+			System.out.println();
+		}
+
+		model.addAttribute("map", map);
 		return "user/orderList";
 	}
+
+	
+	@RequestMapping(value = "/sm/{page}/order", method = RequestMethod.GET)
+	public String listByStore(@PathVariable("page") int page, HttpSession session, Model model) {
+
+		// service내에서 user의 타입을 체크해서 점주일 경우 다른 쿼리문을 실행하도록 해야함
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
+		map = listService.execute(user);
+
+		model.addAttribute("map", map);
+		return "store/orderList";
+	}
+
 	
 	@RequestMapping(value = "/gm/{id}/order/detail", method = RequestMethod.GET)
 	public String view(@PathVariable("id") int orderId, Model model) {
@@ -114,4 +137,5 @@ public class OrderController {
 	public String pay() {
 		return "user/pay";
 	}
+	
 }

@@ -79,7 +79,9 @@
 <div class="container-fluid">
 
     <div class="text-center" style="margin-bottom: 20pt">
+
         <img src="${pageContext.request.contextPath}/resources/images/${store.photo}" width="90%" class="rounded" alt="no picture">
+
     </div>
 
     <div class="container-fluid text-left">

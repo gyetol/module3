@@ -25,49 +25,38 @@
 
 <title>Order History</title>
 </head>
-
 <body>
+
 	<nav class="navbar navbar-light light_green">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<!--사용자 위치-->
-		<div class="btn-group">
-			<button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span>서울특별시 봉천동</span>
-			</button>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">주소 변경하기</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">현재 위치 기준</a>
-			</div>
+		<div>
+			<h5 class="up_down_center">STORE MANAGE</h5>
 		</div>
 
-		<!--장바구니 아이콘-->
-		<a href="${pageContext.request.contextPath}/gm/cart"> <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
-		</a>
+		<img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
-		<!--메뉴-->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
-				<li class="nav-item active"><a class="nav-link" href="#">결제내역</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
+				<li class="nav-item active"><a class="nav-link" href="#">주문 내역</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<!--Content-->
 	<div>
-		<!--제목-->
-		<div class="container-fluid text-center" style="margin-top: 15pt">
-			<img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title" />
-			<h4>주문 내역</h4>
+		<div class="container-fluid">
+			<div class="text-center" style="margin-top: 15pt">
+				<img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title" />
+				<h4>주문 내역</h4>
+			</div>
 		</div>
 
 		<hr style="margin: 0" />
@@ -76,27 +65,24 @@
 			주문 내역이 비어있습니다.
 		</c:if>
 
+
 		<c:if test="${not empty map}">
-			<!--주문 목록-->
 			<c:forEach items="${map}" var="entry" varStatus="i">
-				<div class="orderClass" data-orderid=<c:out value="${entry.key.orderId}"/>>
+				<div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
-							<div>
-								<div style="color: green; font-weight: bold;">
-									주문번호 : <span id="orderNumber"><c:out value="${entry.key.orderId}" /></span><br />
-								</div>
-								주문일시 : <span><c:out value="${entry.key.order_order_date}" /></span><br /> 매장명 : <span><c:out value="${entry.key.storeName}" /></span><br /> 
-								주문메뉴(수량) :
-								<c:forEach items="${entry.value}" var="menu" varStatus="i">
-									<c:out value="${menu.menuName}" />
+							<div style="color: green; font-weight: bold;">
+								주문번호 : <span><c:out value="${entry.key.orderId}" /></span><br />
+							</div> 주문자명 : <span><c:out value="${entry.key.userName}" /></span><br /> 주문일시 : <span><c:out value="${entry.key.order_order_date}" /></span><br /> 
+							주문메뉴(수량) : 
+							<c:forEach items="${entry.value}" var="menu" varStatus="i">
+								<c:out value="${menu.menuName}" />
 								(<c:out value="${menu.amount}" />) /
 							</c:forEach>
-								<div style="margin-top: 5pt">
-									<button id="reviewClick" class="btn btn-outline-success btn_disabled btn-sm" style="width: 32%">리뷰쓰기</button>
-									<button class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
-									<button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%">주문상세</button>
-								</div>
+							<div style="margin-top: 5pt">
+								<button class="btn btn-outline-success btn-sm" style="width: 32%">상세보기</button>
+								<button class="btn btn-outline-success btn-sm btn_disabled" style="width: 32%">주문취소</button>
+								<button class="btn btn-outline-success btn-sm btn_disabled" style="width: 32%">수령완료</button>
 							</div>
 						</li>
 					</ul>
@@ -108,7 +94,6 @@
 
 	<hr style="margin-top: 0" />
 
-	<!--pagination-->
 	<div style="text-align: center">
 		<div class="btn-group" role="group">
 			<button type="button" class="btn btn-success"><<</button>

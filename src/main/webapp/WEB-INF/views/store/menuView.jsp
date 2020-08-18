@@ -94,9 +94,17 @@
 <div class="container-fluid" data-storeId="38" data-menuId="55">
 
     <div class="container-fluid">
-    <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/menu" method="post">
+    <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/update/menu" method="post">
         <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
-            <img src="${pageContext.request.contextPath}/resources/images/categoryImages/chicken.png" width="100%" class="rounded" alt="no picture">
+            <img src="${pageContext.request.contextPath}/resources/images/chicken.png" width="100%" class="rounded" alt="no picture">
+        </div>
+        
+       <div class="form-group">
+            
+            <img src="${pageContext.request.contextPath}/resources/images/${menu.photo}" width="100%" class="rounded" alt="no picture">
+            <!--  <div id="menuPhoto">
+               <input type="file" id="menuPhoto" name="photo" value="${menu.photo}"/>
+            </div>-->
         </div>
 
         <div class="form-group">
@@ -116,7 +124,7 @@
         <div class="form-group" style="margin-bottom: 20pt">
             <label for="offerType">제공방식</label>
             <div class="card card-body">
-                <input type="text" class="form-control" name="offerType.name" id="menuOfferType"  readonly value="${menu.offerType.name}">
+                <input type="text" class="form-control" name="type" id="menuOfferType"  readonly value="${menu.offerType.id}">
             </div>
         </div>
 
@@ -124,6 +132,12 @@
             <label for="price">메뉴 가격</label>
             <div class="card card-body">
             <input type="text" class="form-control" name="price" id="menuPrice" readonly value="${menu.price}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price">메뉴 태그</label>
+            <div class="card card-body">
+            <input type="text" class="form-control" name="tag" id="menuTag" readonly value="${menu.tag}">
             </div>
         </div>
 
@@ -137,8 +151,8 @@
 
         <div class="form-group" style="margin-bottom: 40pt">
             <label for="notice">메뉴 유의 사항</label>
-            <div class="card card-body" id="notice" name="notice">
-             <input type="text" class="form-control" id="menuNotice" readonly value="${menu.notice}">
+            <div class="card card-body" id="notice" >
+             <input type="text" class="form-control" id="menuNotice" name="notice" readonly value="${menu.notice}">
             </div>
         </div>
         
@@ -147,7 +161,7 @@
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>
           
-        <button id="menuUpdate"  type="submit" class="btn btn-success three_button">수정하기</button>
+        <button id="menuUpdate" type="submit" class="btn btn-success three_button">수정하기</button>
          
         <button id="menuDelete" type="button" class="btn btn-success three_button" method="delete" action="menu" >삭제하기</button>
         <input type="hidden" id="storeId" name="storedId" value="${storeId}">
