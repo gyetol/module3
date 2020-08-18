@@ -213,9 +213,16 @@
                     </a>
                 </c:if>
                 <c:if test="${obj.pageNumber ne page}">
-                    <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
-                        <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
-                    </a>
+                    <c:if test="${obj.pageNumber eq 0}">
+                        <a href="${pageContext.request.contextPath}/${type}/1/qna">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
+                    <c:if test="${obj.pageNumber ne 0}">
+                        <a href="${pageContext.request.contextPath}/${type}/${obj.pageNumber}/qna">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
                 </c:if>
             </c:forEach>
         </div>

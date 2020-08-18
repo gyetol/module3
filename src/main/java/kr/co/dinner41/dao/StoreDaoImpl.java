@@ -1,15 +1,20 @@
 package kr.co.dinner41.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import kr.co.dinner41.mapper.MenuMapper;
-import kr.co.dinner41.vo.MenuVO;
+import kr.co.dinner41.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dinner41.exception.ReviewException;
@@ -19,9 +24,6 @@ import kr.co.dinner41.exception.store.StoreInsertFailedException;
 import kr.co.dinner41.exception.store.StoreSelectFailedException;
 import kr.co.dinner41.exception.store.StoreUpdateFailedException;
 import kr.co.dinner41.mapper.StoreMapper;
-import kr.co.dinner41.vo.OpenState;
-import kr.co.dinner41.vo.StoreListByUserViewVO;
-import kr.co.dinner41.vo.StoreVO;
 
 @Repository("storeDao")
 public class StoreDaoImpl implements StoreDao {
@@ -81,18 +83,31 @@ public class StoreDaoImpl implements StoreDao {
 	}
 	
 	@Override
-	public void deleteByManager(int id) throws StoreException{
-		String sql = "update stores set store_state_id=5 where store_id=?";
-		int result=0;
-		try {
-			result=jTemp.update(sql,id);
-		}
-		catch(Exception e) {
-			throw new StoreDeleteFailedException(e.getMessage());
-		}
-		if(result==0){
-			throw new StoreDeleteFailedException("매장 삭제를 시도하였으나 영향받은 행이 없습니다.");
-		}
+	public void deleteByManager(int storeId, UserVO manager, String content) throws StoreException{
+		int deleteCode = 6;
+		String sql1 = "update stores set store_state_id = ? WHERE store_id = ?;";
+		jTemp.update(sql1, deleteCode,storeId);
+
+		final String sql2 = "INSERT INTO logs VALUES (DEFAULT, ?, ?, CURRENT_TIMESTAMP);";
+		KeyHolder holder = new GeneratedKeyHolder();
+		final String[] str = {"log_id"};
+		jTemp.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql2, str);
+				pstmt.setInt(1, storeId);
+				pstmt.setInt(2, deleteCode);
+				return pstmt;
+			}
+		}, holder);
+		Number key= holder.getKey();
+		int primaryID = key.intValue();
+
+		String sql3 = "INSERT INTO log_to_managers VALUES (?, ?);";
+		jTemp.update(sql3, primaryID, manager.getId());
+
+		String sql4 = "INSERT INTO log_to_messages VALUES (?, ?);";
+		jTemp.update(sql4, primaryID, content);
 	}
 
 	@Override
@@ -417,6 +432,104 @@ public class StoreDaoImpl implements StoreDao {
 		String sql = "select * from menu_view WHERE store_id = ?";
 		list = jTemp.query(sql, new MenuMapper(), storeId);
 		return list;
+	}
+
+	@Override
+	public void approve(int storeId, UserVO manager) throws StoreException {
+		int approveCode = 2;
+		String sql1 = "update stores set store_state_id = ? WHERE store_id = ?;";
+		jTemp.update(sql1, approveCode,storeId);
+
+		final String sql2 = "INSERT INTO logs VALUES (DEFAULT, ?, ?, CURRENT_TIMESTAMP);";
+		KeyHolder holder = new GeneratedKeyHolder();
+		final String[] str = {"log_id"};
+		jTemp.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql2, str);
+				pstmt.setInt(1, storeId);
+				pstmt.setInt(2, approveCode);
+				return pstmt;
+			}
+		}, holder);
+		Number key= holder.getKey();
+		int primaryID = key.intValue();
+
+		String sql3 = "INSERT INTO log_to_managers VALUES (?, ?);";
+		jTemp.update(sql3, primaryID, manager.getId());
+	}
+
+	@Override
+	public void block(int storeId, UserVO manager, String content) throws StoreException {
+		int blockCode = 4;
+		String sql1 = "update stores set store_state_id = ? WHERE store_id = ?;";
+		jTemp.update(sql1, blockCode,storeId);
+
+		final String sql2 = "INSERT INTO logs VALUES (DEFAULT, ?, ?, CURRENT_TIMESTAMP);";
+		KeyHolder holder = new GeneratedKeyHolder();
+		final String[] str = {"log_id"};
+		jTemp.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql2, str);
+				pstmt.setInt(1, storeId);
+				pstmt.setInt(2, blockCode);
+				return pstmt;
+			}
+		}, holder);
+		Number key= holder.getKey();
+		int primaryID = key.intValue();
+
+		String sql3 = "INSERT INTO log_to_managers VALUES (?, ?);";
+		jTemp.update(sql3, primaryID, manager.getId());
+
+		String sql4 = "INSERT INTO log_to_messages VALUES (?, ?);";
+		jTemp.update(sql4, primaryID, content);
+	}
+
+	@Override
+	public void reject(int storeId, UserVO manager, String content) throws StoreException {
+		int rejectCode = 3;
+		String sql1 = "update stores set store_state_id = ? WHERE store_id = ?;";
+		jTemp.update(sql1, rejectCode,storeId);
+
+		final String sql2 = "INSERT INTO logs VALUES (DEFAULT, ?, ?, CURRENT_TIMESTAMP);";
+		KeyHolder holder = new GeneratedKeyHolder();
+		final String[] str = {"log_id"};
+		jTemp.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql2, str);
+				pstmt.setInt(1, storeId);
+				pstmt.setInt(2, rejectCode);
+				return pstmt;
+			}
+		}, holder);
+		Number key= holder.getKey();
+		int primaryID = key.intValue();
+
+		String sql3 = "INSERT INTO log_to_managers VALUES (?, ?);";
+		jTemp.update(sql3, primaryID, manager.getId());
+
+		String sql4 = "INSERT INTO log_to_messages VALUES (?, ?);";
+		jTemp.update(sql4, primaryID, content);
+	}
+
+	@Override
+	public int getTotalCount(String stateName, String name) throws StoreException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from store_view ");
+		sb.append("where store_state_name like '"+stateName+"' and store_name like '%"+name+"%' ");
+
+		String sql = sb.toString();
+		List<StoreVO> stores = null;
+		try {
+			stores=jTemp.query(sql, new StoreMapper());
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (Math.max(stores.size(), 0));
 	}
 
 }
