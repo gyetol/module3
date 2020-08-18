@@ -3,16 +3,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -24,7 +20,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Manager Home</title>
 
@@ -42,7 +38,7 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture"/>
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture"/>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -53,7 +49,7 @@
                 <a class="nav-link" href="#">매장 관리</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
@@ -74,14 +70,13 @@
     </div>
 </div>
 
-<!--카테고리-->
 <div>
     <div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
         <div class="col mb-4">
-            <a href="ad/all-/all-/1/store">
+            <a href="${pageContext.request.contextPath}/ad/all-/all-/1/store">
             	<div class="card h-100">
                 	<div class="card-body text-center trim">
-                    	<img src="../../icons/cogs-solid.svg" class="" alt="..." width="70%" style="margin: 10%">
+                    	<img src="${pageContext.request.contextPath}/resources/icons/cogs-solid.svg" class="" alt="..." width="70%" style="margin: 10%">
                     	<h5 class="card-title" style="margin-top: 10pt">매장관리</h5>
                 	</div>
             	</div>
@@ -90,19 +85,21 @@
         <div class="col mb-4">
             <div class="card h-100">
                 <div class="card-body text-center trim">
-                    <img src="../../icons/utensils-solid.svg" class="" alt="no picture" width="60%" style="margin: 10%">
+                    <img src="${pageContext.request.contextPath}/resources/icons/utensils-solid.svg" class="" alt="no picture" width="60%" style="margin: 10%">
                     <h5 class="card-title">승인 대기</h5>
                 </div>
             </div>
         </div>
         <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center trim">
-                    <img src="../../icons/clipboard-list-solid.svg" class="" alt="no picture" width="60%"
-                         style="margin: 10%">
-                    <h5 class="card-title">1:1 문의</h5>
+            <a href="${pageContext.request.contextPath}/ALL/1/qna">
+                <div class="card h-100">
+                    <div class="card-body text-center trim">
+                        <img src=".${pageContext.request.contextPath}/resources/icons/clipboard-list-solid.svg" class="" alt="no picture" width="60%"
+                             style="margin: 10%">
+                        <h5 class="card-title">1:1 문의</h5>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

@@ -23,9 +23,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Store</title>
-    
+
     <style>
-        .menu:hover{
+        .menu:hover {
             background-color: aliceblue;
             cursor: pointer;
         }
@@ -131,8 +131,8 @@
     <ul class="list-group list-group-flush">
         <c:if test="${type eq 'menu'}">
             <c:forEach var="vo" items="${list}">
-                <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu" class="menu">
-                    <li class="list-group-item">
+                <li class="list-group-item">
+                    <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu" class="menu">
                         <div class="row">
                             <div class="col-3">
                                 <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg"
@@ -149,8 +149,8 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </a>
+                    </a>
+                </li>
             </c:forEach>
         </c:if>
         <c:if test="${type eq 'review'}">

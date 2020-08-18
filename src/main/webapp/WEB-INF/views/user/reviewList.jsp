@@ -134,7 +134,7 @@
     </div>
 
     <div class="container-fluid margin_first">
-        <a href="${pageContext.request.contextPath}/gm/${storeId}/store">
+        <a href="${pageContext.request.contextPath}/gm/${storeId}/menu/store">
             <button type="button" class="btn btn-outline-success btn-block">뒤로가기</button>
         </a>
     </div>
