@@ -101,12 +101,14 @@
             <select id="inputKind" class="form-control" name="category">
                 <option>도시락</option>
                 <option>밀키트</option>
-                <option>떡/제과</option>
+                <option>떡</option>
+                <option>제과</option>
                 <option>한식</option>
                 <option>분식</option>
                 <option>일식</option>
                 <option>반찬</option>
-                <option>치킨/피자</option>
+                <option>치킨</option>
+                <option>피자</option>
                 <option>기타</option>
             </select>
         </div>

@@ -137,7 +137,7 @@
            <a href="${pageContext.request.contextPath}/sm/update/store">
             <button type="button" class="btn btn-success two_button">매장 수정 하기</button>
            </a>
-            <button type="button" class="btn btn-success two_button float-right">매장 페점 하기</button>
+            <button id="deleteStoreBtn"type="button" class="btn btn-success two_button float-right">매장 폐점 하기</button>
         </div>
     </div>
 </div>
