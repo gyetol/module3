@@ -59,7 +59,7 @@
                    id="search_store_name"/>
         </div>
         <div class="col-3" style="padding: 3pt;">
-            <button type="button" class="btn btn-outline-success" style="width: 100%" id="button">검색하기</button>
+            <button type="button" class="btn btn-outline-success" style="width: 100%" id="button">검색</button>
         </div>
         <script>
             $('#button').click(function (){

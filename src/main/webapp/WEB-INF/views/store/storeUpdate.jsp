@@ -37,7 +37,9 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    <a href="${pageContext.request.contextPath}/">
+        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -48,7 +50,7 @@
                 <a class="nav-link" href="#">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
