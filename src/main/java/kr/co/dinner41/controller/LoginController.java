@@ -71,6 +71,7 @@ public class LoginController {
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String login(HttpServletRequest request) {
+		/*
 		HttpSession session=request.getSession(false);
 		if(session==null) {
 			return "common/login";
@@ -81,6 +82,8 @@ public class LoginController {
 		}
 		String result=getUserPage(loginUser);
 		return result;
+		*/
+		return "user/userMap";
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)

@@ -1,4 +1,6 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -30,15 +32,14 @@
 
     <!--사용자 위치-->
     <div class="btn-group">
-        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <span>서울특별시 봉천동</span>
-        </button>
+        <input type="text" class="btn btn-outline-dark disable opacity -hover" value="" readonly>
+        <!--
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">주소 변경하기</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">현재 위치 기준</a>
         </div>
+		-->
     </div>
 
     <!--장바구니 아이콘-->
@@ -101,19 +102,20 @@
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body trim">
-                            <div class="text-center map_button">전체</div>
-                            <div class="text-center map_button">한식</div>
-                            <div class="text-center map_button">일식</div>
-                            <div class="text-center map_button">분식</div>
-                            <div class="text-center map_button">떡</div>
-                            <div class="text-center map_button">제과</div>
-                            <div class="text-center map_button">치킨</div>
-                            <div class="text-center map_button">피자</div>
-                            <div class="text-center map_button">기타</div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="all" value="ALL">전체</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="kor" value="KOR">한식</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="jap" value="JAP">일식</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="sna" value="SNA">분식</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="ric" value="RIC">떡</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="bre" value="BRE">제과</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="chi" value="CHI">치킨</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="piz" value="PIZ">피자</button></div>
+                            <div class="text-center map_button"><button type="button" class="btn btn-default btn-block" name="category_button" id="etc" value="ETC">기타</button></div>
                         </div>
                     </div>
                 </div>
 
+<!-- 
                 <div class="card">
                     <div class="card-header" id="headingTwo" style="background-color: #CFE3A1;">
                         <button class="btn btn-block text-center collapsed trim" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" >
@@ -128,6 +130,7 @@
                         </div>
                     </div>
                 </div>
+ -->
             </div>
         </div>
     </div>
