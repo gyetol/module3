@@ -38,7 +38,9 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture"/>
+    <a href="${pageContext.request.contextPath}/">
+        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -82,19 +84,19 @@
             	</div>
             </a>
         </div>
-        <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center trim">
-                    <img src="${pageContext.request.contextPath}/resources/icons/utensils-solid.svg" class="" alt="no picture" width="60%" style="margin: 10%">
-                    <h5 class="card-title">승인 대기</h5>
-                </div>
-            </div>
-        </div>
+<%--        <div class="col mb-4">--%>
+<%--            <div class="card h-100">--%>
+<%--                <div class="card-body text-center trim">--%>
+<%--                    <img src="${pageContext.request.contextPath}/resources/icons/utensils-solid.svg" class="" alt="no picture" width="60%" style="margin: 10%">--%>
+<%--                    <h5 class="card-title">승인 대기</h5>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="col mb-4">
             <a href="${pageContext.request.contextPath}/ALL/1/qna">
                 <div class="card h-100">
                     <div class="card-body text-center trim">
-                        <img src=".${pageContext.request.contextPath}/resources/icons/clipboard-list-solid.svg" class="" alt="no picture" width="60%"
+                        <img src="${pageContext.request.contextPath}/resources/icons/utensils-solid.svg" class="" alt="no picture" width="60%"
                              style="margin: 10%">
                         <h5 class="card-title">1:1 문의</h5>
                     </div>

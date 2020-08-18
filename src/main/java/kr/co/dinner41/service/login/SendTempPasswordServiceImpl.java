@@ -30,36 +30,36 @@ public class SendTempPasswordServiceImpl implements SendTempPasswordService {
         prop.put("mail.smtp.port", "465");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.stmp.ssl.enable", "true");
-        
+
         Authenticator auth = new Authenticator() {
         	@Override
         	protected PasswordAuthentication getPasswordAuthentication() {
-        		return new PasswordAuthentication(from, password)
+        		return new PasswordAuthentication(from, password);
         	}
-        
+
 		};
-        
+
         Session session = Session.getDefaultInstance(prop, auth);
-        
+
         MimeMessage msg = new MimeMessage(session);
-    
+
         try {
             msg.setSentDate(new Date());
-            
+
             msg.setFrom(new InternetAddress("shxorld@gmail.com", "VISITOR"));
-            InternetAddress to = new InternetAddress("szhyun2002@gmail.com");         
-            msg.setRecipient(Message.RecipientType.TO, to);            
-            msg.setSubject("제목", "UTF-8");            
-            msg.setText("안녕하세요 테스트 메일입니다.", "UTF-8");            
-            
+            InternetAddress to = new InternetAddress("szhyun2002@gmail.com");
+            msg.setRecipient(Message.RecipientType.TO, to);
+            msg.setSubject("제목", "UTF-8");
+            msg.setText("안녕하세요 테스트 메일입니다.", "UTF-8");
+
             Transport.send(msg);
-            
-        } catch(AddressException ae) {            
-            System.out.println("AddressException : " + ae.getMessage());           
-        } catch(MessagingException me) {            
+
+        } catch(AddressException ae) {
+            System.out.println("AddressException : " + ae.getMessage());
+        } catch(MessagingException me) {
             System.out.println("MessagingException : " + me.getMessage());
         } catch(UnsupportedEncodingException e) {
-            System.out.println("UnsupportedEncodingException : " + e.getMessage());			
+            System.out.println("UnsupportedEncodingException : " + e.getMessage());
         }
 
 	}

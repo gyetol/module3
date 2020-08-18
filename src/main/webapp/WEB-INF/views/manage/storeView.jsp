@@ -37,7 +37,9 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    <a href="${pageContext.request.contextPath}/">
+        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -54,7 +56,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -62,7 +64,7 @@
 
 <div class="container-fluid">
     <div class="text-center" style="padding: 15pt">
-        <h2>신의주 순대국 봉천중앙시장점</h2>
+        <h2>${store.name}</h2>
     </div>
 </div>
 
@@ -85,7 +87,7 @@
             </tr>
 
             <tr>
-                <td>점주 전화번호</td>
+                <td>전화번호</td>
                 <td>${store.user.phone}</td>
             </tr>
 
@@ -101,7 +103,21 @@
     <hr/>
 
     <div class="container-fluid">
-        <h5>매장 정보</h5>
+        <h5>
+            매장 정보
+            <c:if test="${store.state.id eq 1}">
+                <span class="badge badge-primary">${store.state.name}</span>
+            </c:if>
+            <c:if test="${store.state.id eq 2}">
+                <span class="badge badge-success">${store.state.name}</span>
+            </c:if>
+            <c:if test="${store.state.id eq 3}">
+                <span class="badge badge-danger">${store.state.name}</span>
+            </c:if>
+            <c:if test="${store.state.id eq 4 || store.state.id eq 5 || store.state.id eq 6}">
+                <span class="badge badge-dark">${store.state.name}</span>
+            </c:if>
+        </h5>
         <table style="width: 100%">
             <tbody style="width: 100%">
             <tr>
@@ -155,22 +171,36 @@
 
     <c:if test="${store.state.id eq 1}">
         <div class="form-group">
-            <button type="button" class="btn btn-outline-success btn-block">매장 승인 하기</button>
-            <form method="post">
-                <textarea class="form-control" placeholder="매장 승인 거부를 위해선 이유를 기입해주세요."></textarea>
+            <a href="${pageContext.request.contextPath}/ad/approve/${store.id}/store">
+                <button type="button" class="btn btn-outline-success btn-block">매장 승인 하기</button>
+            </a>
+            <form method="post" action="${pageContext.request.contextPath}/ad/reject/${store.id}/store">
+                <textarea class="form-control" placeholder="매장 승인 거부를 위해선 이유를 기입해주세요." style="margin-top: 7pt; margin-bottom: 3pt" name="content"></textarea>
                 <button type="submit" class="btn btn-outline-success btn-block">매장 승인 거부</button>
             </form>
         </div>
     </c:if>
     <c:if test="${store.state.id eq 2}">
-        <button type="button" class="btn btn-outline-success two_button">매장 정지</button>
-        <button type="button" class="btn btn-outline-success two_button float-right">매장 삭제</button>
+        <form method="post" action="${pageContext.request.contextPath}/ad/block/${store.id}/store">
+            <textarea class="form-control" placeholder="매장 정지를 위해선 이유를 기입해주세요." style="margin-top: 7pt; margin-bottom: 3pt" name="content"></textarea>
+            <button type="submit" class="btn btn-outline-success btn-block">매장 정지</button>
+        </form>
+        <form method="post" action="${pageContext.request.contextPath}/ad/delete/${store.id}/store">
+            <textarea class="form-control" placeholder="매장 삭제를 위해선 이유를 기입해주세요." style="margin-top: 7pt; margin-bottom: 3pt" name="content"></textarea>
+            <button type="submit" class="btn btn-outline-success btn-block">매장 삭제</button>
+        </form>
+
     </c:if>
     <c:if test="${store.state.id eq 3 || store.state.id eq 4 || store.state.id eq 5 || store.state.id eq 6}">
         <div class="container-fluid text-center">
             ${store.state.name} 처리된 매장입니다.
         </div>
     </c:if>
+    <div class="margin_first">
+        <a href="${pageContext.request.contextPath}/ad/all-/all-/1/store">
+            <button type="button" class="btn btn-success btn-block">매장 목록으로</button>
+        </a>
+    </div>
 </div>
 <hr/>
 <div class="last_block"></div>

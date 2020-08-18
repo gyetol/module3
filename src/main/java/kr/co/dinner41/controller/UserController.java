@@ -2,9 +2,9 @@ package kr.co.dinner41.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public String insert(UserInsertCommand command,Errors errors,HttpServletRequest request) {
+	public String insert(UserInsertCommand command, Errors errors, HttpServletRequest request) {
 		/*
 		new UserInsertValidator().validate(command,errors);
 		if(errors.hasErrors()) {

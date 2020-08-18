@@ -37,7 +37,9 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    <a href="${pageContext.request.contextPath}/">
+        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -94,7 +96,11 @@
 <div>
 
     <c:if test="${empty stores}">
-        등록된 매장이 없습니다.
+        <div class="text-center">
+            <br/>
+            등록된 매장이 없습니다.
+            <br/>
+        </div>
     </c:if>
 
     <c:if test="${not empty stores}">
@@ -102,29 +108,41 @@
             <div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg"
-                                     width="100%" class="rounded" alt="no picture">
+                        <a href="${pageContext.request.contextPath}/ad/${store.id}/store">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg"
+                                         width="100%" class="rounded" alt="no picture">
+                                </div>
+                                <div class="col-9" style="padding-left: 0">
+                                    <h5>
+                                        <c:out value="${store.name}"/>&nbsp;&nbsp;
+                                        <c:if test="${store.state.id eq 2}">
+                                            <span class="badge badge-success">
+                                                <c:out value="${store.state.name}"/>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${store.state.id eq 1}">
+                                            <span class="badge badge-primary">
+                                                <c:out value="${store.state.name}"/>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${store.state.id eq 3}">
+                                            <span class="badge badge-danger">
+                                                <c:out value="${store.state.name}"/>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${store.state.id eq 4 || store.state.id eq 5 || store.state.id eq 6}">
+                                            <span class="badge badge-dark">
+                                                <c:out value="${store.state.name}"/>
+                                            </span>
+                                        </c:if>
+                                    </h5>
+                                    매장 전화번호 : <span><c:out value="${store.phone}"/></span> <br/>
+                                    위치 : <span><c:out value="${store.address}"/></span>
+                                </div>
                             </div>
-                            <div class="col-9" style="padding-left: 0">
-                                <h5>
-                                    <c:out value="${store.name}"/>&nbsp;&nbsp;
-                                    <c:if test="${store.state.name eq '승인'}">
-                                        <span class="badge badge-primary">
-                                            <c:out value="${store.state.name}"/>
-                                        </span>
-                                    </c:if>
-                                    <c:if test="${store.state.name eq '신청'}">
-                                        <span class="badge badge-danger">
-                                            <c:out value="${store.state.name}"/>
-                                        </span>
-                                    </c:if>
-                                </h5>
-                                매장 전화번호 : <span><c:out value="${store.phone}"/></span> <br/>
-                                위치 : <span><c:out value="${store.address}"/></span>
-                            </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -135,17 +153,32 @@
 
     <div style="text-align: center">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-success"><<</button>
-            <button type="button" class="btn btn-success" disabled>1</button>
-            <button type="button" class="btn btn-success">2</button>
-            <button type="button" class="btn btn-success">3</button>
-            <button type="button" class="btn btn-success">4</button>
-            <button type="button" class="btn btn-success">>></button>
+            <c:forEach var="obj" items="${pages}">
+                <c:if test="${obj.pageNumber eq page}">
+                    <a href="${pageContext.request.contextPath}/ad/${storeStateName}/${storeName}/${obj.pageNumber}/store">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj.showPageName}"></c:out></button>
+                    </a>
+                </c:if>
+                <c:if test="${obj.pageNumber ne page}">
+                    <c:if test="${obj.pageNumber eq 0}">
+                        <a href="${pageContext.request.contextPath}/ad/${storeStateName}/${storeName}/1/store">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
+                    <c:if test="${obj.pageNumber ne 0}">
+                        <a href="${pageContext.request.contextPath}/ad/${storeStateName}/${storeName}/${obj.pageNumber}/store">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
+                </c:if>
+            </c:forEach>
         </div>
     </div>
 
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block">뒤로가기</button>
+        <a href="${pageContext.request.contextPath}/">
+            <button type="button" class="btn btn-outline-success btn-block">뒤로가기</button>
+        </a>
     </div>
 </div>
 <hr/>
