@@ -1,16 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -22,7 +20,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
     <title>Store</title>
 </head>
@@ -39,7 +37,7 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture">
+    <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -62,10 +60,8 @@
     </div>
 </nav>
 
-<!--매장 헤더-->
 <div class="container-fluid">
     <div class="text-center" style="padding: 15pt">
-        <!--매장명-->
         <h2>신의주 순대국 봉천중앙시장점</h2>
     </div>
 </div>
@@ -74,8 +70,7 @@
 
 <div class="container-fluid">
     <div class="text-center" style="margin-bottom: 20pt">
-        <!--매장 사진-->
-        <img src="../../images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
+        <img src="${pageContext.request.contextPath}/resources/images/sweet-restaurant.jpg" width="90%" class="rounded" alt="no picture">
     </div>
 
     <hr style="margin-top: 0"/>
@@ -86,17 +81,17 @@
             <tbody style="width: 100%">
             <tr>
                 <td>점주명</td>
-                <td>김석진</td>
+                <td>${store.user.name}</td>
             </tr>
 
             <tr>
                 <td>점주 전화번호</td>
-                <td>010-1234-5678</td>
+                <td>${store.user.phone}</td>
             </tr>
 
             <tr>
                 <td>거주주소</td>
-                <td>대한민국</td>
+                <td>${store.user.address}&nbsp;${store.user.subAddress} </td>
             </tr>
 
             </tbody>
@@ -111,42 +106,43 @@
             <tbody style="width: 100%">
             <tr>
                 <td>사업자 번호</td>
-                <td>2013061307</td>
+                <td>${store.businessNumber}</td>
             </tr>
 
             <tr>
                 <td>매장명</td>
-                <td>신의주 순대국</td>
+                <td>${store.name}</td>
             </tr>
 
             <tr>
                 <td>매장 카테고리</td>
-                <td>밀키트</td>
+                <td>${store.category.name}</td>
             </tr>
 
             <tr>
                 <td>매장 전화번호</td>
-                <td>02-123-4567</td>
+                <td>${store.phone}</td>
             </tr>
 
             <tr>
                 <td>매장 주소</td>
-                <td>대한민국</td>
+                <td>${store.address}</td>
             </tr>
 
             <tr>
                 <td>매장 상세 주소</td>
-                <td>렉토피아</td>
+                <td>${store.subAddress}</td>
             </tr>
 
             <tr>
                 <td>매장 운영시간</td>
-                <td>24/7</td>
+                <td>${store.operateTime}</td>
             </tr>
 
             <tr>
                 <td>매장 소개</td>
-                <td>노답임</td>
+                <td>${store.introduction}</td>
+
             </tr>
 
             </tbody>
@@ -155,16 +151,26 @@
 
     <hr/>
 
-    <textarea class="form-control" placeholder="이유를 기입"></textarea>
+    <br/>
 
-    <hr/>
-
-    <div class="form-group">
-        <button type="button" class="btn btn-outline-success two_button">매장 승인 하기</button>
-        <button type="button" class="btn btn-outline-success two_button float-right">매장 승인 거부</button>
-    </div>
-    <button type="button" class="btn btn-outline-success two_button">매장 정지 처리</button>
-    <button type="button" class="btn btn-outline-success two_button float-right">매장 삭제 하기</button>
+    <c:if test="${store.state.id eq 1}">
+        <div class="form-group">
+            <button type="button" class="btn btn-outline-success btn-block">매장 승인 하기</button>
+            <form method="post">
+                <textarea class="form-control" placeholder="매장 승인 거부를 위해선 이유를 기입해주세요."></textarea>
+                <button type="submit" class="btn btn-outline-success btn-block">매장 승인 거부</button>
+            </form>
+        </div>
+    </c:if>
+    <c:if test="${store.state.id eq 2}">
+        <button type="button" class="btn btn-outline-success two_button">매장 정지</button>
+        <button type="button" class="btn btn-outline-success two_button float-right">매장 삭제</button>
+    </c:if>
+    <c:if test="${store.state.id eq 3 || store.state.id eq 4 || store.state.id eq 5 || store.state.id eq 6}">
+        <div class="container-fluid text-center">
+            ${store.state.name} 처리된 매장입니다.
+        </div>
+    </c:if>
 </div>
 <hr/>
 <div class="last_block"></div>
