@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreException;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping()
@@ -192,6 +193,5 @@ public class StoreController {
 
 		return "manage/storeView";
 	}
-
 
 }

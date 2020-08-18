@@ -5,16 +5,11 @@
 	String path = "../storeView/";
 %>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -26,12 +21,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<<<<<<< Updated upstream
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
-=======
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/dinner41.css">
->>>>>>> Stashed changes
-
     <title>Store</title>
 </head>
 
@@ -47,11 +37,7 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
-<<<<<<< Updated upstream
     <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
-=======
-    <img src="${pageContext.request.contextPath}/resource/icons/home-solid.svg" class="home" alt="no picture">
->>>>>>> Stashed changes
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
