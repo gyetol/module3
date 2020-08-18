@@ -116,7 +116,7 @@
 	<div>
 		<div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
 			<div class="col mb-4">
-				<a href="${pageContext.request.contextPath}/sm/store">
+				
 					<div class="card h-100" id="storeManagement" name="storeManagement">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/store.png" class="rounded category" alt="no picture">

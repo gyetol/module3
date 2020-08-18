@@ -58,6 +58,7 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		menu.setPhoto(command.getPhoto());
 		menu.setPrice(command.getPrice());
 		menu.setName(command.getName());
+		menu.setTag(command.getTag());
 		menu.setAmount(command.getAmount());
 		menu.setDescription(command.getIntroduction());
 		menu.setNotice(command.getNotice());
