@@ -1,8 +1,8 @@
 $(document).ready(function(){
-	var contextPath=sessionStorage.getItem("contextPath");
+	let contextPath=sessionStorage.getItem("contextPath");
 	
 	$('#deleteStoreBtn').click(function(){
-		var check;
+		let check;
 		check= confirm("정말로 삭제하시겠습니까?");
 		
 		if(check){
@@ -12,4 +12,10 @@ $(document).ready(function(){
 			location.href=contextPath+"/sm/store";
 		}
 	})
+	
+	
+	$('#updateBtn').click(function(){
+		alert("승인대기중입니다");
+	});
+	
 });
