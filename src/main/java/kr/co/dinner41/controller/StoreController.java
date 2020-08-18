@@ -18,7 +18,6 @@ import kr.co.dinner41.dao.StoreCategoryDao;
 import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreException;
-
 import kr.co.dinner41.service.review.ReviewListService;
 import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
@@ -29,13 +28,13 @@ import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.OpenState;
+import kr.co.dinner41.vo.PageVO;
 import kr.co.dinner41.vo.ReviewVO;
 import kr.co.dinner41.vo.StoreCategoryVO;
 import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.StoreStateVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -146,6 +145,19 @@ public class StoreController {
 		return "store/storeHome";
 	}
 	
+	@RequestMapping(value="/sm/delete/store" , method=RequestMethod.GET)
+	public String delete(HttpSession session,Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int userId = user.getId();
+		StoreVO store = null;
+		store = storeViewByStoreService.execute(userId);
+		int storeId = store.getId();
+		
+		storeDeleteService.execute(storeId);
+		
+		return "store/storeHome";
+	}
+	
 	
 	@RequestMapping(value="/sm/update/store", method=RequestMethod.GET)
 	public String update(HttpSession session, Model model) {
@@ -163,18 +175,17 @@ public class StoreController {
 		
 		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
-		int storeId = storeDao.selectById(user.getId()).getId();
-		System.out.println(storeId);
+		int storeId = storeDao.selectByUserId(user.getId()).getId();
 		String storeCategoryName = command.getCategory();
 		
 		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
 		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
 		
-		StoreStateVO storeState = new StoreStateVO(2,"승인");
-		if(storeDao.selectById(user.getId()).getState().getName().equals("승인")) {
+		StoreStateVO storeState = null;
+		if(storeDao.selectByUserId(user.getId()).getState().getName().equals("승인")) {
 			storeState = new StoreStateVO(2,"승인"); // 승인상태일 때 수정시 그대로 승인상태
 		}
-		else if(storeDao.selectById(user.getId()).getState().getName().equals("거부")) {
+		else if(storeDao.selectByUserId(user.getId()).getState().getName().equals("거부")) {
 			storeState = new StoreStateVO(1,"신청"); //거부상태일 때 수정시 신청상태로 변경
 		}
 		
@@ -194,9 +205,7 @@ public class StoreController {
 		StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
-		System.out.println("컨트롤러->서비스전");
 		storeUpdateService.execute(store);
-		System.out.println("컨트롤러로 다시 나옴");
 		
 		return "store/storeHome";
 	}
