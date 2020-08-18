@@ -18,6 +18,7 @@ import kr.co.dinner41.dao.StoreCategoryDao;
 import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreException;
+
 import kr.co.dinner41.service.review.ReviewListService;
 import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
@@ -34,6 +35,8 @@ import kr.co.dinner41.vo.StoreListByUserViewVO;
 import kr.co.dinner41.vo.StoreStateVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping()
@@ -229,6 +232,7 @@ public class StoreController {
 	public String listByManager(@PathVariable("store-state-name") String storeStateName, @PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
 		int intPage = Integer.parseInt(page);
 		List<StoreVO> stores;
+		List<PageVO> pages;
 		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
@@ -237,15 +241,17 @@ public class StoreController {
 		model.addAttribute("page",page);
 
 		stores = storeListByManagerService.execute(storeStateName, storeName, intPage);
+		pages = storeListByManagerService.getPages(storeStateName, storeName, intPage);
 		
 		model.addAttribute("stores",stores);
 		model.addAttribute("type", storeStateName);
+		model.addAttribute("pages", pages);
 		
 		return "manage/storeList";
 	}
 
 	@RequestMapping(value = "/gm/{id}/{type}/store", method = RequestMethod.GET)
-	public String ViewByUser(@PathVariable("id") String id, HttpSession session, Model model, @PathVariable("type") String type){
+	public String viewByUser(@PathVariable("id") String id, HttpSession session, Model model, @PathVariable("type") String type){
 		int storeId = Integer.parseInt(id);
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		model.addAttribute("address", user.getAddress());
@@ -266,4 +272,23 @@ public class StoreController {
 
 		return "user/storeView";
 	}
+
+	@RequestMapping(value = "/ad/{id}/store", method = RequestMethod.GET)
+	public String viewByManager(@PathVariable("id") String id, Model model, HttpSession session){
+		int storeId = Integer.parseInt(id);
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		if (user == null){
+			return "redirect:/";
+		}
+
+		if (!user.getType().getId().equals("AD")){
+			return "redirect:/";
+		}
+
+		StoreVO store = storeViewByUserService.execute(storeId);
+		model.addAttribute("store", store);
+
+		return "manage/storeView";
+	}
+
 }
