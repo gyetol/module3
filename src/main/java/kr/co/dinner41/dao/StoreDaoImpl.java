@@ -97,39 +97,61 @@ public class StoreDaoImpl implements StoreDao {
 
 	@Override
 	public void update(StoreVO store) throws StoreException {
-		String sql= "update stores set user_id=?, store_category_id=?, store_state_id=?, store_business_number=?,store_name=?, "
+		String sql= "update stores set store_category_id=?,store_state_id=?, store_business_number=?,store_name=?, "
 				+	"store_address=?, store_sub_address=?,store_latitude=?,store_longitude=?,store_phone=?,store_operate_time=?, "
-				+	"store_photo=?, store_introduction=?, store_open_state=?, store_paynumber=?" 
+				+	"store_photo=?, store_introduction=? " 
 				+	"where store_id=?";
 		int result=0;
 		try {
-			int userId= store.getUser().getId();//1
+			//int userId= store.getUser().getId();//1
+			System.out.println("1");
 			String storeCategoryId=store.getCategory().getId();//2
+			System.out.println(storeCategoryId);
 			int storeStateId=store.getState().getId();//3
+			System.out.println(storeStateId);
 			String storeBusinessNumber=store.getBusinessNumber();//4
-			String storeName= store.getName();//5
-			String storeAddress=store.getAddress();//6
-			String storeSubAddress=store.getSubAddress();//7
-			double storeLatitude=store.getLatitude();//8
-			double storeLongitude=store.getLongitude();//9
-			String storePhone=store.getPhone();//10
-			String storeOperateTime=store.getOperateTime();//11
-			String storePhoto=store.getPhoto();//12
-			String storeIntroduction=store.getIntroduction();//13
-			OpenState storeOpenState = store.getOpenState();//14
-			String storePayNumber= store.getPayNumber();//15
-			int storeId=store.getId(); //16
 			
-			result= jTemp.update(sql,userId,storeCategoryId,storeStateId,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
-					storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeOpenState,storePayNumber,storeId);
+			System.out.println(storeBusinessNumber);
+			String storeName= store.getName();//5
+			System.out.println(storeName);
+			String storeAddress=store.getAddress();//6
+			System.out.println(storeAddress);
+			String storeSubAddress=store.getSubAddress();//7
+			System.out.println(storeSubAddress);
+			double storeLatitude=store.getLatitude();//8
+			System.out.println(storeLatitude);
+			double storeLongitude=store.getLongitude();//9
+			System.out.println(storeLongitude);
+			String storePhone=store.getPhone();//10
+			System.out.println(storePhone);
+			String storeOperateTime=store.getOperateTime();//11
+			System.out.println(storeOperateTime);
+			String storePhoto ="becauseofPhoto";//String storePhoto=store.getPhoto();//12
+			System.out.println(storePhoto);
+			String storeIntroduction=store.getIntroduction();//13
+			System.out.println(storeIntroduction);
+			//OpenState storeOpenState = store.getOpenState();//14
+			//String storePayNumber= store.getPayNumber();//15
+			int storeId=store.getId(); //16
+			System.out.println("업데이트전 :" + storeId);
+			result= jTemp.update(sql,storeCategoryId,storeStateId,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
+					storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,storeId);
+			System.out.println("업데이트후");
 		}
 		catch(Exception e) {
+			System.out.println("익셉션");
 			throw new StoreUpdateFailedException(e.getMessage());
 		}
 		if(result==0) {
 			throw new StoreUpdateFailedException("매장 수정을 시도하였으나 영향받은 행이 없습니다.");
 		}
 	}
+	
+	@Override
+	public void switchOpenState(OpenState openState) throws StoreException{
+		
+	}
+	
 
 	@Override
 	public StoreVO selectById(int id) throws StoreException {
@@ -143,6 +165,8 @@ public class StoreDaoImpl implements StoreDao {
 		}
 		return (stores.size()>0?stores.get(0):null);
 	}
+	
+	
 	
 	@Override
 	public StoreVO selectByUserId(int userId) throws StoreException{

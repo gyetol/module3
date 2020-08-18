@@ -75,31 +75,32 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left">
+    <form class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/update/store">
 
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
-            <input type="text" class="form-control" id="storeNumber" value="${store.businessNumber}" readonly/>
+            <input type="text" class="form-control" id="storeNumber" name="businessNumber" value="${store.businessNumber}" />
         </div>
 
         <div class="form-group">
             <label for="storeName">매장명</label>
-            <input type="text" class="form-control" id="storeName" value="${store.name}">
+            <input type="text" class="form-control" id="storeName" name="name" value="${store.name}">
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">매장 대표사진 첨부</label>
             <div id="emailCheckLabel">
                 <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" alt="no pic" class="rounded" style="width: 100%"/>
-                <input type="file" id="exampleFormControlInput1">
+                <input type="file" id="exampleFormControlInput1" name="photo"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputKind">매장 대표 카테고리</label>
-            <select id="inputKind" class="form-control" value= "${store.category.name}" >
+            <select id="inputKind" class="form-control" name="category">
+				<option>${store.category.name}</option>
                 <option>도시락</option>
-                <option>조리키트</option>
+                <option>밀키트</option>
                 <option>떡/제과</option>
                 <option>한식</option>
                 <option>분식</option>
@@ -115,34 +116,35 @@
             <div id="address">
                 <input type="text" class="form-control left_input" id="search_address"/>
                 <button type="button" class="btn btn-outline-success right_input" id="search_button" >주소 찾기</button>
-                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" value= "${store.address}"/>
-                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" value= "${store.subAddress}"/>
+                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" name="address" value= "${store.address}"/>
+                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" name="subAddress" value= "${store.subAddress}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" class="form-control" id="phoneNumber1" value= "${store.phone}" style="width: 100% ;float: left">
+                <input type="tel" class="form-control" id="phoneNumber1" name="phone" value= "${store.phone}" style="width: 100% ;float: left">
                 
             </div>
         </div>
 
         <div class="form-group">
             <label for="storeTime">매장 운영 시간</label>
-            <input type="text" class="form-control" id="storeTime" value= "${store.operateTime}">
+            <input type="text" class="form-control" id="storeTime" name="operateTime" value= "${store.operateTime}">
         </div>
 
 
         <div class="form-group">
             <label for="inputContent">매장 설명</label>
-            <textarea class="form-control" id="inputContent" placeholder="매장 운영시간과 정책에 대해서 설명해주세요."
-               value= "${store.introduction}"       rows="5"></textarea>
+            <textarea class="form-control" id="inputContent" name="introduction" placeholder="매장 운영시간과 정책에 대해서 설명해주세요." rows="5">${store.introduction}</textarea>
         </div>
 
         <div class="margin_first">
-            <button type="button" class="btn btn-success two_button">매장 수정 완료</button>
-            <button type="button" class="btn btn-success two_button float-right">매장 수정 취소</button>
+            	<button type="submit" class="btn btn-success two_button">매장 수정 완료</button>
+            <a href="{pageContext.request.contextPath}">
+            	<button type="button" class="btn btn-success two_button float-right">매장 수정 취소</button>
+            </a>
         </div>
     </form>
 </div>

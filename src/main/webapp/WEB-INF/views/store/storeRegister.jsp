@@ -102,7 +102,7 @@
             <label for="inputKind">매장 대표 카테고리</label>
             <select id="inputKind" class="form-control" name="category">
                 <option>도시락</option>
-                <option>조리키트</option>
+                <option>밀키트</option>
                 <option>떡/제과</option>
                 <option>한식</option>
                 <option>분식</option>
@@ -147,7 +147,9 @@
 
         <div class="margin_first">
             <button type="submit" class="btn btn-success two_button">등록 신청서 제출</button>
-            <button type="submit" class="btn btn-success two_button float-right">등록 신청 취소</button>
+             <a href="{pageContext.request.contextPath}">
+            <button type="button" class="btn btn-success two_button float-right">등록 신청 취소</button>
+            </a>
         </div>
     </form>
 </div>
