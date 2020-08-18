@@ -68,6 +68,32 @@ public class StoreDaoImplTester {
 		StoreStateDao storeStateDao = ctx.getBean("storeStateDao",StoreStateDao.class);
 		
 	}
+	
+	@Test
+	public void updateTest() {
+		StoreDao storeDao = ctx.getBean("storeDao",StoreDao.class);
+		int result = 0;
+		UserTypeVO userType = new UserTypeVO("sm","점주회원");
+		UserVO user = new UserVO();
+		user.setId(14);
+		StoreCategoryVO storeCategory = new StoreCategoryVO();
+		storeCategory.setId("MEA");
+		StoreStateVO storeState = new StoreStateVO();
+		storeState.setId(2);
+		OpenState openState = OpenState.OPEN;
+		
+		StoreVO store = new StoreVO(7,user,storeCategory,storeState,"123456784","안녕베트남1","서울특별시 관악구 봉천동 관악로14길 70","안녕베트남(지하)",37.478386,126.956271,
+				"02-877-3875","연중 무휴","a.jpg","안녕베트남, 설대입구점이오",openState,"12341234");
+		try {
+			storeDao.update(store);
+			System.out.println(store.getIntroduction());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
 
 	
 	
@@ -274,6 +300,7 @@ public class StoreDaoImplTester {
 		}
 	}
 	
+	@Ignore
 	@Test
 	public void  selectViewByCategoryNameTest() {
 		StoreDao storeDao = ctx.getBean("storeDao",StoreDao.class);

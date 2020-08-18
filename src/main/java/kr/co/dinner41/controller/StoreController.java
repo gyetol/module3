@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import kr.co.dinner41.service.review.ReviewListService;
-import kr.co.dinner41.service.store.*;
-import kr.co.dinner41.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,9 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.dinner41.command.StoreInsertCommand;
+import kr.co.dinner41.command.StoreUpdateCommand;
+import kr.co.dinner41.dao.StoreCategoryDao;
+import kr.co.dinner41.dao.StoreDao;
 import kr.co.dinner41.exception.ReviewException;
 import kr.co.dinner41.exception.store.StoreException;
+
+import kr.co.dinner41.service.review.ReviewListService;
+import kr.co.dinner41.service.store.StoreDeleteService;
+import kr.co.dinner41.service.store.StoreInsertService;
+import kr.co.dinner41.service.store.StoreListByManagerService;
+import kr.co.dinner41.service.store.StoreListByUserService;
+import kr.co.dinner41.service.store.StoreUpdateService;
+import kr.co.dinner41.service.store.StoreViewByStoreService;
+import kr.co.dinner41.service.store.StoreViewByUserService;
+import kr.co.dinner41.vo.MenuVO;
+import kr.co.dinner41.vo.OpenState;
+import kr.co.dinner41.vo.ReviewVO;
+import kr.co.dinner41.vo.StoreCategoryVO;
+import kr.co.dinner41.vo.StoreListByUserViewVO;
+import kr.co.dinner41.vo.StoreStateVO;
+import kr.co.dinner41.vo.StoreVO;
+import kr.co.dinner41.vo.UserVO;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping()
@@ -27,6 +45,13 @@ public class StoreController {
 	@Qualifier("storeInsertService")
 	StoreInsertService storeInsertService;
 	
+	@Autowired
+	@Qualifier("storeDeleteService")
+	StoreDeleteService storeDeleteService;
+	
+	@Autowired
+	@Qualifier("storeUpdateService")
+	StoreUpdateService storeUpdateService;
 	
 	@Autowired
 	@Qualifier("storeViewByStoreService")
@@ -48,6 +73,16 @@ public class StoreController {
 	@Qualifier("reviewListService")
 	ReviewListService reviewListService;
 	
+	@Autowired
+	@Qualifier("storeCategoryDao")
+	StoreCategoryDao storeCategoryDao;
+	
+	@Autowired
+	@Qualifier("storeDao")
+	StoreDao storeDao;
+	
+	
+	
 	@RequestMapping(value="/sm/store",method=RequestMethod.GET)
 	public String insert(HttpSession session,Model model) {
 		UserVO user = (UserVO)session.getAttribute("loginUser");
@@ -56,12 +91,28 @@ public class StoreController {
 		store = storeViewByStoreService.execute(userId);
 		
 		if(store==null) {
+			model.addAttribute("store",store);
 			return "store/storeRegister";
+		}
+		else if(store.getState().getName().equals("거부")) {
+			model.addAttribute("store",store);
+			return "store/storeUpdate";
+		}
+		else if(store.getState().getName().equals("점주삭제")) {
+			model.addAttribute("store",store);
+			return "store/storeRegister"; //처리를 새롭게 해야할 듯 
+		}
+		else if(store.getState().getName().equals("관리자정지")) {
+			
+		}
+		else if(store.getState().getName().equals("관리자삭제")) {
+			
 		}
 		
 		model.addAttribute("store",store);
-		return "store/storeView";
+		return "store/storeView"; //승인상태일 때, 매장정보관리 페이지로 이동
 	}
+	
 	@RequestMapping(value="/sm/store",method=RequestMethod.POST)
 	public String insert(StoreInsertCommand command,Model model,HttpSession session) {
 		
@@ -91,11 +142,13 @@ public class StoreController {
 		store.setIntroduction(command.getIntroduction());
 	
 		storeInsertService.execute(store);
+		
 		return "store/storeHome";
 	}
 	
-	@RequestMapping(value="/sm/update/store",method=RequestMethod.GET)
-	public String update(HttpSession session,Model model) {
+	
+	@RequestMapping(value="/sm/update/store", method=RequestMethod.GET)
+	public String update(HttpSession session, Model model) {
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		int userId = user.getId();
 		StoreVO store = null;
@@ -104,6 +157,50 @@ public class StoreController {
 		
 		return "store/storeUpdate";
 	}
+	
+	@RequestMapping(value= "/sm/update/store", method=RequestMethod.POST)
+	public String update(StoreUpdateCommand command, HttpSession session, Model model) {
+		
+		
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int storeId = storeDao.selectById(user.getId()).getId();
+		System.out.println(storeId);
+		String storeCategoryName = command.getCategory();
+		
+		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
+		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
+		
+		StoreStateVO storeState = new StoreStateVO(2,"승인");
+		if(storeDao.selectById(user.getId()).getState().getName().equals("승인")) {
+			storeState = new StoreStateVO(2,"승인"); // 승인상태일 때 수정시 그대로 승인상태
+		}
+		else if(storeDao.selectById(user.getId()).getState().getName().equals("거부")) {
+			storeState = new StoreStateVO(1,"신청"); //거부상태일 때 수정시 신청상태로 변경
+		}
+		
+		String storeBusinessNumber = command.getBusinessNumber();
+		String storeName = command.getName();
+		String storeAddress= command.getAddress();
+		String storeSubAddress = command.getSubAddress();
+		double storeLatitude= 37.482417;//double storeLatitude = command.getLatitude();
+		double storeLongitude= 126.953073;//double storeLongitude = command.getLongitude();
+		String storePhone = command.getPhone();
+		String storeOperateTime = command.getOperateTime();
+		String storePhoto = command.getPhoto();
+		String storeIntroduction = command.getIntroduction();
+		OpenState openState = OpenState.CLOSE;
+		String storePayNumber = "00000000"; // 업데이트 메서드에서 안씀
+		
+		StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
+							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
+		
+		System.out.println("컨트롤러->서비스전");
+		storeUpdateService.execute(store);
+		System.out.println("컨트롤러로 다시 나옴");
+		
+		return "store/storeHome";
+	}
+	
 	
 	
 	

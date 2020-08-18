@@ -16,7 +16,9 @@ public class StoreUpdateServiceImpl implements StoreUpdateService {
 	
 	@Override
 	public void execute(StoreVO store) throws StoreException {
+		System.out.println("서비스전");
 		storeDao.update(store);
+		System.out.println("서비스후");
 
 	}
 
