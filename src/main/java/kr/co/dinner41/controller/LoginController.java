@@ -31,13 +31,13 @@ public class LoginController {
 	@Qualifier("loginService")
 	private LoginService loginService;
 
-	@Autowired
-	@Qualifier("searchUserByEmailService")
-	private SearchUserByEmailService searchUserByEmailService;
+	// @Autowired
+	// @Qualifier("searchUserByEmailService")
+	// private SearchUserByEmailService searchUserByEmailService;
 	
-	@Autowired
-	@Qualifier("sendTempPasswordService")
-	private SendTempPasswordService sendTempPasswordService;
+	// @Autowired
+	// @Qualifier("sendTempPasswordService")
+	// private SendTempPasswordService sendTempPasswordService;
 	
 	@Autowired
 	@Qualifier("logoutService")
@@ -153,8 +153,8 @@ public class LoginController {
 		System.out.println("(searchPassword event handler) email: "+email);
 		ModelAndView mav=new ModelAndView();
 		try {
-			UserVO user=searchUserByEmailService.exectue(email);
-			mav.setViewName(viewName);
+			// UserVO user=searchUserByEmailService.exectue(email);
+			// mav.setViewName(viewName);
 		}catch(SearchPasswordException e) {
 
 			
