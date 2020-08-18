@@ -90,7 +90,7 @@ public class OrderDaoImpl implements OrderDao {
 				"FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n" + 
 				"WHERE A.user_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n" + 
 				"AND A.user_id=D.user_id\r\n" +
-				"ORDER BY A.order_id"; 
+				"ORDER BY A.order_order_date ASC";
 		
 		list = jTemp.query(sql, new OrderViewMapper(), userId);
 		return list;
@@ -111,7 +111,8 @@ public class OrderDaoImpl implements OrderDao {
 				"FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n" + 
 				"WHERE C.store_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n" + 
 				"AND A.user_id=D.user_id\r\n" +
-				"ORDER BY A.order_id"; 
+				"ORDER BY A.order_order_date ASC";
+				
 		
 		list = jTemp.query(sql, new OrderViewMapper(), storeId);
 		return list;

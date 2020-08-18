@@ -94,7 +94,7 @@
 							</c:forEach>
 								<div style="margin-top: 5pt">
 									<button id="reviewClick" class="btn btn-outline-success btn_disabled btn-sm" style="width: 32%">리뷰쓰기</button>
-									<button class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
+									<button id="storeViewClick" class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
 									<button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%">주문상세</button>
 								</div>
 							</div>

@@ -1,7 +1,7 @@
 package kr.co.dinner41.service.order;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class OrderListServiceImpl implements OrderListService {
 	private Menu2OrderDao m2oDao;
 	
 	@Override
-	public HashMap<OrderViewVO, List<Menu2OrderViewVO>> execute(UserVO user) {
+	public LinkedHashMap<OrderViewVO, List<Menu2OrderViewVO>> execute(UserVO user) {
 
-		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = new HashMap<>();
+		LinkedHashMap<OrderViewVO, List<Menu2OrderViewVO>> map = new LinkedHashMap<>();
 		List<OrderViewVO> orderList = null;
 		List<Menu2OrderViewVO> menuList = null;
 

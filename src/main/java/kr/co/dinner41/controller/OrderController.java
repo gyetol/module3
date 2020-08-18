@@ -95,7 +95,7 @@ public class OrderController {
 
 		// service내에서 user의 타입을 체크해서 사용자일 경우 다른 쿼리문을 실행하도록 해야함
 		UserVO user = (UserVO)session.getAttribute("loginUser");
-		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
+		Map<OrderViewVO, List<Menu2OrderViewVO>> map = null;
 		map = listService.execute(user);
 		
 		for (Map.Entry<OrderViewVO, List<Menu2OrderViewVO>> entry : map.entrySet()) {

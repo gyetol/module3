@@ -3,6 +3,13 @@ $(document).ready(function() {
 	clickOrderDetailView();
 });
 
+function clickStoreView() {
+	var storeView = $("#storeViewClick");
+	storeView.click(function() {
+		window.href = "";
+	});
+}
+
 // 리뷰쓰기 클릭 함수
 function clickReview() {
 	var orders = $(".orderClass").get();
