@@ -146,6 +146,7 @@ public class SendTempPasswordServiceImpl implements SendTempPasswordService {
 			throw new UserUpdateFailedException();
 		}
 
+
 	}
 
 }

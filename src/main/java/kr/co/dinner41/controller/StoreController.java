@@ -134,6 +134,7 @@ public class StoreController {
 	public String listByManager(@PathVariable("store-state-name") String storeStateName, @PathVariable("store-name") String storeName, @PathVariable("page") String page, HttpSession session, Model model) {
 		int intPage = Integer.parseInt(page);
 		List<StoreVO> stores;
+		List<PageVO> pages;
 		
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
@@ -142,9 +143,11 @@ public class StoreController {
 		model.addAttribute("page",page);
 
 		stores = storeListByManagerService.execute(storeStateName, storeName, intPage);
+		pages = storeListByManagerService.getPages(storeStateName, storeName, intPage);
 		
 		model.addAttribute("stores",stores);
 		model.addAttribute("type", storeStateName);
+		model.addAttribute("pages", pages);
 		
 		return "manage/storeList";
 	}
@@ -173,12 +176,22 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/ad/{id}/store", method = RequestMethod.GET)
-	public String viewByManager(@PathVariable("id") String id, Model model){
+	public String viewByManager(@PathVariable("id") String id, Model model, HttpSession session){
 		int storeId = Integer.parseInt(id);
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		if (user == null){
+			return "redirect:/";
+		}
+
+		if (!user.getType().getId().equals("AD")){
+			return "redirect:/";
+		}
 
 		StoreVO store = storeViewByUserService.execute(storeId);
 		model.addAttribute("store", store);
 
 		return "manage/storeView";
 	}
+
+
 }
