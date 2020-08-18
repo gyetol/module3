@@ -156,88 +156,88 @@ public class MenuController {
           StoreVO store = storeDao.selectByUserId(user.getId());
           List<MenuVO> list = menuDao.selectByStoreId(store.getId(), page, 10);
 
-          System.out.println("메뉴리스트 : " + list);
-          model.addAttribute("menus", list);
-          return "store/menuList";
-       }
-   
-       @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.PUT)
-       public String update(MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session) throws MenuException {
-          UserVO user = (UserVO) session.getAttribute("loginUser");
-       
-          if (user.getType().getId().equals("AD")) {
-             return "redirect:/";
-          }
-          else if(user.getType().getId().equals("GM")) {
-             return "redirect:/";
-          }
-          else if(user.getType().getId().equals("SM")) {
-             return "store/menuModify";
-          }
-          else {
-             return "redirect:/";
-          }
-       }
-       
-       
-       @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.POST)
-       public String update(@ModelAttribute("menu") MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session,Model model) throws MenuException {
-          int store_id = Integer.parseInt(storeId);
-          int menu_id = Integer.parseInt(menuId);
-          
-          UserVO user = (UserVO)session.getAttribute("loginUser");
-          updateService.execute(menu, store_id, menu_id, user);
-           return "store/menuModify";
-       }
-       
-    
-       @RequestMapping(value = "/{storeId}/{menuId}/menu", method = RequestMethod.GET)
-       public String view(@PathVariable("storeId")String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model){
-       
-          System.out.println(storeId);
-          System.out.println(menuId);
-          
-          int store_id = Integer.parseInt(storeId);
-          int menu_id = Integer.parseInt(menuId);
-          
-          UserVO user = (UserVO) session.getAttribute("loginUser");
-          
-          MenuVO menu = menuViewService.execute(store_id, menu_id);
-          model.addAttribute("menu",menu);
-          if (user.getType().getId().equals("AD")) {
-             return "manage/mangerHome";
-          }
-          else if(user.getType().getId().equals("GM")) {
-             return "user/menuView";
-          }
-          else if(user.getType().getId().equals("SM")) {
-             return "store/menuView";
-          }
-          else {
-             return "redirect:/";
-          }
-       }
-       
-       @ResponseBody
-      @RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
-       public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request) throws MenuException {
-           
-              int store_id = Integer.parseInt(storeId);
-              int menu_id = Integer.parseInt(menuId);
-          
-             deleteService.execute(store_id, menu_id);
-             return "store/menuList";
-             
-        }
-       
-      @RequestMapping(value="/sm/{store-name}/{page}/menu/view",method=RequestMethod.GET)
-      public String listByStore(@PathVariable("storeId") String storeId,@PathVariable("page") String page, HttpSession session, Model model) throws MenuException {
-         int intPage = Integer.parseInt(page);
-         int store_id = Integer.parseInt(storeId);
-         List<MenuVO> menus;
-         
-         UserVO user = (UserVO)session.getAttribute("loginUser");
-         model.addAttribute("page",page);
+	    	System.out.println("메뉴리스트 : " + list);
+	    	model.addAttribute("menus", list);
+	    	return "store/menuList";
+	    }
+	
+	    @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.PUT)
+	    public String update(MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session) throws MenuException {
+	    	UserVO user = (UserVO) session.getAttribute("loginUser");
+	    
+	    	if (user.getType().getId().equals("AD")) {
+	    		return "redirect:/";
+	    	}
+	    	else if(user.getType().getId().equals("GM")) {
+	    		return "redirect:/";
+	    	}
+	    	else if(user.getType().getId().equals("SM")) {
+	    		return "store/menuModify";
+	    	}
+	    	else {
+	    		return "redirect:/";
+	    	}
+	    }
+	    
+	    
+	    @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.POST)
+	    public String update(@ModelAttribute("menu") MenuUpdateCommand menu, @PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session,Model model) throws MenuException {
+	    	int store_id = Integer.parseInt(storeId);
+	    	int menu_id = Integer.parseInt(menuId);
+	    	
+	    	UserVO user = (UserVO)session.getAttribute("loginUser");
+	    	updateService.execute(menu, store_id, menu_id, user);
+	        return "store/menuModify";
+	    }
+	    
+	 
+	    @RequestMapping(value = "/{storeId}/{menuId}/menu/view", method = RequestMethod.GET)
+	    public String view(@PathVariable("storeId")String storeId, @PathVariable("menuId")String menuId, HttpSession session, Model model){
+	    
+	    	System.out.println(storeId);
+	    	System.out.println(menuId);
+	    	
+	    	int store_id = Integer.parseInt(storeId);
+	    	int menu_id = Integer.parseInt(menuId);
+	    	
+	    	UserVO user = (UserVO) session.getAttribute("loginUser");
+	    	
+	    	MenuVO menu = menuViewService.execute(store_id, menu_id);
+	    	model.addAttribute("menu",menu);
+	    	if (user.getType().getId().equals("AD")) {
+	    		return "manage/mangerHome";
+	    	}
+	    	else if(user.getType().getId().equals("GM")) {
+	    		return "user/menuView";
+	    	}
+	    	else if(user.getType().getId().equals("SM")) {
+	    		return "store/menuView";
+	    	}
+	    	else {
+	    		return "redirect:/";
+	    	}
+	    }
+	    
+	    @ResponseBody
+		@RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
+	    public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request) throws MenuException {
+	    	 
+	    	    int store_id = Integer.parseInt(storeId);
+	    	    int menu_id = Integer.parseInt(menuId);
+	    	
+	    		deleteService.execute(store_id, menu_id);
+	    		return "store/menuList";
+	    		
+	     }
+	    
+		@RequestMapping(value="/sm/{store-name}/{page}/menu",method=RequestMethod.GET)
+		public String listByStore(@PathVariable("storeId") String storeId,@PathVariable("page") String page, HttpSession session, Model model) throws MenuException {
+			int intPage = Integer.parseInt(page);
+			int store_id = Integer.parseInt(storeId);
+			List<MenuVO> menus;
+			
+			UserVO user = (UserVO)session.getAttribute("loginUser");
+			model.addAttribute("page",page);
 
          menus = listByStoreService.execute(store_id, intPage);
          

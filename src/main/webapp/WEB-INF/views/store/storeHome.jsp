@@ -126,7 +126,7 @@
 				</a>
 			</div>
 			<div class="col mb-4">
-				<a href="sm/1/menu/list">
+				<a href="${pageContext.request.contextPath}/sm/1/menu/list">
 					<div class="card h-100">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/menu.png" class="rounded category" alt="no picture">
@@ -136,12 +136,14 @@
 				</a>
 			</div>
 			<div class="col mb-4">
-				<div class="card h-100">
-					<div class="card-body text-center trim">
-						<img src="${pageContext.request.contextPath}/resources/categoryImages/list.png" class="rounded category" alt="no picture">
-						<h5 class="card-title">거래내역</h5>
+				<a href="${pageContext.request.contextPath}/sm/1/order">
+					<div class="card h-100">
+						<div class="card-body text-center trim">
+							<img src="${pageContext.request.contextPath}/resources/categoryImages/list.png" class="rounded category" alt="no picture">
+							<h5 class="card-title">거래내역</h5>
+						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
