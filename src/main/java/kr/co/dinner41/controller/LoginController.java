@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.LoginCommand;
-import kr.co.dinner41.exception.login.LoginException;
-import kr.co.dinner41.exception.login.SearchPasswordException;
-import kr.co.dinner41.exception.user.UserException;
+import kr.co.dinner41.exception.login.QuitUserException;
+import kr.co.dinner41.exception.login.SendEmailFailedException;
+import kr.co.dinner41.exception.login.UserNotFoundException;
+import kr.co.dinner41.exception.user.UserUpdateFailedException;
 import kr.co.dinner41.service.login.LoginService;
 import kr.co.dinner41.service.login.SearchUserByEmailService;
+import kr.co.dinner41.service.login.SendTempPasswordService;
 import kr.co.dinner41.service.user.LogoutService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
@@ -96,17 +98,13 @@ public class LoginController {
 		try {
 			loginService.execute(command, session);
 			mav.addObject("result", "로그인 성공!");
-		}catch(LoginException e) {
+		}catch(UserNotFoundException|QuitUserException e) {
 			mav.addObject("errorMessage",e.getMessage());
 			mav.setViewName("common/login");
 			return mav;
 		}
-		catch(UserException e) {
-			
-		}
 
 		UserVO user=(UserVO)session.getAttribute("loginUser");
-		String userType=user.getType().getId();
 		String viewName=null;
 		viewName=getUserPage(user);
 		if(viewName.equals("user/userHome")) {
@@ -149,18 +147,39 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/password",method=RequestMethod.POST)
-	public String searchPassword(@RequestParam("email") String email) {
+	public ModelAndView searchPassword(@RequestParam("email") String email) {
 		System.out.println("(searchPassword event handler) email: "+email);
 		ModelAndView mav=new ModelAndView();
 		try {
-			// UserVO user=searchUserByEmailService.exectue(email);
-			// mav.setViewName(viewName);
-		}catch(SearchPasswordException e) {
 
-			
+			UserVO user=searchUserByEmailService.exectue(email);
+			if(user==null) {
+				mav.addObject("userSearchResult", "해당 하는 이메일을 가지는 회원이 존재하지 않습니다.이메일을 확인해주세요");
+				mav.setViewName("common/searchPassword");
+			}
+			sendTempPasswordService.execute(user);
+			mav.addObject("user", user);
+			mav.addObject("sendTempPasswordResultMessage","success");
+			mav.setViewName("common/login");
+			return mav;
+		}catch(UserNotFoundException e) {
+			mav.setViewName("common/searchPassword");
+			mav.addObject("errorCode", "1");
+			mav.addObject("errorMessage", "해당 하는 이메일을 가지는 회원이 존재하지 않습니다.이메일을 확인해주세요");
+
 		}
-		return "common/login";
-		
+		catch(UserUpdateFailedException e) {
+			mav.setViewName("common/searchPassword");
+			mav.addObject("errorCode", "2");
+			mav.addObject("defaultEmail",email);
+			mav.addObject("errorMessage", "해당 회원의 비밀번호를 임시비밀번호로 변경하는데 실패했습니다.임시비밀번호 발급을 다시 해주세요");
+		}
+		catch(SendEmailFailedException e) {
+			mav.setViewName("common/searchPassword");
+			mav.addObject("errorCode", "2");
+			mav.addObject("errorMessage","임시비밀번호 발급 이메일을 전송하지 못했습니다.");
+		}
+		return mav;
 	}
 	
 }
