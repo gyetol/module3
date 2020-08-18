@@ -143,7 +143,7 @@
             </div>
         </div>
         
-<<<<<<< Updated upstream
+
          <a href="javascript:history.back()">
         <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>
@@ -155,13 +155,6 @@
         <input type="hidden" id="menuId" name="menuId" value="${menuId}">
       </form>
 
-=======
-         <a href = "/dinner41/sm/menu">
-        <button id="menuUpdate"  type="button" class="btn btn-success three_button" >수정하기</button>
-        
-        <a href = " /sm/menu">
-        <button id="menuDelete" type="button" class="btn btn-success three_button float-right" method="delete" >삭제하기</button>
->>>>>>> Stashed changes
     </div>
     
 </div>

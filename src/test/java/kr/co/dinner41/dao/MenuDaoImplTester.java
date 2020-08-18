@@ -11,16 +11,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.dinner41.exception.QnAException;
-import kr.co.dinner41.exception.QnATypeSelectException;
-import kr.co.dinner41.exception.UserDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.exception.menu.OfferTypeSelectException;
 import kr.co.dinner41.vo.MenuVO;
 import kr.co.dinner41.vo.OfferTypeVO;
-import kr.co.dinner41.vo.QnATypeVO;
-import kr.co.dinner41.vo.QnAVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -54,11 +49,7 @@ public class MenuDaoImplTester {
 		
 System.out.println("메뉴 추가 성공");
 	}
-	
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 	@Ignore
 	@Test
     public void testSelecByStoreId(){
@@ -90,6 +81,7 @@ System.out.println("메뉴 추가 성공");
         }
     }
 	
+	@Ignore
     @Test
     public void testUpdate() throws OfferTypeSelectException, SQLException {
     	MenuDaoImpl menuDao=ctx.getBean("menuDao",MenuDaoImpl.class);
@@ -109,10 +101,8 @@ System.out.println("메뉴 추가 성공");
     }
 
 
-<<<<<<< Updated upstream
+
 	@Ignore
-=======
->>>>>>> Stashed changes
 	@Test
 	public void deleteTest() throws MenuException {
 		MenuDao dao=ctx.getBean("menuDao",MenuDao.class);
