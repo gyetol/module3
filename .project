@@ -44,4 +44,11 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/webapp/resources/images</name>
+			<type>2</type>
+			<location>C:/Users/USER/Desktop/mod3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/dinner41/resources/images</location>
+		</link>
+	</linkedResources>
 </projectDescription>

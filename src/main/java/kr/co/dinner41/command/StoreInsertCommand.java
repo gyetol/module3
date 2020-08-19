@@ -1,9 +1,11 @@
 package kr.co.dinner41.command;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StoreInsertCommand {
 	private String businessNumber;
 	private String name;
-	private String photo;
+	private MultipartFile photo;
 	private String category;
 	private String address;
 	private String subAddress;
@@ -17,7 +19,7 @@ public class StoreInsertCommand {
 	public StoreInsertCommand() {}
 
 
-	public StoreInsertCommand(String businessNumber, String name, String photo, String category, String address,
+	public StoreInsertCommand(String businessNumber, String name, MultipartFile photo, String category, String address,
 			String subAddress, String latitude, String longitude, String phone, String operateTime,
 			String introduction) {
 		super();
@@ -55,12 +57,12 @@ public class StoreInsertCommand {
 	}
 
 
-	public String getPhoto() {
+	public MultipartFile getPhoto() {
 		return photo;
 	}
 
 
-	public void setPhoto(String photo) {
+	public void setPhoto(MultipartFile photo) {
 		this.photo = photo;
 	}
 
@@ -144,7 +146,6 @@ public class StoreInsertCommand {
 		this.introduction = introduction;
 	}
 
-	
 	
 	
 }

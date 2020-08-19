@@ -7,7 +7,7 @@ import kr.co.dinner41.vo.*;
 
 
 public interface StoreDao {
-	void insert(StoreVO store) throws StoreException;
+	int insert(StoreVO store) throws StoreException;
 	void deleteByStore(int id) throws StoreException;
 	void deleteByManager(int storeId, UserVO manager, String content) throws StoreException;
 	void update(StoreVO store) throws StoreException;
