@@ -134,16 +134,19 @@ public class StoreController {
 		store.setName(command.getName());
 		store.setAddress(command.getAddress());
 		store.setSubAddress(command.getSubAddress());
-		store.setLatitude(37.482417);//store.setLatitude(command.getLatitude());
-		store.setLongitude(126.953073);//store.setLongitude(command.getLongitude());
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
+		store.setLatitude(storeLatitude);//store.setLatitude(command.getLatitude());
+		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
 		store.setPhoto(command.getPhoto());
 		store.setIntroduction(command.getIntroduction());
 		
-	
-		storeInsertService.execute(store);
 		
+		storeInsertService.execute(store);
+		model.addAttribute(store);
 		return "store/storeHome";
 	}
 	
@@ -199,8 +202,9 @@ public class StoreController {
 		String storeName = command.getName();
 		String storeAddress= command.getAddress();
 		String storeSubAddress = command.getSubAddress();
-		double storeLatitude= 37.482417;//double storeLatitude = command.getLatitude();
-		double storeLongitude= 126.953073;//double storeLongitude = command.getLongitude();
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
 		String storePhone = command.getPhone();
 		String storeOperateTime = command.getOperateTime();
 		String storePhoto = command.getPhoto();
