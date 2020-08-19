@@ -550,4 +550,88 @@ public class StoreDaoImpl implements StoreDao {
 		return (Math.max(stores.size(), 0));
 	}
 
+
+	@Override
+	public int getTotalCountByCategoryName(String categoryName, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select distinct store_id,store_name,store_photo,");
+		sb.append("(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude) - ");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude)))) AS distance ");
+		sb.append("from store_view where store_category_name like '%"+categoryName+"%' and store_state_id=2 ");
+		sb.append(" HAVING distance <=1");
+
+		String sql = sb.toString();
+		List<StoreListByUserViewVO> storeListByUsers =null;
+		try {
+			storeListByUsers=jTemp.query(sql, new RowMapper<StoreListByUserViewVO>() {
+
+				@Override
+				public StoreListByUserViewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					int storeId = rs.getInt("store_id");
+					String storeName = rs.getString("store_name");
+					String storePhoto= rs.getString("store_photo");
+					double distance = rs.getDouble("distance");
+					distance = distance*1000;
+					int intDistance = (int)distance;
+					double reviewScoreAvg=0.0;
+					try {
+						reviewScoreAvg = reviewDao.getAverageScore(storeId);
+						reviewScoreAvg = Double.parseDouble(String.format("%.2f",reviewScoreAvg));
+					} catch (ReviewException e) {
+						e.printStackTrace();
+					}
+					StoreListByUserViewVO storeListByUsers = new StoreListByUserViewVO(storeId,storeName,storePhoto,intDistance,reviewScoreAvg);
+					return storeListByUsers;
+				}
+
+			});
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (Math.max(storeListByUsers.size(), 0));
+	}
+
+	@Override
+	public int getTotalCountByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select distinct store_id,store_name,store_photo,");
+		sb.append("(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude) - ");
+		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude)))) AS distance ");
+		sb.append("from (select * from stores inner join menus using(store_id) ");
+		sb.append("where (store_name like '%"+keyword+"%' or menu_tag like '%"+keyword+"%') and store_state_id=2 and store_open_state='OPEN') AS View_1 ");
+		sb.append("having distance <= 1");
+
+		String sql = sb.toString();
+		List<StoreListByUserViewVO> storeListByUsers =null;
+		try {
+			storeListByUsers=jTemp.query(sql, new RowMapper<StoreListByUserViewVO>() {
+
+				@Override
+				public StoreListByUserViewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					int storeId = rs.getInt("store_id");
+					String storeName = rs.getString("store_name");
+					String storePhoto= rs.getString("store_photo");
+					double distance = rs.getDouble("distance");
+					distance = distance*1000;
+					int intDistance = (int)distance;
+					double reviewScoreAvg=0.0;
+					try {
+						reviewScoreAvg = reviewDao.getAverageScore(storeId);
+						reviewScoreAvg = Double.parseDouble(String.format("%.2f",reviewScoreAvg));
+					} catch (ReviewException e) {
+						e.printStackTrace();
+					}
+					StoreListByUserViewVO storeListByUsers = new StoreListByUserViewVO(storeId,storeName,storePhoto,intDistance,reviewScoreAvg);
+					return storeListByUsers;
+				}
+
+			});
+		}
+		catch(Exception e) {
+			throw new StoreSelectFailedException(e.getMessage());
+		}
+		return (Math.max(storeListByUsers.size(), 0));
+	}
+
 }
