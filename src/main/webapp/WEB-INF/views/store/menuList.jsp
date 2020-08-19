@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 	String path = "../menu/";
@@ -21,9 +21,12 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+<script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/store/menuList.js"></script>
 
 <title>Menu</title>
@@ -69,7 +72,8 @@
 
 		<c:if test="${not empty menus}">
 			<c:forEach items="${menus}" var="menu" varStatus="i">
-				<ul class="list-group list-group-flush">
+			<div class="menuList">
+				<ul class="list-group list-group-flush" id="data" data-storeId="${menu.store.id}" data-menuId="${menu.id}">
 					<li class="list-group-item">
 						<div class="row">
 							<div class="col-3">
@@ -77,20 +81,18 @@
 							</div>
 							<a href="${pageContext.request.contextPath}/${menu.store.id}/${menu.id}/menu/view">
 							<div class="col-9" style="padding-left: 0">
-								<h5>
-									메뉴명 : <span><c:out value="${menu.name}"/></span>
-									</a>
-								</h5>
+								<h5>메뉴명 : <span><c:out value="${menu.name}"/></span></h5></a>
 								<div style="margin-top: 5pt">
 									금액 : <span><c:out value="${menu.price}"/></span><br />	
-								         수량 : <span><c:out value="${menu.amount}"/></span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i>&nbsp;&nbsp;
-									<button class="btn btn-outline-success btn-sm trim">등록</button>
+								         수량 : <span id="num"><c:out value="${menu.amount}"/></span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i>&nbsp;&nbsp;
+									<button id="countUpdate" class="btn btn-outline-success btn-sm trim">등록</button>
 								</div>
 							</div>
 						</div>
 					</li>
 				</ul>
-			</c:forEach>
+			</div>
+		</c:forEach>
 		</c:if>
 
 		<hr style="margin-top: 0" />

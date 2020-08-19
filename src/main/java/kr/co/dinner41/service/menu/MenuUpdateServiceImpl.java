@@ -60,12 +60,6 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 		menu.setNotice(command.getNotice());
 		
 		
-		System.out.println("menuUpdateServiceImpl의 menu 출력 :"+menu);
-		System.out.println("storeVO :" + storeVO);
-		System.out.println("menuId : " + menuId);
-		System.out.println("offerType VO : " + offerTypeVO);
-		System.out.println("getName :" + command.getName());
-		System.out.println("--------------------------------");
 		
 		try {
 			menuDao.update(menu, storeVO);

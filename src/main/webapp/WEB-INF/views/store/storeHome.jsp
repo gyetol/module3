@@ -69,8 +69,8 @@
 	<!--</div>-->
 
 	<div class="container-fluid">
-		<button id="openBtn" name="${store.openState}" class="btn btn-primary two_button">오픈</button>
-		<button id="closeBtn" name="${store.openState}" class="btn btn-danger two_button float-right">마감</button>
+		<button id="openBtn" name="OPEN" class="btn btn-primary two_button">오픈</button>
+		<button id="closeBtn" name="CLOSE" class="btn btn-danger two_button float-right">마감</button>
 	</div>
 
 	<div class="container-fluid" style="margin-top: 10pt">
@@ -116,7 +116,7 @@
 	<div>
 		<div class="row row-cols-3" style="margin: 5pt; padding-top: 10pt">
 			<div class="col mb-4">
-				
+				<a href="${pageContext.request.contextPath}/sm/store">
 					<div class="card h-100" id="storeManagement" name="storeManagement">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/store.png" class="rounded category" alt="no picture">
