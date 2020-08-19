@@ -10,9 +10,9 @@ import kr.co.dinner41.vo.UserVO;
 
 public interface MenuDao {
 	
-	void insert(MenuVO menu, StoreVO store) throws MenuException;
+	int insert(MenuVO menu, StoreVO store) throws MenuException;
 	void delete(int menuId, int storeId) throws MenuException;
-	void update(MenuVO menu, StoreVO store) throws MenuException;
+	int update(MenuVO menu, StoreVO store) throws MenuException;
 	List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException;
 	List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException;
 	MenuVO selectByMenuId(int menuId) throws MenuException;

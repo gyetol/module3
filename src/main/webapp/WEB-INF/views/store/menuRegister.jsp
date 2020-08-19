@@ -80,7 +80,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="text-left container-fluid" method="post" aciton="/sm/menu">
+    <form class="text-left container-fluid" method="post" enctype="multipart/form-data" aciton="/sm/menu">
 
         <div class="form-group">
             <label for="name">메뉴명</label>
