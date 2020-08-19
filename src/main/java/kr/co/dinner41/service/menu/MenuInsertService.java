@@ -10,5 +10,5 @@ import kr.co.dinner41.vo.UserVO;
 
 public interface MenuInsertService {
 
-	public void execute(MenuInsertCommand menu, UserVO user) throws SQLException;
+	public void execute(MenuInsertCommand menu, UserVO user,HttpSession session) throws SQLException;
 }

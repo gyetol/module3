@@ -94,7 +94,7 @@
 <div class="container-fluid" data-storeId="38" data-menuId="55">
 
     <div class="container-fluid">
-    <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/update/menu" method="post">
+    <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/update/menu" method="post" enctype="multipart/form-data">
         <div class="card card-body" style="margin-top: 15pt;margin-bottom: 15pt;">
             <img src="${pageContext.request.contextPath}/resources/images/chicken.png" width="100%" class="rounded" alt="no picture">
         </div>
@@ -102,6 +102,8 @@
        <div class="form-group">
             
             <img src="${pageContext.request.contextPath}/resources/images/${menu.photo}" width="100%" class="rounded" alt="no picture">
+            <input type="file" id="exampleFormControlInput1" name="photo"
+					value="${menu.photo}" />
             <!--  <div id="menuPhoto">
                <input type="file" id="menuPhoto" name="photo" value="${menu.photo}"/>
             </div>-->

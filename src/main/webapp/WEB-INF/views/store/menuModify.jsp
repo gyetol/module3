@@ -80,13 +80,13 @@
 	<hr />
 
 	<div class="container-fluid">
-		<form class="text-left container-fluid" method="post"
+		<form class="text-left container-fluid" method="post" enctype="multipart/form-data"
 			action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/menu">
 
 			<div class="form-group">
 				<label for="exampleFormControlInput1">메뉴 사진 첨부</label>  
-				   <img src="${pageContext.request.contextPath}/resources/images/${menu.photo}"
-				    width="100%" class="rounded" alt="no picture" >
+				   <!--  <img src="${pageContext.request.contextPath}/resources/images/${menu.photo}"
+				    width="100%" class="rounded" alt="no picture" > -->
 				<div id="photo">
 					<input type="file" id="exampleFormControlInput1" name="photo"
 					value="${menu.photo}" />
