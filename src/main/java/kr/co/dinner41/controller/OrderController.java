@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.dinner41.service.order.OrderDeleteService;
 import kr.co.dinner41.service.order.OrderInsertService;
 import kr.co.dinner41.service.order.OrderListService;
-import kr.co.dinner41.service.order.OrderUpdateService;
+import kr.co.dinner41.service.order.OrderReceiptCompleteService;
 import kr.co.dinner41.service.order.OrderViewService;
 import kr.co.dinner41.vo.Menu2OrderViewVO;
 import kr.co.dinner41.vo.OrderVO;
@@ -38,8 +38,8 @@ public class OrderController {
 	OrderDeleteService deleteService;
 
 	@Autowired
-	@Qualifier("orderUpdate")
-	OrderUpdateService updateService;
+	@Qualifier("orderReceiptComplete")
+	OrderReceiptCompleteService receiptCompleteService;
 	
 	@Autowired
 	@Qualifier("orderList")
@@ -90,25 +90,29 @@ public class OrderController {
 	}
 
 	
-	@RequestMapping(value = "/gm/{page}/order", method = RequestMethod.GET)
-	public String listByUser(@PathVariable("page") int page, HttpSession session, Model model) {
+	@RequestMapping(value = "/gm/{type}/{page}/order", method = RequestMethod.GET)
+	public String listByUser(@PathVariable("page") int page, @PathVariable("type") String type, HttpSession session, Model model) {
 
-		// service내에서 user의 타입을 체크해서 사용자일 경우 다른 쿼리문을 실행하도록 해야함
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		Map<OrderViewVO, List<Menu2OrderViewVO>> map = null;
-		map = listService.execute(user);
+
+		// 한 page에 해당하는 주문목록(HashMap형태)을 가져옴
+		// type에는 WAIT(주문대기), COMP(수령완료)이 있음
+		map = listService.execute(user, type, page);
 		model.addAttribute("map", map);
 		return "user/orderList";
 	}
 
 	
-	@RequestMapping(value = "/sm/{page}/order", method = RequestMethod.GET)
-	public String listByStore(@PathVariable("page") int page, HttpSession session, Model model) {
+	@RequestMapping(value = "/sm/{type}/{page}/order", method = RequestMethod.GET)
+	public String listByStore(@PathVariable("page") int page, @PathVariable("type") String type, HttpSession session, Model model) {
 
-		// service내에서 user의 타입을 체크해서 점주일 경우 다른 쿼리문을 실행하도록 해야함
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
-		map = listService.execute(user);
+		
+		// 한 page에 해당하는 주문목록(HashMap형태)을 가져옴
+		// type에는 WAIT(주문대기), COMP(수령완료)이 있음
+		map = listService.execute(user, type, page);
 		model.addAttribute("map", map);
 		return "store/orderList";
 	}
@@ -121,12 +125,27 @@ public class OrderController {
 		return "user/orderView";
 	}
 
+	
 	@RequestMapping(value = "/sm/{id}/order/detail", method = RequestMethod.GET)
 	public String viewByStore(@PathVariable("id") int orderId, Model model) {
 		OrderVO order = viewService.execute(orderId);
 		model.addAttribute("order", order);
 		return "store/orderView";
 	}
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/sm/order/complete", method = RequestMethod.GET)
+	public HashMap<String, Object> receiptComplete(HttpServletRequest request) {
+		HashMap<String, Object> map = new HashMap<>();
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		receiptCompleteService.execute(orderId);
+		
+		map.put("result", true);
+		map.put("msg", "수령처리가 완료되었습니다!!");
+		return map;
+	}
+	
 	
 	@RequestMapping(value = "/gm/{id}/order/delete", method = RequestMethod.GET)
 	public HashMap<String, Object> delete(@PathVariable("id") int orderId) {
@@ -136,6 +155,7 @@ public class OrderController {
 		
 		return map;
 	}
+	
 	
 	@RequestMapping(value = "/gm/pay", method = RequestMethod.GET)
 	public String pay() {

@@ -116,7 +116,7 @@
         <div class="form-group row">
             <label for="get_time" class="col-3 col-form-label">수령 일시</label>
             <div class="col-9">
-                <input type="text" class="form-control" id="get_time" value="${order.reserveDate}" readonly>
+                <input type="text" class="form-control" id="get_time" value="${order.pickupDate}" readonly>
             </div>
         </div>
 

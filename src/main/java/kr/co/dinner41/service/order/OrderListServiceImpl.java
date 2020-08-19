@@ -32,17 +32,17 @@ public class OrderListServiceImpl implements OrderListService {
 	private Menu2OrderDao m2oDao;
 	
 	@Override
-	public LinkedHashMap<OrderViewVO, List<Menu2OrderViewVO>> execute(UserVO user) {
+	public LinkedHashMap<OrderViewVO, List<Menu2OrderViewVO>> execute(UserVO user, String type, int page) {
 
 		LinkedHashMap<OrderViewVO, List<Menu2OrderViewVO>> map = new LinkedHashMap<>();
 		List<OrderViewVO> orderList = null;
 		List<Menu2OrderViewVO> menuList = null;
 
-		String type = user.getType().getId();
+		String userType = user.getType().getId();
 		int userId = user.getId();
 	
-		if (type.equals("GM")) {
-			orderList = oDao.selectAllOrderByUser(userId);
+		if (userType.equals("GM")) {
+			orderList = oDao.selectAllOrderByUser(userId, type);
 			menuList = m2oDao.selectAll();
 			
 			for (OrderViewVO order : orderList) {
@@ -57,11 +57,11 @@ public class OrderListServiceImpl implements OrderListService {
 				map.put(order, tmp);
 			}
 		}
-		else if (user.getType().getId().equals("SM")) {
+		else if (userType.equals("SM")) {
 			StoreVO store = sDao.selectByUserId(userId);
 			int storeId = store.getId();
 		
-			orderList = oDao.selectAllOrderByStore(storeId);
+			orderList = oDao.selectAllOrderByStore(storeId, type);
 			menuList = m2oDao.selectAll();
 			
 			for (OrderViewVO order : orderList) {
