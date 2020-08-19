@@ -151,7 +151,7 @@ public class StoreDaoImpl implements StoreDao {
 		String sql = "update stores set store_open_state=? where store_id=?";
 		int result =0;
 		try {
-			result= jTemp.update(sql,storeId,openState);
+			result= jTemp.update(sql,openState.name(),storeId);
 		}
 		catch(Exception e) {
 			throw new StoreUpdateFailedException(e.getMessage());

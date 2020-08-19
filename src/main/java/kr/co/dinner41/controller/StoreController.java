@@ -23,7 +23,7 @@ import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
-import kr.co.dinner41.service.store.StoreUpdateOpenStateService;
+import kr.co.dinner41.service.store.StoreOpenStateService;
 import kr.co.dinner41.service.store.StoreUpdateService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
@@ -73,7 +73,9 @@ public class StoreController {
 	@Qualifier("reviewListService")
 	ReviewListService reviewListService;
 	
-
+	@Autowired
+	@Qualifier("storeOpenStateService")
+	StoreOpenStateService storeOpenStateService;
 	
 	@Autowired
 	@Qualifier("storeCategoryDao")
@@ -146,7 +148,7 @@ public class StoreController {
 		
 		
 		storeInsertService.execute(store);
-		model.addAttribute(store);
+		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
 	
@@ -216,21 +218,21 @@ public class StoreController {
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
 		storeUpdateService.execute(store);
-		model.addAttribute(store);
+		model.addAttribute("store",store);
 		
 		return "store/storeHome";
 	}
 	
-//	@RequestMapping(value="/sm/switchOpenState/store", method=RequestMethod.GET)
-//	public String updateOpenState(HttpSession session, Model model) {
-//		UserVO user = (UserVO)session.getAttribute("loginUser");
-//		int storeId = storeDao.selectByUserId(user.getId()).getId();
-//		//storeUpdateOpenStateService.execute(storeId,openState);
-//		
-//		StoreVO store = storeDao.selectById(storeId);
-//		model.addAttribute(store);
-//		return "store/storeHome";
-//	}
+	@RequestMapping(value="/sm/switchOpenState/{openState}/store", method=RequestMethod.GET)
+	public String updateOpenState(@PathVariable("openState") OpenState openState, HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int storeId = storeDao.selectByUserId(user.getId()).getId();
+	
+		storeOpenStateService.execute(storeId, openState);
+		StoreVO store = storeDao.selectById(storeId);
+		model.addAttribute("store",store);
+		return "store/storeHome";
+	}
 	
 	
 	

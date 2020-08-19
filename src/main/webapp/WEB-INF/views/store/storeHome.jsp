@@ -69,8 +69,8 @@
 	<!--</div>-->
 
 	<div class="container-fluid">
-		<button id="openBtn" name="${store.openState}" class="btn btn-primary two_button">오픈</button>
-		<button id="closeBtn" name="${store.openState}" class="btn btn-danger two_button float-right">마감</button>
+		<button id="openBtn" name="OPEN" class="btn btn-primary two_button">오픈</button>
+		<button id="closeBtn" name="CLOSE" class="btn btn-danger two_button float-right">마감</button>
 	</div>
 
 	<div class="container-fluid" style="margin-top: 10pt">
