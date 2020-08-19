@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.command.StoreUpdateCommand;
@@ -97,6 +99,7 @@ public class StoreController {
 		
 		if(store==null) {
 			model.addAttribute("store",store);
+	
 			return "store/storeRegister";
 		}
 		
@@ -143,11 +146,11 @@ public class StoreController {
 		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
-		store.setPhoto(command.getPhoto());
+		store.setPhoto(command.getPhoto().getOriginalFilename());
 		store.setIntroduction(command.getIntroduction());
 		
 		
-		storeInsertService.execute(store);
+		storeInsertService.execute(session, store, command.getPhoto());
 		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
