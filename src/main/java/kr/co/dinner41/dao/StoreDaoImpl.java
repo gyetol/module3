@@ -70,7 +70,7 @@ public class StoreDaoImpl implements StoreDao {
 	}
 	@Override
 	public void deleteByStore(int id) throws StoreException {
-		String sql = "update stores set store_state_id=4 where store_id=?";
+		String sql = "update stores set store_state_id=5 where store_id=?";
 		int result=0;
 		try {
 			result=jTemp.update(sql,id);
@@ -112,7 +112,7 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public void update(StoreVO store) throws StoreException {
+	public int update(StoreVO store) throws StoreException {
 		String sql= "update stores set store_category_id=?,store_state_id=?, store_business_number=?,store_name=?, "
 				+	"store_address=?, store_sub_address=?,store_latitude=?,store_longitude=?,store_phone=?,store_operate_time=?, "
 				+	"store_photo=?, store_introduction=? " 
@@ -145,6 +145,7 @@ public class StoreDaoImpl implements StoreDao {
 		if(result==0) {
 			throw new StoreUpdateFailedException("매장 수정을 시도하였으나 영향받은 행이 없습니다.");
 		}
+		return result;
 	}
 	
 	@Override
