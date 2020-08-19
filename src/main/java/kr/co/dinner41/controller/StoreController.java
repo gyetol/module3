@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.command.StoreUpdateCommand;
@@ -23,7 +25,7 @@ import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
-import kr.co.dinner41.service.store.StoreUpdateOpenStateService;
+import kr.co.dinner41.service.store.StoreOpenStateService;
 import kr.co.dinner41.service.store.StoreUpdateService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
@@ -73,7 +75,9 @@ public class StoreController {
 	@Qualifier("reviewListService")
 	ReviewListService reviewListService;
 	
-
+	@Autowired
+	@Qualifier("storeOpenStateService")
+	StoreOpenStateService storeOpenStateService;
 	
 	@Autowired
 	@Qualifier("storeCategoryDao")
@@ -95,6 +99,7 @@ public class StoreController {
 		
 		if(store==null) {
 			model.addAttribute("store",store);
+	
 			return "store/storeRegister";
 		}
 		
@@ -141,12 +146,12 @@ public class StoreController {
 		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
-		store.setPhoto(command.getPhoto());
+		store.setPhoto(command.getPhoto().getOriginalFilename());
 		store.setIntroduction(command.getIntroduction());
 		
 		
-		storeInsertService.execute(store);
-		model.addAttribute(store);
+		storeInsertService.execute(session, store, command.getPhoto());
+		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
 	
@@ -216,21 +221,21 @@ public class StoreController {
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
 		storeUpdateService.execute(store);
-		model.addAttribute(store);
+		model.addAttribute("store",store);
 		
 		return "store/storeHome";
 	}
 	
-//	@RequestMapping(value="/sm/switchOpenState/store", method=RequestMethod.GET)
-//	public String updateOpenState(HttpSession session, Model model) {
-//		UserVO user = (UserVO)session.getAttribute("loginUser");
-//		int storeId = storeDao.selectByUserId(user.getId()).getId();
-//		//storeUpdateOpenStateService.execute(storeId,openState);
-//		
-//		StoreVO store = storeDao.selectById(storeId);
-//		model.addAttribute(store);
-//		return "store/storeHome";
-//	}
+	@RequestMapping(value="/sm/switchOpenState/{openState}/store", method=RequestMethod.GET)
+	public String updateOpenState(@PathVariable("openState") OpenState openState, HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int storeId = storeDao.selectByUserId(user.getId()).getId();
+	
+		storeOpenStateService.execute(storeId, openState);
+		StoreVO store = storeDao.selectById(storeId);
+		model.addAttribute("store",store);
+		return "store/storeHome";
+	}
 	
 	
 	

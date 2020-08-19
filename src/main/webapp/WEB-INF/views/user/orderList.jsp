@@ -80,7 +80,7 @@
 			<!--주문 목록-->
 			<c:forEach items="${map}" var="entry" varStatus="i">
 				<div class="orderClass" data-orderid=<c:out value="${entry.key.orderId}"/>>
-					<ul class="list-group list-group-flush">
+					<ul class="list-group list-group-flush" id="storeId" data-storeId="${entry.key.storeId}">
 						<li class="list-group-item">
 							<div>
 								<div style="color: green; font-weight: bold;">
@@ -94,7 +94,7 @@
 							</c:forEach>
 								<div style="margin-top: 5pt">
 									<button id="reviewClick" class="btn btn-outline-success btn_disabled btn-sm" style="width: 32%">리뷰쓰기</button>
-									<button class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
+									<button id="storeViewClick" class="btn btn-outline-success btn-sm" style="width: 32%">가게보기</button>
 									<button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%">주문상세</button>
 								</div>
 							</div>

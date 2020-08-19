@@ -1,6 +1,16 @@
 /*img:hover{*/
 /*    cursor: pointer;*/
 /*}*/
+
+div.contents {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 800px;
+	height: 1280px;
+	scroll: ;
+}
+
 .pos:hover{
     cursor: pointer;
 }

@@ -81,7 +81,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form id="register_form" class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/store">
+    <form id="register_form" class="container-fluid text-left" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/sm/store">
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
             <div id="store">
