@@ -69,6 +69,11 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 				}
 			});
 		} else {
+
+			// orderId를 통해서 주문 테이블에서 주문을 삭제
+			// ajax 통신으로 처리
+			// 아래 두 줄은 ajax의 콜백함수에서 진행
+
 			alert("결제를 실패했으므로 장바구니 화면으로 돌아갑니다.");
 			window.location.href = "cart";
 		}

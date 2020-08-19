@@ -84,6 +84,7 @@ public class OrderDaoImpl implements OrderDao {
 				"	A.user_id user_id,\r\n" + 
 				"	A.order_order_date order_order_date,\r\n" + 
 				"	A.order_reserve_date order_reserve_date, \r\n" + 
+				"	A.order_pickup_date order_pickup_date, \r\n" + 
 				"	A.price price, \r\n" + 
 				"	C.store_name store_name,\r\n" + 
 				"	D.user_name user_name\r\n" + 
@@ -105,6 +106,7 @@ public class OrderDaoImpl implements OrderDao {
 				"	A.user_id user_id,\r\n" + 
 				"	A.order_order_date order_order_date,\r\n" + 
 				"	A.order_reserve_date order_reserve_date, \r\n" + 
+				"	A.order_pickup_date order_pickup_date, \r\n" + 
 				"	A.price price, \r\n" + 
 				"	C.store_name store_name,\r\n" + 
 				"	D.user_name user_name\r\n" + 
