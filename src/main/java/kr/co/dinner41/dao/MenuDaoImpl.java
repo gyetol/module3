@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dinner41.command.MenuInsertCommand;
+import kr.co.dinner41.exception.QnAException;
 import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
 import kr.co.dinner41.exception.menu.MenuSelectFailedException;
@@ -183,12 +184,6 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public int getTotalRecord() throws MenuException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int getLastInsertId(int storeId) throws SQLException {
 
 		String sql = "SELECT COUNT(menu_id) AS count FROM menus WHERE store_id =?";
@@ -224,5 +219,57 @@ public class MenuDaoImpl implements MenuDao {
 			throw new MenuUpdateFailedException();
 		}
 
+	}
+	
+	@Override
+	public int getTotalRecord() throws MenuException {
+		 String sql="SELECT count(*) as num from menus;";
+	        List<Integer> list = jTemp.query(sql, new RowMapper<Integer>() {
+	            @Override
+	            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                return rs.getInt("num");
+	            }
+	        });
+
+	        return (list.size() == 0? 0:list.get(0));
+	}
+	
+	@Override
+	public int getTotalRecord(UserVO user) throws MenuException {
+		 String sql="SELECT count(*) as num from menus WHERE user_id = ?;";
+	        List<Integer> list = jTemp.query(sql, new RowMapper<Integer>() {
+	            @Override
+	            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                return rs.getInt("num");
+	            }
+	        }, user.getId());
+
+	        return (list.size() == 0? 0:list.get(0));
+	}
+
+	@Override
+	public int getTotalRecord(int storeId) throws MenuException {
+		 String sql="SELECT count(*) as num from menus WHERE store_id = ?;";
+	        List<Integer> list = jTemp.query(sql, new RowMapper<Integer>() {
+	            @Override
+	            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                return rs.getInt("num");
+	            }
+	        }, storeId);
+
+	        return (list.size() == 0? 0:list.get(0));
+	}
+
+	@Override
+	public int getTotalRecord(int storeId, UserVO user) throws MenuException {
+		String sql = "SELECT count(*) as num from menus WHERE store_id LIKE ? AND user_id = ? AND menu_remove_date IS NULL;";
+        List<Integer> list = jTemp.query(sql, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("num");
+            }
+        }, storeId, user.getId());
+
+        return (list.size() == 0? 0:list.get(0));
 	}
 }

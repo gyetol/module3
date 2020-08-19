@@ -43,8 +43,6 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 
 			storeVO = storeDao.selectByUserId(user.getId());
 			menuId = menuDao.getLastInsertId(storeVO.getId());
-//			System.out.println("offerType : "+offerTypeVO.getName());
-//			System.out.println("store : "+storeVO.getName());
 
 		}
 		catch (OfferTypeSelectException e) {
@@ -62,8 +60,6 @@ public class MenuInsertServiceImpl implements MenuInsertService {
 		menu.setAmount(command.getAmount());
 		menu.setDescription(command.getIntroduction());
 		menu.setNotice(command.getNotice());
-		
-		//System.out.println("check0");
 		
 		try {
 			menuDao.insert(menu, storeVO);

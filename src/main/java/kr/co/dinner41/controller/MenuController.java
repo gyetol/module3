@@ -34,6 +34,7 @@ import kr.co.dinner41.service.menu.MenuUpdateService;
 import kr.co.dinner41.service.menu.MenuViewService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.vo.MenuVO;
+import kr.co.dinner41.vo.PageVO;
 import kr.co.dinner41.vo.StoreVO;
 import kr.co.dinner41.vo.UserVO;
 
@@ -151,19 +152,6 @@ public class MenuController {
 //          model.addAttribute("errMessage", "메뉴 유의사항은 필수 입력사항입니다.");
 //          return "store/menuRegister";
 //       }
-      
-       
-       @RequestMapping(value = "/sm/{page}/menu/list", method = RequestMethod.GET)
-       public String list(@PathVariable("page") int page, Model model, HttpSession session) throws MenuException {
-          UserVO user = (UserVO) session.getAttribute("loginUser");
-          StoreVO store = storeDao.selectByUserId(user.getId());
-
-          
-          List<MenuVO> list = menuDao.selectByStoreId(store.getId(), page, 5);
-         
-          model.addAttribute("menus", list);
-          return "store/menuList";
-       }
    
        @RequestMapping(value = "/sm/{storeId}/{menuId}/menu", method = RequestMethod.PUT)
        public String update(@PathVariable("menuId")String menuId, @PathVariable("storeId")String storeId, HttpSession session) throws MenuException {
@@ -262,8 +250,6 @@ public class MenuController {
    		int menu_id = Integer.parseInt(menuId);
    		int num = Integer.parseInt(amount);
    		
-   		System.out.printf("%d, %d, %d\n", store_id, menu_id, num);
-   		
    		updateAmountService.execute(store_id, menu_id, num);
    	
    		map.put("storeId", store_id);
@@ -275,19 +261,44 @@ public class MenuController {
    		map.put("msg", "수량 변경이 완료되었습니다");
    		return map;
    	}
+    
+    @RequestMapping(value = "/sm/{page}/menu/list", method = RequestMethod.GET)
+    public String list(@PathVariable("page") String page, Model model, HttpSession session) throws MenuException {
+       UserVO user = (UserVO) session.getAttribute("loginUser");
+       StoreVO store = storeDao.selectByUserId(user.getId());
+       int intPage = Integer.parseInt(page);
+
        
+       List<MenuVO> list = menuDao.selectByStoreId(store.getId(), intPage, 5);
+       List<PageVO> pageList = null;
+       
+       list = listByStoreService.execute(store.getId(), intPage);
+       pageList = listByStoreService.getPages(intPage, store.getId());
+       model.addAttribute("menus",list);
+       model.addAttribute("pages",pageList);
+       model.addAttribute("storeId",store.getId());
+       model.addAttribute("page", intPage);
+       
+       model.addAttribute("menus", list);
+       return "store/menuList";
+    }
+      
       @RequestMapping(value="/sm/{store-name}/{page}/menu/view",method=RequestMethod.GET)
       public String listByStore(@PathVariable("storeId") String storeId,@PathVariable("page") String page, HttpSession session, Model model) throws MenuException {
          int intPage = Integer.parseInt(page);
          int store_id = Integer.parseInt(storeId);
-         List<MenuVO> menus;
+         List<MenuVO> menus = null;
+         List<PageVO>pageList = null;
          
          UserVO user = (UserVO)session.getAttribute("loginUser");
          model.addAttribute("page",page);
 
          menus = listByStoreService.execute(store_id, intPage);
-         
+         pageList = listByStoreService.getPages(intPage, store_id);
          model.addAttribute("menus",menus);
+         model.addAttribute("pages",pageList);
+         model.addAttribute("storeId",store_id);
+         model.addAttribute("page", intPage);
          
          return "store/menuList";
    }

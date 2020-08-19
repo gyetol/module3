@@ -34,11 +34,8 @@ public class MenuUpdateServiceImpl implements MenuUpdateService {
 		MenuVO menuVO = null;
 		
 		try {
-	
-			System.out.println("aaaaa :" + command.getType());
 			offerTypeVO = offerTypeDao.selectById(command.getType());
 			storeVO = storeDao.selectByUserId(user.getId());
-			//menuVO = menuDao.selectByMenuIdStoreId(menuId, storeId);
 			
 		}
 		catch (OfferTypeSelectException e) {
