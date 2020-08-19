@@ -255,12 +255,11 @@ public class StoreController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(storeListByUserViews);
+		List<PageVO> pages = storeListByUserService.getPages(category, keyword, userLatitude, userLongitude, intPage);
 		model.addAttribute("category",category);
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("stores",storeListByUserViews); //이름주의! stores로 담아놓음
-		
+		model.addAttribute("pages", pages);
 		return "user/storeList";
 	}
 

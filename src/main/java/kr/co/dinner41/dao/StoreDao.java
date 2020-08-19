@@ -30,4 +30,8 @@ public interface StoreDao {
 	void block(int storeId, UserVO manager, String content) throws StoreException;
 	void reject(int storeId, UserVO manager, String content) throws StoreException;
 	int getTotalCount(String stateName,String name) throws StoreException;
+
+	int getTotalCountByCategoryName(String categoryName, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
+
+	int getTotalCountByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
 }
