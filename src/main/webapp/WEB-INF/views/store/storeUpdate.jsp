@@ -81,7 +81,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form id= "register_form" class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/update/store">
+    <form id= "register_form" class="container-fluid text-left" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/sm/update/store">
 
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
@@ -96,7 +96,7 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">매장 대표사진 첨부</label>
             <div id="emailCheckLabel">
-                <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg" alt="no pic" class="rounded" style="width: 100%"/>
+                <img src="${pageContext.request.contextPath}/resources/images/${store.photo}" alt="no pic" class="rounded" style="width: 100%"/>
                 <input type="file" id="exampleFormControlInput1" name="photo"/>
             </div>
         </div>

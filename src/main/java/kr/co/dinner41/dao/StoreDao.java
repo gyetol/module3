@@ -10,7 +10,7 @@ public interface StoreDao {
 	int insert(StoreVO store) throws StoreException;
 	void deleteByStore(int id) throws StoreException;
 	void deleteByManager(int storeId, UserVO manager, String content) throws StoreException;
-	void update(StoreVO store) throws StoreException;
+	int update(StoreVO store) throws StoreException;
 	void switchOpenState(int storeId,OpenState openState) throws StoreException;
 	StoreVO selectById(int id) throws StoreException;
 	StoreVO selectByUserId(int userId) throws StoreException;
