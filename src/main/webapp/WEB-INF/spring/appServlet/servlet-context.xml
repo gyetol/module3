@@ -28,9 +28,7 @@
 </beans:bean>
 
 	<context:component-scan base-package="kr.co.dinner41" />
-	
-	
-	
+
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
@@ -57,5 +55,5 @@
 			<beans:bean class="kr.co.dinner41.interceptor.CheckADInterceptor"/>
 		</interceptor>
 	</interceptors>
-	
+
 </beans:beans>

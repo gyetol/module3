@@ -12,23 +12,24 @@ public class OrderViewVO implements Serializable {
 	private int userId;
 	private Timestamp order_order_date;
 	private Timestamp order_reserve_date;
+	private Timestamp order_pickup_date;
 	private int price;
 	private String storeName;
 	private String userName;
 	
 	public OrderViewVO() {}
 	public OrderViewVO(int orderId, int storeId, int userId, Timestamp order_order_date, Timestamp order_reserve_date,
-			int price, String storeName, String userName) {
+			Timestamp order_pickup_date, int price, String storeName, String userName) {
 		this.orderId = orderId;
 		this.storeId = storeId;
 		this.userId = userId;
 		this.order_order_date = order_order_date;
 		this.order_reserve_date = order_reserve_date;
+		this.order_pickup_date = order_pickup_date;
 		this.price = price;
 		this.storeName = storeName;
 		this.userName = userName;
 	}
-
 	public int getOrderId() {
 		return orderId;
 	}
@@ -59,6 +60,12 @@ public class OrderViewVO implements Serializable {
 	public void setOrder_reserve_date(Timestamp order_reserve_date) {
 		this.order_reserve_date = order_reserve_date;
 	}
+	public Timestamp getOrder_pickup_date() {
+		return order_pickup_date;
+	}
+	public void setOrder_pickup_date(Timestamp order_pickup_date) {
+		this.order_pickup_date = order_pickup_date;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -80,4 +87,5 @@ public class OrderViewVO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 }

@@ -134,7 +134,7 @@
         <c:if test="${type eq 'menu'}">
             <c:forEach var="vo" items="${list}">
                 <li class="list-group-item">
-                    <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu" class="menu">
+                    <a href="${pageContext.request.contextPath}/${store.id}/${vo.id}/menu/view" class="menu">
                         <div class="row">
                             <div class="col-3">
                                 <img src="${pageContext.request.contextPath}/resources/images/dish-food.jpg"
