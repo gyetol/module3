@@ -18,7 +18,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/login.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<!-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css"> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
 
 <title>login</title>
 <script>
