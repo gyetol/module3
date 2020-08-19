@@ -23,6 +23,7 @@ import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
+import kr.co.dinner41.service.store.StoreUpdateOpenStateService;
 import kr.co.dinner41.service.store.StoreUpdateService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
@@ -72,6 +73,8 @@ public class StoreController {
 	@Qualifier("reviewListService")
 	ReviewListService reviewListService;
 	
+
+	
 	@Autowired
 	@Qualifier("storeCategoryDao")
 	StoreCategoryDao storeCategoryDao;
@@ -79,6 +82,7 @@ public class StoreController {
 	@Autowired
 	@Qualifier("storeDao")
 	StoreDao storeDao;
+	
 	
 	
 	
@@ -93,10 +97,7 @@ public class StoreController {
 			model.addAttribute("store",store);
 			return "store/storeRegister";
 		}
-		else if(store.getState().getName().equals("거부")) {
-			model.addAttribute("store",store);
-			return "store/storeUpdate";
-		}
+		
 		else if(store.getState().getName().equals("점주삭제")) {
 			model.addAttribute("store",store);
 			return "store/storeRegister"; //처리를 새롭게 해야할 듯 
@@ -114,34 +115,38 @@ public class StoreController {
 	
 	@RequestMapping(value="/sm/store",method=RequestMethod.POST)
 	public String insert(StoreInsertCommand command,Model model,HttpSession session) {
-		
 		StoreVO store = new StoreVO();
+		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
-		UserVO user = new UserVO();
-		user.setId(14);
-		
-		StoreCategoryVO storeCategory = new StoreCategoryVO();
-		storeCategory.setId("KOR");
-		
-		StoreStateVO storeState = new StoreStateVO();
-		storeState.setId(2);
+		String storeCategoryName = command.getCategory();
+		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
+		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
 		
 		store.setUser(user);
+		
 		store.setCategory(storeCategory);
+		
+		StoreStateVO storeState = new StoreStateVO();
+		storeState.setId(1);
 		store.setState(storeState);
+		
 		store.setBusinessNumber(command.getBusinessNumber());
 		store.setName(command.getName());
 		store.setAddress(command.getAddress());
 		store.setSubAddress(command.getSubAddress());
-		store.setLatitude(37.482417);//store.setLatitude(command.getLatitude());
-		store.setLongitude(126.953073);//store.setLongitude(command.getLongitude());
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
+		store.setLatitude(storeLatitude);//store.setLatitude(command.getLatitude());
+		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
 		store.setPhoto(command.getPhoto());
 		store.setIntroduction(command.getIntroduction());
-	
-		storeInsertService.execute(store);
 		
+		
+		storeInsertService.execute(store);
+		model.addAttribute(store);
 		return "store/storeHome";
 	}
 	
@@ -180,6 +185,10 @@ public class StoreController {
 		
 		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
 		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
+//		StoreCategoryVO storeCategory = StoreCategoryVO.builder()
+//				.id(storeCategoryId)
+//				.name(storeCategoryName)
+//				.build();
 		
 		StoreStateVO storeState = null;
 		if(storeDao.selectByUserId(user.getId()).getState().getName().equals("승인")) {
@@ -193,8 +202,9 @@ public class StoreController {
 		String storeName = command.getName();
 		String storeAddress= command.getAddress();
 		String storeSubAddress = command.getSubAddress();
-		double storeLatitude= 37.482417;//double storeLatitude = command.getLatitude();
-		double storeLongitude= 126.953073;//double storeLongitude = command.getLongitude();
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
 		String storePhone = command.getPhone();
 		String storeOperateTime = command.getOperateTime();
 		String storePhoto = command.getPhoto();
@@ -206,9 +216,21 @@ public class StoreController {
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
 		storeUpdateService.execute(store);
+		model.addAttribute(store);
 		
 		return "store/storeHome";
 	}
+	
+//	@RequestMapping(value="/sm/switchOpenState/store", method=RequestMethod.GET)
+//	public String updateOpenState(HttpSession session, Model model) {
+//		UserVO user = (UserVO)session.getAttribute("loginUser");
+//		int storeId = storeDao.selectByUserId(user.getId()).getId();
+//		//storeUpdateOpenStateService.execute(storeId,openState);
+//		
+//		StoreVO store = storeDao.selectById(storeId);
+//		model.addAttribute(store);
+//		return "store/storeHome";
+//	}
 	
 	
 	

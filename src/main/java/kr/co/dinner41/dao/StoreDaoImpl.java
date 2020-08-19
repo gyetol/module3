@@ -43,7 +43,7 @@ public class StoreDaoImpl implements StoreDao {
 		try {
 			int userId= store.getUser().getId();//1
 			String storeCategoryId=store.getCategory().getId();//2
-			int storeStateId=store.getState().getId();//3
+			int storeStateId=1; // 등록시 신청 상태로 등록요청
 			String storeBusinessNumber=store.getBusinessNumber();//4
 			String storeName= store.getName();//5
 			String storeAddress=store.getAddress();//6
@@ -147,7 +147,15 @@ public class StoreDaoImpl implements StoreDao {
 	}
 	
 	@Override
-	public void switchOpenState(OpenState openState) throws StoreException{
+	public void switchOpenState(int storeId,OpenState openState) throws StoreException{
+		String sql = "update stores set store_open_state=? where store_id=?";
+		int result =0;
+		try {
+			result= jTemp.update(sql,storeId,openState);
+		}
+		catch(Exception e) {
+			throw new StoreUpdateFailedException(e.getMessage());
+		}
 		
 	}
 	
