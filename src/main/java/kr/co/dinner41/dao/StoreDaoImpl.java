@@ -37,7 +37,7 @@ public class StoreDaoImpl implements StoreDao {
 	private int searchDistance=1; //1km검색
 
 	@Override
-	public void insert(StoreVO store) throws StoreException {
+	public int insert(StoreVO store) throws StoreException {
 		String sql = "insert into stores values (default,?,?,?,?,?,?,?,?,?,?,?,?,?,default,?)";
 		int result=0;
 		try {
@@ -66,6 +66,7 @@ public class StoreDaoImpl implements StoreDao {
 		if(result==0) {
 			throw new StoreInsertFailedException("매장 등록을 시도하였으나 영향받은 행이 없습니다.");
 		}
+		return result;
 	}
 	@Override
 	public void deleteByStore(int id) throws StoreException {
