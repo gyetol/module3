@@ -249,39 +249,32 @@ public class MenuController {
              
         }
        
-//    @ResponseBody
-//   	@RequestMapping(value = "/sm/menu/list", method = RequestMethod.POST)
-//   	public HashMap<String, Object> insert(HttpServletRequest request) {
-//   		HashMap<String, Object> map = new HashMap<>();
-//   		HttpSession session = request.getSession(false);
-//   	
-//   		UserVO user = (UserVO)session.getAttribute("loginUser");
-//   		int userId = user.getId();
-//   		
-//   		String getTime = request.getParameter("getTime");
-//   		
-//   		String[] payNumberAndOrderId = insertService.execute(arrForOrder, arrForOrder2, userId, Integer.parseInt(getTime), Integer.parseInt(payTotal));
-//   	
-//   		String price = arrForOrder[Integer.parseInt(arrForOrder[1])+2];
-//
-//   		// 결제 진행을 위해 매장결제식별번호, 주문번호, 결제금액, 사용자 정보를 보내줌
-//   		map.put("storePayNumber", payNumber);
-//   		map.put("orderId", orderId);
-//   		map.put("price", price);
-//   		map.put("user", user);
-//   	
-//   		// 결제가 완료되면 완료된 메뉴들을 장바구니에서 제거
-//   		int clearMenuCount = Integer.parseInt(arrForOrder[1]);
-//   		
-//   		System.out.println("결제가 완료된 메뉴의 개수 : " + clearMenuCount);
-//   		
-//   		String [] clearMenuIds = new String[clearMenuCount]; 
-//   		for (int i = 0; i < clearMenuCount; i++) {
-//   			clearMenuIds[i] = arrForOrder[i+2];
-//   		}
-//   		map.put("menuIds", clearMenuIds);
-//   		return map;
-//   	}
+    @ResponseBody
+   	@RequestMapping(value = "/sm/menu/list", method = RequestMethod.POST)
+   	public HashMap<String, Object> update(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, @RequestParam("amount")String amount, HttpServletRequest request) throws MenuException {
+    	
+    	HashMap<String, Object> map = new HashMap<>();
+   		HttpSession session = request.getSession(false);
+   		UserVO user = (UserVO)session.getAttribute("loginUser");
+   		int userId = user.getId();
+
+   		int store_id = Integer.parseInt(storeId);
+   		int menu_id = Integer.parseInt(menuId);
+   		int num = Integer.parseInt(amount);
+   		
+   		System.out.printf("%d, %d, %d\n", store_id, menu_id, num);
+   		
+   		updateAmountService.execute(store_id, menu_id, num);
+   	
+   		map.put("storeId", store_id);
+   		map.put("menuId", menu_id);
+   		map.put("num", num);
+   		map.put("user", user);
+   		
+   		map.put("result", true);
+   		map.put("msg", "수량 변경이 완료되었습니다");
+   		return map;
+   	}
        
       @RequestMapping(value="/sm/{store-name}/{page}/menu/view",method=RequestMethod.GET)
       public String listByStore(@PathVariable("storeId") String storeId,@PathVariable("page") String page, HttpSession session, Model model) throws MenuException {

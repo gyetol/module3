@@ -80,7 +80,7 @@
 			<!--주문 목록-->
 			<c:forEach items="${map}" var="entry" varStatus="i">
 				<div class="orderClass" data-orderid=<c:out value="${entry.key.orderId}"/>>
-					<ul class="list-group list-group-flush">
+					<ul class="list-group list-group-flush" id="storeId" data-storeId="${entry.key.storeId}">
 						<li class="list-group-item">
 							<div>
 								<div style="color: green; font-weight: bold;">

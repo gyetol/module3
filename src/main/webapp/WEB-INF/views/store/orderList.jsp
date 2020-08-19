@@ -20,7 +20,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/user/orderList.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/store/orderList.js"></script>
 
 
 <title>Order History</title>
@@ -68,11 +68,11 @@
 
 		<c:if test="${not empty map}">
 			<c:forEach items="${map}" var="entry" varStatus="i">
-				<div>
+				<div class="orderClass" data-orderid=<c:out value="${entry.key.orderId}"/>>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">
 							<div style="color: green; font-weight: bold;">
-								주문번호 : <span><c:out value="${entry.key.orderId}" /></span><br />
+								주문번호 : <span id="orderId"><c:out value="${entry.key.orderId}" /></span><br />
 							</div> 주문자명 : <span><c:out value="${entry.key.userName}" /></span><br /> 주문일시 : <span><c:out value="${entry.key.order_order_date}" /></span><br /> 
 							주문메뉴(수량) : 
 							<c:forEach items="${entry.value}" var="menu" varStatus="i">
@@ -80,7 +80,7 @@
 								(<c:out value="${menu.amount}" />) /
 							</c:forEach>
 							<div style="margin-top: 5pt">
-								<button class="btn btn-outline-success btn-sm" style="width: 32%">상세보기</button>
+								<button id="storeDetail" class="btn btn-outline-success btn-sm" style="width: 32%">상세보기</button>
 								<button class="btn btn-outline-success btn-sm btn_disabled" style="width: 32%">주문취소</button>
 								<button class="btn btn-outline-success btn-sm btn_disabled" style="width: 32%">수령완료</button>
 							</div>

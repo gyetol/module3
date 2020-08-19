@@ -100,6 +100,13 @@
         </div>
 
         <div class="form-group row">
+            <label for="pay_id" class="col-3 col-form-label">주문자</label>
+            <div class="col-9">
+                <input type="text" class="form-control" id="pay_id" value="${order.user.name}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label for="order_date" class="col-3 col-form-label">주문 일시</label>
             <div class="col-9">
                 <input type="text" class="form-control" id="order_date" value="${order.orderDate}" readonly>

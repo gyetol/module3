@@ -97,16 +97,6 @@ public class OrderController {
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		Map<OrderViewVO, List<Menu2OrderViewVO>> map = null;
 		map = listService.execute(user);
-		
-		for (Map.Entry<OrderViewVO, List<Menu2OrderViewVO>> entry : map.entrySet()) {
-			OrderViewVO key = entry.getKey();
-			List<Menu2OrderViewVO> value = entry.getValue();
-			for (Menu2OrderViewVO m2o : value) {
-				System.out.printf("%s / ",  m2o.getMenuName());
-			}
-			System.out.println();
-		}
-
 		model.addAttribute("map", map);
 		return "user/orderList";
 	}
@@ -119,19 +109,33 @@ public class OrderController {
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
 		map = listService.execute(user);
-
 		model.addAttribute("map", map);
 		return "store/orderList";
 	}
 
 	
 	@RequestMapping(value = "/gm/{id}/order/detail", method = RequestMethod.GET)
-	public String view(@PathVariable("id") int orderId, Model model) {
+	public String viewByUser(@PathVariable("id") int orderId, Model model) {
 		OrderVO order = viewService.execute(orderId);
 		model.addAttribute("order", order);
 		return "user/orderView";
 	}
+
+	@RequestMapping(value = "/sm/{id}/order/detail", method = RequestMethod.GET)
+	public String viewByStore(@PathVariable("id") int orderId, Model model) {
+		OrderVO order = viewService.execute(orderId);
+		model.addAttribute("order", order);
+		return "store/orderView";
+	}
 	
+	@RequestMapping(value = "/gm/{id}/order/delete", method = RequestMethod.GET)
+	public HashMap<String, Object> delete(@PathVariable("id") int orderId) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		// 넘어온 주문 아이디로 삭제를 진행
+		
+		return map;
+	}
 	
 	@RequestMapping(value = "/gm/pay", method = RequestMethod.GET)
 	public String pay() {

@@ -48,8 +48,8 @@ public class MenuDaoImpl implements MenuDao {
 		Calendar calendar = Calendar.getInstance();
 		String now = sdf.format(calendar.getTime());
 
-		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = " + menuId
-				+ " AND store_id =" + storeId;
+		String sql = "UPDATE menus SET menu_remove_date = '" + now + "' WHERE menu_id = " + menuId + " AND store_id ="
+				+ storeId;
 
 		int result = 0;
 
@@ -71,23 +71,10 @@ public class MenuDaoImpl implements MenuDao {
 		String sql = "UPDATE menu_view SET offer_type_id = ?, menu_name = ?, menu_price = ?, menu_amount = ?, menu_description = ?, menu_notice = ?,menu_photo = ? WHERE menu_id = ? AND store_id=? ";
 
 		int result = 0;
-		System.out.println("----------------------updat DaoImpl");
-		System.out.println("a : " + menu.getOfferType());
-		System.out.println("OfferType : "+menu.getOfferType().getId());
-		System.out.println("getName : "+menu.getName());
-		System.out.println("getPrice :"+menu.getPrice());
-		System.out.println("getAmount :"+menu.getAmount());
-		System.out.println("getDescription :"+menu.getDescription());
-		System.out.println("getNotice: "+menu.getNotice());
-		System.out.println("getPhoto :"+menu.getPhoto());
-		System.out.println("getId : "+menu.getId());
-		System.out.println("getStoreId : "+store.getId());
-		System.out.println("-----------------------------------------------------------------");
 
 		try {
-			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getName(), menu.getPrice(),
-					menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto(), menu.getId(),
-					store.getId());
+			result = jTemp.update(sql, menu.getOfferType().getId(), menu.getName(), menu.getPrice(), menu.getAmount(),
+					menu.getDescription(), menu.getNotice(), menu.getPhoto(), menu.getId(), store.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MenuUpdateFailedException();
@@ -96,7 +83,7 @@ public class MenuDaoImpl implements MenuDao {
 			throw new MenuUpdateFailedException();
 		}
 	}
-	
+
 	@Override
 	public MenuVO selectByMenuIdStoreId(int menuId, int storeId) throws MenuException {
 		List<MenuVO> list;
@@ -104,7 +91,7 @@ public class MenuDaoImpl implements MenuDao {
 		list = jTemp.query(sql, new MenuMapper(), menuId, storeId);
 		return (list.size() == 0 ? null : list.get(0));
 	}
-	
+
 	@Override
 	public MenuVO selectByMenuId(int menuId) throws MenuException {
 		List<MenuVO> list;
@@ -112,7 +99,6 @@ public class MenuDaoImpl implements MenuDao {
 		list = jTemp.query(sql, new MenuMapper(), menuId);
 		return (list.size() == 0 ? null : list.get(0));
 	}
-
 
 	@Override
 	public List<MenuVO> selectAll(int page, int pageSize, String condition, String word) throws MenuException {
@@ -151,57 +137,50 @@ public class MenuDaoImpl implements MenuDao {
 		return list;
 
 	}
-	
+
 	@Override
 	public List<MenuVO> selectByStoreId(int storeId, int page, int pageSize) throws MenuException {
-		
+
 		int startPoint = (page - 1) * pageSize;
-		
+
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId + "' ");
 		sb.append("AND menu_remove_date is null ");
-		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
-	
-		
+		sb.append("ORDER BY menu_id DESC LIMIT " + startPoint + "," + pageSize);
+
 		String sql = sb.toString();
-		
+
 		List<MenuVO> menus = null;
-		
+
 		try {
-		    menus = jTemp.query(sql, new MenuMapper());
-		}
-		catch(Exception e) {
+			menus = jTemp.query(sql, new MenuMapper());
+		} catch (Exception e) {
 			throw new MenuSelectFailedException(e.getMessage());
 		}
-		return (menus.size() > 0 ? menus:null);
+		return (menus.size() > 0 ? menus : null);
 	}
-	
 
-	
 	@Override
 	public List<MenuVO> userSelectByStoreId(int storeId, int page, int pageSize) throws MenuException {
-		
+
 		int startPoint = (page - 1) * pageSize;
-		
+
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId +"' ");
+		sb.append("SELECT * FROM menu_view WHERE store_id = '" + storeId + "' ");
 		sb.append("AND menu_remove_date is null ");
 		sb.append("AND menu_amount > 0 ");
-		sb.append("ORDER BY menu_id DESC LIMIT " +startPoint+","+pageSize);
-	
+		sb.append("ORDER BY menu_id DESC LIMIT " + startPoint + "," + pageSize);
+
 		String sql = sb.toString();
 		List<MenuVO> menus = null;
-		
+
 		try {
-		    menus = jTemp.query(sql, new MenuMapper());
-		}
-		catch(Exception e) {
+			menus = jTemp.query(sql, new MenuMapper());
+		} catch (Exception e) {
 			throw new MenuSelectFailedException(e.getMessage());
 		}
-		return (menus.size() > 0 ? menus:null);
+		return (menus.size() > 0 ? menus : null);
 	}
-	
-
 
 	@Override
 	public int getTotalRecord() throws MenuException {
@@ -228,5 +207,22 @@ public class MenuDaoImpl implements MenuDao {
 		}
 
 		return (count.size() == 0 ? null : count.get(0));
+	}
+
+	public void updateAmount(int menuId, int storeId, int count) throws MenuUpdateFailedException {
+		String sql = "UPDATE menu_view SET menu_amount = ? WHERE menu_id = ? AND store_id=? ";
+
+		int result = 0;
+
+		try {
+			result = jTemp.update(sql, count, menuId, storeId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MenuUpdateFailedException();
+		}
+		if (result == 0) {
+			throw new MenuUpdateFailedException();
+		}
+
 	}
 }

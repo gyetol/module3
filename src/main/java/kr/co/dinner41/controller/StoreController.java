@@ -23,7 +23,7 @@ import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
-import kr.co.dinner41.service.store.StoreUpdateOpenStateService;
+import kr.co.dinner41.service.store.StoreOpenStateService;
 import kr.co.dinner41.service.store.StoreUpdateService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
@@ -73,7 +73,9 @@ public class StoreController {
 	@Qualifier("reviewListService")
 	ReviewListService reviewListService;
 	
-
+	@Autowired
+	@Qualifier("storeOpenStateService")
+	StoreOpenStateService storeOpenStateService;
 	
 	@Autowired
 	@Qualifier("storeCategoryDao")
@@ -134,16 +136,19 @@ public class StoreController {
 		store.setName(command.getName());
 		store.setAddress(command.getAddress());
 		store.setSubAddress(command.getSubAddress());
-		store.setLatitude(37.482417);//store.setLatitude(command.getLatitude());
-		store.setLongitude(126.953073);//store.setLongitude(command.getLongitude());
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
+		store.setLatitude(storeLatitude);//store.setLatitude(command.getLatitude());
+		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
 		store.setPhoto(command.getPhoto());
 		store.setIntroduction(command.getIntroduction());
 		
-	
-		storeInsertService.execute(store);
 		
+		storeInsertService.execute(store);
+		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
 	
@@ -199,8 +204,9 @@ public class StoreController {
 		String storeName = command.getName();
 		String storeAddress= command.getAddress();
 		String storeSubAddress = command.getSubAddress();
-		double storeLatitude= 37.482417;//double storeLatitude = command.getLatitude();
-		double storeLongitude= 126.953073;//double storeLongitude = command.getLongitude();
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
 		String storePhone = command.getPhone();
 		String storeOperateTime = command.getOperateTime();
 		String storePhoto = command.getPhoto();
@@ -212,21 +218,21 @@ public class StoreController {
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
 		storeUpdateService.execute(store);
-		model.addAttribute(store);
+		model.addAttribute("store",store);
 		
 		return "store/storeHome";
 	}
 	
-//	@RequestMapping(value="/sm/switchOpenState/store", method=RequestMethod.GET)
-//	public String updateOpenState(HttpSession session, Model model) {
-//		UserVO user = (UserVO)session.getAttribute("loginUser");
-//		int storeId = storeDao.selectByUserId(user.getId()).getId();
-//		//storeUpdateOpenStateService.execute(storeId,openState);
-//		
-//		StoreVO store = storeDao.selectById(storeId);
-//		model.addAttribute(store);
-//		return "store/storeHome";
-//	}
+	@RequestMapping(value="/sm/switchOpenState/{openState}/store", method=RequestMethod.GET)
+	public String updateOpenState(@PathVariable("openState") OpenState openState, HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int storeId = storeDao.selectByUserId(user.getId()).getId();
+	
+		storeOpenStateService.execute(storeId, openState);
+		StoreVO store = storeDao.selectById(storeId);
+		model.addAttribute("store",store);
+		return "store/storeHome";
+	}
 	
 	
 	

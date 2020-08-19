@@ -21,6 +21,14 @@
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+    
+     <!-- daum주소검색api사용 -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
+    <!-- kakaoMap api -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/store/storeUpdate.js"></script>
 
     <title>Store</title>
 </head>
@@ -73,7 +81,7 @@
 <hr/>
 
 <div class="container-fluid">
-    <form class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/update/store">
+    <form id= "register_form" class="container-fluid text-left" method="post" action="${pageContext.request.contextPath}/sm/update/store">
 
         <div class="form-group">
             <label for="storeNumber">사업자 번호</label>
@@ -110,16 +118,21 @@
                 <option>기타</option>
             </select>
         </div>
-
+        
+        
         <div class="form-group">
-            <label for="address">거주지</label>
-            <div id="address">
-                <input type="text" class="form-control left_input" id="search_address"/>
-                <button type="button" class="btn btn-outline-success right_input" id="search_button" >주소 찾기</button>
-                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address" name="address" value= "${store.address}"/>
-                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address" name="subAddress" value= "${store.subAddress}"/>
-            </div>
-        </div>
+             <label for="address">거주지</label>
+                <div id="address">
+                      <button type="button" class="btn btn-outline-success right_input" id="searchButton" >주소검색</button>
+                      <input type="text" name="address" class="form-control margin_up" placeholder="도로명주소" id="user_address" value= "${store.address}"/>
+                      <input type="text" name="subAddress" class="form-control margin_up" placeholder="상세주소" id="user_detailAddress" value= "${store.subAddress}"/>
+                      <div id="wrap" style="display:none;border:2px solid #CFE3A1;width:503px;height:300px;margin:5px 0;position:absolute; overflow:auto"></div>
+                       <input type="hidden" name="latitude" id="user_latitude"/>
+                       <input type="hidden" name="longitude" id="user_longitude"/>
+                </div>
+       </div>
+
+      
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
@@ -141,8 +154,8 @@
         </div>
 
         <div class="margin_first">
-            	<button type="submit" class="btn btn-success two_button">매장 수정 완료</button>
-            <a href="{pageContext.request.contextPath}">
+            	<button id ="register_apply_button" type="button" class="btn btn-success two_button">매장 수정 완료</button>
+            <a href="${pageContext.request.contextPath}">
             	<button type="button" class="btn btn-success two_button float-right">매장 수정 취소</button>
             </a>
         </div>
