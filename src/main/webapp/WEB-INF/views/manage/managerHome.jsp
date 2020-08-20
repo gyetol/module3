@@ -19,6 +19,7 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
@@ -46,10 +47,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">매장 관리</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/ad/{1]/order">매장 관리</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -80,7 +81,7 @@
             	<div class="card h-100">
                 	<div class="card-body text-center trim">
                     	<img src="${pageContext.request.contextPath}/resources/icons/cogs-solid.svg" class="" alt="..." width="70%" style="margin: 10%">
-                    	<h5 class="card-title" style="margin-top: 10pt">매장관리</h5>
+                    	<h5 class="card-title" style="margin-top: 10pt; font-family: 'Do Hyeon';">매장관리</h5>
                 	</div>
             	</div>
             </a>

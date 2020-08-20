@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -22,6 +23,9 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services,clusterer,drawing"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/user/storeView.js"></script>
 
     <title>Store</title>
 
@@ -108,7 +112,11 @@
                 ${store.subAddress}
             </span>
         </div>
-        <div class="card card-body">지도</div>
+        <div class="card card-body">
+			<div id="map" class="card card-body" style="height:150pt" data-latitude="${store.latitude }" data-longitude="${store.longitude }">
+				지도
+			</div>    
+        </div>
     </div>
     <hr/>
 

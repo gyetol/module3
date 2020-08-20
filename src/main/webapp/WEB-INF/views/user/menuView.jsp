@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -31,12 +32,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
 <script type="text/javascript" charset="UTF-8">
-    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+       sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <script src="${pageContext.request.contextPath}/resources/js/store/menuView.js"></script>
-    <!-- <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>  -->
+    <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script> 
 
     <title>Menu</title>
 </head>
@@ -70,10 +71,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문 내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/gm/{1]/order">주문 내역</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -92,7 +93,7 @@
 </nav>
 
 <!-- storeId, menuId가 data로 세팅되어야함 -->
-<div class="container-fluid" data-storeId="38" data-menuId="55">
+<div class="container-fluid" data-storeId="${storeId}" data-menuId="${menuId}">
 
     <div class="container-fluid">
     <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/update/menu" method="post">
@@ -111,14 +112,14 @@
         <div class="form-group">
             <label for="menName">메뉴명</label>
             <div class="card card-body">
-            	<input type="text" class="form-control" name="name" id="menName" readonly value="${menu.name}">
+               <input type="text" class="form-control" name="name" id="menName" readonly value="${menu.name}">
             </div>
         </div>
 
         <div class="form-group">
             <label for="menuAmount">재고 수량</label>
             <div class="card card-body">
-            	<input type="text" class="form-control" name="amount" id="menuAmount"  readonly value="${menu.amount}">
+               <input type="text" class="form-control" name="amount" id="menuAmount"  readonly value="${menu.amount}">
             </div>
         </div>
 
@@ -157,14 +158,14 @@
             </div>
         </div>
 
-			<button type="button" class="btn btn-success two_button" id="insertCart">장바구니에 넣기</button>
-			
-			 <a href="javascript:history.back()">
-			<button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
-			</a>
-		</div>
-	</div>
-	<hr />
-	<div class="last_block"></div>
+         <button type="button" class="btn btn-success two_button" id="insertCart">장바구니에 넣기</button>
+         
+          <a href="javascript:history.back()">
+         <button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
+         </a>
+      </div>
+   </div>
+   <hr />
+   <div class="last_block"></div>
 </body>
 </html>

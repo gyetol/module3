@@ -110,9 +110,6 @@ public class CartController {
 		HashMap<String, Object> map = new HashMap<>();
 		String [] menuIds = request.getParameterValues("arr[]");
 
-		System.out.println("menuIds : " + menuIds);
-		System.out.println("menuIds.length : " + menuIds.length);
-
 		deleteService.execute(session, menuIds);
 		map.put("msg", "장바구니에서 삭제 되었습니다!!");
 		return map;
@@ -144,8 +141,6 @@ public class CartController {
 		@SuppressWarnings("unchecked")
 		List<CartVO> carts = (List<CartVO>)session.getAttribute("carts");
 		if (!carts.isEmpty()) {
-			// 현재 카트에는 storeId, menuId만 있으므로
-			// DB를 거쳐서 CartVO의 나머지 부분을 채워서 리턴
 			carts = listService.execute(carts);
 		}
 		model.addAttribute("carts", carts);

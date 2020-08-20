@@ -10,7 +10,7 @@ function insertCart() {
 	$("#insertCart").click(function() {
 		$.ajax({
 			type : "POST",
-			url : "gm/cart",
+			url : getContextPath() + "/gm/cart",
 			data : {
 				"storeId" : storeId,
 				"menuId" : menuId
@@ -21,7 +21,7 @@ function insertCart() {
 						alert(data.msg1);
 					}
 					alert(data.msg2);
-					window.location.href = "menuView";
+					window.location.href = getContextPath() + "/" + storeId + "/" + menuId + "/menu/view";
 				}
 				else {
 					alert(data.msg);
@@ -35,4 +35,10 @@ function insertCart() {
 	$("#cartButton").click(function() {
 		window.location.href = "gm/cart";
 	});
+}
+
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/',
+			hostIndex + 1));
 }

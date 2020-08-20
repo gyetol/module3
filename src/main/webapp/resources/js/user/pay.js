@@ -7,14 +7,15 @@ $(document).ready(
 			var price = sessionStorage.getItem("price", price);
 			price = price.replace(/[^0-9]/g, '');
 			var menuIds = sessionStorage.getItem("menuIds", menuIds);
+			var storeId = sessionStorage.getItem("storeId", storeId);
 
 			// 결제 API 함수 실행
 			pay(storePayNumber, orderId, price, user.email, user.name,
-					user.phone, user.addr, user.subAddr, menuIds);
+					user.phone, user.addr, user.subAddr, menuIds, storeId);
 		});
 
 function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
-		menuIds) {
+		menuIds, storeId) {
 
 	sessionStorage.setItem("payCompleteCheck", false);
 
@@ -29,8 +30,10 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 		buyer_name : name,
 		buyer_tel : phone,
 		buyer_addr : addr,
-		buyer_postcode : subAddr /*,
-		m_redirect_url : "http://192.168.30.29:8080/dinner41/gm/pay/result" */
+		buyer_postcode : subAddr
+	/*
+	 * , m_redirect_url : "http://192.168.30.29:8080/dinner41/gm/pay/result"
+	 */
 	}, function(rsp) {
 		if (rsp.success) {
 			var flag = true;
@@ -44,9 +47,9 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 			var msg = '결제에 실패하였습니다.' + '\n';
 			msg += '에러내용 : ' + rsp.error_msg + "\n";
 		}
-	
+
 		alert(msg);
-		
+
 		if (flag) {
 			var arr = [];
 			for (let i = 0; i < menuIds.length; i++) {
@@ -56,26 +59,37 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 				arr.push(String(menuIds[i]));
 			}
 
-			// 결제가 완료된 메뉴들을 장바구니에서 삭제
+			// 결제가 완료된 메뉴들의 수량을 하나씩 내림
 			$.ajax({
-				type : "DELETE",
-				url : "cart",
+				type : "PUT",
+				url : getContextPath() + "/gm/" + storeId + "/order/updateMenuAmount",
 				data : {
 					"arr" : arr
 				},
 				success : function(data) {
-					alert("결제가 완료된 메뉴들은 장바구니에서 삭제됩니다.");
-					window.location.href = "1/order";
+
+					// 결제가 완료된 메뉴들을 장바구니에서 삭제
+					$.ajax({
+						type : "DELETE",
+						url : "cart",
+						data : {
+							"arr" : arr
+						},
+						success : function(data) {
+							alert("결제가 완료된 메뉴들은 장바구니에서 삭제됩니다.");
+							window.location.href = "WAIT/1/order";
+						}
+					});
 				}
-			});
+			})
 		} else {
-
-			// orderId를 통해서 주문 테이블에서 주문을 삭제
-			// ajax 통신으로 처리
-			// 아래 두 줄은 ajax의 콜백함수에서 진행
-
 			alert("결제를 실패했으므로 장바구니 화면으로 돌아갑니다.");
 			window.location.href = "cart";
 		}
 	});
+}
+
+function getContextPath() {
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 }

@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -24,11 +25,17 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/store/orderList.js"></script>
-
+    
 
     <title>Order History</title>
 </head>
@@ -48,12 +55,12 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
-            <li class="nav-item active"><a class="nav-link" href="#">주문 내역</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">1:1 문의</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a></li>
+            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }/sm/{1]/order">주문 내역</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
-            <li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
         </ul>
     </div>
 </nav>
@@ -63,7 +70,7 @@
         <div class="text-center" style="margin-top: 25pt; margin-bottom: 25px;">
             <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title"
                  alt="no title"/>
-            <h4 style="margin-top: 10pt;">주문 내역</h4>
+            <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-weight: bold; font-size: 30px;">주문 내역</h4>
         </div>
     </div>
 
@@ -72,21 +79,21 @@
     <ul class="nav nav-tabs">
         <c:if test="${type eq 'COMP'}">
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
         <c:if test="${type eq 'WAIT'}">
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
@@ -105,33 +112,47 @@
             <div class="orderClass" data-orderid=<c:out value="${entry.key.orderId}"/>>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div style="color: green; font-weight: bold;">
-                            주문번호 : <span id="orderId"><c:out value="${entry.key.orderId}"/></span><br/>
-                        </div>
-                        주문자명 : <span><c:out value="${entry.key.userName}"/></span><br/> 주문일시 : <span><c:out
-                            value="${entry.key.order_order_date}"/></span><br/> 주문메뉴(수량) : <c:forEach
-                            items="${entry.value}" var="menu" varStatus="i">
-                        <c:out value="${menu.menuName}"/>
-                        (<c:out value="${menu.amount}"/>) /
-                    </c:forEach>
 
-                        <div style="margin-top: 5pt" id="pickupDate" data-pickupDate="${entry.key.order_pickup_date}">
-                            <button id="storeDetail" class="btn btn-outline-success btn-sm" style="width: 32%">상세보기
+                      <div style="color: green; font-weight: bold; font-size: 25px; font-family: 'Do Hyeon'">
+                            주문번호 : <span id="orderId"><c:out value="${entry.key.orderId}"/></span><br/>
+                      </div>
+
+                    <div style="font-size: 20px;">
+                            주문자명 : <span><c:out value="${entry.key.userName}"/></span><br/> 
+                    </div>
+
+                    <div style="font-size: 20px;">
+                            주문일시 : <span><c:out value="${entry.key.order_order_date}"/></span><br/>
+                    </div> 
+
+                    <div style="font-size: 20px;">
+                            주문메뉴(수량) : 
+                    <span style="font-weight: bold;">
+                    <c:forEach items="${entry.value}" var="menu" varStatus="i">
+                        <c:out value="${menu.menuName}"/>
+                        (<c:out value="${menu.amount}"/>) 
+                        <c:if test="${!i.last}">/</c:if>
+                    </c:forEach>
+                    </span>
+                    </div>
+
+                        <div style="margin-top: 5pt;" id="pickupDate" data-pickupDate="${entry.key.order_pickup_date}">
+                            <button style="font-size: 20px; font-weight: bold; width: 32%" id="storeDetail" class="btn btn-outline-success btn-sm">주문상세
                             </button>
-                            <button id="cancelOrder" class="btn btn-outline-success btn-sm" style="width: 32%;">주문취소
+                            <button style="font-size: 20px; font-weight: bold; width: 32%" id="cancelOrder" class="btn btn-outline-success btn-sm">주문취소
                             </button>
-                            <button id="receiptComplete" class="btn btn-outline-success btn-sm" style="width: 32%">
-                                수령완료
+                            <button style="font-size: 20px; font-weight: bold; width: 32%" id="receiptComplete" class="btn btn-outline-success btn-sm">수령완료
                             </button>
                         </div>
                     </li>
                 </ul>
             </div>
+
+		<hr/>
+
         </c:forEach>
     </c:if>
 </div>
-
-<hr style="margin-top: 0"/>
 
 <div style="text-align: center">
     <div class="btn-group" role="group">
