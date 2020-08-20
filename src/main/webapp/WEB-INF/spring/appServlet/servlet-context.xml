@@ -33,9 +33,9 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
-			<exclude-mapping path="/login"/>
-			<exclude-mapping path="/password"/>
-			<exclude-mapping path="/register"/>
+			<exclude-mapping path="/login/**"/>
+			<exclude-mapping path="/password/**"/>
+			<exclude-mapping path="/register/**"/>
 			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="kr.co.dinner41.interceptor.CheckSessionInterceptor"/>
 		</interceptor>
