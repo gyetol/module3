@@ -92,13 +92,6 @@ public class OrderListServiceImpl implements OrderListService {
 				}
 		}
 
-		int totalPage = totalRecord / PAGE_SIZE + 1;
-		if (page > totalPage) {
-			page = totalPage;
-		}
-		if (page < 1) {
-			page = 1;
-		}
 		return map;
 	}
 
@@ -109,29 +102,64 @@ public class OrderListServiceImpl implements OrderListService {
 		String userType = user.getType().getId();
 		int userId = user.getId();
 
-		StoreVO store = sDao.selectByUserId(userId);
-		int storeId = store.getId();
+		StoreVO store = null;
+		int storeId = 0;
 
 		if (type.equals("COMP")) {
-			try {
-				totalRecord = oDao.getTotalRecordForStore(storeId, type);
-				System.out.println("COM" + totalRecord);
-			} catch (OrderException e) {
-				e.printStackTrace();
+			if(userType.equals("SM")){
+				try {
+					store =sDao.selectByUserId(userId);
+					storeId =store.getId();
+					totalRecord = oDao.getTotalRecordForStore(storeId, type);
+					System.out.println("COM" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					totalRecord = oDao.getTotalRecordForUser(userId, type);
+					System.out.println("COM" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
 			}
+
 		} else if (type.equals("WAIT")) {
-			try {
-				totalRecord = oDao.getTotalRecordForStore(storeId, type);
-				System.out.println("WAIT" + totalRecord);
-			} catch (OrderException e) {
-				e.printStackTrace();
+			if (userType.equals("SM")){
+				try {
+					store =sDao.selectByUserId(userId);
+					storeId =store.getId();
+					totalRecord = oDao.getTotalRecordForStore(storeId, type);
+					System.out.println("WAIT" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					totalRecord = oDao.getTotalRecordForUser(userId, type);
+					System.out.println("COM" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
 			}
+
 		} else {
-			try {
-				totalRecord = oDao.getTotalRecordForStore(storeId, type);
-				System.out.println("ELSE" + totalRecord);
-			} catch (OrderException e) {
-				e.printStackTrace();
+			if (userType.equals("SM")){
+				try {
+					store =sDao.selectByUserId(userId);
+					storeId =store.getId();
+					totalRecord = oDao.getTotalRecordForStore(storeId, type);
+					System.out.println("ELSE" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					totalRecord = oDao.getTotalRecordForUser(userId, type);
+					System.out.println("COM" + totalRecord);
+				} catch (OrderException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 

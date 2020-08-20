@@ -103,12 +103,18 @@ public class OrderController {
 
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		Map<OrderViewVO, List<Menu2OrderViewVO>> map = null;
-		
+		List<PageVO> pageList = null;
 
 		// 한 page에 해당하는 주문목록(HashMap형태)을 가져옴
 		// type에는 WAIT(주문대기), COMP(수령완료)이 있음
 		map = listService.execute(user, type, page);
+		pageList = listService.getPages(page, type, user);
+
 		model.addAttribute("map", map);
+		model.addAttribute("pages", pageList);
+		model.addAttribute("type", type);
+		model.addAttribute("page",page);
+		System.out.println(type+", "+page);
 		return "user/orderList";
 	}
 
@@ -130,6 +136,7 @@ public class OrderController {
 		model.addAttribute("pages", pageList);
 		model.addAttribute("type", type);
 		model.addAttribute("page",page);
+		System.out.println(type+", "+page);
 		
 		return "store/orderList";
 	}
