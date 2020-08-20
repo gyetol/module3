@@ -1,4 +1,4 @@
-package kr.co.dinner41.service.user;
+package kr.co.dinner41.service.login;
 
 import javax.servlet.http.HttpSession;
 

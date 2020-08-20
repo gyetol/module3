@@ -59,7 +59,7 @@
             </form>
             <button type="button" class="btn btn-outline-success btn-block" id="password_button">비밀번호 찾기</button>
             <button type="button" class="btn btn-outline-success btn-block" id="register_button">회원가입하기</button>
-            <div id="modelData" data-message="${sendTempPasswordResultMessage }" data-useremail="${user.email }" ></div>
+            <div id="modelData" data-resultemail="${resultUser.email}" data-errormessage="${loginErrorMessage }"></div>
         </div>
     </div>
 </div>
