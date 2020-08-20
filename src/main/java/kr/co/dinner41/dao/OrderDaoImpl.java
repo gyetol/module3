@@ -82,6 +82,7 @@ public class OrderDaoImpl implements OrderDao {
 		String sql = null;
 		String NULL_CHECK = null;
 		String ORDER_BY = null;
+		int startPoint = (page-1)*pageSize;
 
 		// 주문 대기중인 주문 목록을 불러오기 위해서
 		if (type.equals("WAIT")) {
@@ -100,7 +101,7 @@ public class OrderDaoImpl implements OrderDao {
 				+ "	A.price price, \r\n" + "	C.store_name store_name,\r\n" + "	D.user_name user_name\r\n"
 				+ "FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n"
 				+ "WHERE A.user_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n"
-				+ "AND A.user_id=D.user_id\r\n" + "AND A.order_pickup_date " + NULL_CHECK + ORDER_BY;
+				+ "AND A.user_id=D.user_id\r\n" + "AND A.order_pickup_date " + NULL_CHECK + ORDER_BY+" LIMIT "+startPoint+", "+pageSize;
 
 		list = jTemp.query(sql, new OrderViewMapper(), userId);
 		return list;
@@ -113,6 +114,7 @@ public class OrderDaoImpl implements OrderDao {
 		String sql = null;
 		String NULL_CHECK = null;
 		String ORDER_BY = null;
+		int startPoint = (page-1)*pageSize;
 
 		// 주문 대기중인 주문 목록을 불러오기 위해서
 		if (type.equals("WAIT")) {
@@ -131,7 +133,7 @@ public class OrderDaoImpl implements OrderDao {
 				+ "	A.price price, \r\n" + "	C.store_name store_name,\r\n" + "	D.user_name user_name\r\n"
 				+ "FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D\r\n"
 				+ "WHERE C.store_id=? AND A.order_id = B.order_id AND B.store_id = C.store_id\r\n"
-				+ "AND A.user_id=D.user_id\r\n" + "AND A.order_pickup_date " + NULL_CHECK + ORDER_BY;
+				+ "AND A.user_id=D.user_id\r\n" + "AND A.order_pickup_date " + NULL_CHECK + ORDER_BY+" LIMIT "+startPoint+", "+pageSize;
 
 		list = jTemp.query(sql, new OrderViewMapper(), storeId);
 		return list;
