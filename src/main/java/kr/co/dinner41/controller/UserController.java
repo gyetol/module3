@@ -122,8 +122,9 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/register/checkPass",method=RequestMethod.POST)
+	@RequestMapping(value="/mypage/checkPass",method=RequestMethod.POST)
 	public HashMap<String, Object> checkPassword(HttpServletRequest request) {
+		System.out.println("checkPassword진입");
 		HashMap<String, Object> map = new HashMap<>();
 		try {
 			checkPasswordService.execute(request);
