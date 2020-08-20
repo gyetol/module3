@@ -216,13 +216,18 @@ public class StoreDaoImpl implements StoreDao {
 		StringBuffer sb = new StringBuffer();
 		sb.append("select *,(6371*acos(cos(radians("+userLatitude+"))*cos(radians(store_latitude))*cos(radians(store_longitude)-");
 		sb.append("radians("+userLongitude+"))+sin(radians("+userLatitude+"))*sin(radians(store_latitude))))");
-		sb.append(" AS distance from (select * from store_view where store_category_name like '"+categoryName+"' and store_state_id=2 ) AS viewByCategory "); 
+		sb.append(" AS distance from (select * from store_view where store_category_name like ? and store_state_id=2 ) AS viewByCategory "); 
 		sb.append(" HAVING distance <=1 order by distance limit 0,300");
+		
+		if(categoryName.equals("ALL")) {
+			categoryName="%";
+		}
 		
 		String sql = sb.toString();
 		List<StoreVO> stores = null;
 		try {
-			stores=jTemp.query(sql, new StoreMapper());
+			stores=jTemp.query(sql, new StoreMapper(),categoryName);
+			System.out.println("dao:"+stores);
 		}
 		catch(Exception e) {
 			throw new StoreSelectFailedException(e.getMessage());
