@@ -12,6 +12,9 @@ public interface OrderDao {
 	void update(int orderId) throws OrderException;;
 	OrderVO selectById(int orderId) throws OrderException;;
 	List<OrderVO> selectAll() throws OrderException;;
-	List<OrderViewVO> selectAllOrderByUser(int userId, String type) throws OrderException;
-	List<OrderViewVO> selectAllOrderByStore(int storeId, String type) throws OrderException;
+	List<OrderViewVO> selectAllOrderByUser(int page, int pageSize, int userId, String type) throws OrderException;
+	List<OrderViewVO> selectAllOrderByStore(int page, int pageSize,int storeId, String type) throws OrderException;
+	int getTotalRecordForUser(int userId, String type);
+	int getTotalRecordForStore(int storeId, String type);
 }
+
