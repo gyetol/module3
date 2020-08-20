@@ -77,18 +77,18 @@ function getStoreMarkers(map,latitude,longitude,keyword){
 					console.log(markers);
 				}
 				else{//제대로 검색했는데 결과가 0 인경우
-					alert('주변 1km내에 제휴 매장이 존재하지 않습니다.');
+					swal.fire('사용자 주변 1km내에 제휴 매장이  존재하지 않습니다.');
 					removeMarkers(markers);
 				}
 			}
 			else{//exception 터졌을 경우
-				alert('지도를 불러오는 데 실패했습니다.');
+				swal.fire('지도를 불러오는 데 실패했습니다.');
 				removeMarkers(markers);
 			}
 			isRun=false;
 		},
 		error:function(){
-			alert('지도를 불러오는 데 실패했습니다.');
+			swal.fire('지도를 불러오는 데 실패했습니다.');
 			isRun=false;
 			for(let marker in markers){
 				marker.setMap(null);

@@ -132,7 +132,7 @@ function clickDeleteMenus() {
 		}
 
 		if (arr.length == 0) {
-			alert("삭제할 메뉴를 선택해주세요.");
+			swal.fire("삭제할 메뉴를 선택해주세요.");
 			return;
 		}
 
@@ -143,7 +143,7 @@ function clickDeleteMenus() {
 				"arr" : arr
 			},
 			success : function(data) {
-				alert(data.msg);
+				swal.fire(data.msg);
 				window.location.href = "cart";
 			}
 		});
@@ -188,7 +188,7 @@ function clickOrderMenus() {
 		arr.push(totalPrice);
 
 		if (arr.length == 3) {
-			alert("주문할 메뉴를 선택해주세요.");
+			swal.fire("주문할 메뉴를 선택해주세요.");
 			return;
 		}
 
@@ -200,7 +200,7 @@ function clickOrderMenus() {
 				"arr2" : arr2
 			},
 			success : function(data) {
-				alert(data.msg);
+				swal.fire(data.msg);
 				window.location.href = "order";
 			}
 		});

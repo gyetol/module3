@@ -53,12 +53,12 @@ function loadStores(mapContainer,latitude,longitude,keyword){
 				}
 			}
 			else{
-				alert('지도를 불러오는 데 실패했습니다');
+				swal.fire('지도를 불러오는 데 실패했습니다');
 			}
 			isRun=false;
 		},
 		error:function(){
-			alert('지도를 불러오는 데 실패했습니다.');
+			swal.fire('지도를 불러오는 데 실패했습니다.');
 			isRun=false;
 		}
 	});

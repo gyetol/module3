@@ -48,7 +48,7 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 			msg += '에러내용 : ' + rsp.error_msg + "\n";
 		}
 
-		alert(msg);
+		swal.fire(msg);
 
 		if (flag) {
 			var arr = [];
@@ -76,14 +76,14 @@ function pay(storePayNumber, orderId, price, email, name, phone, addr, subAddr,
 							"arr" : arr
 						},
 						success : function(data) {
-							alert("결제가 완료된 메뉴들은 장바구니에서 삭제됩니다.");
+							swal.fire("결제가 완료된 메뉴들은 장바구니에서 삭제됩니다.");
 							window.location.href = "WAIT/1/order";
 						}
 					});
 				}
 			})
 		} else {
-			alert("결제를 실패했으므로 장바구니 화면으로 돌아갑니다.");
+			swal.fire("결제를 실패했으므로 장바구니 화면으로 돌아갑니다.");
 			window.location.href = "cart";
 		}
 	});
