@@ -45,6 +45,7 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<linkedResources>
 		<link>
 			<name>src/main/webapp/resources/images</name>
@@ -197,6 +198,8 @@
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/%EC%8F%98%EC%9A%B02.jpeg</locationURI>
 		</link>
 	</linkedResources>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 </projectDescription>

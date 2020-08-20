@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -80,8 +81,8 @@
 
 <div>
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="${pageContext.request.contextPath }/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title" />
-        <h4>마이페이지</h4>
+        <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title" />
+        <h4 style="font-family: 'Do Hyeon';">마이페이지</h4>
     </div>
 
     <hr/>

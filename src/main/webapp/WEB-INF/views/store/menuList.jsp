@@ -20,6 +20,7 @@
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -81,7 +82,7 @@
 	<div>
 		<div class="container-fluid" style="margin-top: 15pt">
 			<div class="text-center">
-				<h2>메뉴 관리</h2>
+				<h2 style="font-family: 'Do Hyeon';">메뉴 관리</h2>
 			</div>
 		</div>
 

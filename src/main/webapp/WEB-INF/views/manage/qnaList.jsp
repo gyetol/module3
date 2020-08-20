@@ -21,6 +21,7 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
@@ -67,7 +68,7 @@
 <div>
     <div class="container-fluid text-center" style="margin-top: 15pt">
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title" style="margin: auto;"/>
-        <h4>문의 내역</h4>
+        <h4 style="font-family: 'Do Hyeon';">문의 내역</h4>
     </div>
 
     <c:if test="${type eq 'ALL'}">

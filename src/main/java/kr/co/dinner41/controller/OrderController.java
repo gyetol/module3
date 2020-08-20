@@ -179,7 +179,6 @@ public class OrderController {
 		return map;
 	}
 
-	
 	// 결제가 완료되면 해당 제품의 수량을 하나줄임
 	@ResponseBody
 	@RequestMapping(value = "/gm/{storeId}/order/updateMenuAmount", method = RequestMethod.PUT)
@@ -189,7 +188,6 @@ public class OrderController {
 		
 		System.out.println("결제한 메뉴의 개수 : " + menuIds.length);
 		System.out.print("메뉴 아이디 : ");
-
 		for (int i = 0; i < menuIds.length; i++) {
 			System.out.print("/" + menuIds[i]);
 			int count = 0;
