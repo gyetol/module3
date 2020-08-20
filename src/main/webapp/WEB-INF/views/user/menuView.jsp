@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
 
 <script type="text/javascript" charset="UTF-8">
-    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+       sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
