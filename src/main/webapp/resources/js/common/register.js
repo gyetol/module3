@@ -1,6 +1,46 @@
 $(document).ready(function(){
+	var contextPath=sessionStorage.getItem('contextPath');
 	var wrap=$('#wrap');
 	var geocoder = new kakao.maps.services.Geocoder();
+	var contextPath=sessionStorage.getItem("contextPath");
+
+	
+
+	
+	$('#user_email_button').on("click",function(){
+		let email=$('#user_email').val();
+		console.log(email);
+		console.log(contextPath+'/register/checkEmail');
+		$.ajax({
+			url:contextPath+'/register/checkEmail',
+			method:'post',
+			data:{
+				'email':email
+			},
+			success:function(data){
+				console.log('아작스 성공');
+				if(data.result==true){
+					Swal.fire({
+						title:'이미 등록된 이메일입니다',
+						text:'다른 이메일로 등록해주세요',
+						icon:'error'
+					});
+					$('#user_email').val(data.user.email);
+				}
+				else{
+					Swal.fire({
+						title:'등록이 가능한 이메일입니다.',
+						text:'회원가입을 계속 진행해주세요',
+						icon:'success'
+					});					
+				}
+			},
+			error:function(){
+				console.log('아작스 실패');
+			}
+		});	
+	});
+	
 	$('#searchButton').on("click",function(){
 		//alert('주소검색버튼 클릭 이벤트 발생');
 		var address='';
