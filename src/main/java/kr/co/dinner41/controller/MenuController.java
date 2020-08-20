@@ -91,6 +91,9 @@ public class MenuController {
              return "redirect:/";
           }
           else if(user.getType().getId().equals("SM")) {
+        	  StoreVO store = storeDao.selectByUserId(user.getId());
+        	  List<MenuVO> menus = menuDao.selectByStoreId(store.getId(), 1, 5);
+        	  model.addAttribute("menus",menus);
              return "store/menuRegister";
           }
           else {
@@ -101,9 +104,17 @@ public class MenuController {
        @RequestMapping(value = "/sm/menu", method = RequestMethod.POST)
        public String insert(MenuInsertCommand menu, Model model, HttpSession session) throws SQLException
        {
+    	   List<MenuVO> menus =null;
           UserVO user = (UserVO)session.getAttribute("loginUser");
-          
+          StoreVO store = storeDao.selectByUserId(user.getId());
+          try {
+			menus = menuDao.selectByStoreId(store.getId(), 1, 5);
+		} catch (MenuException e) {
+			e.printStackTrace();
+		}
           insertService.execute(menu, user,session);
+          model.addAttribute("menus",menus);
+          //return "store/menuList";
           return "redirect:/sm/1/menu/list";
        }
 //          System.out.println("Controller"+user.getName()+", id:"+user.getId());
@@ -180,9 +191,11 @@ public class MenuController {
           
           UserVO user = (UserVO)session.getAttribute("loginUser");
           updateService.execute(menu,store_id,menu_id, user,session);
-          
+          StoreVO store = storeDao.selectByUserId(user.getId());
+          List<MenuVO> menus = menuDao.selectByStoreId(store.getId(), 1, 5);
          MenuVO menuvo = menuDao.selectByMenuIdStoreId(menu_id, store_id);
           model.addAttribute("menu",menuvo);
+          model.addAttribute("menus",menus);
           return "store/menuModify";
        }
        
@@ -195,9 +208,11 @@ public class MenuController {
           
           UserVO user = (UserVO)session.getAttribute("loginUser");
           updateService.execute(command,store_id, menu_id,  user,session);
-          
+          StoreVO store = storeDao.selectByUserId(user.getId());
+          List<MenuVO> menus = menuDao.selectByStoreId(store.getId(), 1, 5);
           MenuVO menuvo = menuDao.selectByMenuIdStoreId(menu_id, store_id);
           model.addAttribute("menu",menuvo);
+          model.addAttribute("menus",menus);
           return "redirect:/sm/1/menu/list";
        }
        
@@ -231,13 +246,18 @@ public class MenuController {
        
        @ResponseBody
       @RequestMapping(value = "/menu/delete", method = RequestMethod.GET)
-       public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request) throws MenuException {
+       public String delete(@RequestParam("storeId") String storeId, @RequestParam("menuId")String menuId, HttpServletRequest request,HttpSession session,Model model) throws MenuException {
            
               int store_id = Integer.parseInt(storeId);
               int menu_id = Integer.parseInt(menuId);
-          
+              UserVO user = (UserVO) session.getAttribute("loginUser");
+              StoreVO store = storeDao.selectByUserId(user.getId());
+              List<MenuVO> menus = menuDao.selectByStoreId(store.getId(), 1, 5);
+              
              deleteService.execute(store_id, menu_id);
-             return "redirect:/sm/1/menu/list";
+             model.addAttribute("menus",menus);
+             return "store/menuList";
+             //return "redirect:/sm/1/menu/list";
              
         }
        

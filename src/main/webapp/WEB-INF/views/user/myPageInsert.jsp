@@ -23,7 +23,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/user/mypageInsert.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">

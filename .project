@@ -51,11 +51,6 @@
 			<location>C:/Users/USER/Desktop/mod3/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/dinner41/resources/images</location>
 		</link>
 		<link>
-			<name>src/main/webapp/resources/images/1111.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/images/1111.jpeg</locationURI>
-		</link>
-		<link>
 			<name>src/main/webapp/resources/images/1인의만찬.png</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/images/1%EC%9D%B8%EC%9D%98%EB%A7%8C%EC%B0%AC.png</locationURI>
@@ -64,21 +59,6 @@
 			<name>src/main/webapp/resources/images/2.JPG</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/images/2.JPG</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/images/DSC_0749.JPG</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/images/DSC_0749.JPG</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/images/DSC_0755.JPG</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/images/DSC_0755.JPG</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/images/DSC_0772.JPG</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/images/DSC_0772.JPG</locationURI>
 		</link>
 		<link>
 			<name>src/main/webapp/resources/images/box-solid.svg</name>
@@ -176,24 +156,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/images/table-cafe.jpg</locationURI>
 		</link>
 		<link>
-			<name>src/main/webapp/resources/images/다운로드.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpeg</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/images/반쎄오.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%EB%B0%98%EC%8E%84%EC%98%A4.jpeg</locationURI>
-		</link>
-		<link>
 			<name>src/main/webapp/resources/images/쏘우.jpeg</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/images/%EC%8F%98%EC%9A%B0.jpeg</locationURI>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/images/쏘우2.jpeg</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%EC%8F%98%EC%9A%B02.jpeg</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

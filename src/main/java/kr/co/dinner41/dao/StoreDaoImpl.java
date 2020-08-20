@@ -164,7 +164,7 @@ public class StoreDaoImpl implements StoreDao {
 
 	@Override
 	public StoreVO selectById(int id) throws StoreException {
-		String sql = "select * from store_view where store_id=?";
+		String sql = "select * from store_view where store_id=? order by store_id DESC";
 		List<StoreVO> stores =null;
 		try {
 			stores=jTemp.query(sql,new StoreMapper(),id);
@@ -172,6 +172,7 @@ public class StoreDaoImpl implements StoreDao {
 		catch(Exception e) {
 			throw new StoreSelectFailedException(e.getMessage());
 		}
+		
 		return (stores.size()>0?stores.get(0):null);
 	}
 	
@@ -179,7 +180,7 @@ public class StoreDaoImpl implements StoreDao {
 	
 	@Override
 	public StoreVO selectByUserId(int userId) throws StoreException{
-		String sql = "select * from store_view where user_id=?";
+		String sql = "select * from store_view where user_id=? order by store_id DESC";
 		List<StoreVO> stores =null;
 		try {
 			stores=jTemp.query(sql,new StoreMapper(),userId);

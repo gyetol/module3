@@ -32,14 +32,35 @@ $(document).ready(function(){
 		    	 //alert("latitude:"+lat+",longitude:"+lng);
 		    	 var latitude=document.getElementById('user_latitude');
 		    	 latitude.value=lat;
-		    	 alert($('#user_latitude').val());
+		    	 //alert($('#user_latitude').val());
 		    	 var longitude=document.getElementById('user_longitude');
 		    	 longitude.value=lng;
 		    	// $('#user_longitude').val(lng);
-		    	 alert($('#user_longitude').val());
+		    	 //alert($('#user_longitude').val());
 		    	 //alert(latitude.value);
 		    	 //alert(longitude.value);
-		    	 $('#register_form').submit();
+		    	 Swal.fire({
+		    		  title: '정말로 수정하시겠습니까?',
+		    		  text: "'네'를 누를시 매장정보가 수정됩니다",
+		    		  icon: 'question',
+		    		  showCancelButton: true,
+		    		  confirmButtonColor: '#3085d6',
+		    		  cancelButtonColor: '#d33',
+		    		  confirmButtonText: '네',
+		    		  cancelButtonText: '아니오'
+		    		}).then((result) => {
+		    		  if (result.value) {
+		    		    Swal.fire(
+		    		      '수정완료',
+		    		      '매장정보가 수정되었습니다.',
+		    		      'success'
+		    		    );
+		    		    setTimeout(function() {
+		    		    	 $('#register_form').submit();
+					    			}, 1000);
+		    		  }
+		    		});
+		    	 
 		    	 /*
 		    	 $('#user_latitude').val(""+latitude);
 		    	 const la=$('#user_latitude');
@@ -48,7 +69,23 @@ $(document).ready(function(){
 		    	 */
 		    } 
 		});    
-		
-		
-	})
+	});
+	$('#register_cancel_button').on("click",function(){
+		Swal.fire({
+  		  title: '수정을 취소하시겠습니까?',
+  		  text: "'네'를 누르면  홈화면으로 이동합니다",
+  		  icon: 'question',
+  		  showCancelButton: true,
+  		  confirmButtonColor: '#3085d6',
+  		  cancelButtonColor: '#d33',
+  		  confirmButtonText: '네',
+  		  cancelButtonText: '아니오'
+  		}).then((result) => {
+  		  if (result.value) {
+  		    
+  		  }
+  		});
+	});
+	
+	
 });
