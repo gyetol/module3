@@ -1,8 +1,9 @@
 $(document).ready(function(){
+	 let contextPath=sessionStorage.getItem("contextPath");
 	var wrap=$('#wrap');
 	var geocoder = new kakao.maps.services.Geocoder();
 	$('#searchButton').on("click",function(){
-		alert('주소검색버튼 클릭 이벤트 발생');
+		//alert('주소검색버튼 클릭 이벤트 발생');
 		var address='';
         new daum.Postcode({
             oncomplete: function(data) {
@@ -27,28 +28,58 @@ $(document).ready(function(){
 		    	 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 		    	 var lat=coords.getLat();
 		    	 var lng=coords.getLng();
-		    	 //alert(lat);
-		    	 //alert(lng);
-		    	 //alert("latitude:"+lat+",longitude:"+lng);
+		    	
 		    	 var latitude=document.getElementById('user_latitude');
 		    	 latitude.value=lat;
-		    	 alert($('#user_latitude').val());
+		    
 		    	 var longitude=document.getElementById('user_longitude');
 		    	 longitude.value=lng;
-		    	// $('#user_longitude').val(lng);
-		    	 alert($('#user_longitude').val());
-		    	 //alert(latitude.value);
-		    	 //alert(longitude.value);
-		    	 $('#register_form').submit();
-		    	 /*
-		    	 $('#user_latitude').val(""+latitude);
-		    	 const la=$('#user_latitude');
-		    	 alert(""+la);
-		    	 $('#user_longitude').val(""+longitude);
-		    	 */
+		    	
+		    	 
+		    	 Swal.fire({
+		    		  title: '정말로 등록하시겠습니까?',
+		    		  text: "해당 정보로 매장승인을 받게 됩니다",
+		    		  icon: 'question',
+		    		  showCancelButton: true,
+		    		  confirmButtonColor: '#3085d6',
+		    		  cancelButtonColor: '#d33',
+		    		  confirmButtonText: '네',
+		    		  cancelButtonText: '아니오'
+		    		}).then((result) => {
+		    		  if (result.value) {
+		    		    Swal.fire(
+		    		      '등록완료',
+		    		      '매장승인을 기다려주세요!',
+		    		      'success'
+		    		    );
+		    		    setTimeout(function() {
+		    		    	 $('#register_form').submit();
+					    			}, 1000);
+		    		   
+		    		  }
+		    		});
+		    	 
 		    } 
 		});    
 		
-		
-	})
+	});
+	
+	$('#register_cancel_button').on("click",function(){
+		    	 Swal.fire({
+		    		  title: '등록을 취소하시겠습니까?',
+		    		  text: "'네'를 누르면 홈화면으로 이동합니다.",
+		    		  icon: 'question',
+		    		  showCancelButton: true,
+		    		  confirmButtonColor: '#3085d6',
+		    		  cancelButtonColor: '#d33',
+		    		  confirmButtonText: '네',
+		    		  cancelButtonText: '아니오'
+		    		}).then((result) => {
+		    		  if (result.value) {
+		    			  setTimeout(function() {
+		  			    	location.href=contextPath+"/sm/storeHome";
+		  			    			}, 1000);
+		    		  }
+		    		});
+		    }); 
 });

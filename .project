@@ -44,8 +44,7 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 	<linkedResources>
 		<link>
 			<name>src/main/webapp/resources/images</name>
@@ -54,11 +53,13 @@
 		</link>
 		<link>
 			<name>src/main/webapp/resources/images/1인의만찬.png</name>
+
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/1%EC%9D%B8%EC%9D%98%EB%A7%8C%EC%B0%AC.png</locationURI>
 		</link>
 		<link>
 			<name>src/main/webapp/resources/images/2.JPG</name>
+
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/2.JPG</locationURI>
 		</link>
@@ -68,6 +69,9 @@
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/box-solid.svg</locationURI>
 		</link>
 		<link>
+
+			<name>src/main/webapp/resources/images/box-solid.svg</name>
+
 			<name>src/main/webapp/resources/images/bread-slice-solid.svg</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/bread-slice-solid.svg</locationURI>
@@ -84,6 +88,7 @@
 		</link>
 		<link>
 			<name>src/main/webapp/resources/images/chicken.png</name>
+
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/chicken.png</locationURI>
 		</link>
@@ -178,6 +183,7 @@
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/table-cafe.jpg</locationURI>
 		</link>
 		<link>
+
 			<name>src/main/webapp/resources/images/다운로드.jpeg</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpeg</locationURI>
@@ -192,14 +198,13 @@
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/%EC%8F%98%EC%9A%B0.jpeg</locationURI>
 		</link>
+
 		<link>
 			<name>src/main/webapp/resources/images/쏘우2.jpeg</name>
 			<type>1</type>
 			<locationURI>PARENT-3-PROJECT_LOC/AppData/Local/Temp/BNZ.5f3e527a11945767/%EC%8F%98%EC%9A%B02.jpeg</locationURI>
 		</link>
+
 	</linkedResources>
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 </projectDescription>

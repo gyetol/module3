@@ -40,25 +40,42 @@ function clickCountUpdate(contextPath) {
 			var menuId = $(this).parents(".menuList").find("#data").data("menuid");
 			var amount = $(this).parents(".menuList").find("#num").text();
 			
-			let input = confirm("해당 수량으로 변경하시겠습니까? ");
-			if (input) {
-				$.ajax({
-					url : contextPath + "/sm/menu/list",
-					method : "POST",
-					data : {
-						"storeId" : storeId,
-						"menuId" : menuId,
-						"amount" : amount
-					},
-					success : function(data) {
-						if (data.result) {
-							alert(data.msg);
-						} else {
-							window.location.href = contextPath + "/sm/1/menu/list";
-						}
-					},
-				});
-			}
+			Swal.fire({
+				  title: '해당 수량으로 변경할까요?',
+				  text: "해당 수량이 0이면 회원들에게 노출되지 않습니다!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '네',
+				  cancelButtonText: '아니오',
+				  
+				}).then((result) => {
+				  if (result.value) {
+				    Swal.fire(
+				      '수량변경!',
+				      '수량이 성공적으로 변경되었습니다.',
+				      'success'
+				    )
+				    $.ajax({
+						url : contextPath + "/sm/menu/list",
+						method : "POST",
+						data : {
+							"storeId" : storeId,
+							"menuId" : menuId,
+							"amount" : amount
+						},
+						success : function(data) {
+							if (data.result) {
+								//alert(data.msg);
+							} else {
+								window.location.href = contextPath + "/sm/1/menu/list";
+							}
+						},
+					});
+				    
+				  }
+				})
 		})
 	}
 	/*

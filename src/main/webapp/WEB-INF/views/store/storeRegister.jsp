@@ -22,6 +22,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     
      <!-- daum주소검색api사용 -->
@@ -159,9 +160,7 @@
 
         <div class="margin_first">
             <button id="register_apply_button" type="button" class="btn btn-success two_button">등록 신청서 제출</button>
-             <a href="${pageContext.request.contextPath}">
-            <button type="button" class="btn btn-success two_button float-right">등록 신청 취소</button>
-            </a>
+            <button id="register_cancel_button" type="button" class="btn btn-success two_button float-right">등록 신청 취소</button>
         </div>
     </form>
 </div>

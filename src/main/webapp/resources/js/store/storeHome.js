@@ -3,13 +3,17 @@ $(document).ready(function(){
 	
 	$('#openBtn').click(function(){
 		 let name =$('#openBtn').attr('name');
-		 alert(name);
-		 location.href = contextPath+"/sm/switchOpenState/"+name+"/store";
+		 Swal.fire('매장을 오픈하였습니다');
+		 setTimeout(function() {
+			 location.href = contextPath+"/sm/switchOpenState/"+name+"/store";
+		    			}, 1000);
 	});
 	
 	$('#closeBtn').click(function(){
 		let name =$('#closeBtn').attr('name');
-		alert(name);
-		location.href = contextPath+"/sm/switchOpenState/"+name+"/store";
+		 Swal.fire('매장을 마감하였습니다');
+		 setTimeout(function() {
+			 location.href = contextPath+"/sm/switchOpenState/"+name+"/store";
+		    			}, 1000);
 	});
 });
