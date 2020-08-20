@@ -2,12 +2,14 @@ package kr.co.dinner41.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -74,7 +76,8 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<OrderViewVO> selectAllOrderByUser(int userId, String type) throws OrderException {
+	public List<OrderViewVO> selectAllOrderByUser(int page, int pageSize, int userId, String type)
+			throws OrderException {
 		List<OrderViewVO> list = null;
 		String sql = null;
 		String NULL_CHECK = null;
@@ -84,7 +87,7 @@ public class OrderDaoImpl implements OrderDao {
 		if (type.equals("WAIT")) {
 			NULL_CHECK = "IS NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_order_date DESC";
-		} 
+		}
 		// 수령 완료된 주문 목록을 불러오기 위해서
 		else if (type.equals("COMP")) {
 			NULL_CHECK = "IS NOT NULL\r\n";
@@ -104,7 +107,8 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<OrderViewVO> selectAllOrderByStore(int storeId, String type) throws OrderException {
+	public List<OrderViewVO> selectAllOrderByStore(int page, int pageSize, int storeId, String type)
+			throws OrderException {
 		List<OrderViewVO> list = null;
 		String sql = null;
 		String NULL_CHECK = null;
@@ -114,7 +118,7 @@ public class OrderDaoImpl implements OrderDao {
 		if (type.equals("WAIT")) {
 			NULL_CHECK = "IS NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_order_date DESC";
-		} 
+		}
 		// 수령 완료된 주문 목록을 불러오기 위해서
 		else if (type.equals("COMP")) {
 			NULL_CHECK = "IS NOT NULL\r\n";
@@ -132,4 +136,90 @@ public class OrderDaoImpl implements OrderDao {
 		list = jTemp.query(sql, new OrderViewMapper(), storeId);
 		return list;
 	}
+
+	@Override
+	// 일반회원에 관한 주문목록의 개수를 가져옴
+	public int getTotalRecordForUser(int userId, String type) {
+		List<Integer> list = null;
+		String sql = null;
+		String NULL_CHECK = null;
+		String ORDER_BY = null;
+
+		// 주문 대기중인 주문 목록을 불러오기 위해서
+		if (type.equals("WAIT")) {
+			NULL_CHECK = "IS NULL\r\n";
+			ORDER_BY = " ORDER BY A.order_order_date DESC";
+		}
+		// 수령 완료된 주문 목록을 불러오기 위해서
+		else if (type.equals("COMP")) {
+			NULL_CHECK = "IS NOT NULL\r\n";
+			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
+		}
+
+		sql = "SELECT COUNT(*) AS num \r\n" + "FROM ( \r\n" + "SELECT DISTINCT\r\n"
+				+ "					A.order_id order_id,  \r\n" + "					C.store_id store_id, \r\n"
+				+ "					A.user_id user_id,\r\n"
+				+ "					A.order_order_date order_order_date,\r\n"
+				+ "					A.order_reserve_date order_reserve_date, \r\n"
+				+ "					A.order_pickup_date order_pickup_date,\r\n"
+				+ "					A.price price,  \r\n" + "					C.store_name store_name, \r\n"
+				+ "					D.user_name user_name \r\n"
+				+ "				FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D \r\n"
+				+ "				WHERE A.user_id=? \r\n" + "					AND A.order_id = B.order_id \r\n"
+				+ "					AND B.store_id = C.store_id \r\n" + "					AND A.user_id=D.user_id\r\n"
+				+ "					AND A.order_pickup_date IS NULL\r\n"
+				+ "				ORDER BY A.order_order_date DESC) AS sub;";
+
+		list = jTemp.query(sql, new RowMapper<Integer>() {
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getInt("num");
+			}
+		}, userId);
+		return (list.size() == 0 ? 0 : list.get(0));
+	}
+
+	@Override
+	// 점주회원에 관한 주문목록의 개수를 가져옴
+	public int getTotalRecordForStore(int storeId, String type) {
+		List<Integer> list = null;
+		String sql = null;
+		String NULL_CHECK = null;
+		String ORDER_BY = null;
+
+		// 주문 대기중인 주문 목록을 불러오기 위해서
+		if (type.equals("WAIT")) {
+			NULL_CHECK = "IS NULL\r\n";
+			ORDER_BY = " ORDER BY A.order_order_date DESC";
+		}
+		// 수령 완료된 주문 목록을 불러오기 위해서
+		else if (type.equals("COMP")) {
+			NULL_CHECK = "IS NOT NULL\r\n";
+			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
+		}
+
+		sql = "SELECT COUNT(*) AS num\r\n" + "FROM ( \r\n" + "SELECT DISTINCT\r\n"
+				+ "					A.order_id order_id,  \r\n" + "					C.store_id store_id, \r\n"
+				+ "					A.user_id user_id,\r\n"
+				+ "					A.order_order_date order_order_date,\r\n"
+				+ "					A.order_reserve_date order_reserve_date, \r\n"
+				+ "					A.order_pickup_date order_pickup_date,\r\n"
+				+ "					A.price price,  \r\n" + "					C.store_name store_name, \r\n"
+				+ "					D.user_name user_name \r\n"
+				+ "				FROM orders AS A, menu_to_orders AS B, stores AS C, users AS D \r\n"
+				+ "				WHERE C.store_id=?\r\n" + "					AND A.order_id = B.order_id \r\n"
+				+ "					AND B.store_id = C.store_id \r\n" + "					AND A.user_id=D.user_id\r\n"
+				+ "					AND A.order_pickup_date IS NULL\r\n"
+				+ "				ORDER BY A.order_order_date DESC) AS sub;";
+
+		list = jTemp.query(sql, new RowMapper<Integer>() {
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getInt("num");
+			}
+
+		}, storeId);
+		return (list.size() == 0 ? 0 : list.get(0));
+	}
+
 }

@@ -94,17 +94,30 @@
 	</div>
 
 	<hr style="margin-top: 0" />
-
-	<div style="text-align: center">
-		<div class="btn-group" role="group">
-			<button type="button" class="btn btn-success"><<</button>
-			<button type="button" class="btn btn-success">1</button>
-			<button type="button" class="btn btn-success">2</button>
-			<button type="button" class="btn btn-success">3</button>
-			<button type="button" class="btn btn-success">4</button>
-			<button type="button" class="btn btn-success">>></button>
-		</div>
-	</div>
+	
+	    <div style="text-align: center">
+        <div class="btn-group" role="group">
+            <c:forEach var="obj" items="${pages}">
+                <c:if test="${obj.pageNumber eq page}">
+                    <a href="${pageContext.request.contextPath}/sm/${type}/${obj.pageNumber}/order">
+                        <button type="button" class="btn btn-success" disabled><c:out value="${obj.showPageName}"></c:out></button>
+                    </a>
+                </c:if>
+                <c:if test="${obj.pageNumber ne page}">
+                    <c:if test="${obj.pageNumber eq 0}">
+                        <a href="${pageContext.request.contextPath}/sm/${type}/1/order">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
+                    <c:if test="${obj.pageNumber ne 0}">
+                        <a href="${pageContext.request.contextPath}/sm/${type}/${obj.pageNumber}/order">
+                            <button type="button" class="btn btn-success"><c:out value="${obj.showPageName}"></c:out></button>
+                        </a>
+                    </c:if>
+                </c:if>
+            </c:forEach>
+        </div>
+    </div>
 	<hr />
 	<div class="last_block"></div>
 </body>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.dinner41.dao.MenuDao;
+import kr.co.dinner41.dao.OrderDao;
 import kr.co.dinner41.service.order.OrderDeleteService;
 import kr.co.dinner41.service.order.OrderInsertService;
 import kr.co.dinner41.service.order.OrderListService;
@@ -24,6 +26,7 @@ import kr.co.dinner41.service.order.OrderViewService;
 import kr.co.dinner41.vo.Menu2OrderViewVO;
 import kr.co.dinner41.vo.OrderVO;
 import kr.co.dinner41.vo.OrderViewVO;
+import kr.co.dinner41.vo.PageVO;
 import kr.co.dinner41.vo.UserVO;
 
 @Controller
@@ -48,6 +51,11 @@ public class OrderController {
 	@Autowired
 	@Qualifier("orderView")
 	OrderViewService viewService;
+	
+	 @Autowired
+     @Qualifier("orderDao")
+     OrderDao orderDao;
+	
 	
 	@RequestMapping(value = "/gm/order", method = RequestMethod.GET)
 	public String insert() {
@@ -95,6 +103,7 @@ public class OrderController {
 
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		Map<OrderViewVO, List<Menu2OrderViewVO>> map = null;
+		
 
 		// 한 page에 해당하는 주문목록(HashMap형태)을 가져옴
 		// type에는 WAIT(주문대기), COMP(수령완료)이 있음
@@ -109,11 +118,19 @@ public class OrderController {
 
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		HashMap<OrderViewVO, List<Menu2OrderViewVO>> map = null;
+		List<PageVO> pageList = null;
+
 		
 		// 한 page에 해당하는 주문목록(HashMap형태)을 가져옴
 		// type에는 WAIT(주문대기), COMP(수령완료)이 있음
 		map = listService.execute(user, type, page);
+		pageList = listService.getPages(page, type, user);
+		
 		model.addAttribute("map", map);
+		model.addAttribute("pages", pageList);
+		model.addAttribute("type", type);
+		model.addAttribute("page",page);
+		
 		return "store/orderList";
 	}
 
