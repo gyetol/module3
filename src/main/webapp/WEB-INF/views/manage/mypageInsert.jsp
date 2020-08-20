@@ -1,4 +1,6 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -40,27 +42,27 @@
         <h5 class="up_down_center">MANAGER</h5>
     </div>
 
-    <img src="../../icons/home-solid.svg" class="home" alt="no picture"/>
+    <img src="../../icons/home-solid.svg" class="home" alt="no picture">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/ad/{1]/order">주문 내역</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">1:1 문의</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="#"> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -78,36 +80,49 @@
 
         <div class="form-group">
             <label for="userName">이름</label>
-            <input type="text" class="form-control " id="userName" readonly>
+            <input type="text" class="form-control " id="userName">
         </div>
 
         <div class="form-group">
-            <label for="userEmail">이메일</label>
-            <input type="email" class="form-control" id="userEmail" readonly>
+            <label for="user_email">이메일</label>
+            <input type="email" class="form-control" id="user_email" readonly>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" readonly/>
+                <input type="tel" class="form-control" id="phoneNumber1" style="width: 30% ;float: left">
                 <p style="width: 5% ;float: left;text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" readonly/>
+                <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left">
                 <p style="width: 5% ;float: left ; text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;" readonly/>
+                <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;">
             </div>
         </div>
 
         <div class="form-group">
             <label for="address">거주지</label>
             <div id="address">
-                <input type="text" class="form-control margin_up" id="user_address" readonly/>
-                <input type="text" class="form-control margin_up" id="user_sub_address" readonly/>
+                <input type="text" class="form-control left_input" id="search_address"/>
+                <button type="button" class="btn btn-outline-success right_input" id="search_button">주소 찾기</button>
+                <input type="text" class="form-control margin_up" placeholder="주소" id="user_address"/>
+                <input type="text" class="form-control margin_up" placeholder="상세주소" id="user_sub_address"/>
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="exampleInputPassword1">비밀번호</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword2">비밀번호 확인</label>
+            <input type="password" class="form-control" id="exampleInputPassword2">
+            <small id="passhelp" class="form-text text-muted">내정보 수정을 위해서는 비밀번호 입력이 필요합니다.</small>
+        </div>
+
         <div class="margin_first">
-            <button type="button" class="btn btn-success two_button">수정하기</button>
-            <button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
+            <button type="button" class="btn btn-success two_button">수정완료</button>
+            <button type="button" class="btn btn-success two_button float-right">수정취소</button>
         </div>
 
     </div>

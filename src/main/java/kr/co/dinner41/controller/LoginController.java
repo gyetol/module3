@@ -22,9 +22,9 @@ import kr.co.dinner41.exception.login.SendEmailFailedException;
 import kr.co.dinner41.exception.login.UserNotFoundException;
 import kr.co.dinner41.exception.user.UserUpdateFailedException;
 import kr.co.dinner41.service.login.LoginService;
+import kr.co.dinner41.service.login.LogoutService;
 import kr.co.dinner41.service.login.SearchUserByEmailService;
 import kr.co.dinner41.service.login.SendTempPasswordService;
-import kr.co.dinner41.service.user.LogoutService;
 import kr.co.dinner41.validator.LoginValidator;
 import kr.co.dinner41.vo.CartVO;
 import kr.co.dinner41.vo.StoreVO;
@@ -80,8 +80,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
+
 	public String login(HttpServletRequest request,Model model) {
-		
 		HttpSession session=request.getSession(false);
 		if(session==null) {
 			return "common/login";
@@ -92,8 +92,6 @@ public class LoginController {
 		}
 		String result=getUserPage(loginUser,model);
 		return result;
-		
-		//return "user/userMap";
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
@@ -112,7 +110,7 @@ public class LoginController {
 			loginService.execute(command, session);
 			mav.addObject("result", "로그인 성공!");
 		}catch(UserNotFoundException|QuitUserException e) {
-			mav.addObject("errorMessage",e.getMessage());
+			mav.addObject("loginErrorMessage",e.getMessage());
 			mav.setViewName("common/login");
 			return mav;
 		}
@@ -171,8 +169,9 @@ public class LoginController {
 				mav.setViewName("common/searchPassword");
 			}
 			sendTempPasswordService.execute(user);
-			mav.addObject("user", user);
-			mav.addObject("sendTempPasswordResultMessage","success");
+			mav.addObject("resultUser", user);
+			//mav.addObject("resultEmail", user.getEmail());
+			//mav.addObject("resultMessage",user.getEmail()+"님에게 임시비밀번호를 발급했습니다. 이메일을 확인해주세요");
 			mav.setViewName("common/login");
 			return mav;
 		}catch(UserNotFoundException e) {

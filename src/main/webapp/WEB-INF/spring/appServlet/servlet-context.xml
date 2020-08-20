@@ -34,24 +34,24 @@
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/password"/>
+			<exclude-mapping path="/register"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="kr.co.dinner41.interceptor.CheckSessionInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/gm/**"/>
-			<exclude-mapping path="/"/>
-			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="kr.co.dinner41.interceptor.CheckGMInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/sm/**"/>
-			<exclude-mapping path="/"/>
-			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="kr.co.dinner41.interceptor.CheckSMInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/ad/**"/>
-			<exclude-mapping path="/"/>
-			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/resources/**"/>
 			<beans:bean class="kr.co.dinner41.interceptor.CheckADInterceptor"/>
 		</interceptor>
 	</interceptors>

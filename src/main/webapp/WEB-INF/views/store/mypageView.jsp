@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,7 +26,15 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
+    
+    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script type="text/javascript" charset="UTF-8">
+    	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
+    </script>
+    
+    <script src="${pageContext.request.contextPath }/resources/js/store/myPageView.js"></script>
 
     <title>My Page</title>
 </head>
@@ -49,10 +58,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/sm/{1]/order">주문내역</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -64,7 +73,7 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
@@ -79,41 +88,52 @@
     <hr/>
 
     <div class="container-fluid">
-
+    	<form:form id="update_form" action="${pageContext.request.contextPath }/mypage">
         <div class="form-group">
             <label for="userName">이름</label>
-            <input type="text" class="form-control " id="userName" readonly>
+            <input type="text" class="form-control " id="userName" value="${viewTargetUser.name }" readonly>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">이메일</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" readonly>
+            <input type="email" class="form-control" id="exampleFormControlInput1" value="${viewTargetUser.email }" readonly>
         </div>
-
+<%
+	kr.co.dinner41.vo.UserVO user=(kr.co.dinner41.vo.UserVO)session.getAttribute("viewTargetUser");
+	String phone=user.getPhone();
+	int phoneLength=phone.length();
+	String phone1=phone.substring(0, 3);
+	String phone2=phone.substring(3, phoneLength-4);
+	String phone3=phone.substring(phoneLength-4,phoneLength);
+%>
         <div class="form-group">
             <label for="phoneNumber">전화번호</label>
             <div id="phoneNumber">
-                <input type="tel" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" readonly/>
+                <input type="tel" value="<%=phone1 %>" class="form-control" id="phoneNumber1" style="width: 30% ;float: left" readonly/>
                 <p style="width: 5% ;float: left;text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" readonly/>
+                <input type="tel" value="<%=phone2 %>" class="form-control" id="phoneNumber2" style="width: 30% ;float: left" readonly/>
                 <p style="width: 5% ;float: left ; text-align: center">-</p>
-                <input type="tel" class="form-control" id="phoneNumber3" style="width: 30% ;" readonly/>
+                <input type="tel" value="<%=phone3 %>" class="form-control" id="phoneNumber3" style="width: 30% ;" readonly/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="address">거주지</label>
             <div id="address">
-                <input type="text" class="form-control margin_up" id="user_address" readonly/>
-                <input type="text" class="form-control margin_up" id="user_sub_address" readonly/>
+                <input type="text" class="form-control margin_up" id="user_address" value="${viewTargetUser.address }" readonly/>
+                <input type="text" class="form-control margin_up" id="user_sub_address" value="${viewTargetUser.subAddress }" readonly/>
             </div>
         </div>
 
         <div class="margin_first">
-            <button type="button" class="btn btn-success two_button">수정하기</button>
-            <button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
+            <button type="button" id="update_button" class="btn btn-success two_button">수정하기</button>
+            <a href="javascript:history.back()">
+				<button type="button" id="go_back_button" class="btn btn-success two_button float-right">뒤로가기</button>
+            </a>
+            <button type="button" id="delete_button" class="btn btn-success three_button" >탈퇴하기</button>
+            <input type="hidden" id="password" name="password">
         </div>
-
+        </form:form>
     </div>
 </div>
 <hr/>

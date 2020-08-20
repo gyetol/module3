@@ -22,6 +22,9 @@
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services,clusterer,drawing"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/user/storeView.js"></script>
 
     <title>Store</title>
 
@@ -108,7 +111,11 @@
                 ${store.subAddress}
             </span>
         </div>
-        <div class="card card-body">지도</div>
+        <div class="card card-body">
+			<div id="map" class="card card-body" style="height:150pt" data-latitude="${store.latitude }" data-longitude="${store.longitude }">
+				지도
+			</div>    
+        </div>
     </div>
     <hr/>
 

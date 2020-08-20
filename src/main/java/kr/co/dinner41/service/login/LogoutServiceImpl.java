@@ -1,4 +1,4 @@
-package kr.co.dinner41.service.user;
+package kr.co.dinner41.service.login;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +15,8 @@ public class LogoutServiceImpl implements LogoutService {
 		if(session==null) {
 			throw new NotLoginStateException();
 		}
-		session.removeAttribute("loginUser");
+		//session.removeAttribute("loginUser");
+		session.invalidate();
 	}
 
 }

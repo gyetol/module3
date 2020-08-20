@@ -23,8 +23,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/store/storeView.js"></script>
+
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services,clusterer,drawing"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/js/store/storeView.js"></script>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <title>Store</title>
 </head>
@@ -48,10 +52,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">주문 내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/sm/{1]/order">주문 내역</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -109,15 +113,17 @@
 
         <div class="form-group">
             <label for="address">매장주소</label>
-            <div id="address" class="card card-body">
-                ${store.address} ${store.subAddress}
+            <div id="address" class="card card-body" data-latitude="${store.latitude }" data-longitude="${store.longitude }">
+				<div id="map" class="card card-body" style="height: 350pt">
+					지도
+				</div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">매장 전화번호</label>
             <div id="phoneNumber" class="card card-body">
-                ${store.phone}
+                <a href="tel:${store.phone}">${store.phone }</a>
             </div>
         </div>
 
