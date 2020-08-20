@@ -94,6 +94,10 @@ public class OrderDaoImpl implements OrderDao {
 			NULL_CHECK = "IS NOT NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
 		}
+		else {
+			System.out.println("selectAllOrderByUser : type으로 WAIT, COMP 이외의 인자가 들어왔습니다.");
+			return null;
+		}
 
 		sql = "SELECT DISTINCT\r\n" + "	A.order_id order_id, \r\n" + "	C.store_id store_id,\r\n"
 				+ "	A.user_id user_id,\r\n" + "	A.order_order_date order_order_date,\r\n"
@@ -126,6 +130,10 @@ public class OrderDaoImpl implements OrderDao {
 			NULL_CHECK = "IS NOT NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
 		}
+		else {
+			System.out.println("selectAllOrderByStore : type으로 WAIT, COMP 이외의 인자가 들어왔습니다.");
+			return null;
+		}
 
 		sql = "SELECT DISTINCT\r\n" + "	A.order_id order_id, \r\n" + "	C.store_id store_id,\r\n"
 				+ "	A.user_id user_id,\r\n" + "	A.order_order_date order_order_date,\r\n"
@@ -156,6 +164,10 @@ public class OrderDaoImpl implements OrderDao {
 		else if (type.equals("COMP")) {
 			NULL_CHECK = "IS NOT NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
+		}
+		else {
+			System.out.println("getTotalRecordForUser : type으로 WAIT, COMP 이외의 인자가 들어왔습니다.");
+			return 0;
 		}
 
 		sql = "SELECT COUNT(*) AS num \r\n" + "FROM ( \r\n" + "SELECT DISTINCT\r\n"
@@ -198,6 +210,10 @@ public class OrderDaoImpl implements OrderDao {
 		else if (type.equals("COMP")) {
 			NULL_CHECK = "IS NOT NULL\r\n";
 			ORDER_BY = " ORDER BY A.order_pickup_date DESC";
+		}
+		else {
+			System.out.println("getTotalRecordForStore : type으로 WAIT, COMP 이외의 인자가 들어왔습니다.");
+			return 0;
 		}
 
 		sql = "SELECT COUNT(*) AS num\r\n" + "FROM ( \r\n" + "SELECT DISTINCT\r\n"

@@ -51,7 +51,7 @@
 
 	<div class="container-fluid">
 		<div class="text-center" style="padding: 15pt">
-			<h2>뽀식이네 족발 봉천점</h2>
+			<h2>${store.name}</h2>
 		</div>
 	</div>
 

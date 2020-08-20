@@ -116,7 +116,7 @@
                     </c:forEach>
 
                         <div style="margin-top: 5pt" id="pickupDate" data-pickupDate="${entry.key.order_pickup_date}">
-                            <button id="storeDetail" class="btn btn-outline-success btn-sm" style="width: 32%">상세보기
+                            <button id="storeDetail" class="btn btn-outline-success btn-sm" style="width: 32%">주문상세
                             </button>
                             <button id="cancelOrder" class="btn btn-outline-success btn-sm" style="width: 32%;">주문취소
                             </button>

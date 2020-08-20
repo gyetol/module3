@@ -52,7 +52,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">내정보 보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">주문 내역</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/gm/WAIT/1/order">주문내역 보기</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
@@ -82,11 +82,14 @@
 				<!--메뉴가 선택된 경우 매장이름을 출력하고 -->
 				<!--메뉴가 선택되지 않아 장바구니가 빈경우 매장이름 대신 빈 값을 넣거나 -->
 				<!--'장바구니가 비었습니다.'를 출력해주세요 -->
+
+				<!-- 
 				<h5>
 					매장고유번호 : <span><c:out value="${carts[0].storeId}" /></span>
 				</h5>
+				-->
 				<h5>
-					매장명 : <span>뽀식이네 감자탕</span>
+					매장명 : <span><c:out value="${carts[0].storeName}" /></span>
 				</h5>
 			</div>
 			<hr />
@@ -109,7 +112,7 @@
 								</div>
 								<div style="width: 90%; padding-top: 3pt;">
 									<div>
-										메뉴고유번호 : <span><c:out value="${cart.menuId}" /></span><br /> 주문메뉴 : <span>개구리 뒷다리</span>
+										<!-- 메뉴고유번호 : <span><c:out value="${cart.menuId}"/></span><br/> --> 주문메뉴 : <span><c:out value="${cart.menuName}"/></span>
 										<div style="margin-top: 5pt">
 											수량 : <span id="num">1</span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i> <br /> 금액 : <span id="amount" data-amount=<c:out value="${cart.price}"/>><c:out value="${cart.price}" />원</span>
 										</div>

@@ -26,12 +26,14 @@ function clickOrder() {
 				var orderId = data.orderId;
 				var price = data.price;
 				var menuIds = data.menuIds;
+				var storeId = data.storeId;
 				
 				sessionStorage.setItem("user", user);
 				sessionStorage.setItem("storePayNumber", storePayNumber);
 				sessionStorage.setItem("orderId", orderId);
 				sessionStorage.setItem("price", price);
 				sessionStorage.setItem("menuIds", menuIds);
+				sessionStorage.setItem("storeId", storeId);
 				
 				alert("결제 페이지로 이동합니다.");
 

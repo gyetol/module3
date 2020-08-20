@@ -18,22 +18,14 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/login.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<!-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css"> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
 
 <title>login</title>
 <script>
 	sessionStorage.setItem("contextPath", "${pageContext.request.contextPath}");
-
-	$(document).ready(function() {
-		window.moveTo(0, 0);
-		top.window.resizeTo(screen.availWidth, screen.availHeight);
-		top.window.outerHeight = screen.availHeight;
-		top.window.outerWidth = screen.availWidth;
-	});
 </script>
 </head>
 <body>
-
 <!--전체-->
 <div class="container-fluid">
     <!--한행-->
@@ -70,7 +62,5 @@
     </div>
 </div>
 <div class="last_block"></div>
-
 </body>
-
 </html>
