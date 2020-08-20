@@ -57,7 +57,7 @@
 
 	<div class="container-fluid">
 		<div class="alert alert-primary text-center">
-			<h3>OPEN</h3>
+			<h3>${store.openState}</h3>
 		</div>
 	</div>
 
@@ -69,48 +69,9 @@
 	<!--</div>-->
 
 	<div class="container-fluid">
-		<button class="btn btn-primary two_button">오픈</button>
-		<button class="btn btn-danger two_button float-right">마감</button>
+		<button id="openBtn" name="OPEN" class="btn btn-primary two_button">오픈</button>
+		<button id="closeBtn" name="CLOSE" class="btn btn-danger two_button float-right">마감</button>
 	</div>
-
-	<div class="container-fluid" style="margin-top: 10pt">
-		<div class="card">
-			<div class="card-body">
-				<h5>미수령 주문들</h5>
-				<hr style="margin-bottom: 0" />
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">
-						<h5>
-							주문번호 : <span>WD130613</span>
-						</h5>
-						<div>
-							주문메뉴 : <span>개구리 뒷다리, ...</span>
-							<div style="margin-top: 5pt">
-								<button class="btn btn-outline-success btn-sm float-left three_button">상세 보기</button>
-								<button class="btn btn-outline-success btn-sm three_button_center">주문 취소</button>
-								<button class="btn btn-outline-success btn-sm float-right three_button">수령 완료</button>
-							</div>
-						</div>
-					</li>
-					<li class="list-group-item">
-						<h5>
-							주문번호 : <span>WD130613</span>
-						</h5>
-						<div>
-							주문메뉴 : <span>개구리 뒷다리, ...</span>
-							<div style="margin-top: 5pt">
-								<button class="btn btn-outline-success btn-sm float-left three_button">상세 보기</button>
-								<button class="btn btn-outline-success btn-sm three_button_center">주문 취소</button>
-								<button class="btn btn-outline-success btn-sm float-right three_button">수령 완료</button>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
-
 
 	<!--카테고리-->
 	<div>
@@ -129,18 +90,18 @@
 				<a href="${pageContext.request.contextPath}/sm/1/menu/list">
 					<div class="card h-100">
 						<div class="card-body text-center trim">
-							<img src="${pageContext.request.contextPath}/resources/categoryImages/menu.png" class="rounded category" alt="no picture">
+							<img src="${pageContext.request.contextPath}/resources/categoryImages/korean.png" class="rounded category" alt="no picture">
 							<h5 id="menuManage" class="card-title">메뉴관리</h5>
 						</div>
 					</div>
 				</a>
 			</div>
 			<div class="col mb-4">
-				<a href="${pageContext.request.contextPath}/sm/1/order">
+				<a href="${pageContext.request.contextPath}/sm/WAIT/1/order">
 					<div class="card h-100">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/list.png" class="rounded category" alt="no picture">
-							<h5 class="card-title">거래내역</h5>
+							<h5 class="card-title">주문내역</h5>
 						</div>
 					</div>
 				</a>

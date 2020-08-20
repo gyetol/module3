@@ -5,6 +5,7 @@
 
 *.MF
 *.mf
+MANIFEST.MF
 *.properties
 
 ### Android ###

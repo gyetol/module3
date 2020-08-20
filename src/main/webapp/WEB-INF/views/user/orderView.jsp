@@ -52,7 +52,7 @@
 
     <!--장바구니 아이콘-->
     <a href="${pageContext.request.contextPath}/gm/cart">
-    <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
+ 	   <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
     </a>
 
     <!--메뉴-->
@@ -120,34 +120,6 @@
             </div>
         </div>
     </div>
-
-    <hr style="margin: 0"/>
-
-	<!-- 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="container-fluid">
-                주문메뉴 : <span>개구리 뒷다리</span>
-                <div style="margin-top: 5pt">
-                    수량 : <span>1</span> &nbsp;
-                    <br/>
-                    금액 : <span>10000원</span>
-                </div>
-            </div>
-        </li>
-
-        <li class="list-group-item">
-            <div class="container-fluid">
-                주문메뉴 : <span>개구리 뒷다리</span>
-                <div style="margin-top: 5pt">
-                    수량 : <span>1</span> &nbsp;
-                    <br/>
-                    금액 : <span>10000원</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-    -->
 
     <hr style="margin: 0"/>
 

@@ -1,4 +1,5 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <!-- Required meta tags -->
@@ -22,13 +23,13 @@
             crossorigin="anonymous"></script>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="../../css/dinner41.css">
 
-    <title>Order</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
+
+    <title>Order History</title>
 </head>
 
 <body>
-
 <nav class="navbar navbar-light light_green">
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -36,14 +37,25 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div>
-        <h5 class="up_down_center">STORE MANAGE</h5>
+    <!--사용자 위치-->
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span>서울특별시 봉천동</span>
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">주소 변경하기</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">현재 위치 기준</a>
+        </div>
     </div>
 
-    <a href="${pageContext.request.contextPath}/">
-        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    <!--장바구니 아이콘-->
+    <a href="${pageContext.request.contextPath}/gm/cart">
+ 	   <img src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart" alt="no picture">
     </a>
 
+    <!--메뉴-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -62,18 +74,18 @@
                 <a class="nav-link" href="#"> </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">로그아웃</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
         </ul>
     </div>
 </nav>
 
+<!--Content-->
 <div>
-    <div class="container-fluid">
-        <div class="text-center" style="margin-top: 15pt">
-            <img src="../../images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-            <h4>주문 상세</h4>
-        </div>
+    <!--제목-->
+    <div class="container-fluid text-center" style="margin-top: 15pt">
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
+        <h4>주문 상세</h4>
     </div>
 
     <hr/>
@@ -83,81 +95,46 @@
         <div class="form-group row">
             <label for="pay_id" class="col-3 col-form-label">주문번호</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="pay_id" readonly>
+                <input type="text" class="form-control" id="pay_id" value="${order.id}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="user_name" class="col-3 col-form-label">주문자</label>
+            <label for="pay_id" class="col-3 col-form-label">주문자</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="user_name" readonly>
+                <input type="text" class="form-control" id="pay_id" value="${order.user.name}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="phone" class="col-3 col-form-label">전화번호</label>
+            <label for="order_date" class="col-3 col-form-label">주문 일시</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="phone" readonly>
+                <input type="text" class="form-control" id="order_date" value="${order.orderDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="get_time" class="col-3 col-form-label">수령 예정 일시</label>
+            <label for="get_time" class="col-3 col-form-label">수령 일시</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="get_time" readonly>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="pay_type" class="col-3 col-form-label">결제 수단</label>
-            <div class="col-9">
-                <input type="password" class="form-control" id="pay_type" readonly>
+                <input type="text" class="form-control" id="get_time" value="${order.pickupDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="pay_total" class="col-3 col-form-label">결제금액</label>
             <div class="col-9">
-                <input type="password" class="form-control" id="pay_total" readonly>
+                <input type="text" class="form-control" id="pay_total" value="${order.price}" readonly>
             </div>
         </div>
     </div>
 
     <hr style="margin: 0"/>
 
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <div class="container-fluid">
-                주문메뉴 : <span>개구리 뒷다리</span>
-                <br/>
-                수량 : <span>1</span> &nbsp;
-                <br/>
-                금액 : <span>10000원</span>
-            </div>
-        </li>
-
-        <li class="list-group-item">
-            <div class="container-fluid">
-                주문메뉴 : <span>개구리 뒷다리</span>
-                <br/>
-                수량 : <span>1</span> &nbsp;
-                <br/>
-                금액 : <span>10000원</span>
-            </div>
-        </li>
-    </ul>
-
-    <hr style="margin: 0"/>
-
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success three_button">상세보기</button>
-        <button type="button" class="btn btn-outline-success three_button">주문취소</button>
-        <button type="button" class="btn btn-outline-success" style="width: 32%">수령완료</button>
+        <button type="button" class="btn btn-outline-success btn-block" onclick="history.back(-1)">뒤로가기</button>
     </div>
 </div>
-
 <hr/>
-
 <div class="last_block"></div>
 </body>
 </html>

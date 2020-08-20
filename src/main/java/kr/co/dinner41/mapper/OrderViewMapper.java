@@ -17,6 +17,7 @@ public class OrderViewMapper implements RowMapper<OrderViewVO>{
 		orderView.setUserId(rs.getInt("user_id"));
 		orderView.setOrder_order_date(rs.getTimestamp("order_order_date"));
 		orderView.setOrder_reserve_date(rs.getTimestamp("order_reserve_date"));
+		orderView.setOrder_pickup_date(rs.getTimestamp("order_pickup_date"));
 		orderView.setPrice(rs.getInt("price"));
 		orderView.setStoreName(rs.getString("store_name"));
 		orderView.setUserName(rs.getString("user_name"));

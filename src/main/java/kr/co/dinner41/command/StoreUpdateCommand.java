@@ -1,22 +1,24 @@
 package kr.co.dinner41.command;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StoreUpdateCommand {
 	private String businessNumber;
 	private String name;
-	private String photo;
+	private MultipartFile photo;
 	private String category;
 	private String address;
 	private String subAddress;
-	private double latitude;
-	private double longitude;
+	private String latitude;
+	private String longitude;
 	private String phone;
 	private String operateTime;
 	private String introduction;
 	
 	public StoreUpdateCommand() {}
 
-	public StoreUpdateCommand(String businessNumber, String name, String photo, String category, String address,
-			String subAddress, double latitude, double longitude, String phone, String operateTime,
+	public StoreUpdateCommand(String businessNumber, String name, MultipartFile photo, String category, String address,
+			String subAddress, String latitude, String longitude, String phone, String operateTime,
 			String introduction) {
 		super();
 		this.businessNumber = businessNumber;
@@ -48,11 +50,11 @@ public class StoreUpdateCommand {
 		this.name = name;
 	}
 
-	public String getPhoto() {
+	public MultipartFile getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(MultipartFile photo) {
 		this.photo = photo;
 	}
 
@@ -80,19 +82,19 @@ public class StoreUpdateCommand {
 		this.subAddress = subAddress;
 	}
 
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
@@ -119,7 +121,5 @@ public class StoreUpdateCommand {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	
-	
 
 }

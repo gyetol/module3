@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.dinner41.command.StoreInsertCommand;
 import kr.co.dinner41.command.StoreUpdateCommand;
@@ -23,6 +25,7 @@ import kr.co.dinner41.service.store.StoreDeleteService;
 import kr.co.dinner41.service.store.StoreInsertService;
 import kr.co.dinner41.service.store.StoreListByManagerService;
 import kr.co.dinner41.service.store.StoreListByUserService;
+import kr.co.dinner41.service.store.StoreOpenStateService;
 import kr.co.dinner41.service.store.StoreUpdateService;
 import kr.co.dinner41.service.store.StoreViewByStoreService;
 import kr.co.dinner41.service.store.StoreViewByUserService;
@@ -73,12 +76,17 @@ public class StoreController {
 	ReviewListService reviewListService;
 	
 	@Autowired
+	@Qualifier("storeOpenStateService")
+	StoreOpenStateService storeOpenStateService;
+	
+	@Autowired
 	@Qualifier("storeCategoryDao")
 	StoreCategoryDao storeCategoryDao;
 	
 	@Autowired
 	@Qualifier("storeDao")
 	StoreDao storeDao;
+	
 	
 	
 	
@@ -91,12 +99,10 @@ public class StoreController {
 		
 		if(store==null) {
 			model.addAttribute("store",store);
+	
 			return "store/storeRegister";
 		}
-		else if(store.getState().getName().equals("거부")) {
-			model.addAttribute("store",store);
-			return "store/storeUpdate";
-		}
+		
 		else if(store.getState().getName().equals("점주삭제")) {
 			model.addAttribute("store",store);
 			return "store/storeRegister"; //처리를 새롭게 해야할 듯 
@@ -114,34 +120,38 @@ public class StoreController {
 	
 	@RequestMapping(value="/sm/store",method=RequestMethod.POST)
 	public String insert(StoreInsertCommand command,Model model,HttpSession session) {
-		
 		StoreVO store = new StoreVO();
+		UserVO user = (UserVO)session.getAttribute("loginUser");
 		
-		UserVO user = new UserVO();
-		user.setId(14);
-		
-		StoreCategoryVO storeCategory = new StoreCategoryVO();
-		storeCategory.setId("KOR");
-		
-		StoreStateVO storeState = new StoreStateVO();
-		storeState.setId(2);
+		String storeCategoryName = command.getCategory();
+		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
+		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
 		
 		store.setUser(user);
+		
 		store.setCategory(storeCategory);
+		
+		StoreStateVO storeState = new StoreStateVO();
+		storeState.setId(1);
 		store.setState(storeState);
+		
 		store.setBusinessNumber(command.getBusinessNumber());
 		store.setName(command.getName());
 		store.setAddress(command.getAddress());
 		store.setSubAddress(command.getSubAddress());
-		store.setLatitude(37.482417);//store.setLatitude(command.getLatitude());
-		store.setLongitude(126.953073);//store.setLongitude(command.getLongitude());
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
+		store.setLatitude(storeLatitude);//store.setLatitude(command.getLatitude());
+		store.setLongitude(storeLongitude);//store.setLongitude(command.getLongitude());
 		store.setPhone(command.getPhone());
 		store.setOperateTime(command.getOperateTime());
-		store.setPhoto(command.getPhoto());
+		store.setPhoto(command.getPhoto().getOriginalFilename());
 		store.setIntroduction(command.getIntroduction());
-	
-		storeInsertService.execute(store);
 		
+		
+		storeInsertService.execute(session, store, command.getPhoto());
+		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
 	
@@ -180,6 +190,10 @@ public class StoreController {
 		
 		String storeCategoryId = storeCategoryDao.selectIdByName(storeCategoryName);
 		StoreCategoryVO storeCategory = new StoreCategoryVO(storeCategoryId,storeCategoryName);
+//		StoreCategoryVO storeCategory = StoreCategoryVO.builder()
+//				.id(storeCategoryId)
+//				.name(storeCategoryName)
+//				.build();
 		
 		StoreStateVO storeState = null;
 		if(storeDao.selectByUserId(user.getId()).getState().getName().equals("승인")) {
@@ -193,11 +207,12 @@ public class StoreController {
 		String storeName = command.getName();
 		String storeAddress= command.getAddress();
 		String storeSubAddress = command.getSubAddress();
-		double storeLatitude= 37.482417;//double storeLatitude = command.getLatitude();
-		double storeLongitude= 126.953073;//double storeLongitude = command.getLongitude();
+		
+		double storeLatitude = Double.parseDouble(command.getLatitude());
+		double storeLongitude = Double.parseDouble(command.getLongitude());
 		String storePhone = command.getPhone();
 		String storeOperateTime = command.getOperateTime();
-		String storePhoto = command.getPhoto();
+		String storePhoto = command.getPhoto().getOriginalFilename();
 		String storeIntroduction = command.getIntroduction();
 		OpenState openState = OpenState.CLOSE;
 		String storePayNumber = "00000000"; // 업데이트 메서드에서 안씀
@@ -205,8 +220,20 @@ public class StoreController {
 		StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
-		storeUpdateService.execute(store);
+		storeUpdateService.execute(session,store,command.getPhoto());
+		model.addAttribute("store",store);
 		
+		return "store/storeHome";
+	}
+	
+	@RequestMapping(value="/sm/switchOpenState/{openState}/store", method=RequestMethod.GET)
+	public String updateOpenState(@PathVariable("openState") OpenState openState, HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		int storeId = storeDao.selectByUserId(user.getId()).getId();
+	
+		storeOpenStateService.execute(storeId, openState);
+		StoreVO store = storeDao.selectById(storeId);
+		model.addAttribute("store",store);
 		return "store/storeHome";
 	}
 	
@@ -228,12 +255,11 @@ public class StoreController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(storeListByUserViews);
+		List<PageVO> pages = storeListByUserService.getPages(category, keyword, userLatitude, userLongitude, intPage);
 		model.addAttribute("category",category);
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("stores",storeListByUserViews); //이름주의! stores로 담아놓음
-		
+		model.addAttribute("pages", pages);
 		return "user/storeList";
 	}
 
