@@ -22,7 +22,8 @@
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 	<script type="text/javascript" charset="UTF-8">
