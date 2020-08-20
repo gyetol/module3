@@ -18,13 +18,13 @@ function insertCart() {
 			success : function(data) {
 				if (data.result) {
 					if (data.msg1 != undefined) {
-						alert(data.msg1);
+						swal.fire(data.msg1);
 					}
-					alert(data.msg2);
+					swal.fire(data.msg2);
 					window.location.href = getContextPath() + "/" + storeId + "/" + menuId + "/menu/view";
 				}
 				else {
-					alert(data.msg);
+					swal.fire(data.msg);
 					// 로그인 화면으로 이동하는 URL
 					winow.location.href = "/dinner41";
 				}

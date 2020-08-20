@@ -1,3 +1,3 @@
 $(document).ready(function() {
-	alert("storeDetail_menu.js");
+	swal.fire("storeDetail_menu.js");
 });

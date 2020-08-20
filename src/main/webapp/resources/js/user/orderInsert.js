@@ -8,7 +8,7 @@ function clickOrder() {
 		var payTotal = $("#pay_total").val();
 
 		if (getTime.trim() == "") {
-			alert("수령 소요 시간을 입력해주세요.");
+			swal.fire("수령 소요 시간을 입력해주세요.");
 			$("#get_time").focus();
 			return;
 		}
@@ -35,7 +35,7 @@ function clickOrder() {
 				sessionStorage.setItem("menuIds", menuIds);
 				sessionStorage.setItem("storeId", storeId);
 				
-				alert("결제 페이지로 이동합니다.");
+				swal.fire("결제 페이지로 이동합니다.");
 
 				// 결제 페이지로 이동
 				window.location = getContextPath() + "/gm/pay";
