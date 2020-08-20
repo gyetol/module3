@@ -51,12 +51,14 @@
         <h5 class="up_down_center">STORE MANAGE</h5>
     </div>
 
+	<a href="${pageContext.request.contextPath}/">
     <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a></li>
-            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }/sm/{1]/order">주문 내역</a></li>
+            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }/sm/WAIT/1/order">주문내역 보기</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
@@ -70,7 +72,7 @@
         <div class="text-center" style="margin-top: 25pt; margin-bottom: 25px;">
             <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title"
                  alt="no title"/>
-            <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-weight: bold; font-size: 30px;">주문 내역</h4>
+            <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-weight: bold; font-size: 35px;">주문 내역</h4>
         </div>
     </div>
 
@@ -79,21 +81,21 @@
     <ul class="nav nav-tabs">
         <c:if test="${type eq 'COMP'}">
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
         <c:if test="${type eq 'WAIT'}">
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/sm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
@@ -103,7 +105,7 @@
         <c:if test="${empty map}">
             <br/>
             주문 내역이 비어있습니다.
-            <br/>
+            <br/><br/>
         </c:if>
     </div>
 

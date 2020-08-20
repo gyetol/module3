@@ -74,6 +74,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
+	            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">홈 화면으로 이동</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
@@ -86,7 +87,7 @@
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
-        <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 30px;">주문 상세</h4>
+        <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 35px;">주문 상세</h4>
     </div>
 
     <hr/>
@@ -94,30 +95,30 @@
     <div class="container-fluid">
 
         <div class="form-group row">
-            <label for="pay_id" class="col-3 col-form-label">주문번호</label>
+            <label style="font-family:'Do Hyeon'; font-size:23px; font-weight:bold;" for="pay_id" class="col-3 col-form-label">주문번호</label>
             <div class="col-9">
-                <input type="text" class="form-control" id="pay_id" value="${order.id}" readonly>
+                <input style="font-size:20px;" type="text" class="form-control" id="pay_id" value="${order.id}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="order_date" class="col-3 col-form-label">주문 일시</label>
+            <label style="font-family:'Do Hyeon'; font-size:23px; font-weight:bold;" for="order_date" class="col-3 col-form-label">주문 일시</label>
             <div class="col-9">
-                <input type="text" class="form-control" id="order_date" value="${order.orderDate}" readonly>
+                <input style="font-size:20px;" type="text" class="form-control" id="order_date" value="${order.orderDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="get_time" class="col-3 col-form-label">수령 일시</label>
+            <label style="font-family:'Do Hyeon'; font-size:23px; font-weight:bold;" for="get_time" class="col-3 col-form-label">수령 일시</label>
             <div class="col-9">
-                <input type="text" class="form-control" id="get_time" value="${order.reserveDate}" readonly>
+                <input style="font-size:20px;" type="text" class="form-control" id="get_time" value="${order.reserveDate}" readonly>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="pay_total" class="col-3 col-form-label">결제금액</label>
+            <label style="font-family:'Do Hyeon'; font-size:23px; font-weight:bold;" for="pay_total" class="col-3 col-form-label">결제금액</label>
             <div class="col-9">
-                <input type="text" class="form-control" id="pay_total" value="${order.price}" readonly>
+                <input style="font-size:20px;" type="text" class="form-control" id="pay_total" value="${order.price}" readonly>
             </div>
         </div>
     </div>
@@ -125,7 +126,7 @@
     <hr style="margin: 0"/>
 
     <div class="container-fluid margin_first">
-        <button type="button" class="btn btn-outline-success btn-block" onclick="history.back(-1)">뒤로가기</button>
+        <button style="font-size: 20px; font-weight: bold;" type="button" class="btn btn-outline-success btn-block" onclick="history.back(-1)">뒤로가기</button>
     </div>
 </div>
 <hr/>
