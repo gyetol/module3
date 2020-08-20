@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.dinner41.command.UserInsertCommand;
 import kr.co.dinner41.command.UserUpdateCommand;
+import kr.co.dinner41.exception.login.UserNotFoundException;
 import kr.co.dinner41.exception.user.UserException;
+import kr.co.dinner41.service.user.CheckEmailService;
 import kr.co.dinner41.service.user.CheckPasswordService;
 import kr.co.dinner41.service.user.UserDeleteService;
 import kr.co.dinner41.service.user.UserInsertService;
@@ -48,10 +50,34 @@ public class UserController {
 	@Qualifier("checkPasswordService")
 	private CheckPasswordService checkPasswordService;
 	
+	@Autowired
+	@Qualifier("checkEmailService")
+	private CheckEmailService checkEmailService;
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public String insert() {
 		return "common/register";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/register/checkEmail",method=RequestMethod.POST)
+	public HashMap<String,Object> checkEmail(HttpServletRequest request){
+		System.out.println("컨트롤러 진입");
+		String email=request.getParameter("email");
+		System.out.println(email);
+		HashMap<String,Object> result=new HashMap<>();
+		UserVO user=null;
+		try {
+			user=checkEmailService.execute(email);
+
+			System.out.println(user);
+			result.put("result", true);
+			result.put("user", user);
+		}
+		catch(UserNotFoundException e) {
+			result.put("result", false);
+		}
+		return result;
 	}
 
 	@RequestMapping(value="/register",method=RequestMethod.POST)
@@ -96,7 +122,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/mypage/checkPass",method=RequestMethod.POST)
+	@RequestMapping(value="/register/checkPass",method=RequestMethod.POST)
 	public HashMap<String, Object> checkPassword(HttpServletRequest request) {
 		HashMap<String, Object> map = new HashMap<>();
 		try {
