@@ -17,13 +17,10 @@ public class CheckSessionInterceptor implements HandlerInterceptor {
 		if(session==null) {
 			return false;
 		}
-		/*
 		UserVO user=(UserVO)session.getAttribute("loginUser");
 		if(user==null) {
 			return false;
 		}
-		*/
-
 		return true;
 	}
 }
