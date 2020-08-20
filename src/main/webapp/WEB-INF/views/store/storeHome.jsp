@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script type="text/javascript" charset="UTF-8">
     	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
@@ -51,13 +52,13 @@
 
 	<div class="container-fluid">
 		<div class="text-center" style="padding: 15pt">
-			<h2>${store.name}</h2>
+			<h2 style="font-family: 'Do Hyeon';">${store.name}</h2>
 		</div>
 	</div>
 
 	<div class="container-fluid">
 		<div class="alert alert-primary text-center">
-			<h3>${store.openState}</h3>
+			<h3 style="font-family: 'Do Hyeon';">${store.openState}</h3>
 		</div>
 	</div>
 
@@ -81,7 +82,7 @@
 					<div class="card h-100" id="storeManagement" name="storeManagement">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/store.png" class="rounded category" alt="no picture">
-							<h5 class="card-title">매장관리</h5>
+							<h5 style="font-family: 'Do Hyeon'; font-size: 25px;" class="card-title">매장관리</h5>
 						</div>
 					</div>
 				</a>
@@ -91,7 +92,7 @@
 					<div class="card h-100">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/korean.png" class="rounded category" alt="no picture">
-							<h5 id="menuManage" class="card-title">메뉴관리</h5>
+							<h5 style="font-family: 'Do Hyeon'; font-size: 25px;" id="menuManage" class="card-title">메뉴관리</h5>
 						</div>
 					</div>
 				</a>
@@ -101,7 +102,7 @@
 					<div class="card h-100">
 						<div class="card-body text-center trim">
 							<img src="${pageContext.request.contextPath}/resources/categoryImages/list.png" class="rounded category" alt="no picture">
-							<h5 class="card-title">주문내역</h5>
+							<h5 style="font-family: 'Do Hyeon'; font-size: 25px;" class="card-title">주문내역</h5>
 						</div>
 					</div>
 				</a>

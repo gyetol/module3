@@ -24,6 +24,7 @@
     <!-- kakaoMap api -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/resources/js/common/register.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dinner41.css">
@@ -40,7 +41,7 @@
             <!--            로고 이미지-->
             <div style="">
                 <img src="${pageContext.request.contextPath }/resources/images/1인의만찬.png" width="18%" class="img-fluid" alt="no title" style="margin: auto;"/>
-                <h2>회원가입</h2>
+                <h2 style="font-family: 'Do Hyeon';">회원가입</h2>
             </div>
 
             <hr/>

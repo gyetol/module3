@@ -13,6 +13,7 @@
 <script type="text/javascript" charset="UTF-8">
     	sessionStorage.setItem("contextPath","${pageContext.request.contextPath}");
     </script>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -71,7 +72,7 @@
 
 <div class="container-fluid text-center" style="margin-top: 15pt">
     <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-fluid img-title" alt="no title"/>
-    <h2>매장 상세</h2>
+    <h2 style="font-family: 'Do Hyeon';">매장 상세</h2>
 </div>
 
 <hr style="margin-top: 0"/>
