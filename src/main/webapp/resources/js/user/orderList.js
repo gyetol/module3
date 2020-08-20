@@ -10,7 +10,7 @@ function clickStoreView() {
 		var order = $(orders[i]);
 		order.find("#storeViewClick").click(function() {
 			var storeId = $(this).parents("#storeId").data("storeid");
-			window.location = getContextPath() + "/sm/" + storeId + "/menu/store";
+			window.location = getContextPath() + "/gm/" + storeId + "/menu/store";
 		});
 	}
 }
@@ -21,8 +21,9 @@ function clickReview() {
 	for (let i = 0; i < orders.length; i++) {
 		var order = $(orders[i]);
 		order.find("#reviewClick").click(function() {
-			var orderId = $(this).parents(".orderClass").data("orderid");
-			window.location = orderId + "/review"
+			// var orderId = $(this).parents(".orderClass").data("orderid");
+			var storeId = $(this).parents("#storeId").data("storeid");
+			window.location = getContextPath() + "/gm/" + storeId + "/review/store"
 		});
 	}
 }

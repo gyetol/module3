@@ -69,15 +69,37 @@
     </div>
 </nav>
 
-<!--Content-->
 <div>
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
-        <h4>주문 내역</h4>
+        <h4 style="margin-top: 10pt;">주문 내역</h4>
     </div>
 
     <hr style="margin: 0"/>
+
+    <ul class="nav nav-tabs">
+        <c:if test="${type eq 'COMP'}">
+            <li class="nav-item text-center nav_two"><a class="nav-link"
+                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        href="${pageContext.request.contextPath}/gm/WAIT/1/order">주문대기</a>
+            </li>
+            <li class="nav-item text-center nav_two"><a class="nav-link active"
+                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        href="${pageContext.request.contextPath}/gm/COMP/1/order">수령완료</a>
+            </li>
+        </c:if>
+        <c:if test="${type eq 'WAIT'}">
+            <li class="nav-item text-center nav_two"><a class="nav-link active"
+                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        href="${pageContext.request.contextPath}/gm/WAIT/1/order">주문대기</a>
+            </li>
+            <li class="nav-item text-center nav_two"><a class="nav-link"
+                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        href="${pageContext.request.contextPath}/gm/COMP/1/order">수령완료</a>
+            </li>
+        </c:if>
+    </ul>
 
     <c:if test="${empty map}">
         주문 내역이 비어있습니다.
