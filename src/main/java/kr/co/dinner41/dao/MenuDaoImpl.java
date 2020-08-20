@@ -1,9 +1,7 @@
 package kr.co.dinner41.dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -14,13 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import kr.co.dinner41.command.MenuInsertCommand;
-import kr.co.dinner41.exception.QnAException;
 import kr.co.dinner41.exception.menu.MenuDeleteFailedException;
 import kr.co.dinner41.exception.menu.MenuException;
+import kr.co.dinner41.exception.menu.MenuInsertFailedException;
 import kr.co.dinner41.exception.menu.MenuSelectFailedException;
 import kr.co.dinner41.exception.menu.MenuUpdateFailedException;
-import kr.co.dinner41.exception.store.StoreDeleteFailedException;
 import kr.co.dinner41.mapper.MenuMapper;
 import kr.co.dinner41.service.menu.MenuListByUserServiceImpl;
 import kr.co.dinner41.vo.MenuVO;
@@ -34,12 +30,18 @@ public class MenuDaoImpl implements MenuDao {
 	private JdbcTemplate jTemp;
 
 	@Override
-	public void insert(MenuVO menu, StoreVO store) throws MenuException {
+	public int insert(MenuVO menu, StoreVO store) throws MenuException {
 		String sql = "INSERT INTO menus VALUES(?,?,?,?,?,?,?,?,?,?,default)";
-
-		jTemp.update(sql, store.getId(), menu.getId(), menu.getOfferType().getId(), menu.getTag(), menu.getName(),
-				menu.getPrice(), menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto());
-
+		int result=0;
+		try {
+			result=jTemp.update(sql, store.getId(), menu.getId(), menu.getOfferType().getId(), menu.getTag(), menu.getName(),
+					menu.getPrice(), menu.getAmount(), menu.getDescription(), menu.getNotice(), menu.getPhoto());
+		}
+		catch(DataAccessException e) {
+			e.printStackTrace();
+			throw new MenuInsertFailedException();
+		}
+		return result;
 	}
 
 	@Override
@@ -68,7 +70,7 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void update(MenuVO menu, StoreVO store) throws MenuException {
+	public int update(MenuVO menu, StoreVO store) throws MenuException {
 		String sql = "UPDATE menu_view SET offer_type_id = ?, menu_name = ?, menu_price = ?, menu_amount = ?, menu_description = ?, menu_notice = ?,menu_photo = ? WHERE menu_id = ? AND store_id=? ";
 
 		int result = 0;
@@ -83,6 +85,7 @@ public class MenuDaoImpl implements MenuDao {
 		if (result == 0) {
 			throw new MenuUpdateFailedException();
 		}
+		return result;
 	}
 
 	@Override

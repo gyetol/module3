@@ -68,8 +68,7 @@ public class ManagerController {
         try {
             out = response.getWriter();
             out.println("<script>" +
-                    "alert('" + store.getName()+
-                    " Approve Success!');" +
+                    "alert('Approve Success!');" +
                     "location.href='"+request.getContextPath() +"/ad/"+storeId+"/store';"+
                     "</script>");
             out.flush();
@@ -103,8 +102,7 @@ public class ManagerController {
         try {
             out = response.getWriter();
             out.println("<script>" +
-                    "alert('" + store.getName()+
-                    " Reject Success!');" +
+                    "alert('Reject Success!');" +
                     "location.href='"+request.getContextPath() +"/ad/"+storeId+"/store';"+
                     "</script>");
             out.flush();
@@ -138,8 +136,7 @@ public class ManagerController {
         try {
             out = response.getWriter();
             out.println("<script>" +
-                    "alert('" + store.getName()+
-                    " Reject Success!');" +
+                    "alert('Reject Success!');" +
                     "location.href='"+request.getContextPath() +"/ad/"+storeId+"/store';"+
                     "</script>");
             out.flush();
@@ -173,8 +170,7 @@ public class ManagerController {
         try {
             out = response.getWriter();
             out.println("<script>" +
-                    "alert('" + store.getName()+
-                    " Reject Success!');" +
+                    "alert('Reject Success!');" +
                     "location.href='"+request.getContextPath() +"/ad/"+storeId+"/store';"+
                     "</script>");
             out.flush();

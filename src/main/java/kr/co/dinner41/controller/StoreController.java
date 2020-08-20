@@ -212,7 +212,7 @@ public class StoreController {
 		double storeLongitude = Double.parseDouble(command.getLongitude());
 		String storePhone = command.getPhone();
 		String storeOperateTime = command.getOperateTime();
-		String storePhoto = command.getPhoto();
+		String storePhoto = command.getPhoto().getOriginalFilename();
 		String storeIntroduction = command.getIntroduction();
 		OpenState openState = OpenState.CLOSE;
 		String storePayNumber = "00000000"; // 업데이트 메서드에서 안씀
@@ -220,7 +220,7 @@ public class StoreController {
 		StoreVO store = new StoreVO(storeId,user,storeCategory,storeState,storeBusinessNumber,storeName,storeAddress,storeSubAddress,
 							storeLatitude,storeLongitude,storePhone,storeOperateTime,storePhoto,storeIntroduction,openState,storePayNumber);
 		
-		storeUpdateService.execute(store);
+		storeUpdateService.execute(session,store,command.getPhoto());
 		model.addAttribute("store",store);
 		
 		return "store/storeHome";
@@ -255,12 +255,11 @@ public class StoreController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(storeListByUserViews);
+		List<PageVO> pages = storeListByUserService.getPages(category, keyword, userLatitude, userLongitude, intPage);
 		model.addAttribute("category",category);
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("stores",storeListByUserViews); //이름주의! stores로 담아놓음
-		
+		model.addAttribute("pages", pages);
 		return "user/storeList";
 	}
 

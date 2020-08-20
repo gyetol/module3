@@ -10,7 +10,7 @@ public interface StoreDao {
 	int insert(StoreVO store) throws StoreException;
 	void deleteByStore(int id) throws StoreException;
 	void deleteByManager(int storeId, UserVO manager, String content) throws StoreException;
-	void update(StoreVO store) throws StoreException;
+	int update(StoreVO store) throws StoreException;
 	void switchOpenState(int storeId,OpenState openState) throws StoreException;
 	StoreVO selectById(int id) throws StoreException;
 	StoreVO selectByUserId(int userId) throws StoreException;
@@ -30,4 +30,8 @@ public interface StoreDao {
 	void block(int storeId, UserVO manager, String content) throws StoreException;
 	void reject(int storeId, UserVO manager, String content) throws StoreException;
 	int getTotalCount(String stateName,String name) throws StoreException;
+
+	int getTotalCountByCategoryName(String categoryName, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
+
+	int getTotalCountByStoreNameOrMenuName(String keyword, double userLatitude, double userLongitude, int page, int pageSize) throws StoreException;
 }
