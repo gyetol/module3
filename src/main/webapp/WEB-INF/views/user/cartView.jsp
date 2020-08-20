@@ -59,6 +59,7 @@
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
+	            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">홈 화면으로 이동</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			</ul>
 		</div>
@@ -95,15 +96,16 @@
 					매장고유번호 : <span><c:out value="${carts[0].storeId}" /></span>
 				</h5>
 				-->
-				<h5>
-					매장명 : <span><c:out value="${carts[0].storeName}" /></span>
+				<h5 style="font-weight: bold; font-size: 20px;">
+					매장명 : <span style="font-family: 'Do Hyeon'; font-size: 25px;"><c:out value="${carts[0].storeName}" /></span>
 				</h5>
 			</div>
 			<hr />
 
+
 			<!--전체 선택 체크박스-->
 			<div class="custom-control custom-checkbox  " style="margin-left: 10pt">
-				<input type="checkbox" class="custom-control-input" id="totalToggle"> <label class="custom-control-label" for="totalToggle">전체선택</label>
+				<input type="checkbox" class="custom-control-input" id="totalToggle"><label style="font-weight:bold; font-size:17px;" class="custom-control-label" for="totalToggle">전체선택</label>
 			</div>
 
 			<hr style="margin-bottom: 0" />
@@ -118,9 +120,9 @@
 									<input type="checkbox" class="form-control" style="width: 11pt; margin: auto">
 								</div>
 								<div style="width: 90%; padding-top: 3pt;">
-									<div>
-										<!-- 메뉴고유번호 : <span><c:out value="${cart.menuId}"/></span><br/> --> 주문메뉴 : <span><c:out value="${cart.menuName}"/></span>
-										<div style="margin-top: 5pt">
+									<div style="font-weight: bold; font-size: 20px;">
+										주문메뉴 : <span style="font-family:'Do Hyeon'; font-size:23px; color:green"><c:out value="${cart.menuName}"/></span>
+										<div style="margin-top: 5pt; font-size: 17px;">
 											수량 : <span id="num">1</span> &nbsp; <i id="minusButton" class="fas fa-minus-square pos"></i> <i id="plusButton" class="fas fa-plus-square pos"></i> <br /> 금액 : <span id="amount" data-amount=<c:out value="${cart.price}"/>><c:out value="${cart.price}" />원</span>
 										</div>
 									</div>
@@ -132,14 +134,14 @@
 			</c:forEach>
 
 			<div class="text-right" style="margin: 10pt">
-				<h5>
+				<h5 style="font-weight: bold; font-size: 20px;">
 					총 금액 : <span id="totalPrice">0원</span>
 				</h5>
 			</div>
 
 			<div class="container-fluid margin_first">
-				<button type="button" id="delete" class="btn btn-success two_button float-right">선택 메뉴 삭제</button>
-				<button type="button" id="order" class="btn btn-success two_button">선택 메뉴 주문</button>
+				<button style="font-size: 20px; font-weight: bold;" type="button" id="delete" class="btn btn-success two_button float-right">선택 메뉴 삭제</button>
+				<button style="font-size: 20px; font-weight: bold;" type="button" id="order" class="btn btn-success two_button">선택 메뉴 주문</button>
 			</div>
 		</c:if>
 	</div>

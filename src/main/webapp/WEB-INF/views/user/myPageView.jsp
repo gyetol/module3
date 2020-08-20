@@ -65,7 +65,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath }/gm/{1]/order">주문 내역</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/gm/WAIT/1/order">주문내역 보기</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -76,6 +76,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
+	            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">홈 화면으로 이동</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
@@ -86,7 +87,7 @@
 <div>
     <!--제목-->
     <div class="container-fluid text-center" style="margin-top: 15pt">
-        <img src="../../images/1인의만찬.png" class="img-title" alt="no title"/>
+        <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
         <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 30px;">마이페이지</h4>
     </div>
 
@@ -101,6 +102,7 @@
             <input type="text" class="form-control " id="userName" value="${viewTargetUser.name }" readonly>
         </div>
 
+		<br/>
         <div class="form-group">
             <label for="exampleFormControlInput1">이메일</label>
             <input type="email" class="form-control" id="exampleFormControlInput1" value="${viewTargetUser.email }"readonly>
@@ -120,6 +122,7 @@
             </div>
         </div>
 
+		<br/><br/>
         <div class="form-group">
             <label for="address">거주지</label>
             <div id="address">
@@ -129,11 +132,11 @@
         </div>
 
         <div class="margin_first">
-            <button type="button" id="update_button" class="btn btn-success three_button">수정하기</button>
+            <button style="width: 32%;" type="button" id="update_button" class="btn btn-success three_button">수정하기</button>
             <a href="javascript:history.back()">
-				<button type="button" id="go_back_button" class="btn btn-success three_button" >뒤로가기</button>
+				<button style="width: 32%;" type="button" id="go_back_button" class="btn btn-success three_button" >뒤로가기</button>
 			</a>
-            <button type="button" id="delete_button" class="btn btn-success three_button" method="delete" action="mypage">탈퇴하기</button>
+            <button style="width: 32%;" type="button" id="delete_button" class="btn btn-success three_button" method="delete" action="mypage">탈퇴하기</button>
             <input type="hidden" id="password" name="password">
         </div>
 		</form:form>

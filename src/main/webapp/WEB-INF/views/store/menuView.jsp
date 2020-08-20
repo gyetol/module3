@@ -162,12 +162,12 @@
         
 
          <a href="javascript:history.back()">
-        <button id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
+        <button style="width: 32%;" id="historyBack" type="button" class="btn btn-success three_button" >뒤로가기</button>
         </a>
           
-        <button id="menuUpdate" type="submit" class="btn btn-success three_button">수정하기</button>
+        <button style="width: 32%;" id="menuUpdate" type="submit" class="btn btn-success three_button">수정하기</button>
          
-        <button id="menuDelete" type="button" class="btn btn-success three_button" method="delete" action="menu" >삭제하기</button>
+        <button style="width: 32%;" id="menuDelete" type="button" class="btn btn-success three_button" method="delete" action="menu" >삭제하기</button>
         <input type="hidden" id="storeId" name="storedId" value="${storeId}">
         <input type="hidden" id="menuId" name="menuId" value="${menuId}">
       </form>

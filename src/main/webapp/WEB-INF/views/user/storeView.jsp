@@ -67,7 +67,7 @@
                 <a class="nav-link" href="#">내정보 보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">결제내역</a>
+                <a class="nav-link" href="#">주문내역 보기</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>
@@ -78,6 +78,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
+	            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">홈 화면으로 이동</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>

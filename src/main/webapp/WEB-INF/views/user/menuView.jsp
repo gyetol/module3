@@ -63,8 +63,10 @@
         </div>
     </div>
 
-    <a href="${pageContext.request.contextPath}/">
-        <img src="${pageContext.request.contextPath}/resources/icons/home-solid.svg" class="home" alt="no picture">
+    <!--장바구니 아이콘-->
+    <a href="${pageContext.request.contextPath}/gm/cart"> <img
+            src="${pageContext.request.contextPath}/resources/icons/shopping-bag-solid.svg" class="cart"
+            alt="no picture">
     </a>
 
     <!--메뉴-->
@@ -85,6 +87,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"> </a>
             </li>
+	            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/">홈 화면으로 이동</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </li>
