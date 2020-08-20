@@ -35,7 +35,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dinner41.css">
     <script src="${pageContext.request.contextPath}/resources/js/store/menuView.js"></script>
-    <!-- <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script>  -->
+    <script src="${pageContext.request.contextPath}/resources/js/user/menuView.js"></script> 
 
     <title>Menu</title>
 </head>
@@ -91,7 +91,7 @@
 </nav>
 
 <!-- storeId, menuId가 data로 세팅되어야함 -->
-<div class="container-fluid" data-storeId="38" data-menuId="55">
+<div class="container-fluid" data-storeId="${storeId}" data-menuId="${menuId}">
 
     <div class="container-fluid">
     <form action="${pageContext.request.contextPath}/sm/${storeId}/${menuId}/update/menu" method="post">
@@ -110,14 +110,14 @@
         <div class="form-group">
             <label for="menName">메뉴명</label>
             <div class="card card-body">
-            	<input type="text" class="form-control" name="name" id="menName" readonly value="${menu.name}">
+               <input type="text" class="form-control" name="name" id="menName" readonly value="${menu.name}">
             </div>
         </div>
 
         <div class="form-group">
             <label for="menuAmount">재고 수량</label>
             <div class="card card-body">
-            	<input type="text" class="form-control" name="amount" id="menuAmount"  readonly value="${menu.amount}">
+               <input type="text" class="form-control" name="amount" id="menuAmount"  readonly value="${menu.amount}">
             </div>
         </div>
 
@@ -156,14 +156,14 @@
             </div>
         </div>
 
-			<button type="button" class="btn btn-success two_button" id="insertCart">장바구니에 넣기</button>
-			
-			 <a href="javascript:history.back()">
-			<button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
-			</a>
-		</div>
-	</div>
-	<hr />
-	<div class="last_block"></div>
+         <button type="button" class="btn btn-success two_button" id="insertCart">장바구니에 넣기</button>
+         
+          <a href="javascript:history.back()">
+         <button type="button" class="btn btn-success two_button float-right">뒤로가기</button>
+         </a>
+      </div>
+   </div>
+   <hr />
+   <div class="last_block"></div>
 </body>
 </html>

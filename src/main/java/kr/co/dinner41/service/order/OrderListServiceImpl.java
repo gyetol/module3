@@ -46,11 +46,10 @@ public class OrderListServiceImpl implements OrderListService {
 
 		String userType = user.getType().getId();
 		int userId = user.getId();
-
 		int totalRecord = 0;
 
 		if (userType.equals("GM")) {
-				orderList = oDao.selectAllOrderByUser(page, PAGE_SIZE, userId, userType);
+				orderList = oDao.selectAllOrderByUser(page, PAGE_SIZE, userId, type);
 				totalRecord = oDao.getTotalRecordForUser(userId, userType);
 				menuList = m2oDao.selectAll();
 				
@@ -73,23 +72,23 @@ public class OrderListServiceImpl implements OrderListService {
 			StoreVO store = sDao.selectByUserId(userId);
 			int storeId = store.getId();
 
-				orderList = oDao.selectAllOrderByStore(page, PAGE_SIZE, storeId, type);
-				oDao.getTotalRecordForStore(storeId, type);
-				menuList = m2oDao.selectAll();
-				System.out.println("sm totalRecord :" + totalRecord);
-				System.out.println("sm orderList : " + orderList);
-				
-				for (OrderViewVO order : orderList) {
-					int orderId = order.getOrderId();
-					List<Menu2OrderViewVO> tmp = new ArrayList<>();
+			orderList = oDao.selectAllOrderByStore(page, PAGE_SIZE, storeId, type);
+			oDao.getTotalRecordForStore(storeId, type);
+			menuList = m2oDao.selectAll();
+			System.out.println("sm totalRecord :" + totalRecord);
+			System.out.println("sm orderList : " + orderList);
 
-					for (Menu2OrderViewVO m2o : menuList) {
-						if (m2o.getOrderId() == orderId) {
-							tmp.add(m2o);
-						}
+			for (OrderViewVO order : orderList) {
+				int orderId = order.getOrderId();
+				List<Menu2OrderViewVO> tmp = new ArrayList<>();
+
+				for (Menu2OrderViewVO m2o : menuList) {
+					if (m2o.getOrderId() == orderId) {
+						tmp.add(m2o);
 					}
-					map.put(order, tmp);
 				}
+				map.put(order, tmp);
+			}
 		}
 
 		return map;
