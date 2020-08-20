@@ -46,7 +46,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">내정보 보기</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a>

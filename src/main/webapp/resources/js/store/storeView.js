@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	let contextPath=sessionStorage.getItem("contextPath");
+
 	
 	$('#deleteStoreBtn').click(function(){
 		let check;

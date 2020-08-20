@@ -81,7 +81,7 @@ public class LoginController {
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request,Model model) {
 		HttpSession session=request.getSession(false);
 		if(session==null) {
 			return "common/login";
