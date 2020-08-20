@@ -54,7 +54,7 @@
 			<ul class="navbar-nav mr-auto">
 
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/gm/{1]/order">주문 내역</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/gm/WAIT/1/order">주문내역 보기</a></li>
 
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"> </a></li>
@@ -68,15 +68,19 @@
 	<!--Content-->
 	<div>
 		<!--제목-->
-		<div class="container-fluid text-center" style="margin-top: 15pt">
+		<div class="container-fluid text-center" style="margin-top: 25pt; margin-bottom: 25px;">
 			<img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title" />
-			<h4 style="font-family: 'Do Hyeon';">장바구니</h4>
+			<h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 35px;">장바구니</h4>
 		</div>
 		<hr />
 
+    <div class="text-center">
 		<c:if test="${empty carts}">
+		<br/>
 		장바구니가 비어있습니다.
+		<br/><br/>
 		</c:if>
+		</div>
 
 		<c:if test="${not empty carts}">
 

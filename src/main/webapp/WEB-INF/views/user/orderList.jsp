@@ -61,7 +61,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/mypage">내정보 보기</a></li>
-            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }/gm/{1]/order">결제내역</a></li>
+            <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }/gm/WAIT/1/order">주문내역 보기</a></li>
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ALL/1/qna">1:1 문의</a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
             <li class="nav-item"><a class="nav-link" href="#"> </a></li>
@@ -72,9 +72,9 @@
 
 <div>
     <!--제목-->
-    <div class="container-fluid text-center" style="margin-top: 15pt">
+    <div class="container-fluid text-center" style="margin-top: 25pt; margin-bottom: 25px;">
         <img src="${pageContext.request.contextPath}/resources/images/1인의만찬.png" class="img-title" alt="no title"/>
-        <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 30px;">주문 내역</h4>
+        <h4 style="font-family: 'Do Hyeon'; margin-top: 10pt; font-size: 35px;">주문 내역</h4>
     </div>
 
     <hr style="margin: 0"/>
@@ -82,29 +82,33 @@
     <ul class="nav nav-tabs">
         <c:if test="${type eq 'COMP'}">
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/gm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/gm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
         <c:if test="${type eq 'WAIT'}">
             <li class="nav-item text-center nav_two"><a class="nav-link active"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/gm/WAIT/1/order">주문대기</a>
             </li>
             <li class="nav-item text-center nav_two"><a class="nav-link"
-                                                        style="color: green; font-size: 20px; font-weight: bold;"
+                                                        style="color: gray; font-family: 'Do Hyeon'; font-size: 25px; font-weight: bold;"
                                                         href="${pageContext.request.contextPath}/gm/COMP/1/order">수령완료</a>
             </li>
         </c:if>
     </ul>
 
+    <div class="text-center">
     <c:if test="${empty map}">
+            <br/>
         주문 내역이 비어있습니다.
+        <br/><br/>
     </c:if>
+    </div>
 
     <c:if test="${not empty map}">
         <!--주문 목록-->
@@ -113,24 +117,35 @@
                 <ul class="list-group list-group-flush" id="storeId" data-storeId="${entry.key.storeId}">
                     <li class="list-group-item">
                         <div>
-                            <div style="color: green; font-weight: bold;">
+                            <div style="color: green; font-weight: bold; font-size: 25px; font-family: 'Do Hyeon'">
                                 주문번호 : <span id="orderNumber"><c:out value="${entry.key.orderId}"/></span><br/>
                             </div>
-                            주문일시 : <span><c:out value="${entry.key.order_order_date}"/></span><br/> 매장명 : <span><c:out
-                                value="${entry.key.storeName}"/></span><br/>
-                            주문메뉴(수량) :
+                            <div style="font-size: 20px;">
+                            주문일시 : <span><c:out value="${entry.key.order_order_date}"/></span><br/> 
+                            </div>
+                            <div style="font-size: 20px;">
+                            매장명 : <span><c:out value="${entry.key.storeName}"/></span><br/>
+                            </div>
+
+                    <div style="font-size: 20px;">
+                            주문메뉴 (수량) :
+                    <span style="font-weight: bold;">
                             <c:forEach items="${entry.value}" var="menu" varStatus="i">
                                 <c:out value="${menu.menuName}"/>
-                                (<c:out value="${menu.amount}"/>) /
+                               (<c:out value="${menu.amount}"/>) 
+                        	<c:if test="${!i.last}">/</c:if>
                             </c:forEach>
-                            <div style="margin-top: 5pt">
-                                <button id="reviewClick" class="btn btn-outline-success btn_disabled btn-sm"
-                                        style="width: 32%">리뷰쓰기
+                            </span>
+                            </div>
+                            
+                            <div style="margin-top: 5pt" id="pickupDate" data-pickupDate="${entry.key.order_pickup_date}">
+                                <button id="reviewClick" class="btn btn-outline-success btn-sm" style="width: 32%; font-size: 20px; font-weight: bold;">
+                                        리뷰쓰기
                                 </button>
-                                <button id="storeViewClick" class="btn btn-outline-success btn-sm" style="width: 32%">
+                                <button id="storeViewClick" class="btn btn-outline-success btn-sm" style="width: 32%; font-size: 20px; font-weight: bold;">
                                     가게보기
                                 </button>
-                                <button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%">
+                                <button id="orderDetailView" class="btn btn-outline-success btn-sm" style="width: 32%; font-size: 20px; font-weight: bold;">
                                     주문상세
                                 </button>
                             </div>
@@ -138,6 +153,7 @@
                     </li>
                 </ul>
             </div>
+		<hr/>
         </c:forEach>
     </c:if>
 

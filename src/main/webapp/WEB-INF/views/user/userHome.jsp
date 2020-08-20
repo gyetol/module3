@@ -90,11 +90,11 @@
         <input class="form-control" type="search" placeholder="매장명 또는 메뉴명 입력" style="width: inherit" id="search_input"/>
     </div>
     <div class="col-2" style="padding: 3pt 3pt 3pt 0;">
-        <button class="btn btn-outline-success btn-block" type="button" id="search_button">찾기</button>
+        <button class="btn btn-outline-success btn-block" type="button" id="search_button" style="font-weight:bold;">찾기</button>
     </div>
     <div class="col-3" style="padding: 3pt 3pt 3pt 0;">
         <a href="${pageContext.request.contextPath}/gm/map">
-            <button class="btn btn-outline-success btn-block" type="button" id="map_button">지도로 검색</button>
+            <button class="btn btn-outline-success btn-block" type="button" id="map_button" style="font-weight:bold;">지도로 검색</button>
         </a>
     </div>
 </div>
@@ -139,7 +139,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/total.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">전체</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">전체</h5>
                     </div>
                 </div>
             </a>
@@ -151,7 +151,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/box.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">도시락</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">도시락</h5>
                     </div>
                 </div>
             </a>
@@ -163,7 +163,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/mealKit.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">밀키트</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">밀키트</h5>
                     </div>
                 </div>
             </a>
@@ -175,7 +175,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/korean.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">한식</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">한식</h5>
                     </div>
                 </div>
             </a>
@@ -187,7 +187,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/japan.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">일식</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">일식</h5>
                     </div>
                 </div>
             </a>
@@ -199,7 +199,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/tpk.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">분식</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">분식</h5>
                     </div>
                 </div>
             </a>
@@ -211,7 +211,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/bread.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">제과</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">제과</h5>
                     </div>
                 </div>
             </a>
@@ -223,7 +223,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/ttt.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">떡</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">떡</h5>
                     </div>
                 </div>
             </a>
@@ -235,7 +235,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/chicken.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">치킨</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">치킨</h5>
                     </div>
                 </div>
             </a>
@@ -247,7 +247,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/pizza.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">피자</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">피자</h5>
                     </div>
                 </div>
             </a>
@@ -259,7 +259,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/side.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">반찬</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">반찬</h5>
                     </div>
                 </div>
             </a>
@@ -271,7 +271,7 @@
                     <div class="card-body text-center trim">
                         <img src="${pageContext.request.contextPath}/resources/categoryImages/etc.png"
                              class="category rounded" alt="no picture">
-                        <h5 class="card-title">기타</h5>
+                        <h5 class="card-title" style="font-family: 'Do Hyeon';">기타</h5>
                     </div>
                 </div>
             </a>
