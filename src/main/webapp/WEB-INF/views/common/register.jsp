@@ -24,7 +24,8 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
     <!-- kakaoMap api -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc023166bbc9c4e8ae23818cf48006fe&libraries=services,clusterer,drawing"></script>
+   
 
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
 	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
