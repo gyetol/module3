@@ -42,7 +42,10 @@ $(document).ready(function(){
 		    	 latitude.value=lat;
 		    	 var longitude=document.getElementById('user_longitude');
 		    	 longitude.value=lng;
+		    	 Swal.fire('수정이 완료되었습니다.');
+		    	 setTimeout(function() {
 		    	 $('#update_form').submit();
+		    	 },1000);
 		    } 		
 		});
 		
